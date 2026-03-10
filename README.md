@@ -15,7 +15,6 @@ This repository demonstrates QA automation practices including UI automation, AP
 - Robot Framework
 - Postman
 - REST APIs
-- SQL
 - Jira / Xray
 
 ## Project Structure
