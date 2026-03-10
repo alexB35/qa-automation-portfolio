@@ -9,11 +9,14 @@
 
 This repository demonstrates QA automation practices including UI automation, API testing and test management.
 
+Demonstrates workflow from test cases in Jira to automated test execution and reporting.
+
 ## Technologies
 
 - Playwright
 - Robot Framework
 - Postman
+- Python/JavaScript for automation scripts
 - REST APIs
 - Jira / Xray
 
