@@ -61,10 +61,10 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 ## How to Run Tests
 
 ### Install dependencies
-npm install
+`npm install`
 
 ### Run UI tests with Playwright
-npx playwright test
+`npx playwright test`
 
 ### Run Robot Framework tests
-robot tests/
+`robot tests/`
