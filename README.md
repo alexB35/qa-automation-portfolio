@@ -14,8 +14,8 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 ## Technologies
 
 - Playwright, Robot Framework  
+- Python / JavaScript for automation scripts
 - Postman  
-- Python / JavaScript for automation scripts  
 - REST APIs  
 - Jira
 
@@ -24,16 +24,18 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 ## Project Structure
 
 ### 01_Banking
-- **ParaBank UI & API** – End-to-end automation tests for banking scenarios (user creation, login, transactions)
+- **ParaBank UI & API** – End-to-end automation tests (UI & API) for banking scenarios
+  - tests/ → contains Robot Framework & Playwright test cases
 
 ### 02_SaaS_Tech
 - **DemoQA & OrangeHRM** – Functional and UI automation tests for SaaS applications, including exploratory scenarios
+  - tests/ → contains Robot Framework & Playwright test cases
 
 ### framework
 - Reusable automation utilities, keywords, and test templates for UI and API testing
 
 ### test-data
-- Test datasets used by automated tests
+- Centralized test datasets (CSV/JSON) used across all projects
 
 ### docs
 - Testing documentation and workflow notes
@@ -49,23 +51,18 @@ Typical workflow used in this project:
 - Write test cases
 - Implement automation tests
 - Run tests
-- Capture defects in Jira (if any)
+- Log defects in Jira for traceability
 - Generate test reports
 
 ---
 
 ## How to Run Tests
 
-Install dependencies:
-
+# Install dependencies
 npm install
 
-
-Run UI tests with Playwright :
-
+# Run UI tests with Playwright
 npx playwright test
 
-
-Run Robot Framework tests :
-
+# Run Robot Framework tests
 robot tests/
