@@ -5,55 +5,47 @@
 ![Postman](https://img.shields.io/badge/Postman-API_Testing-orange)
 ![GitHub](https://img.shields.io/badge/GitHub-Version_Control-blue)
 ![Jira](https://img.shields.io/badge/Jira-Test_Management-blue)
-![Xray](https://img.shields.io/badge/Xray-Test_Management-blue)
 
-This repository demonstrates QA automation practices including UI automation, API testing and test management.
+This repository demonstrates QA automation practices including **UI automation, API testing, and test management**.  
+It showcases a workflow from **test cases in Jira** to **automated test execution** and **reporting**.
 
-Demonstrates workflow from test cases in Jira to automated test execution and reporting.
+---
 
 ## Technologies
 
-- Playwright
-- Robot Framework
-- Postman
-- Python/JavaScript for automation scripts
-- REST APIs
-- Jira / Xray
+- Playwright, Robot Framework  
+- Postman  
+- Python / JavaScript for automation scripts  
+- REST APIs  
+- Jira
+
+---
 
 ## Project Structure
 
-tests/
-- UI automation tests
-- API automation tests
+### 01_Banking
+- **ParaBank UI & API** – End-to-end automation tests for banking scenarios (user creation, login, transactions)
 
-framework/
-- reusable automation utilities
+### 02_SaaS_Tech
+- **DemoQA & OrangeHRM** – Functional and UI automation tests for SaaS applications, including exploratory scenarios
 
-test-data/
-- data used by automated tests
+### framework
+- Reusable automation utilities, keywords, and test templates for UI and API testing
 
-docs/
-- testing documentation
+### test-data
+- Test datasets used by automated tests
 
-demo/
-- screenshots of test execution
+### docs
+- Testing documentation and workflow notes
 
-## How to run tests
+### demo
+- Screenshots and logs from test execution
+
+---
+
+## How to Run Tests
 
 Install dependencies:
 
+```bash
 npm install
-
-Run tests:
-
-npx playwright test
-
-## Test Workflow
-
-Typical workflow used in this project:
-
-1. Create story in Jira
-2. Write test cases
-3. Implement automation tests
-4. Run tests
-5. Report defects
