@@ -24,11 +24,11 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 ## Project Structure
 
 ### 01_Banking
-- **ParaBank UI & API** – End-to-end automation tests (UI & API) for banking scenarios
+- **`ParaBank UI & API`** – End-to-end automation tests (UI & API) for banking scenarios
   - tests/ → contains Robot Framework & Playwright test cases
 
 ### 02_SaaS_Tech
-- **DemoQA & OrangeHRM** – Functional and UI automation tests for SaaS applications, including exploratory scenarios
+- **`DemoQA & OrangeHRM`** – Functional and UI automation tests for SaaS applications, including exploratory scenarios
   - tests/ → contains Robot Framework & Playwright test cases
 
 ### 03_framework
