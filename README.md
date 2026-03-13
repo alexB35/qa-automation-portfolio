@@ -45,7 +45,9 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 
 ---
 
-Typical workflow used in this project:
+## Workflow
+
+### Typical workflow used in this project:
 
 - Create story in Jira
 - Write test cases
@@ -58,11 +60,11 @@ Typical workflow used in this project:
 
 ## How to Run Tests
 
-# Install dependencies
+### Install dependencies
 npm install
 
-# Run UI tests with Playwright
+### Run UI tests with Playwright
 npx playwright test
 
-# Run Robot Framework tests
+### Run Robot Framework tests
 robot tests/
