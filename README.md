@@ -31,16 +31,16 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 - **DemoQA & OrangeHRM** – Functional and UI automation tests for SaaS applications, including exploratory scenarios
   - tests/ → contains Robot Framework & Playwright test cases
 
-### framework
+### 03_framework
 - Reusable automation utilities, keywords, and test templates for UI and API testing
 
-### test-data
+### 04_output
 - Centralized test datasets (CSV/JSON) used across all projects
 
-### docs
+### 05_docs
 - Testing documentation and workflow notes
 
-### demo
+### 06_demo
 - Screenshots and logs from test execution
 
 ---
