@@ -43,9 +43,29 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 
 ---
 
+Typical workflow used in this project:
+
+- Create story in Jira
+- Write test cases
+- Implement automation tests
+- Run tests
+- Capture defects in Jira (if any)
+- Generate test reports
+
+---
+
 ## How to Run Tests
 
 Install dependencies:
 
-```bash
 npm install
+
+
+Run UI tests with Playwright :
+
+npx playwright test
+
+
+Run Robot Framework tests :
+
+robot tests/
