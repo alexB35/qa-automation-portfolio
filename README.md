@@ -3,7 +3,6 @@
 ![Playwright](https://img.shields.io/badge/Playwright-Automation-green)
 ![Robot Framework](https://img.shields.io/badge/Robot_Framework-Automation-green)
 ![Postman](https://img.shields.io/badge/Postman-API_Testing-orange)
-![GitHub](https://img.shields.io/badge/GitHub-Version_Control-blue)
 ![Jira](https://img.shields.io/badge/Jira-Test_Management-blue)
 ![Python](https://img.shields.io/badge/Python-3.10-lightgrey)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-lightgrey)
