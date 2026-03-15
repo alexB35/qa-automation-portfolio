@@ -29,6 +29,8 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 - **ParaBank UI & API** – End-to-end automation tests (UI & API) for banking scenarios
   - `tests/` → Robot Framework & Playwright test cases (user creation, login, transactions)
   - `resources/` → locators, keywords, reusable test libraries
+ 
+**Jira :** https://alexb35.atlassian.net/jira/software/projects/PBQ/boards/1
 
 ### 02_SaaS_Tech
 - **DemoQA & OrangeHRM** – Functional and UI automation tests for SaaS applications, including exploratory scenarios
