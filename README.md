@@ -15,10 +15,10 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 
 ## Technologies
 
-- Playwright, Robot Framework  
-- Python / JavaScript for automation scripts  
-- Postman  
-- REST APIs  
+- Playwright (UI & API automation)  
+- Postman (API testing)  
+- JavaScript / Node.js  
+- Robot Framework (legacy / additional) 
 - Jira
 
 ---
