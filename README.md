@@ -25,7 +25,7 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 
 ## Project Structure
 
-### 01_Banking
+### 01_banking
 - **ParaBank UI** – End-to-end UI automation tests for banking scenarios
   - `tests/` → Robot Framework & Playwright test cases (user creation, login, transactions)
   - `resources/` → locators, keywords, reusable test libraries
@@ -35,7 +35,7 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 
 
 
-### 02_API_Testing
+### 02_api
 - **Restful Booker API** – API testing and automation for booking management scenarios
   - `tests/` → API test cases (Postman / Robot Framework)
   - `resources/` → request templates, payloads, reusable keywords
@@ -45,7 +45,7 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 
 
 
-### 03_SaaS
+### 03_saas
 - **OrangeHRM UI** – Functional and UI automation tests for HR management scenarios
   - `tests/` → Robot Framework & Playwright test cases
   - `resources/` → test data templates, page objects, helper keywords
@@ -80,9 +80,8 @@ Jira → Test Cases → Automation Tests → Bug creation → Test Reporting →
 ## Versions used
 - Node.js >= v20  
 - npm >= v10  
-- Playwright (latest version)  
-- Supported browsers: Chromium, Firefox, WebKit  
+- Playwright Test  
 
-Optional:
+Optional (legacy / additional tools):
+- Robot Framework  
 - Python 3.11+  
-- Robot Framework 7.4.2  
