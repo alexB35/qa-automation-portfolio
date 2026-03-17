@@ -37,10 +37,14 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
   - `tests/` → API test cases (Postman / Robot Framework)
   - `resources/` → request templates, payloads, reusable keywords
 
+**Jira :**  https://alexb35.atlassian.net/jira/software/projects/RFB/boards/2
+
 ### 03_SaaS
 - **OrangeHRM UI** – Functional and UI automation tests for HR management scenarios
   - `tests/` → Robot Framework & Playwright test cases
   - `resources/` → test data templates, page objects, helper keywords
+
+**Jira :**  https://alexb35.atlassian.net/jira/software/projects/ORH/boards/3
 
 ### 04_framework
 - Reusable automation utilities, keywords, and test templates for UI and API testing
