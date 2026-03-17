@@ -78,8 +78,11 @@ Jira → Test Cases → Automation Tests → Bug creation → Test Reporting →
 ---
 
 ## Versions used
-- Node.js >= v24.14.0
-- Npm 11.11.0
-- Python 3.11+
-- Robot Framework 7.4.2
-- Browser drivers (Chromium/Firefox)
+- Node.js >= v20  
+- npm >= v10  
+- Playwright (latest version)  
+- Supported browsers: Chromium, Firefox, WebKit  
+
+Optional:
+- Python 3.11+  
+- Robot Framework 7.4.2  
