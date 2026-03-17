@@ -61,21 +61,6 @@ The repository is organized by application, each containing its own test assets 
 
 **Jira :**  https://alexb35.atlassian.net/jira/software/projects/ORH/boards/3
 
-
-
-
-### 04_framework
-- Reusable automation utilities, keywords, and test templates for UI and API testing
-
-### 05_output
-- Centralized test datasets (CSV/JSON) used across all projects
-
-### 06_docs
-- Testing documentation and workflow notes
-
-### 07_demo
-- Screenshots and logs from tespython --version execution
-
 ---
 
 ## Workflow
