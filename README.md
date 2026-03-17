@@ -25,10 +25,14 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 
 ## Project Structure
 
+The repository is organized by application, each containing its own test assets and execution results.
+
 ### 01_banking
-- **ParaBank UI** – End-to-end UI automation tests for banking scenarios
-  - `tests/` → Robot Framework & Playwright test cases (user creation, login, transactions)
-  - `resources/` → locators, keywords, reusable test libraries
+- **ParaBank UI** – End-to-end UI automation for banking workflows
+  - `tests/` → Playwright & Robot Framework test cases (registration, login, transactions)
+  - `outputs/` → test execution reports and logs
+  - `screenshots/` → captured evidence during test runs
+  - `resources/` → locators, reusable keywords, test utilities
  
 **Jira :** https://alexb35.atlassian.net/jira/software/projects/PBQ/boards/1
 
@@ -37,8 +41,11 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 
 ### 02_api
 - **Restful Booker API** – API testing and automation for booking management scenarios
-  - `tests/` → API test cases (Postman / Robot Framework)
-  - `resources/` → request templates, payloads, reusable keywords
+  - `tests/` → API test cases (Playwright & Postman collections)
+  - `outputs/` → API responses, reports and logs
+  - `screenshots/` → request/response evidence (if applicable)
+  - `resources/` → request payloads, schemas, reusable helpers
+  - `postman/` → Postman collections and environments
 
 **Jira :**  https://alexb35.atlassian.net/jira/software/projects/RFB/boards/2
 
@@ -46,9 +53,11 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 
 
 ### 03_saas
-- **OrangeHRM UI** – Functional and UI automation tests for HR management scenarios
-  - `tests/` → Robot Framework & Playwright test cases
-  - `resources/` → test data templates, page objects, helper keywords
+- **OrangeHRM UI** – Functional and UI automation for HR management workflows
+  - `tests/` → Playwright & Robot Framework test cases (login, employee management)
+  - `outputs/` → execution reports and logs
+  - `screenshots/` → UI validation evidence
+  - `resources/` → page objects, test data, helper functions
 
 **Jira :**  https://alexb35.atlassian.net/jira/software/projects/ORH/boards/3
 
