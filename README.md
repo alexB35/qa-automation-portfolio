@@ -33,6 +33,7 @@ The repository is organized by application, each containing its own test assets 
   - `outputs/` → test execution reports and logs
   - `screenshots/` → captured evidence during test runs
   - `resources/` → locators, reusable keywords, test utilities
+  - `jira/` → screenshots illustrating test management
  
 **Jira :** https://alexb35.atlassian.net/jira/software/projects/PBQ/boards/1
 
@@ -46,6 +47,7 @@ The repository is organized by application, each containing its own test assets 
   - `screenshots/` → request/response evidence (if applicable)
   - `resources/` → request payloads, schemas, reusable helpers
   - `postman/` → Postman collections and environments
+  - `jira/` → screenshots illustrating test management
 
 **Jira :**  https://alexb35.atlassian.net/jira/software/projects/RFB/boards/2
 
@@ -58,6 +60,7 @@ The repository is organized by application, each containing its own test assets 
   - `outputs/` → execution reports and logs
   - `screenshots/` → UI validation evidence
   - `resources/` → page objects, test data, helper functions
+  - `jira/` → screenshots illustrating test management
 
 **Jira :**  https://alexb35.atlassian.net/jira/software/projects/ORH/boards/3
 
