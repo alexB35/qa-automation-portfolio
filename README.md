@@ -26,28 +26,33 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 ## Project Structure
 
 ### 01_Banking
-- **ParaBank UI & API** – End-to-end automation tests (UI & API) for banking scenarios
+- **ParaBank UI** – End-to-end UI automation tests for banking scenarios
   - `tests/` → Robot Framework & Playwright test cases (user creation, login, transactions)
   - `resources/` → locators, keywords, reusable test libraries
  
 **Jira :** https://alexb35.atlassian.net/jira/software/projects/PBQ/boards/1
 
-### 02_SaaS_Tech
-- **DemoQA & OrangeHRM** – Functional and UI automation tests for SaaS applications, including exploratory scenarios
-  - `tests/` → contains Robot Framework & Playwright test cases
+### 02_API_Testing
+- **Restful Booker API** – API testing and automation for booking management scenarios
+  - `tests/` → API test cases (Postman / Robot Framework)
+  - `resources/` → request templates, payloads, reusable keywords
+
+### 03_SaaS
+- **OrangeHRM UI** – Functional and UI automation tests for HR management scenarios
+  - `tests/` → Robot Framework & Playwright test cases
   - `resources/` → test data templates, page objects, helper keywords
 
-### 03_framework
+### 04_framework
 - Reusable automation utilities, keywords, and test templates for UI and API testing
 
-### 04_output
+### 05_output
 - Centralized test datasets (CSV/JSON) used across all projects
 
-### 05_docs
+### 06_docs
 - Testing documentation and workflow notes
 
-### 06_demo
-- Screenshots and logs from tespython --versiont execution
+### 07_demo
+- Screenshots and logs from tespython --version execution
 
 ---
 
