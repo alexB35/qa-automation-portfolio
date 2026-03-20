@@ -1,1 +1,26 @@
-{}
+{
+  "name": "qa-automation-portfolio",
+  "version": "1.0.0",
+  "description": "![Playwright](https://img.shields.io/badge/Playwright-Automation-green)\r ![Robot Framework](https://img.shields.io/badge/Robot_Framework-Automation-green)\r ![Postman](https://img.shields.io/badge/Postman-API_Testing-orange)\r ![Jira](https://img.shields.io/badge/Jira-Test_Management-blue)\r ![Python](https://img.shields.io/badge/Python-3.10-lightgrey)\r ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-lightgrey)\r ![CI/CD](https://img.shields.io/badge/CI/CD-GitHub%20Actions-lightgrey)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+"repository": {
+  "type": "git",
+  "url": "git+https://github.com/alexB35/qa-automation-portfolio.git"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/alexB35/qa-automation-portfolio/issues"
+  },
+  "homepage": "https://github.com/alexB35/qa-automation-portfolio#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.5.0",
+    "typescript": "^5.9.3"
+  }
+}

@@ -4,7 +4,7 @@
 ![Postman](https://img.shields.io/badge/Postman-API_Testing-orange)
 ![Jira](https://img.shields.io/badge/Jira-Test_Management-blue)
 ![Python](https://img.shields.io/badge/Python-3.10-lightgrey)
-![TypeScript](https://img.shields.io/badge/TypeScript-ES6-lightgrey)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-lightgrey)
 ![CI/CD](https://img.shields.io/badge/CI/CD-GitHub%20Actions-lightgrey)
 
 This repository showcases QA automation skills across multiple applications, covering:
@@ -14,7 +14,9 @@ This repository showcases QA automation skills across multiple applications, cov
 - Test case management (Jira)
 - CI/CD integration (GitHub Actions)
 
-The project demonstrates a complete QA workflow from **test design** → **automation** → **execution** → **reporting**.
+The project demonstrates a complete QA workflow from:
+
+Jira → Test Cases → Automation (Playwright / Postman) → Execution → Reports → CI/CD
 
 ---
 
@@ -73,12 +75,6 @@ This repository is organized by application, each containing its own test assets
 
 ### 04_other
   - config files
-  
----
-
-## Workflow
-
-Jira → Test Cases → Automation (Playwright / Postman) → Execution → Reports → CI/CD
 
 ---
 
@@ -126,7 +122,4 @@ Some third-party dependencies may contain known vulnerabilities that do not impa
 - Node.js >= v20
 - npm >= v10
 - Playwright Test
-
-Optional / complementary tools:
-- Robot Framework
 - Python 3.11+
