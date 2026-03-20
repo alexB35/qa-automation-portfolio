@@ -1,0 +1,18 @@
+# Node modules
+node_modules/
+
+# Test outputs
+outputs/
+test-results/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# VSCode settings
+.vscode/
+
+# Optional: report HTML from Playwright (si tu ne veux pas push)
+outputs/playwright-report/

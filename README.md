@@ -17,7 +17,7 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 
 - Playwright (UI & API automation)  
 - Postman (API testing)  
-- JavaScript / Node.js  
+- TypeScript / Node.js  
 - Robot Framework (legacy / additional) 
 - Jira
 
@@ -25,7 +25,7 @@ It showcases a workflow from **test cases in Jira** to **automated test executio
 
 ## Project Structure
 
-The repository is organized by application, each containing its own test assets and execution results.
+This repository is organized by application, each containing its own test assets and execution results.
 
 ### 01_banking
 - **ParaBank UI** – End-to-end UI automation for banking workflows
