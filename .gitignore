@@ -14,5 +14,5 @@ test-results/
 # VSCode settings
 .vscode/
 
-# Optional: report HTML from Playwright (si tu ne veux pas push)
+# Optional: report HTML from Playwright
 outputs/playwright-report/
