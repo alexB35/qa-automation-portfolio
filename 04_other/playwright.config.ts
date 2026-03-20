@@ -1,10 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  // default testDir folder not limited : precise folder in command line
+  testDir: '../01_banking/parabank/tests', // from 04_other
   timeout: 30_000,
   retries: 1,
-  reporter: [['list'], ['html', { outputFolder: 'outputs/playwright-report' }]],
+  reporter: [['list'], ['html', { outputFolder: '../01_banking/parabank/outputs/playwright-report' }]],
   use: {
     browserName: 'chromium',
     headless: false,
