@@ -10,6 +10,9 @@ on:
       - '02_api/restful_booker/5_postman/**'
   workflow_dispatch:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   newman:
     name: Run Newman Collections
