@@ -1,0 +1,93 @@
+{
+  "info": {
+    "_postman_id": "485d43a6-462f-4755-b0f7-13ab39e85ad8",
+    "name": "RFB-04 - Delete Booking",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23015621"
+  },
+  "item": [
+    {
+      "name": "TC-09 - Delete Existing Booking",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"TC-09 | Status code is 201 (Restful Booker quirk)\", function () {\r",
+              "    pm.response.to.have.status(201);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"TC-09 | Response confirms deletion\", function () {\r",
+              "    pm.expect(pm.response.text()).to.include(\"Created\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "token={{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/booking/{{bookingId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "booking",
+            "{{bookingId}}"
+          ]
+        },
+        "description": "Delete an existent booking successfully"
+      },
+      "response": []
+    },
+    {
+      "name": "TC-10 - Delete Non-Existing Booking",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"TC-10 | Delete non-existing booking returns 405\", function () {\r",
+              "    pm.response.to.have.status(405);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "token={{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/booking/99999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "booking",
+            "99999"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

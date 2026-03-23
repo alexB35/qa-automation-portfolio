@@ -1,0 +1,188 @@
+{
+  "info": {
+    "_postman_id": "a8f42b55-2008-45a6-966d-192f5d89eced",
+    "name": "RFB-01 - Create Booking",
+    "description": "## RFB-01 - Create Booking\n\nThis collection covers the **booking creation** flow for the Restful Booker API. It contains a suite of test cases that validate the `POST /booking` endpoint, ensuring it behaves correctly across both successful and error scenarios.\n\n### Test Cases\n\n| # | Test Case | Description |\n| --- | --- | --- |\n| TC-01 | Successful Booking Creation | Verifies that a booking is created successfully when all required fields are provided with valid data. |\n| TC-02 | Missing Required Fields | Validates that the API returns an appropriate error response when one or more required fields are omitted from the request. |\n| TC-03 | Invalid Date Format | Ensures the API correctly rejects requests where date fields are submitted in an unsupported or malformed format. |\n\n### Notes\n\n- All requests target the `{{baseUrl}}/booking/` endpoint.\n    \n- This collection is part of a broader QA automation suite for the Restful Booker API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23015621"
+  },
+  "item": [
+    {
+      "name": "TC-01 - Successful Booking Creation",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"TC-01 | Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"TC-01 | Response has bookingid\", function () {\r",
+              "    var json = pm.response.json();\r",
+              "    pm.expect(json).to.have.property(\"bookingid\");\r",
+              "    pm.expect(json.bookingid).to.be.a(\"number\");\r",
+              "    pm.environment.set(\"bookingId\", json.bookingid);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"TC-01 | Booking data matches request\", function () {\r",
+              "    var json = pm.response.json().booking;\r",
+              "    pm.expect(json.firstname).to.eql(\"John\");\r",
+              "    pm.expect(json.lastname).to.eql(\"Doe\");\r",
+              "    pm.expect(json.totalprice).to.eql(150);\r",
+              "    pm.expect(json.depositpaid).to.eql(true);\r",
+              "    pm.expect(json.bookingdates.checkin).to.eql(\"2026-03-20\");\r",
+              "    pm.expect(json.bookingdates.checkout).to.eql(\"2026-03-25\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"firstname\": \"John\",\r\n  \"lastname\": \"Doe\",\r\n  \"totalprice\": 150,\r\n  \"depositpaid\": true,\r\n  \"bookingdates\": {\r\n    \"checkin\": \"2026-03-20\",\r\n    \"checkout\": \"2026-03-25\"\r\n  },\r\n  \"additionalneeds\": \"Breakfast\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/booking/",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "booking",
+            ""
+          ]
+        },
+        "description": "Create a booking with some informations successfully"
+      },
+      "response": []
+    },
+    {
+      "name": "TC-02 - Missing required fields",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('TC-02 | Status code is 200 (known bug RFB-18 — required fields not validated)', function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test('TC-02 | Booking created despite missing firstname and lastname', function () {\r",
+              "    var json = pm.response.json();\r",
+              "    pm.expect(json).to.have.property('bookingid');\r",
+              "    pm.expect(json.booking.firstname).to.eql('');\r",
+              "    pm.expect(json.booking.lastname).to.eql('');\r",
+              "});\r",
+              "\r",
+              "console.warn('TC-02: API accepts booking with missing firstname and lastname — known Restful Booker limitation. In a real API, a 400 should be returned. Documented in RFB-18.');"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"firstname\": \"\",\r\n  \"lastname\": \"\",\r\n  \"totalprice\": 150,\r\n  \"depositpaid\": true,\r\n  \"bookingdates\": {\r\n    \"checkin\": \"2026-03-20\",\r\n    \"checkout\": \"2026-03-25\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/booking/",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "booking",
+            ""
+          ]
+        },
+        "description": "Create a booking with missing informations"
+      },
+      "response": []
+    },
+    {
+      "name": "TC-03 - Invalid date format",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"TC-03 | Status code is 400 - Invalid date format should be rejected\", function () {\r",
+              "    pm.response.to.have.status(400);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"TC-03 | Response contains validation error message\", function () {\r",
+              "    var json = pm.response.json();\r",
+              "    pm.expect(json).to.have.property(\"error\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"firstname\": \"John\",\r\n  \"lastname\": \"Doe\",\r\n  \"totalprice\": 150,\r\n  \"depositpaid\": true,\r\n  \"bookingdates\": {\r\n    \"checkin\": \"27-03-2026\",\r\n    \"checkout\": \"25-03-2026\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/booking/",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "booking",
+            ""
+          ]
+        },
+        "description": "Create a booking with invalid date format\n\n⚠️ This test is expected to FAIL. The API incorrectly accepts invalid date formats (DD-MM-YYYY) and returns 200 instead of 400. Defect tracked in RFB-17."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "bookingId",
+      "value": ""
+    }
+  ]
+}

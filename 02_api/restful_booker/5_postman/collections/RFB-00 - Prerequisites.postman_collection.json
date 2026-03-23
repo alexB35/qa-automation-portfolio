@@ -1,0 +1,114 @@
+{
+  "info": {
+    "_postman_id": "2b7c076c-3072-4878-b266-dd0b2cde2b9b",
+    "name": "RFB-00 - Prerequisites",
+    "description": "## RFB-00 - Prerequisites\n\nThis collection covers the **authentication prerequisites** required before executing any other Restful Booker test suites. It targets the `POST /auth` endpoint and validates the token generation flow under two scenarios:\n\n- **TC-AUTH-01 | Valid Credentials** — Authenticates with correct credentials, asserts a successful `200` response, and automatically stores the returned token as a collection variable (`token`) for use in subsequent requests.\n    \n- **TC-AUTH-02 | Invalid Credentials** — Authenticates with wrong credentials and verifies that the API returns the expected `Bad credentials` reason, ensuring proper error handling.\n    \n\n> Run this collection first to ensure the `token` variable is populated before executing booking-related test suites.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23015621"
+  },
+  "item": [
+    {
+      "name": "TC-AUTH-01 | Create Token - Valid Credentials",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('TC-AUTH-01 | Status is 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('TC-AUTH-01 | Token returned and stored', function () {",
+              "    var json = pm.response.json();",
+              "    pm.expect(json).to.have.property('token');",
+              "    pm.expect(json.token).to.be.a('string').and.not.empty;",
+              "    pm.environment.set('token', json.token);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"username\":\"admin\",\r\n\t\"password\":\"password123\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/auth",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth"
+          ]
+        },
+        "description": "US-RFB-01 | Valid authentification. Store token in variable collection."
+      },
+      "response": []
+    },
+    {
+      "name": "TC-AUTH-02 | Create Token - Invalid Credentials",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('TC-AUTH-02 | Status is 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('TC-AUTH-02 | Reason is Bad credentials', function () { pm.expect(pm.response.json().reason).to.equal('Bad credentials'); });"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"username\":\"wronguser\",\r\n    \"password\":\"wrongpassword\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/auth",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth"
+          ]
+        },
+        "description": "US-RFB-01 | Invalid credentials. Attend reason: Bad credentials."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}

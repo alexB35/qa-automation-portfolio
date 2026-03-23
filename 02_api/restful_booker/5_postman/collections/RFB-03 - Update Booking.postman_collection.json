@@ -1,0 +1,141 @@
+{
+  "info": {
+    "_postman_id": "10eb1515-6328-4a64-bcc2-8fb73901d065",
+    "name": "RFB-03 - Update Booking",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23015621"
+  },
+  "item": [
+    {
+      "name": "TC-07 - Update Booking Successfully",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Firstname updated\", function () {\r",
+              "    var json = pm.response.json();\r",
+              "    pm.expect(json.firstname).to.eql(\"Alice\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Cookie",
+            "value": "token={{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstname\": \"Alice\",\n  \"lastname\": \"Brown\",\n  \"totalprice\": 200,\n  \"depositpaid\": false,\n  \"bookingdates\": {\n    \"checkin\": \"2026-04-01\",\n    \"checkout\": \"2026-04-05\"\n  },\n  \"additionalneeds\": \"Dinner\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/booking/{{bookingId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "booking",
+            "{{bookingId}}"
+          ]
+        },
+        "description": "Update an existent booking successfully"
+      },
+      "response": []
+    },
+    {
+      "name": "TC-08 - Update Booking With Invalid Data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response contains malformed dates due to invalid input\", function () {",
+              "    var json = pm.response.json();",
+              "    pm.expect(json.bookingdates.checkin).to.eql(\"0NaN-aN-aN\");",
+              "    pm.expect(json.bookingdates.checkout).to.eql(\"0NaN-aN-aN\");",
+              "});",
+              "",
+              "pm.test(\"Other booking fields are correctly updated\", function () {",
+              "    var json = pm.response.json();",
+              "    pm.expect(json.firstname).to.eql(\"Alice\");",
+              "    pm.expect(json.lastname).to.eql(\"Brown\");",
+              "    pm.expect(json.totalprice).to.eql(300);",
+              "    pm.expect(json.depositpaid).to.eql(true);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Cookie",
+            "value": "token={{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstname\": \"Alice\",\n  \"lastname\": \"Brown\",\n  \"totalprice\": 300,\n  \"depositpaid\": true,\n  \"bookingdates\": {\n    \"checkin\": \"invalid-date\",\n    \"checkout\": \"invalid-date\"\n  },\n  \"additionalneeds\": \"Breakfast\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/booking/{{bookingId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "booking",
+            "{{bookingId}}"
+          ]
+        },
+        "description": "Update an existent booking with an invalid date"
+      },
+      "response": []
+    }
+  ]
+}

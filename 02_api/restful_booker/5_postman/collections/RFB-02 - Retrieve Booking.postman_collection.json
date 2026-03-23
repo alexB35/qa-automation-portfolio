@@ -1,0 +1,163 @@
+{
+  "info": {
+    "_postman_id": "9598101f-1f1d-4d79-93f2-f4313a889fdb",
+    "name": "RFB-02 - Retrieve Booking",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "23015621"
+  },
+  "item": [
+    {
+      "name": "TC-04 - Retrieve Existing Booking",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"TC-04 | Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"TC-04 | Response contains booking fields\", function () {\r",
+              "    var json = pm.response.json();\r",
+              "    pm.expect(json).to.have.property(\"firstname\");\r",
+              "    pm.expect(json).to.have.property(\"lastname\");\r",
+              "    pm.expect(json).to.have.property(\"totalprice\");\r",
+              "    pm.expect(json).to.have.property(\"depositpaid\");\r",
+              "    pm.expect(json).to.have.property(\"bookingdates\");\r",
+              "    pm.expect(json.bookingdates).to.have.property(\"checkin\");\r",
+              "    pm.expect(json.bookingdates).to.have.property(\"checkout\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/booking/{{bookingId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "booking",
+            "{{bookingId}}"
+          ]
+        },
+        "description": "Return a created booking ID successfully"
+      },
+      "response": []
+    },
+    {
+      "name": "TC-05 - Retrieve Non-Existing Booking",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"TC-05 | Status code is 404 for non-existing booking\", function () {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/booking/9999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "booking",
+            "9999"
+          ]
+        },
+        "description": "Search for a non-existing booking ID"
+      },
+      "response": []
+    },
+    {
+      "name": "TC-06 - Unauthorized Access",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('TC-06 | GET /booking/{id} should require authentication — expects 401', function () {",
+              "    pm.response.to.have.status(401);",
+              "});",
+              "",
+              "console.error('TC-06 FAILED: GET /booking/{id} returns 200 without token — unauthenticated access to booking data. Defect tracked in RFB-17.');"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "if (!pm.environment.get('bookingId')) {\r",
+              "    pm.sendRequest({\r",
+              "        url: pm.environment.get('baseUrl') + '/booking',\r",
+              "        method: 'POST',\r",
+              "        header: { 'Content-Type': 'application/json' },\r",
+              "        body: { mode: 'raw', raw: JSON.stringify({\r",
+              "            firstname: 'John', lastname: 'Doe', totalprice: 150, depositpaid: true,\r",
+              "            bookingdates: { checkin: '2026-03-20', checkout: '2026-03-25' }\r",
+              "        })}\r",
+              "    }, function(err, res) {\r",
+              "        pm.environment.set('bookingId', res.json().bookingid);\r",
+              "    });\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/booking/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "booking",
+            "1"
+          ]
+        },
+        "description": "Search for a booking ID without an authentication token"
+      },
+      "response": []
+    }
+  ]
+}
