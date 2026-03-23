@@ -29,8 +29,8 @@ jobs:
 
       - name: 🔐 RFB-00 – Prerequisites (Auth)
         run: |
-          newman run 02_api/restful_booker/5_postman/collections/RFB-00_-_Prerequisites_postman_collection.json \
-            --environment 02_api/restful_booker/5_postman/environments/RFB_Environment.postman_environment.json \
+          newman run "02_api/restful_booker/5_postman/collections/RFB-00 - Prerequisites.postman_collection.json" \
+            --environment "02_api/restful_booker/5_postman/environments/RFB_Environment.postman_environment.json" \
             --export-environment /tmp/rfb_env.json \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-00-report.html \
@@ -38,7 +38,7 @@ jobs:
 
       - name: 📝 RFB-01 – Create Booking
         run: |
-          newman run 02_api/restful_booker/5_postman/collections/RFB-01_-_Create_Booking_postman_collection.json \
+          newman run "02_api/restful_booker/5_postman/collections/RFB-01 - Create Booking.postman_collection.json" \
             --environment /tmp/rfb_env.json \
             --export-environment /tmp/rfb_env.json \
             --reporters cli,htmlextra \
@@ -48,7 +48,7 @@ jobs:
 
       - name: 🔍 RFB-02 – Retrieve Booking
         run: |
-          newman run 02_api/restful_booker/5_postman/collections/RFB-02_-_Retrieve_Booking_postman_collection.json \
+          newman run "02_api/restful_booker/5_postman/collections/RFB-02 - Retrieve Booking.postman_collection.json" \
             --environment /tmp/rfb_env.json \
             --export-environment /tmp/rfb_env.json \
             --reporters cli,htmlextra \
@@ -58,7 +58,7 @@ jobs:
 
       - name: ✏️ RFB-03 – Update Booking
         run: |
-          newman run 02_api/restful_booker/5_postman/collections/RFB-03_-_Update_Booking_postman_collection.json \
+          newman run "02_api/restful_booker/5_postman/collections/RFB-03 - Update Booking.postman_collection.json" \
             --environment /tmp/rfb_env.json \
             --export-environment /tmp/rfb_env.json \
             --reporters cli,htmlextra \
@@ -67,7 +67,7 @@ jobs:
 
       - name: 🗑️ RFB-04 – Delete Booking
         run: |
-          newman run 02_api/restful_booker/5_postman/collections/RFB-04_-_Delete_Booking_postman_collection.json \
+          newman run "02_api/restful_booker/5_postman/collections/RFB-04 - Delete Booking.postman_collection.json" \
             --environment /tmp/rfb_env.json \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-04-report.html \
