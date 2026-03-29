@@ -1,0 +1,40 @@
+name: ParaBank UI Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  parabank-ui:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    # ================================
+    # Checkout repository
+    # ================================
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # ================================
+    # Build Docker image for UI tests
+    # ================================
+    - name: Build Docker image
+      run: docker build -t qa-tests .
+
+    # ================================
+    # Run ParaBank UI Tests
+    # ================================
+    - name: Run Playwright UI Tests - ParaBank
+      run: docker run qa-tests npx playwright test 01_banking/parabank/tests
+
+    # ================================
+    # Upload Playwright Report
+    # ================================
+    - name: Upload Playwright Report - ParaBank
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: parabank-playwright-report
+        path: 01_banking/parabank/outputs

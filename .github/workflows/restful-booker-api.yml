@@ -1,0 +1,75 @@
+name: Restful Booker API & UI Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  restful-booker:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    # ================================
+    # Checkout repository
+    # ================================
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # ================================
+    # Build Docker image
+    # ================================
+    - name: Build Docker image
+      run: docker build -t qa-tests .
+
+    # ================================
+    # Run API Tests - Prerequisites (Auth)
+    # ================================
+    - name: API Tests - Prerequisites (Auth)
+      run: docker run qa-tests npx newman run 02_api/restful_booker/5_postman/RFB-00_Prerequisites.postman_collection.json \
+        --reporters cli,htmlextra \
+        --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-00-report.html
+
+    # ================================
+    # Run API Tests - Create Booking
+    # ================================
+    - name: API Tests - Create Booking
+      run: docker run qa-tests npx newman run 02_api/restful_booker/5_postman/RFB-01_Create_Booking.postman_collection.json \
+        --reporters cli,htmlextra \
+        --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-01-report.html
+
+    # ================================
+    # Run API Tests - Retrieve Booking
+    # ================================
+    - name: API Tests - Retrieve Booking
+      run: docker run qa-tests npx newman run 02_api/restful_booker/5_postman/RFB-02_Retrieve_Booking.postman_collection.json \
+        --reporters cli,htmlextra \
+        --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-02-report.html
+
+    # ================================
+    # Run API Tests - Update Booking
+    # ================================
+    - name: API Tests - Update Booking
+      run: docker run qa-tests npx newman run 02_api/restful_booker/5_postman/RFB-03_Update_Booking.postman_collection.json \
+        --reporters cli,htmlextra \
+        --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-03-report.html
+
+    # ================================
+    # Run API Tests - Delete Booking
+    # ================================
+    - name: API Tests - Delete Booking
+      run: docker run qa-tests npx newman run 02_api/restful_booker/5_postman/RFB-04_Delete_Booking.postman_collection.json \
+        --reporters cli,htmlextra \
+        --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-04-report.html
+
+    # ================================
+    # Upload Newman HTML Reports
+    # ================================
+
+    - name: Upload Newman Reports
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: newman-reports
+        path: 02_api/restful_booker/outputs/*.html

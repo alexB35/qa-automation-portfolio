@@ -1,38 +1,50 @@
-# OrangeHRM UI Testing
+![Playwright](https://img.shields.io/badge/Playwright-Automation-green)
+![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/orangehrm-ui.yml/badge.svg)
 
-This project focuses on **UI and functional testing** for an HR management system.
+# Orange HRM UI Automation
 
-## Scope
+## Overview
 
-The following features are covered:
+This project demonstrates **UI automation** for Orange HRM, a human resources management system.  
 
-- User login  
-- Employee creation  
-- Employee management (edit & delete)  
+Automates employee workflows including login, employee creation, edit and delete.
 
-## Testing Approach
+## Technology Stack
 
-- UI automation using **Playwright**  
-- Functional test scenarios with validation checks  
-- Coverage of common HR workflows  
+- **Playwright** (UI automation)
+- **TypeScript / Node.js**
+- **Docker**
+- **GitHub Actions**
 
-## Key Highlights
+## Project Structure
 
-- Real-world SaaS application testing  
-- Form validation and user interaction testing  
-- Structured test cases based on business requirements  
+- `tests/` → Playwright test cases
+- `outputs/` → Reports & logs
+- `screenshots/` → UI validation evidence
+- `resources/` → Page objects & test data
+- `jira/` → Screenshots of Jira boards and user story cards
 
-## Goal
+---
 
-Demonstrate the ability to test **SaaS applications and business workflows** using modern UI automation tools.
+## How to Run Tests 
 
-## Tech Stack
+## Locally
 
-- Playwright (UI automation)  
-- JavaScript  
-- Node.js  
+npm install
+npx playwright install
+npx playwright test 03_saas/orange_hrm/tests
 
-## Environment
 
-- OS: Windows  
-- Browser: Chromium (Playwright)  
+## Using Docker
+
+docker build -t qa-tests .
+docker run qa-tests npx playwright test 03_saas/orange_hrm/tests
+
+
+## Using GitHub Actions
+
+Trigger the workflow: orangehrm-ui.yml
+
+## Reports :
+
+Playwright reports are uploaded as artifacts (orangehrm-playwright-report)

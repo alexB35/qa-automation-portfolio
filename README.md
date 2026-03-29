@@ -1,5 +1,6 @@
 # QA Automation Portfolio
 
+![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/tests.yml/badge.svg)
 ![Playwright](https://img.shields.io/badge/Playwright-Automation-green)
 ![Postman](https://img.shields.io/badge/Postman-API_Testing-orange)
 ![Jira](https://img.shields.io/badge/Jira-Test_Management-blue)

@@ -1,0 +1,40 @@
+name: Orange HRM UI Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  orangehrm-ui:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    # ================================
+    # Checkout repository
+    # ================================
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # ================================
+    # Build Docker image
+    # ================================
+    - name: Build Docker image
+      run: docker build -t qa-tests .
+
+    # ================================
+    # Run Orange HRM UI Tests
+    # ================================
+    - name: Run Playwright UI Tests - Orange HRM
+      run: docker run qa-tests npx playwright test 03_saas/orange_hrm/tests
+
+    # ================================
+    # Upload Playwright Report
+    # ================================
+    - name: Upload Playwright Report - Orange HRM
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: orangehrm-playwright-report
+        path: 03_saas/orange_hrm/outputs

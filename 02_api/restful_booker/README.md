@@ -1,39 +1,47 @@
-# Restful Booker API Testing
+![Postman](https://img.shields.io/badge/Postman-API_Testing-orange)
+![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml/badge.svg)
 
-This project focuses on **API testing and automation** for a booking system.
+# Restful Booker API Automation
 
-## Scope
+## Overview
 
-The following API operations are covered:
+This project covers **API automation** for the Restful Booker API.  
 
-- Create booking  
-- Retrieve booking  
-- Update booking  
-- Delete booking  
+It demonstrates CRUD operations via API: create, retrieve, update, and delete bookings. Includes positive and negative scenarios with Newman.
 
-## Testing Approach
+## Technology Stack
 
-- API testing using **Postman** (exploratory & collections)  
-- API automation using **Playwright**  
-- Validation of request/response structure and status codes  
+- **Postman + Newman** (API testing)
+- **TypeScript / Node.js**
+- **Docker**
+- **GitHub Actions**
 
-## Key Highlights
+## Project Structure
 
-- REST API testing (CRUD operations)  
-- Positive, negative, and validation scenarios  
-- JSON-based request/response validation  
 
-## Goal
+- `tests/` → Postman API tests
+- `outputs/` → Newman HTML reports
+- `screenshots/` → Screenshots of failures
+- `resources/` → Payloads & helpers
+- `jira/` → Screenshots of Jira boards and user story cards
 
-Demonstrate the ability to test and automate **RESTful APIs**, combining manual exploration and automated validation.
+---
 
-## Tech Stack
+## How to Run Tests
 
-- Postman (API testing)  
-- Playwright (API automation)  
-- REST APIs / JSON  
+## Locally
 
-## Environment
+newman run 02_api/restful_booker/5_postman/RFB-00_Prerequisites.postman_collection.json -e 02_api/restful_booker/5_postman/environment.json
 
-- OS: Windows  
-- Browser: Chromium (Playwright)  
+## Using Docker 
+
+docker build -t qa-tests .
+docker run qa-tests npx newman run 02_api/restful_booker/5_postman/RFB-00_Prerequisites.postman_collection.json
+
+## Using GitHub Actions
+
+Trigger the workflow: restful-booker-api.yml
+
+## Reports :
+
+Newman HTML reports are uploaded as artifacts (restful-booker-newman-report)
