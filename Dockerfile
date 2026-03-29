@@ -19,9 +19,9 @@ COPY . .
 RUN npm install
 
 # ================================
-# Install Newman (Postman CLI)
+# Install Newman + HTML reporter
 # ================================
-RUN npm install -g newman
+RUN npm install -g newman newman-reporter-htmlextra
 
 # ================================
 # Default command: run Playwright tests

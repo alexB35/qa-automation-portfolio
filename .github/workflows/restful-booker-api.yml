@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  restful-booker:
+  restful-booker-api:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,7 +27,7 @@ jobs:
     # Run API Tests - Prerequisites (Auth)
     # ================================
     - name: API Tests - Prerequisites (Auth)
-      run: docker run qa-tests npx newman run 02_api/restful_booker/5_postman/RFB-00_Prerequisites.postman_collection.json \
+      run: docker run qa-tests npx newman run 02_api/restful_booker/postman/RFB-00_Prerequisites.postman_collection.json \
         --reporters cli,htmlextra \
         --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-00-report.html
 
@@ -35,7 +35,7 @@ jobs:
     # Run API Tests - Create Booking
     # ================================
     - name: API Tests - Create Booking
-      run: docker run qa-tests npx newman run 02_api/restful_booker/5_postman/RFB-01_Create_Booking.postman_collection.json \
+      run: docker run qa-tests npx newman run 02_api/restful_booker/postman/RFB-01_Create_Booking.postman_collection.json \
         --reporters cli,htmlextra \
         --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-01-report.html
 
@@ -43,7 +43,7 @@ jobs:
     # Run API Tests - Retrieve Booking
     # ================================
     - name: API Tests - Retrieve Booking
-      run: docker run qa-tests npx newman run 02_api/restful_booker/5_postman/RFB-02_Retrieve_Booking.postman_collection.json \
+      run: docker run qa-tests npx newman run 02_api/restful_booker/postman/RFB-02_Retrieve_Booking.postman_collection.json \
         --reporters cli,htmlextra \
         --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-02-report.html
 
@@ -51,7 +51,7 @@ jobs:
     # Run API Tests - Update Booking
     # ================================
     - name: API Tests - Update Booking
-      run: docker run qa-tests npx newman run 02_api/restful_booker/5_postman/RFB-03_Update_Booking.postman_collection.json \
+      run: docker run qa-tests npx newman run 02_api/restful_booker/postman/RFB-03_Update_Booking.postman_collection.json \
         --reporters cli,htmlextra \
         --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-03-report.html
 
@@ -59,7 +59,7 @@ jobs:
     # Run API Tests - Delete Booking
     # ================================
     - name: API Tests - Delete Booking
-      run: docker run qa-tests npx newman run 02_api/restful_booker/5_postman/RFB-04_Delete_Booking.postman_collection.json \
+      run: docker run qa-tests npx newman run 02_api/restful_booker/postman/RFB-04_Delete_Booking.postman_collection.json \
         --reporters cli,htmlextra \
         --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-04-report.html
 

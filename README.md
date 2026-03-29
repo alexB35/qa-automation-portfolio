@@ -1,47 +1,59 @@
 # QA Automation Portfolio
+_A fully dockerized, multi-application QA automation framework with UI & API tests, reporting, and CI/CD._
 
-![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/tests.yml/badge.svg)
+![ParaBank UI Tests](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml/badge.svg)
+![Restful Booker API Tests](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml/badge.svg)
+![Orange HRM UI Tests](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/orange-hrm-ui.yml/badge.svg)
+
 ![Playwright](https://img.shields.io/badge/Playwright-Automation-green)
 ![Postman](https://img.shields.io/badge/Postman-API_Testing-orange)
-![Jira](https://img.shields.io/badge/Jira-Test_Management-blue)
-![Python](https://img.shields.io/badge/Python-3.10-lightgrey)
+![Docker](https://img.shields.io/badge/Docker-Containerization-2496ED)
+![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-CI/CD-2088FF)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-lightgrey)
-![CI/CD](https://img.shields.io/badge/CI/CD-GitHub%20Actions-lightgrey)
 
-This repository showcases QA automation skills across multiple applications, covering:
+Portfolio demonstrating **UI & API automation**, **containerized execution**, and **CI/CD workflows**.
 
 - UI test automation (Playwright)
 - API testing (Playwright & Postman)
 - Test case management (Jira)
+- Containerized test execution (Docker)
 - CI/CD integration (GitHub Actions)
 
-The project demonstrates a complete QA workflow from:
+**QA workflow:**
 
-Jira → Test Cases → Automation (Playwright / Postman) → Execution → Reports → CI/CD
+Jira → Test Design → Automation (Playwright / Postman) → Execution (Docker) → Reporting → CI/CD (GitHub Actions)
+
+Each application has its own dedicated CI workflow, allowing independent execution and clear reporting.
 
 ---
 
-## Technologies
+## Test Strategy
 
-- **Playwright** (UI & API automation)
-- **Postman + Newman** (API testing & execution)
-- **TypeScript / Node.js**
-- **GitHub Actions** (CI/CD)
-- **Jira** (test management)
+This portfolio follows a structured QA approach to ensure high-quality, reliable, and maintainable automated tests across multiple applications.
+
+### 1️⃣ Scope
+UI automation (ParaBank, OrangeHRM), API automation (Restful Booker), independent and reusable tests.
+
+### 2️⃣ Approach
+Modular, reusable and data-driven tests executed in Docker containers; orchestrated via GitHub Actions.
+
+### 3️⃣ Types of Tests
+Functional, API, exploratory, negative testing.
+
+### 4️⃣ Reporting & Results
+Playwright & Newman HTML reports; failure screenshots; CI artifacts for traceability.
 
 ---
 
 ## Project Structure
 
-This repository is organized by application, each containing its own test assets and execution results.
-
 ### 01_banking
-- **ParaBank UI** – End-to-end UI automation for banking workflows
-  - `tests/` → Playwright test cases (registration, login, transactions)
-  - `outputs/` → test execution reports and logs
+- **ParaBank UI** – End-to-end UI automation for banking scenarios
+  - `tests/` → Playwright UI tests (registration, login, transactions)
+  - `outputs/` → test reports & logs
   - `screenshots/` → failure evidences
-  - `resources/` → locators, reusable keywords
-  - `jira/` → user stories and test case screenshots
+  - `resources/` → locators & keywords
+  - `jira/` → user stories & test case screenshots
  
 **Jira :** https://alexb35.atlassian.net/jira/software/projects/PBQ/boards/1
 
@@ -50,12 +62,12 @@ This repository is organized by application, each containing its own test assets
 
 ### 02_api
 - **Restful Booker API** – API testing and automation for booking management scenarios
-  - `tests/` → Playwright API test cases
+  - `tests/` → Playwright API tests
   - `outputs/` → Newman HTML reports
   - `screenshots/` → request/response evidence (if applicable)
-  - `resources/` → request payloads, schemas, reusable helpers
-  - `postman/` → Postman collections and environments
-  - `jira/` → API test cases and documentation
+  - `resources/` → payloads, schemas
+  - `postman/` → collections & environments
+  - `jira/` → API test cases & documentation
 
 **Jira :**  https://alexb35.atlassian.net/jira/software/projects/RFB/boards/2
 
@@ -63,12 +75,12 @@ This repository is organized by application, each containing its own test assets
 
 
 ### 03_saas
-- **OrangeHRM UI** – Functional and UI automation for HR management workflows
-  - `tests/` → Playwright & Robot Framework test cases (login, employee management)
-  - `outputs/` → execution reports and logs
-  - `screenshots/` → UI validation evidence
-  - `resources/` → page objects, test data, helper functions
-  - `jira/` → user stories and test scenarios
+- **OrangeHRM UI** – Functional and UI automation for HR management scenarios
+  - `tests/` → Playwright & Robot Framework tests (login, employee management)
+  - `outputs/` → reports & logs
+  - `screenshots/` → failure evidences
+  - `resources/` → page objects & helpers
+  - `jira/` → user stories & test scenarios
 
 **Jira :**  https://alexb35.atlassian.net/jira/software/projects/ORH/boards/3
 
@@ -79,48 +91,52 @@ This repository is organized by application, each containing its own test assets
 
 ---
 
-## CI/CD Pipeline
+## Tech Stack
 
-Automated workflows are implemented using GitHub Actions:
-
-Run Playwright UI tests (Banking & SaaS)
-
-Run Postman collections via Newman
-
-Generate and upload test reports
+- **Playwright** (UI & API automation)
+- **Postman + Newman** (API execution)
+- **TypeScript / Node.js**
+- **Docker** (containerized execution)
+- **GitHub Actions** (CI/CD)
+- **Jira** (test management)
 
 ---
 
 ## How to Run Tests
 
-### Playwright (UI & API)
-npm install
-npx playwright install
-npx playwright test 01_banking/parabank/tests
+All tests in this portfolio are containerized with Docker.
+No local dependencies required.
 
-Run specific projects:
+To run tests :
 
-npx playwright test 02_api/restful_booker/tests
-npx playwright test 03_saas/orange_hrm/tests
+- Install **Docker Desktop** for your system :
 
-### Postman (Newman)
-newman run 02_api/restful_booker/postman/collections/restful_booker_collection.json \
-  -e 02_api/restful_booker/postman/environments/restful_booker_env.json
+https://www.docker.com/get-started
+
+- Clone this repository :
+
+git clone https://github.com/alexB35/qa-automation-portfolio.git
+cd qa-automation-portfolio
+
+- Build the Docker image :
+
+docker build -t qa-portfolio .
+
+- Run tests :
+
+docker run --rm qa-portfolio
+
+Reports are generated inside each app’s outputs/ folder.
+To copy them locally :
+
+docker cp <insert_container_id>:/app/02_api/outputs ./my_local_reports
 
 ---
 
 ## Notes
 
-Test data is generated dynamically where possible
+Test data is dynamically generated where possible.
 
-API and UI tests are designed to be independent
+Tests are independent & reusable.
 
-Some third-party dependencies may contain known vulnerabilities that do not impact test execution
-
----
-
-## Versions used
-- Node.js >= v20
-- npm >= v10
-- Playwright Test
-- Python 3.11+
+CI/CD pipelines generate reports and store artifacts automatically.

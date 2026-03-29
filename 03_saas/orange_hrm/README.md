@@ -1,5 +1,5 @@
 ![Playwright](https://img.shields.io/badge/Playwright-Automation-green)
-![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/orangehrm-ui.yml/badge.svg)
+![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/orange-hrm-ui.yml/badge.svg)
 
 # Orange HRM UI Automation
 

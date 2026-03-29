@@ -18,7 +18,7 @@ jobs:
       uses: actions/checkout@v4
 
     # ================================
-    # Build Docker image
+    # Build Docker image for UI tests
     # ================================
     - name: Build Docker image
       run: docker build -t qa-tests .
@@ -37,4 +37,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: orangehrm-playwright-report
-        path: 03_saas/orange_hrm/outputs
+        path: 03_saas/orange_hrm/outputs/*.html
