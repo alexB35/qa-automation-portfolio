@@ -1,0 +1,1 @@
+{"id":"86a6197966232c943663da15b8b17027","fullName":"PBQ-01-User-registration/tc03-register-empty-fields.spec.ts:22:7","name":"TC-03 | Mandatory field validation — all required fields show error on empty submit","status":"passed","testResultsByEnv":{"default":"84291f0e974fed123da570da96b07d1b"}}

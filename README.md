@@ -1,6 +1,8 @@
 # QA Automation Portfolio
 _A fully dockerized, multi-application QA automation framework with UI & API tests, reporting, and CI/CD._
 
+
+
 ![ParaBank UI Tests](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml/badge.svg)
 ![Restful Booker API Tests](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml/badge.svg)
 ![Orange HRM UI Tests](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/orange-hrm-ui.yml/badge.svg)
@@ -10,6 +12,8 @@ _A fully dockerized, multi-application QA automation framework with UI & API tes
 ![Docker](https://img.shields.io/badge/Docker-Containerization-2496ED)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-CI/CD-2088FF)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-lightgrey)
+
+
 
 Portfolio demonstrating **UI & API automation**, **containerized execution**, and **CI/CD workflows**.
 

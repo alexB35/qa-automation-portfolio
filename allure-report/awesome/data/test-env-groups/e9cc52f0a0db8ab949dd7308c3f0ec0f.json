@@ -1,0 +1,1 @@
+{"id":"e9cc52f0a0db8ab949dd7308c3f0ec0f","fullName":"PBQ-05-Bill-payment/tc19-bill-payment-invalid-amount.spec.ts:22:7","name":"TC-19 | Bill payment with negative amount should be rejected (KNOWN BUG PBQ-B04: payment processed with negative amount)","status":"failed","testResultsByEnv":{"default":"b9369352c217280e50bd25b11f585e20"}}

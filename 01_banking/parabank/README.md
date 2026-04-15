@@ -49,5 +49,6 @@ Playwright reports are uploaded as artifacts in GitHub Actions workflow (paraban
 
 ## Notes :
 
-Tests are independent and can be run individually
+You can run an entire User Story tests suit or test cases individually
+Playwright is configured to not stop at a failure
 Failure screenshots and evidences are stored in screenshots/

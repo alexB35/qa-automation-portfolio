@@ -1,0 +1,1 @@
+{"id":"0f5bb5ee39334f2101dbee2692a56d31","fullName":"PBQ-02-User-login/tc08-login-non-existing-user.spec.ts:13:7","name":"TC-08 | Login with non-existing user shows error message","status":"broken","testResultsByEnv":{"default":"b8bbdcc528dfad641c4500efd8ebb140"}}

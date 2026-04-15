@@ -1,0 +1,1 @@
+{"id":"29d8a5940c2cad3c9eb42783aea20a94","fullName":"PBQ-07-Update-contact-info/tc23-update-contact-information-invalid-data.spec.ts:11:7","name":"TC-23 | Update contact information with empty required fields shows validation errors","status":"failed","testResultsByEnv":{"default":"259f0c4315c69fe63c1cf5e2a2acdaaf"}}

@@ -1,0 +1,1 @@
+{"id":"d131275d853d473e30330ee3a11b19ea","fullName":"PBQ-06-Find-transactions/tc21-search-transaction-invalid-id.spec.ts:35:7","name":"TC-21b | Search with non-existing transaction ID returns empty results","status":"failed","testResultsByEnv":{"default":"60cd847f3d0e8f1373cd2e5befa4be70"}}

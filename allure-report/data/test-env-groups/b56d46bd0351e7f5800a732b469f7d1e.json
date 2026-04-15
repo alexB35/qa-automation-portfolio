@@ -1,0 +1,1 @@
+{"id":"b56d46bd0351e7f5800a732b469f7d1e","fullName":"PBQ-01-User-registration/tc02-register-existing-username.spec.ts:22:7","name":"TC-02 | Registration with existing username shows error message","status":"failed","testResultsByEnv":{"default":"28b43f5472eae282ee1ed5fbb6e884fc"}}

@@ -4,12 +4,26 @@
   "description": "![Playwright](https://img.shields.io/badge/Playwright-Automation-green)\r ![Robot Framework](https://img.shields.io/badge/Robot_Framework-Automation-green)\r ![Postman](https://img.shields.io/badge/Postman-API_Testing-orange)\r ![Jira](https://img.shields.io/badge/Jira-Test_Management-blue)\r ![Python](https://img.shields.io/badge/Python-3.10-lightgrey)\r ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-lightgrey)\r ![CI/CD](https://img.shields.io/badge/CI/CD-GitHub%20Actions-lightgrey)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:parabank": "npx playwright test --project=setup-parabank && npx playwright test --project=parabank",
+    "report:parabank": "allure generate 01_banking/parabank/outputs/allure-results -o 01_banking/parabank/outputs/allure-report --open",
+
+    "test:restful-booker": "cd 02_api/restful-booker && newman run collection.json -r allure2 --reporter-allure2-export outputs/allure-results && cd ../../",
+    "report:restful-booker": "allure generate 02_api/restful-booker/outputs/allure-results -o 02_api/restful-booker/outputs/allure-report --open",
+
+    "test:orange-hrm": "cd 03_saas/orange-hrm && npx playwright test && robot -d outputs/allure-results robot-tests/ && cd ../../",
+    "report:orange-hrm": "allure generate 03_saas/orange-hrm/outputs/allure-results -o 03_saas/orange-hrm/outputs/allure-report --open",
+
+    "test:all": "npm run test:parabank && npm run test:restful-booker && npm run test:orange-hrm",
+    "report:all": "npm run report:parabank && npm run report:restful-booker && npm run report:orange-hrm",
+
+    "test:parabank:allure": "npm run test:parabank && npm run report:parabank",
+    "test:restful-booker:allure": "npm run test:restful-booker && npm run report:restful-booker",
+    "test:orange-hrm:allure": "npm run test:orange-hrm && npm run report:orange-hrm"
   },
-"repository": {
-  "type": "git",
-  "url": "git+https://github.com/alexB35/qa-automation-portfolio.git"
-},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexB35/qa-automation-portfolio.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -21,6 +35,9 @@
   "devDependencies": {
     "@playwright/test": "^1.58.2",
     "@types/node": "^25.5.0",
+    "allure-playwright": "^3.6.0",
+    "newman": "^6.19.1",
+    "newman-reporter-allure2": "^1.0.0",
     "typescript": "^5.9.3"
   }
 }
