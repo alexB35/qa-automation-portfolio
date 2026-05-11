@@ -70,8 +70,14 @@ No session files are stored in the repository.
 Playwright reports are uploaded as artifacts (automation-exercise-playwright-report)
 
 
-## Disclaimer : 
+## View Allure Report
 
-Automation Exercise displays third-party ads that may occasionally interfere with test execution. 
-Tests include ad dismissal logic but some ad variants may not be closeable programmatically due to iframe sandboxing restrictions.
+Download the `allure-report-automation-exercise` artifact from GitHub Actions, extract the zip, then:
+
+# Option 1 — Allure CLI
+allure open allure-report-automation-exercise
+
+# Option 2 — Simple HTTP server (no install required)
+npx serve allure-report-automation-exercise
+
 

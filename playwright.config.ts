@@ -17,12 +17,11 @@ const allureResultsDir = path.resolve(
 );
 
 export default defineConfig({
-  timeout: 25_000,
+  timeout: process.env['CI'] ? 45_000 : 25_000,
   forbidOnly: isCI,
-  retries: isCI ? 2 : 0,
-  // Parallelism disabled during development for stability
+  retries: isCI ? 1 : 0,
   fullyParallel: false,
-  workers: process.env['WORKERS'] ? parseInt(process.env['WORKERS']) : 1,
+  workers: process.env['WORKERS'] ? parseInt(process.env['WORKERS'], 10) : isCI ? 2 : 1,
   maxFailures: isCI ? 5 : 0,
 
   reporter: [

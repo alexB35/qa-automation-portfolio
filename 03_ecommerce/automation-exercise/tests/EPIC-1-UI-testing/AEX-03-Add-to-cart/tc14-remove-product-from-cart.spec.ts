@@ -28,7 +28,9 @@ test('TC-14 | Remove Product from Cart', async ({ page }) => {
       const product = page.locator('.product-image-wrapper')
         .filter({ has: page.locator('a[href="/product_details/31"]') });
       await product.locator('text=View Product').click();
-      await page.getByRole('button', { name: /add to cart/i }).click();
+      const addToCartBtn = page.getByRole('button', { name: /add to cart/i });
+        await expect(addToCartBtn).toBeVisible();
+        await addToCartBtn.click();
     });
 
     await step('Verify cart', async () => {
