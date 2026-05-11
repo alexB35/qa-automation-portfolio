@@ -1,6 +1,8 @@
 ![Playwright](https://img.shields.io/badge/Playwright-Automation-green)
-![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml/badge.svg)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-lightgrey)
 ![Allure](https://img.shields.io/badge/Allure-Test%20Reporting-ff69b4)
+![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/orange-hrm-ui.yml/badge.svg)
+
 
 # ParaBank UI Automation
 
@@ -21,11 +23,14 @@ The goal is to automate common banking workflows, validate UI functionality, and
 
 ## Project Structure
 
-- `tests/` → Playwright test cases (registration, login, transactions, ...)
-- `setup/` → Test setup and preconditions (authentication, session management)
-- `docs/` → Screenshots of test executions and Allure reports
-- `resources/` → Page objects, test data, and reusable utilities
-- `jira/` → Screenshots of Jira boards and cards
+| **ParaBank UI** | E2E UI automation for banking scenarios |
+|------|------|
+| `tests/` | Playwright test scripts |
+| `docs/` | Screenshots of test executions and Allure reports |
+| `resources/` | Page objects & reusable helpers |
+| `jira/` | Screenshots of Jira boards and cards |
+
+**Jira :** https://alexb35.atlassian.net/jira/software/projects/PBQ/boards/1
 
 ---
 

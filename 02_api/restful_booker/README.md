@@ -1,4 +1,4 @@
-![Postman](https://img.shields.io/badge/Postman-API_Testing-orange)
+![Postman / Newman](https://img.shields.io/badge/Postman-API_Testing-orange)
 ![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml/badge.svg)
 
 # Restful Booker API Automation
@@ -20,12 +20,16 @@ It demonstrates CRUD operations via API: create, retrieve, update, and delete bo
 
 ## Project Structure
 
+| **Restful Booker API** | API testing for booking management scenarios |
+|------|------|
+| `tests/` | Playwright API tests |
+| `outputs/` | Newman HTML reports |
+| `screenshots/` | request/response evidence (if applicable) |
+| `resources/` | payloads, schemas |
+| `postman/` | collections & environments |
+| `jira/` | API test cases & documentation |
 
-- `tests/` → Postman API tests
-- `outputs/` → Newman HTML reports
-- `screenshots/` → Screenshots of failures
-- `resources/` → Payloads & helpers
-- `jira/` → Screenshots of Jira boards and user story cards
+**Jira :**  https://alexb35.atlassian.net/jira/software/projects/RFB/boards/2
 
 ---
 
