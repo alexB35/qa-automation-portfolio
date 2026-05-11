@@ -9,6 +9,8 @@ on:
 jobs:
   automation-exercise:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
 
@@ -81,6 +83,15 @@ jobs:
     - name: Quality gate — fail on unexpected test failures
       if: always()
       run: node scripts/quality-gates.js automation-exercise
+
+    # ── Deploy Allure report to GitHub Pages ─────────────────────────────────
+    - name: Deploy Allure report to GitHub Pages
+      if: github.ref == 'refs/heads/main' && always()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: 03_ecommerce/automation-exercise/outputs/allure-report
+        destination_dir: automation-exercise
 
     # ── Login to Docker Hub ──────────────────────────────────────────────────
     - name: Login to Docker Hub
