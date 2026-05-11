@@ -28,7 +28,9 @@ test('TC-10a | Add Product to Cart', async ({ page }) => {
       const product = page.locator('.product-image-wrapper')
         .filter({ has: page.locator('a[href="/product_details/1"]') });
       await product.locator('text=View Product').click();
+      await expect(page.getByRole('spinbutton')).toBeVisible();
       await page.getByRole('spinbutton').fill('2');
+      await expect(page.getByRole('button', { name: /add to cart/i })).toBeVisible();
       await page.getByRole('button', { name: /add to cart/i }).click();
     });
 
