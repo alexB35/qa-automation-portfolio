@@ -1,5 +1,10 @@
 # QA Automation Portfolio
-## _A fully dockerized, multi-application QA automation framework with UI & API tests, reporting, and CI/CD._
+
+![QA Automation Portfolio](./assets/banner.png)
+
+## _A dockerized QA automation framework featuring UI/API testing, CI/CD pipelines and Allure reporting._
+
+> Open to QA Automation opportunities.
 
 ![ParaBank - UI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml/badge.svg)
 ![Restful Booker - API](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml/badge.svg)
@@ -14,17 +19,22 @@
 
 ---
 
-Portfolio demonstrating **UI & API automation**, **containerized execution**, and **CI/CD workflows**.
+This portfolio demonstrates **UI & API automation**, **containerized execution**, and **CI/CD workflows**.
 
-- UI test automation (Playwright)
-- API testing (Playwright & Postman)
-- Test case management (Jira)
-- Containerized test execution (Docker)
-- CI/CD integration (GitHub Actions)
 
-**QA workflow:**
+## Framework features
 
-_Jira → Test Design → Automation (Playwright / Postman) → Execution (Docker) → Reporting (Allure) → CI/CD (GitHub Actions)_
+- Reusable fixtures & helpers
+- Data-driven testing
+- Dynamic test data generation
+- API cleanup hooks
+- Isolated test execution
+- CI-ready architecture
+
+
+## QA workflow
+
+_Jira → Test Design → Automation (Playwright / Postman) → Execution (Docker) → CI/CD (GitHub Actions) → Reporting (Allure)_
 
 Each application has its own dedicated CI workflow, allowing independent execution and clear reporting.
 
@@ -41,7 +51,7 @@ _UI & API automation, independent and reusable tests._
 _Modular, reusable and data-driven tests executed in Docker containers; orchestrated via GitHub Actions._
 
 ### 3️⃣ Types of Tests
-_Functional, API, exploratory, positive / negative and validation tests._
+_Functional, API, positive/negative and validation testing._
 
 ### 4️⃣ Reporting & Results
 _Playwright & Newman HTML reports; failure screenshots; CI artifacts for traceability._
@@ -50,15 +60,11 @@ _Playwright & Newman HTML reports; failure screenshots; CI artifacts for traceab
 
 ## Project Structure
 
-| ** Application ** | Scope |
-|------|------|
-| ParaBank | UI automation for banking scenarios |
-| Restful Booker | API testing for booking management scenarios |
-| Automation Exercise | UI and API automation for e-commerce scenarios |
-
-
-### 04_other
-  - config files
+| Application | Scope | README |
+|------|------|------|
+| ParaBank | UI automation for banking scenarios | [ParaBank](./01_banking/parabank/README.md) |
+| Restful Booker | API testing for booking management scenarios | [Restful Booker](./02_api/restful_booker/README.md) |
+| Automation Exercise | UI and API automation for e-commerce scenarios | [Automation Exercise](./03_ecommerce/automation-exercise/README.md) |
 
 ---
 
@@ -68,58 +74,49 @@ _Playwright & Newman HTML reports; failure screenshots; CI artifacts for traceab
 - **Postman + Newman** (API execution)
 - **TypeScript / Node.js**
 - **Docker** (containerized execution)
-- **GitHub Actions** (CI/CD)
+- **GitHub Actions** (CI/CD integration)
 - **Jira** (test management)
 
 ---
 
 ## How to Run Tests
 
-All tests in this portfolio are containerized with Docker.
-No local dependencies required.
+All tests are containerized — no local dependencies required beyond Docker.
 
-To run tests :
+**Prerequisites:** [Install Docker Desktop](https://www.docker.com/get-started)
 
-- Install **Docker Desktop** for your system :
-
-https://www.docker.com/get-started
-
-- Clone this repository :
-
-```
+**Clone the repository:**
+```bash
 git clone https://github.com/alexB35/qa-automation-portfolio.git
 cd qa-automation-portfolio
 ```
 
-- Build the Docker image :
-
+**Run tests with volume mount** (recommended — reports are accessible locally):
+```bash
+docker run --rm -v $(pwd)/reports:/app/outputs qa-portfolio
 ```
-docker build -t qa-portfolio .
-```
 
-- Run tests :
-
-```
+**Or run without volume mount:**
+```bash
 docker run --rm qa-portfolio
 ```
 
-Reports are generated inside each app’s outputs/ folder.
-To copy them locally :
+Reports are generated inside each app's `outputs/` folder and accessible at `./reports/` on your machine.
 
-```
-docker cp <insert_container_id>:/app/02_api/outputs ./my_local_reports
-```
+---
+
+## Reporting
+
+Insert Allure Screenshot
 
 ---
 
 > [!NOTE]
-
 > Test data is dynamically generated where possible.
-
 > Tests are independent & reusable.
-
 > CI/CD pipelines generate reports and store artifacts automatically.
 
-> Docker image includes known npm dependency vulnerabilities. In a production environment, these would be addressed by pinning secure package versions and using a minimal base image.
+> [!WARNING]
+> Docker image includes known npm dependency vulnerabilities. In a real environment, dependencies would be pinned to secure versions and a minimal base image used.
 
 
