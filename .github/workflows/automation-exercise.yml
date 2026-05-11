@@ -1,4 +1,4 @@
-name: automation-exercise Tests
+name: Automation Exercise Tests - UI + API
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: '24'
 
     # ── Install dependencies ────────────────────────────────────────────────
     - name: Install dependencies
@@ -80,7 +80,7 @@ jobs:
     # ── Quality gate ─────────────────────────────────────────────────────────
     - name: Quality gate — fail on unexpected test failures
       if: always()
-      run: node 03_ecommerce/automation-exercise/scripts/quality-gate.js automation-exercise
+      run: node 03_ecommerce/automation-exercise/scripts/quality-gates.js automation-exercise
 
     # ── Login to Docker Hub ──────────────────────────────────────────────────
     - name: Login to Docker Hub
