@@ -80,7 +80,7 @@ jobs:
     # ── Quality gate ─────────────────────────────────────────────────────────
     - name: Quality gate — fail on unexpected test failures
       if: always()
-      run: node 03_ecommerce/automation-exercise/scripts/quality-gates.js automation-exercise
+      run: node scripts/quality-gates.js automation-exercise
 
     # ── Login to Docker Hub ──────────────────────────────────────────────────
     - name: Login to Docker Hub
