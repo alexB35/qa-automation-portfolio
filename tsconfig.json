@@ -1,18 +1,20 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "commonjs",
+    "module": "commonjs",   
+    "moduleResolution": "node",
+    "ignoreDeprecations": "6.0",
     "strict": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
     "outDir": "dist",
     "types": ["node", "@playwright/test"]
   },
   "include": [
     "01_banking/**/*.spec.ts",
     "02_api/**/*.spec.ts",
-    "03_saas/**/*.spec.ts",
-    "playwright.config.ts"
+    "03_ecommerce/**/*.ts",
+    "playwright.config.ts", 
+    "03_ecommerce/automation-exercise/setup/auth.setup.ts"  
   ],
   "exclude": [
     "node_modules",

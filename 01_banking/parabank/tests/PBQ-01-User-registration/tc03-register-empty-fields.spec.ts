@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test';
+import { URLS } from '../../resources/urls';
+
 
 // ── Test Data ──────────────────────────────────────────────────────────────
-const REGISTRATION_URL = 'https://parabank.parasoft.com/parabank/register.htm';
 
 const EXPECTED_ERRORS = {
   firstName: 'First name is required.',
@@ -22,7 +23,7 @@ test.describe('PBQ-01 – User Registration', () => {
   test('TC-03 | Mandatory field validation — all required fields show error on empty submit', async ({ page }) => {
 
     // ── Arrange ─────────────────────────────────────────────────────────
-    await page.goto(REGISTRATION_URL);
+    await page.goto(URLS.registerUrl);
 
     // ── Act ─────────────────────────────────────────────────────────────
     await page.locator('input[value="Register"]').click();

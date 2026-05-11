@@ -19,9 +19,10 @@ COPY . .
 RUN npm install
 
 # ================================
-# Install Newman + HTML reporter
+# Install Newman + Allure CLI
 # ================================
 RUN npm install -g newman newman-reporter-htmlextra
+RUN npm install -g allure-commandline
 
 # ================================
 # Default command: run Playwright tests

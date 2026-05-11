@@ -1,9 +1,8 @@
 import { test, expect } from '@playwright/test';
+import { URLS } from '../../resources/urls';
 
 // ── Test Data ──────────────────────────────────────────────────────────────
-const URLS = {
-  updateProfile: 'https://parabank.parasoft.com/parabank/updateprofile.htm',
-};
+
 
 // ── TC-23 | Update contact information with invalid data ───────────────────
 test.describe('PBQ-07 – Update Contact Info', () => {
@@ -11,7 +10,7 @@ test.describe('PBQ-07 – Update Contact Info', () => {
   test('TC-23 | Update contact information with empty required fields shows validation errors', async ({ page }) => {
 
     // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.updateProfile);
+    await page.goto(URLS.updateProfileUrl);
 
     // ── Act — clear required fields ──────────────────────────────────────
     await page.locator('input[id="customer.address.street"]').fill('');

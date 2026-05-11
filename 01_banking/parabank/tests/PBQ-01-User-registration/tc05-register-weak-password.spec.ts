@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { URLS } from '../../resources/urls';
+
 
 // ── Test Data ──────────────────────────────────────────────────────────────
+
 const BASE_USER = {
   firstName: 'John',
   lastName: 'Tester',
@@ -12,7 +15,6 @@ const BASE_USER = {
   ssn: '123-45-6789',
   password: '     ',
   confirmPassword: '     ',
-  url: 'https://parabank.parasoft.com/parabank/register.htm',
 };
 
 // ── TC-05 | Registration with weak password format ─────────────────────────
@@ -23,7 +25,7 @@ test.describe('PBQ-01 – User Registration', () => {
     // ── Arrange ─────────────────────────────────────────────────────────
     const username = `tu${Math.random().toString(36).slice(2, 8)}`;
 
-    await page.goto(BASE_USER.url);
+    await page.goto(URLS.registerUrl);
 
     // ── Act ─────────────────────────────────────────────────────────────
     await page.locator('input[id="customer.firstName"]').fill(BASE_USER.firstName);

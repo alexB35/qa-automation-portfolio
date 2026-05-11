@@ -1,1 +1,0 @@
-{"id":"7f6bd951e72c0ca5efe6e864934be50a","fullName":"PBQ-04-Transfer-funds/tc15-transfer-insufficient-funds.spec.ts:12:7","name":"TC-15 | Transfer with insufficient funds should be rejected (KNOWN BUG PBQ-B03: transfer succeeds and account goes negative)","status":"broken","testResultsByEnv":{"default":"4deef4dfc3a3d692793e4f060ddf74b2"}}

@@ -1,1 +1,0 @@
-{"id":"193bdad4176d44005654d2c3ef306461","fullName":"PBQ-08-Loan-request/tc25-submit-loan-empty-field.spec.ts:11:7","name":"TC-25 | Loan request with empty amount field should show validation error (KNOWN BUG PBQ-B05: returns internal error instead)","status":"failed","testResultsByEnv":{"default":"da3449ae696b560679d6b928f54a3058"}}

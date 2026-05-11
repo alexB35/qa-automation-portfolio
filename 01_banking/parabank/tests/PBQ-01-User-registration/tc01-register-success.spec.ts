@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test';
-import * as allure from 'allure-js-commons';
+import { epic, feature, story, severity, step } from 'allure-js-commons';
+import { URLS } from '../../resources/urls';
 
 // ── Test Data ──────────────────────────────────────────────────────────────
+
 const NEW_USER = {
   firstName: 'John',
   lastName: 'Doe',
@@ -11,10 +13,9 @@ const NEW_USER = {
   zipCode: '10001',
   phone: '0123456789',
   ssn: '123-45-6789',
-  username: `tu${Math.random().toString(36).slice(2, 8)}`,
+  username: 'john_doe_test01',
   password: 'Test123!',
   confirmPassword: 'Test123!',
-  url: 'https://parabank.parasoft.com/parabank/register.htm',
 };
 
 // ── TC-01 | Successful user registration ──────────────────────────────────
@@ -22,21 +23,21 @@ test.describe('PBQ-01 – User Registration', () => {
 
   test('TC-01 | Successful user registration with valid data', async ({ page }) => {
 
-  await allure.epic('Banking');
-  await allure.feature('PBQ-01 User Registration');
-  await allure.story('TC-01 Successful user registration');
-  await allure.severity('critical');
+  await epic('Banking');
+  await feature('PBQ-01 User Registration');
+  await story('TC-01 Successful user registration');
+  await severity('critical');
 
     // ── Arrange ─────────────────────────────────────────────────────────
     const username = `tu${Math.random().toString(36).slice(2, 8)}`;
   
 
     // ── Act ─────────────────────────────────────────────────────────────
-    await allure.step('Go to login page', async () => {        
-    await page.goto(NEW_USER.url);
+  await step('Go to login page', async () => {        
+    await page.goto(URLS.registerUrl);
   });
 
-  await allure.step('Enter credentials', async () => {
+  await step('Enter credentials', async () => {
     await page.locator('input[id="customer.firstName"]').fill(NEW_USER.firstName);
     await page.locator('input[id="customer.lastName"]').fill(NEW_USER.lastName);
     await page.locator('input[id="customer.address.street"]').fill(NEW_USER.address);
@@ -52,7 +53,7 @@ test.describe('PBQ-01 – User Registration', () => {
     await page.waitForTimeout(500);
   });
 
-  await allure.step('Submit login', async () => {
+  await step('Submit login', async () => {
     await page.locator('input[value="Register"]').click();
 
     // ── Assert ──────────────────────────────────────────────────────────

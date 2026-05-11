@@ -1,7 +1,10 @@
 ![Playwright](https://img.shields.io/badge/Playwright-Automation-green)
 ![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml/badge.svg)
+![Allure](https://img.shields.io/badge/Allure-Test%20Reporting-ff69b4)
 
 # ParaBank UI Automation
+
+https://parabank.parasoft.com/parabank/index.htm
 
 ## Overview
 
@@ -18,11 +21,11 @@ The goal is to automate common banking workflows, validate UI functionality, and
 
 ## Project Structure
 
-- `tests/` → Playwright test cases (registration, login, transactions)
-- `outputs/` → Playwright execution reports
-- `screenshots/` → UI validation evidence
-- `resources/` → Page objects & reusable functions
-- `jira/` → Screenshots of Jira boards and user story cards
+- `tests/` → Playwright test cases (registration, login, transactions, ...)
+- `setup/` → Test setup and preconditions (authentication, session management)
+- `docs/` → Screenshots of test executions and Allure reports
+- `resources/` → Page objects, test data, and reusable utilities
+- `jira/` → Screenshots of Jira boards and cards
 
 ---
 
@@ -41,14 +44,19 @@ docker run qa-tests npx playwright test 01_banking/parabank/tests
 
 ## Using GitHub Actions
 
-Trigger the workflow: parabank-ui.yml
+Trigger the workflow: 
+parabank-ui.yml
 
 ## Reports :
 
-Playwright reports are uploaded as artifacts in GitHub Actions workflow (parabank-playwright-report)
+Test execution results are generated using Allure.
+
+- Reports are automatically generated during CI runs.
+- Available as downloadable artifacts in GitHub Actions.
+- Include test steps, logs, and screenshots for failures.
 
 ## Notes :
 
-You can run an entire User Story tests suit or test cases individually
-Playwright is configured to not stop at a failure
-Failure screenshots and evidences are stored in screenshots/
+You can run an entire application, User Story, or test cases individually.
+Playwright is configured to not stop at a failure.
+Debug information (logs, screenshots) is centralized in Allure reports.

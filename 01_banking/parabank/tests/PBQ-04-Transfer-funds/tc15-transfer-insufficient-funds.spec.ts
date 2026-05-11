@@ -1,10 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { URLS } from '../../resources/urls';
+
 
 // ── Test Data ──────────────────────────────────────────────────────────────
-const URLS = {
-  overview: 'https://parabank.parasoft.com/parabank/overview.htm',
-  transfer: 'https://parabank.parasoft.com/parabank/transfer.htm',
-};
+
 
 // ── TC-15 | Transfer with insufficient funds ───────────────────────────────
 test.describe('PBQ-04 – Transfer Funds', () => {
@@ -12,7 +11,7 @@ test.describe('PBQ-04 – Transfer Funds', () => {
   test('TC-15 | Transfer with insufficient funds should be rejected', async ({ page }) => {
 
     // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.overview);
+    await page.goto(URLS.overviewUrl);
 
     // Get total balance across all accounts
     const balanceTexts = await page.locator('table#accountTable tbody tr td:nth-child(2)').allTextContents();
@@ -25,7 +24,7 @@ test.describe('PBQ-04 – Transfer Funds', () => {
     console.log(`Total balance: $${totalBalance} — Transfer amount: $${transferAmount}`);
 
     // ── Act ──────────────────────────────────────────────────────────────
-    await page.goto(URLS.transfer);
+    await page.goto(URLS.transferUrl);
     await page.locator('#amount').fill(transferAmount);
 
     // Wait for accounts to load

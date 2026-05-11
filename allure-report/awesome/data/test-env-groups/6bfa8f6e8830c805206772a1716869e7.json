@@ -1,1 +1,0 @@
-{"id":"6bfa8f6e8830c805206772a1716869e7","fullName":"PBQ-02-User-login/tc07-login-invalid-password.spec.ts:13:7","name":"TC-07 | Login with invalid password shows error message","status":"broken","testResultsByEnv":{"default":"1d6f32c6f819e204e895e2bc7b37838e"}}

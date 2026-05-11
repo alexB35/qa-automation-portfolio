@@ -1,51 +1,74 @@
-import { defineConfig } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
+import path from 'path';
 
 const isCI = process.env['CI'] !== undefined;
+const isHeadless = isCI || process.env['HEADLESS'] !== undefined;
+
+// ── Allure output per project ─────────────────────────────────────────────
+const ALLURE_DIRS = {
+  'parabank': '01_banking/parabank/outputs/allure-results',
+  'automation-exercise': '03_ecommerce/automation-exercise/outputs/allure-results',
+};
+
+const currentProject = process.env['PROJECT'] || 'automation-exercise';
+const allureResultsDir = path.resolve(
+  ALLURE_DIRS[currentProject as keyof typeof ALLURE_DIRS] 
+  || '03_ecommerce/automation-exercise/outputs/allure-results'
+);
 
 export default defineConfig({
-  timeout: 10_000,
+  timeout: 25_000,
   forbidOnly: isCI,
-  retries: isCI ? 1 : 0,
+  retries: isCI ? 2 : 0,
+  // Parallelism disabled during development for stability
   fullyParallel: false,
-  workers: 1,
-  maxFailures: 0,
+  workers: process.env['WORKERS'] ? parseInt(process.env['WORKERS']) : 1,
+  maxFailures: isCI ? 5 : 0,
 
   reporter: [
     ['list'],
-    ['allure-playwright', { outputFolder: './01_banking/parabank/outputs/allure-results' }],
-    ['html', { outputFolder: './01_banking/parabank/outputs/playwright-report', open: 'never' }],
-    ['junit', { outputFile: './01_banking/parabank/outputs/results.xml' }],
+    ['allure-playwright', { resultsDir: allureResultsDir }],
   ],
 
   projects: [
-    {
-      name: 'setup-parabank',
-      testMatch: '**/auth.setup.ts',
-      use: { browserName: 'firefox', headless: isCI },
-    },
-    {
-      name: 'parabank',
-      testDir: './01_banking/parabank/tests',
-      dependencies: ['setup-parabank'],
-      outputDir: './01_banking/parabank/outputs/test-results',
-      use: {
-        browserName: 'firefox',
-        headless: isCI,
-        viewport: { width: 1280, height: 720 },
-        screenshot: 'only-on-failure',
-        storageState: './01_banking/parabank/.auth/session.json',
-      },
-    },
-    {
-      name: 'orange-hrm',
-      testDir: './03_saas/orange-hrm/playwright-tests',
-      outputDir: './03_saas/orange-hrm/outputs/test-results',
-      use: {
-        browserName: 'firefox',
-        headless: isCI,
-        viewport: { width: 1280, height: 720 },
-        screenshot: 'only-on-failure',
-      },
-    },
+
+// ── ParaBank ──────────────────────────────────────────────────────
+{
+  name: 'setup-parabank',
+  testMatch: './01_banking/parabank/setup/auth.setup.ts',
+  use: { 
+    browserName: 'firefox', 
+    headless: isHeadless ,
+    viewport: { width: 1920, height: 1040 },
+    screenshot: 'only-on-failure',
+  },
+      
+  },
+{
+  name: 'parabank',
+  testDir: './01_banking/parabank/tests',
+  dependencies: ['setup-parabank'],
+  outputDir: './01_banking/parabank/outputs/test-results',
+  use: {
+    browserName: 'firefox',
+    headless: isHeadless,
+    viewport: { width: 1920, height: 1040 },
+    screenshot: 'only-on-failure',
+    storageState: './01_banking/parabank/.auth/session.json',
+  },
+},
+
+// ── Automation Exercise ───────────────────────────────────────────
+{
+  name: 'automation-exercise',
+  testDir: './03_ecommerce/automation-exercise/tests',
+  outputDir: './03_ecommerce/automation-exercise/outputs/test-results',
+  use: {
+    browserName: 'firefox',
+    headless: isHeadless,
+    viewport: { width: 1920, height: 1040 },
+    screenshot: 'only-on-failure',
+  },
+},
   ],
 });

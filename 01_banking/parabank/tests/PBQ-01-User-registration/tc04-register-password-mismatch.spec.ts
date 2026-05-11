@@ -1,19 +1,21 @@
 import { test, expect } from '@playwright/test';
+import { URLS } from '../../resources/urls';
+
 
 // ── Test Data ──────────────────────────────────────────────────────────────
+
 const TEST_USER = {
   firstName: 'John',
   lastName: 'Doe',
   address: '123 Main St',
-  city: 'Anytown',
+  city: 'Los Angeles',
   state: 'CA',
   zipCode: '12345',
   phone: '555-1234',
   ssn: '123-45-6789',
   username: 'john_doe_mismatch',
-  password: 'Test123!',
+  password: 'Test12345!',
   confirmPassword: 'WrongPassword!',
-  url: 'https://parabank.parasoft.com/parabank/register.htm',
 };
 
 // ── TC-04 | Password mismatch ──────────────────────────────────────────────
@@ -22,7 +24,7 @@ test.describe('PBQ-01 – User Registration', () => {
   test('TC-04 | Password mismatch shows error message', async ({ page }) => {
 
     // ── Arrange ─────────────────────────────────────────────────────────
-    await page.goto(TEST_USER.url);
+    await page.goto(URLS.registerUrl);
 
     // ── Act ─────────────────────────────────────────────────────────────
     await page.locator('input[id="customer.firstName"]').fill(TEST_USER.firstName);

@@ -1,9 +1,8 @@
 import { test, expect } from '@playwright/test';
+import { URLS } from '../../resources/urls';
+
 
 // ── Test Data ──────────────────────────────────────────────────────────────
-const URLS = {
-  billPay: 'https://parabank.parasoft.com/parabank/billpay.htm',
-};
 
 const PAYEE = {
   name: 'Electric Company',
@@ -21,7 +20,7 @@ test.describe('PBQ-05 – Bill Pay', () => {
   test('TC-18 | Bill payment with empty field shows validation error', async ({ page }) => {
 
     // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.billPay);
+    await page.goto(URLS.billPayUrl);
 
     // ── Act — fill all fields except amount ──────────────────────────────
     await page.locator('input[name="payee.name"]').fill(PAYEE.name);

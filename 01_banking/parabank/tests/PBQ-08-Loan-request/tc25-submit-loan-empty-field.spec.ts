@@ -1,9 +1,8 @@
 import { test, expect } from '@playwright/test';
+import { URLS } from '../../resources/urls';
 
 // ── Test Data ──────────────────────────────────────────────────────────────
-const URLS = {
-  requestLoan: 'https://parabank.parasoft.com/parabank/requestloan.htm',
-};
+
 
 // ── TC-25 | Submit loan request with empty field ───────────────────────────
 test.describe('PBQ-08 – Loan Request', () => {
@@ -11,7 +10,7 @@ test.describe('PBQ-08 – Loan Request', () => {
   test('TC-25 | Loan request with empty amount field should show validation error (KNOWN BUG PBQ-B05: returns internal error instead)', async ({ page }) => {
 
     // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.requestLoan);
+    await page.goto(URLS.requestLoanUrl);
 
     // ── Act — leave loan amount empty ────────────────────────────────────
     await page.locator('input[id="downPayment"]').fill('100');

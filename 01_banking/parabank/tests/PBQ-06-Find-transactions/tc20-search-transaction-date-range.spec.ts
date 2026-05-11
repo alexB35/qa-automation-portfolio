@@ -1,9 +1,8 @@
 import { test, expect } from '@playwright/test';
+import { URLS } from '../../resources/urls';
+
 
 // ── Test Data ──────────────────────────────────────────────────────────────
-const URLS = {
-  findTransactions: 'https://parabank.parasoft.com/parabank/findtrans.htm',
-};
 
 const DATE_RANGE = {
   from: '01-01-2026',
@@ -16,7 +15,7 @@ test.describe('PBQ-06 – Find Transactions', () => {
   test('TC-20 | Search transactions by valid date range returns results', async ({ page }) => {
 
     // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.findTransactions);
+    await page.goto(URLS.findTransactionsUrl);
 
     // ── Act ──────────────────────────────────────────────────────────────
 

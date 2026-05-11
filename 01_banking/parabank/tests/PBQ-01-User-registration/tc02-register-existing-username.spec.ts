@@ -1,19 +1,21 @@
 import { test, expect } from '@playwright/test';
+import { URLS } from '../../resources/urls';
+
 
 // ── Test Data ──────────────────────────────────────────────────────────────
+
 const EXISTING_USER = {
   firstName: 'John',
   lastName: 'Doe',
   address: '123 Main St',
-  city: 'Anytown',
-  state: 'CA',
-  zipCode: '12345',
-  phone: '555-1234',
+  city: 'New York',
+  state: 'NY',
+  zipCode: '10001',
+  phone: '0123456789',
   ssn: '123-45-6789',
   username: 'john_doe_test01',
   password: 'Test123!',
   confirmPassword: 'Test123!',
-  url: 'https://parabank.parasoft.com/parabank/register.htm',
 };
 
 // ── TC-02 | Registration with existing username ────────────────────────────
@@ -22,7 +24,7 @@ test.describe('PBQ-01 – User Registration', () => {
   test('TC-02 | Registration with existing username shows error message', async ({ page }) => {
 
     // ── Arrange ─────────────────────────────────────────────────────────
-    await page.goto(EXISTING_USER.url);
+    await page.goto(URLS.registerUrl);
 
     // ── Act ─────────────────────────────────────────────────────────────
     await page.locator('input[id="customer.firstName"]').fill(EXISTING_USER.firstName);

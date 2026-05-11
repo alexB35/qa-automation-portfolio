@@ -14,5 +14,21 @@ test-results/
 # VSCode settings
 .vscode/
 
-# Optional: report HTML from Playwright
-outputs/playwright-report/
+# Auth files
+01_banking/parabank/.auth/
+03_ecommerce/automation-exercise/.auth/
+
+# All test outputs
+01_banking/parabank/outputs/
+02_api/restful-booker/outputs/
+03_ecommerce/automation-exercise/outputs/
+
+# Allure at root (generated reports)
+allure-results/
+allure-report/
+
+# Playwright test results
+test-results/
+
+# Credentials
+03_ecommerce/automation-exercise/resources/test-data/credentials.json

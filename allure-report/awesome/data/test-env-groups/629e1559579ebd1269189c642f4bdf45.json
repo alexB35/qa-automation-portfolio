@@ -1,1 +1,0 @@
-{"id":"629e1559579ebd1269189c642f4bdf45","fullName":"PBQ-06-Find-transactions/tc21-search-transaction-invalid-id.spec.ts:16:7","name":"TC-21a | Search with non-numeric transaction ID shows error message","status":"failed","testResultsByEnv":{"default":"01f3e131334f2dabfbdcc6c30dd26d0a"}}

@@ -1,9 +1,8 @@
 import { test, expect } from '@playwright/test';
+import { URLS } from '../../resources/urls';
+
 
 // ── Test Data ──────────────────────────────────────────────────────────────
-const URLS = {
-  findTransactions: 'https://parabank.parasoft.com/parabank/findtrans.htm',
-};
 
 const INVALID_DATA = {
   invalidId: 'abc',
@@ -16,7 +15,7 @@ test.describe('PBQ-06 – Find Transactions', () => {
   test('TC-21a | Search with non-numeric transaction ID shows error message', async ({ page }) => {
 
     // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.findTransactions);
+    await page.goto(URLS.findTransactionsUrl);
 
     // Select first available account
     await page.locator('#accountId option').first().waitFor({ state: 'attached' });
@@ -35,7 +34,7 @@ test.describe('PBQ-06 – Find Transactions', () => {
   test('TC-21b | Search with non-existing transaction ID returns empty results', async ({ page }) => {
 
     // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.findTransactions);
+    await page.goto(URLS.findTransactionsUrl);
 
     // Select first available account
     await page.locator('#accountId option').first().waitFor({ state: 'attached' });

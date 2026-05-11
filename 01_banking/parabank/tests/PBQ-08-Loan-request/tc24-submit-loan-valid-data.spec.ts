@@ -1,9 +1,7 @@
 import { test, expect } from '@playwright/test';
+import { URLS } from '../../resources/urls';
 
 // ── Test Data ──────────────────────────────────────────────────────────────
-const URLS = {
-  requestLoan: 'https://parabank.parasoft.com/parabank/requestloan.htm',
-};
 
 const LOAN_DATA = {
   loanAmount: '600',
@@ -16,7 +14,7 @@ test.describe('PBQ-08 – Loan Request', () => {
   test('TC-24 | Loan request with valid data is approved', async ({ page }) => {
 
     // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.requestLoan);
+    await page.goto(URLS.requestLoanUrl);
 
     // ── Act ──────────────────────────────────────────────────────────────
     await page.locator('input[id="amount"]').fill(LOAN_DATA.loanAmount);

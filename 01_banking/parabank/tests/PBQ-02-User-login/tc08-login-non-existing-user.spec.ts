@@ -1,10 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { URLS } from '../../resources/urls';
+
 
 // ── Test Data ──────────────────────────────────────────────────────────────
+
 const TEST_USER = {
   username: 'nonexisting_user_12345',
   password: 'Test123!',
-  url: 'https://parabank.parasoft.com/parabank/index.htm',
 };
 
 // ── TC-08 | Login with non-existing user ──────────────────────────────────
@@ -13,7 +15,7 @@ test.describe('PBQ-02 – User Login', () => {
   test('TC-08 | Login with non-existing user shows error message', async ({ page }) => {
 
     // ── Arrange ─────────────────────────────────────────────────────────
-    await page.goto(TEST_USER.url);
+    await page.goto(URLS.indexUrl);
 
     // ── Act ─────────────────────────────────────────────────────────────
     await page.locator('input[name="username"]').fill(TEST_USER.username);

@@ -1,8 +1,10 @@
 import { test, expect } from '@playwright/test';
+import { URLS } from '../../resources/urls';
+
 
 // ── Test Data ──────────────────────────────────────────────────────────────
+
 const TEST_USER = {
-  transferUrl: 'https://parabank.parasoft.com/parabank/billpay.htm',
   transferAmount: '1000', // A valid amount for bill payment
 };
 
@@ -12,7 +14,7 @@ test.describe('PBQ-05 – Bill Pay', () => {
   test('TC-17 | Successful bill payment', async ({ page }) => {
 
     // ── Arrange — session already active via storageState ────────────────
-    await page.goto(TEST_USER.transferUrl);
+    await page.goto(URLS.transferUrl);
 
     // ── Act ──────────────────────────────────────────────────────────────
     await page.locator('#amount').fill(TEST_USER.transferAmount);

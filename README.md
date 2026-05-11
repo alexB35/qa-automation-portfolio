@@ -1,19 +1,20 @@
 # QA Automation Portfolio
 _A fully dockerized, multi-application QA automation framework with UI & API tests, reporting, and CI/CD._
 
-
+---
 
 ![ParaBank UI Tests](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml/badge.svg)
 ![Restful Booker API Tests](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml/badge.svg)
-![Orange HRM UI Tests](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/orange-hrm-ui.yml/badge.svg)
+![Automation Exercise UI + API Tests](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/automation-exercise-ui.yml/badge.svg)
 
 ![Playwright](https://img.shields.io/badge/Playwright-Automation-green)
 ![Postman](https://img.shields.io/badge/Postman-API_Testing-orange)
 ![Docker](https://img.shields.io/badge/Docker-Containerization-2496ED)
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-CI/CD-2088FF)
+![Allure](https://img.shields.io/badge/Allure-Test%20Reporting-ff69b4)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-lightgrey)
 
-
+---
 
 Portfolio demonstrating **UI & API automation**, **containerized execution**, and **CI/CD workflows**.
 
@@ -25,7 +26,7 @@ Portfolio demonstrating **UI & API automation**, **containerized execution**, an
 
 **QA workflow:**
 
-Jira → Test Design → Automation (Playwright / Postman) → Execution (Docker) → Reporting → CI/CD (GitHub Actions)
+_Jira → Test Design → Automation (Playwright / Postman) → Execution (Docker) → Reporting (Allure) → CI/CD (GitHub Actions)_
 
 Each application has its own dedicated CI workflow, allowing independent execution and clear reporting.
 
@@ -36,16 +37,16 @@ Each application has its own dedicated CI workflow, allowing independent executi
 This portfolio follows a structured QA approach to ensure high-quality, reliable, and maintainable automated tests across multiple applications.
 
 ### 1️⃣ Scope
-UI automation (ParaBank, OrangeHRM), API automation (Restful Booker), independent and reusable tests.
+_UI & API automation, independent and reusable tests._
 
 ### 2️⃣ Approach
-Modular, reusable and data-driven tests executed in Docker containers; orchestrated via GitHub Actions.
+_Modular, reusable and data-driven tests executed in Docker containers; orchestrated via GitHub Actions._
 
 ### 3️⃣ Types of Tests
-Functional, API, exploratory, negative testing.
+_Functional, API, exploratory, positive / negative and validation tests._
 
 ### 4️⃣ Reporting & Results
-Playwright & Newman HTML reports; failure screenshots; CI artifacts for traceability.
+_Playwright & Newman HTML reports; failure screenshots; CI artifacts for traceability._
 
 ---
 
@@ -53,11 +54,11 @@ Playwright & Newman HTML reports; failure screenshots; CI artifacts for traceabi
 
 ### 01_banking
 - **ParaBank UI** – End-to-end UI automation for banking scenarios
-  - `tests/` → Playwright UI tests (registration, login, transactions)
-  - `outputs/` → test reports & logs
-  - `screenshots/` → failure evidences
-  - `resources/` → locators & keywords
-  - `jira/` → user stories & test case screenshots
+  - `tests/` → Playwright test cases (registration, login, transactions, ...)
+  - `setup/` → sest setup and preconditions (authentication, session management)
+  - `docs/` → screenshots of test executions and Allure reports
+  - `resources/` → page objects & reusable helpers
+  - `jira/` → screenshots of Jira boards and cards
  
 **Jira :** https://alexb35.atlassian.net/jira/software/projects/PBQ/boards/1
 
@@ -78,15 +79,16 @@ Playwright & Newman HTML reports; failure screenshots; CI artifacts for traceabi
 
 
 
-### 03_saas
-- **OrangeHRM UI** – Functional and UI automation for HR management scenarios
-  - `tests/` → Playwright & Robot Framework tests (login, employee management)
+### 03_ecommerce
+- **Automation Exercise UI + API** – UI and API automation for shopping scenarios
+  - `tests/` → Playwright (register, login, shopping)
   - `outputs/` → reports & logs
-  - `screenshots/` → failure evidences
-  - `resources/` → page objects & helpers
-  - `jira/` → user stories & test scenarios
+  - `setup/` → new account creation script
+  - `docs/` → failure evidences
+  - `resources/` → page objects & reusable helpers
+  - `jira/` → screenshots of Jira boards and cards
 
-**Jira :**  https://alexb35.atlassian.net/jira/software/projects/ORH/boards/3
+**Jira :**  https://alexb35.atlassian.net/jira/software/projects/AEX/boards/3
 
 
 
@@ -144,3 +146,7 @@ Test data is dynamically generated where possible.
 Tests are independent & reusable.
 
 CI/CD pipelines generate reports and store artifacts automatically.
+
+Docker image includes known npm dependency vulnerabilities. In a production environment, these would be addressed by pinning secure package versions and using a minimal base image.
+
+

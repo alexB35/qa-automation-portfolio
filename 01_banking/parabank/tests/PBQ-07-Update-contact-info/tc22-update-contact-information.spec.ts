@@ -1,14 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { URLS } from '../../resources/urls';
 
 // ── Test Data ──────────────────────────────────────────────────────────────
-const URLS = {
-  updateProfile: 'https://parabank.parasoft.com/parabank/updateprofile.htm',
-};
 
 const UPDATED_DATA = {
   address: '456 Updated Street',
-  city: 'Los Angeles',
-  state: 'CA',
+  city: 'Las Vegas',
+  state: 'NV',
   zipCode: '90001',
   phone: '9876543210',
 };
@@ -19,7 +17,7 @@ test.describe('PBQ-07 – Update Contact Info', () => {
   test('TC-22 | Update contact information with valid data shows success message', async ({ page }) => {
 
     // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.updateProfile);
+    await page.goto(URLS.updateProfileUrl);
 
     // ── Act ──────────────────────────────────────────────────────────────
     await page.locator('input[id="customer.address.street"]').fill(UPDATED_DATA.address);
