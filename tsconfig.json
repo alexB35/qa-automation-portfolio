@@ -14,7 +14,6 @@
     "02_api/**/*.spec.ts",
     "03_ecommerce/**/*.ts",
     "playwright.config.ts", 
-    "03_ecommerce/automation-exercise/setup/auth.setup.ts"  
   ],
   "exclude": [
     "node_modules",
