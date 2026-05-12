@@ -1,6 +1,6 @@
 # QA Automation Portfolio
 
-![QA Automation Portfolio](./assets/banner.png)
+![QA Automation Portfolio](./assets/banner1.png)
 
 ## A dockerized QA automation framework featuring UI/API testing, CI/CD pipelines and Allure reporting.
 
