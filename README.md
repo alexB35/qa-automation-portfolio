@@ -2,9 +2,11 @@
 
 ![QA Automation Portfolio](./assets/banner.png)
 
-## _A dockerized QA automation framework featuring UI/API testing, CI/CD pipelines and Allure reporting._
+## A dockerized QA automation framework featuring UI/API testing, CI/CD pipelines and Allure reporting.
 
 > Open to QA Automation opportunities.
+
+---
 
 ![ParaBank - UI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml/badge.svg)
 ![Restful Booker - API](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml/badge.svg)
@@ -19,9 +21,6 @@
 
 ---
 
-This portfolio demonstrates **UI & API automation**, **containerized execution**, and **CI/CD workflows**.
-
-
 ## Framework features
 
 - Reusable fixtures & helpers
@@ -34,7 +33,7 @@ This portfolio demonstrates **UI & API automation**, **containerized execution**
 
 ## QA workflow
 
-_Jira → Test Design → Automation (Playwright / Postman) → Execution (Docker) → CI/CD (GitHub Actions) → Reporting (Allure)_
+_Test Design (Jira) → Automation (Playwright / Postman) → Execution (Docker) → CI/CD (GitHub Actions) → Reporting (Allure)_
 
 Each application has its own dedicated CI workflow, allowing independent execution and clear reporting.
 
@@ -60,30 +59,32 @@ _Playwright & Newman HTML reports; failure screenshots; CI artifacts for traceab
 
 ## Project Structure
 
-| Application | Scope | README |
-|------|------|------|
-| ParaBank | UI automation for banking scenarios | [ParaBank](./01_banking/parabank/README.md) |
-| Restful Booker | API testing for booking management scenarios | [Restful Booker](./02_api/restful_booker/README.md) |
-| Automation Exercise | UI and API automation for e-commerce scenarios | [Automation Exercise](./03_ecommerce/automation-exercise/README.md) |
+| Application | Scope |
+|------|------|
+| [ParaBank](./01_banking/parabank/README.md) | UI automation for banking scenarios |
+| [Restful Booker](./02_api/restful_booker/README.md) | API testing for booking management scenarios |
+| [Automation Exercise](./03_ecommerce/automation-exercise/README.md) | UI and API automation for e-commerce scenarios |
 
 ---
 
 ## Tech Stack
 
-- **Playwright** (UI & API automation)
-- **Postman + Newman** (API execution)
+- **Playwright** - _UI & API automation_
+- **Postman + Newman** - _API execution_
 - **TypeScript / Node.js**
-- **Docker** (containerized execution)
-- **GitHub Actions** (CI/CD integration)
-- **Jira** (test management)
+- **Docker** - _containerized execution_
+- **GitHub Actions** - _CI/CD integration_
+- **Allure** - _test reporting_
+- **Jira** - _test management_
 
 ---
 
 ## How to Run Tests
 
-All tests are containerized — no local dependencies required beyond Docker.
+_All tests are containerized — no local dependencies required beyond Docker._
 
-**Prerequisites:** [Install Docker Desktop](https://www.docker.com/get-started)
+**Prerequisites:** 
+[Install Docker Desktop](https://www.docker.com/get-started)
 
 **Clone the repository:**
 ```bash
@@ -105,9 +106,9 @@ Reports are generated inside each app's `outputs/` folder and accessible at `./r
 
 ---
 
-## Reporting
+## Reporting sample
 
-Insert Allure Screenshot
+![Allure report](./assets/allure_report.png)
 
 ---
 

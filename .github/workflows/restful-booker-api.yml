@@ -4,6 +4,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   restful-booker-api:
@@ -11,65 +12,67 @@ jobs:
 
     steps:
 
-    # ================================
-    # Checkout repository
-    # ================================
+    # ── Checkout ────────────────────────────────────────────────────────────
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # ================================
-    # Build Docker image
-    # ================================
-    - name: Build Docker image
-      run: docker build -t qa-tests .
+    # ── Setup Node ──────────────────────────────────────────────────────────
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '24'
 
-    # ================================
-    # Run API Tests - Prerequisites (Auth)
-    # ================================
-    - name: API Tests - Prerequisites (Auth)
-      run: docker run qa-tests npx newman run 02_api/restful_booker/postman/RFB-00_Prerequisites.postman_collection.json \
-        --reporters cli,htmlextra \
-        --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-00-report.html
+    # ── Install dependencies ────────────────────────────────────────────────
+    - name: Install dependencies
+      run: npm install
 
-    # ================================
-    # Run API Tests - Create Booking
-    # ================================
-    - name: API Tests - Create Booking
-      run: docker run qa-tests npx newman run 02_api/restful_booker/postman/RFB-01_Create_Booking.postman_collection.json \
-        --reporters cli,htmlextra \
-        --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-01-report.html
+    # ── Install Allure CLI ──────────────────────────────────────────────────
+    - name: Install Allure CLI
+      run: npm install -g allure-commandline
 
-    # ================================
-    # Run API Tests - Retrieve Booking
-    # ================================
-    - name: API Tests - Retrieve Booking
-      run: docker run qa-tests npx newman run 02_api/restful_booker/postman/RFB-02_Retrieve_Booking.postman_collection.json \
-        --reporters cli,htmlextra \
-        --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-02-report.html
+    # ── Create allure-results directory ─────────────────────────────────────
+    - name: Create allure-results directory
+      run: mkdir -p 02_api/restful_booker/outputs/allure-results
 
-    # ================================
-    # Run API Tests - Update Booking
-    # ================================
-    - name: API Tests - Update Booking
-      run: docker run qa-tests npx newman run 02_api/restful_booker/postman/RFB-03_Update_Booking.postman_collection.json \
-        --reporters cli,htmlextra \
-        --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-03-report.html
+    # ── Run API tests ────────────────────────────────────────────────────────
+    - name: Run Restful Booker API tests
+      continue-on-error: true
+      run: npm run test:restful-booker
 
-    # ================================
-    # Run API Tests - Delete Booking
-    # ================================
-    - name: API Tests - Delete Booking
-      run: docker run qa-tests npx newman run 02_api/restful_booker/postman/RFB-04_Delete_Booking.postman_collection.json \
-        --reporters cli,htmlextra \
-        --reporter-htmlextra-export 02_api/restful_booker/outputs/RFB-04-report.html
+    # ── Generate Allure report ───────────────────────────────────────────────
+    - name: Generate Allure report
+      if: always()
+      run: |
+        allure generate 02_api/restful_booker/outputs/allure-results \
+          --output 02_api/restful_booker/outputs/allure-report
 
-    # ================================
-    # Upload Newman HTML Reports
-    # ================================
-
-    - name: Upload Newman Reports
+    # ── Upload Allure report ─────────────────────────────────────────────────
+    - name: Upload Allure report
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: newman-reports
-        path: 02_api/restful_booker/outputs/*.html
+        name: allure-report-restful-booker
+        path: 02_api/restful_booker/outputs/allure-report
+        retention-days: 30
+
+    # ── Quality gate ─────────────────────────────────────────────────────────
+    - name: Quality gate — fail on unexpected test failures
+      if: always()
+      run: node scripts/quality-gates.js restful-booker
+
+    # ── Login to Docker Hub ──────────────────────────────────────────────────
+    - name: Login to Docker Hub
+      if: github.ref == 'refs/heads/main'
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_TOKEN }}
+
+    # ── Build and push Docker image ──────────────────────────────────────────
+    - name: Build and push Docker image
+      if: github.ref == 'refs/heads/main'
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: ${{ secrets.DOCKER_USERNAME }}/qa-automation-portfolio:latest

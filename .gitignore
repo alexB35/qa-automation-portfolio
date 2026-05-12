@@ -32,3 +32,6 @@ test-results/
 
 # Credentials
 03_ecommerce/automation-exercise/resources/test-data/credentials.json
+
+# GitHub logs
+diff-stat.txt

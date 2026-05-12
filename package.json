@@ -1,7 +1,7 @@
 {
   "name": "qa-automation-portfolio",
   "version": "1.0.0",
-  "description": "![Playwright](https://img.shields.io/badge/Playwright-Automation-green)\r ![Robot Framework](https://img.shields.io/badge/Robot_Framework-Automation-green)\r ![Postman](https://img.shields.io/badge/Postman-API_Testing-orange)\r ![Jira](https://img.shields.io/badge/Jira-Test_Management-blue)\r ![Python](https://img.shields.io/badge/Python-3.10-lightgrey)\r ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-lightgrey)\r ![CI/CD](https://img.shields.io/badge/CI/CD-GitHub%20Actions-lightgrey)",
+  "description": "Dockerized QA automation framework featuring UI/API testing, CI/CD pipelines and Allure reporting.",  
   "main": "index.js",
   
   "scripts": {

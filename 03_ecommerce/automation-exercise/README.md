@@ -6,93 +6,67 @@
 
 # Automation Exercise
 
-https://automationexercise.com
+[https://automationexercise.com](https://automationexercise.com)
 
 ## Overview
 
 This project demonstrates **UI + API automation** for "Automation Exercise", an e-commerce platform.  
 
-Automates online product buying flows including register, login, product buying, checkout and an API scope.
+Automates online shopping flows including registration, login, product browsing, checkout and an API scenarios.
 
-## Technology Stack
+---
 
-- **Playwright** (UI & API)
+## Tech Stack
+
+- **Playwright** - _UI & API_
 - **TypeScript / Node.js**
-- **Docker**
-- **GitHub Actions**
+- **Docker** - contenerized execution
+- **GitHub Actions** - _CI/CD_
+
+---
 
 ## Project Structure
 
-| **Automation Exercise UI + API** | E2E UI and API automation for e-commerce scenarios |
+| Folder | Description |
 |------|------|
 | `tests/` | Playwright test scripts |
-| `framework/` | fixture and data and helpers and pages |
-| `outputs/` | reports & logs |
-| `resources/` | config and test-data |
+| `framework/` | Fixtures, helpers, page objects & API clients |
+| `outputs/` | Allure reports & logs |
+| `resources/` | Config & test data |
+| `docs/` | Screenshots of test executions and Allure reports |
 | `jira/` | Screenshots of Jira boards and cards |  
 
-**Jira :**  https://alexb35.atlassian.net/jira/software/projects/AEX/boards/3
+**Jira board:** [AEX Board](https://alexb35.atlassian.net/jira/software/projects/AEX/boards/3)
 
 ---
 
 ## How to Run Tests 
 
+Refer to the [root README](../../README.md) for Docker and CI instructions.
+
 ## Locally
 
-```
+```bash
 npm install
 npx playwright install
 npx playwright test 03_ecommerce/automation-exercise/tests
 ```
 
-
-## Using Docker
-
-```
-docker build -t qa-tests .
-docker run qa-tests npx playwright test 03_ecommerce/automation-exercise/tests
-```
-
-## Run tests locally with Docker
-
-```
-docker pull alexb35/qa-automation-portfolio:latest
-
-docker run -e CI=true -e PROJECT=automation-exercise \
-  /qa-automation-portfolio:latest \
-  npx playwright test \
-  --project=setup-automation-exercise \
-  --project=automation-exercise
-```
-
-
-## Using GitHub Actions
+## Using GitHub Actions:
 
 Trigger the workflow: automation-exercise-ui.yml
 
+## Reporting:
 
-## Authentication
+Test execution results are generated using Allure.
 
-Authentication is dynamically generated before test execution via `auth.setup.ts`.
+- Reports are automatically generated during CI runs
+- Available as downloadable artifacts in GitHub Actions
+- Include test steps, logs, and screenshots on failure
 
-No session files are stored in the repository.
+---
 
-
-## Reports :
-
-Playwright reports are uploaded as artifacts (automation-exercise-playwright-report)
-
-
-## View Allure Report
-
-Download the `allure-report-automation-exercise` artifact from GitHub Actions, extract the zip, then:
-
-# Option 1 — Allure CLI
-```
-allure open allure-report-automation-exercise
-```
-
-# Option 2 — Simple HTTP server (no install required)
-```
-npx serve allure-report-automation-exercise
-```
+> [!NOTE]
+> You can run an entire application, a User Story, or individual test cases.
+> Playwright is configured to continue on failure.
+> Debug information (logs, screenshots) is centralized in Allure reports.

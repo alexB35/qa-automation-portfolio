@@ -14,11 +14,15 @@ const KNOWN_FAILURES = {
   'parabank': [
     'TC-05',   // PBQ-B02: weak password not rejected
   ],
+  'restful-booker': [
+    // list RFB failures here
+  ],
 };
 
 const RESULTS_DIRS = {
   'automation-exercise': '03_ecommerce/automation-exercise/outputs/allure-results',
   'parabank': '01_banking/parabank/outputs/allure-results',
+  'restful-booker': '02_api/restful_booker/outputs/allure-results',
 };
 
 const resultsDir = RESULTS_DIRS[project];

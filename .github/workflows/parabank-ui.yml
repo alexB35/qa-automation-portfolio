@@ -78,7 +78,7 @@ jobs:
     # ── Quality gate ─────────────────────────────────────────────────────────
     - name: Quality gate — fail on unexpected test failures
       if: always()
-      run: node scripts/quality-gate.js parabank
+      run: node scripts/quality-gates.js parabank
 
     # ── Login to Docker Hub ──────────────────────────────────────────────────
     - name: Login to Docker Hub
