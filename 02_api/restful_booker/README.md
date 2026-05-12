@@ -1,6 +1,6 @@
 ![Postman / Newman](https://img.shields.io/badge/Postman-API_Testing-orange)
-![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml/badge.svg)
 ![Allure](https://img.shields.io/badge/Allure-Test%20Reporting-ff69b4)
+![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml/badge.svg)
 
 # Restful Booker API Automation
 
@@ -47,7 +47,7 @@ newman run 02_api/restful_booker/5_postman/RFB-00_Prerequisites.postman_collecti
 
 ## Using GitHub Actions
 
-Trigger the workflow: restful-booker-api.yml
+Trigger the workflow: [restful-booker-api.yml](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml)
 
 ## Reports :
 

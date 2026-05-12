@@ -1,7 +1,7 @@
 ![Playwright](https://img.shields.io/badge/Playwright-Automation-green)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-lightgrey)
-![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml/badge.svg)
 ![Allure](https://img.shields.io/badge/Allure-Test%20Reporting-ff69b4)
+![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml/badge.svg)
 
 # ParaBank UI Automation
 
@@ -48,8 +48,7 @@ npx playwright test 01_banking/parabank/tests
 
 ## Using GitHub Actions
 
-Trigger the workflow: 
-parabank-ui.yml
+Trigger the workflow: [parabank-ui.yml](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml)
 
 ## Reports :
 

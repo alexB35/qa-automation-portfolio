@@ -4,7 +4,7 @@
 
 ## A dockerized QA automation framework featuring UI/API testing, CI/CD pipelines and Allure reporting.
 
-> Open to QA Automation opportunities.
+> _Open to QA Automation opportunities._
 
 ---
 

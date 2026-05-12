@@ -54,7 +54,7 @@ npx playwright test 03_ecommerce/automation-exercise/tests
 
 ## Using GitHub Actions:
 
-Trigger the workflow: automation-exercise-ui.yml
+Trigger the workflow: [automation-exercise.yml](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/automation-exercise.yml)
 
 ## Reporting:
 
