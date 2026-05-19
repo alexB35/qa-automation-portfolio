@@ -1,38 +1,28 @@
-import { test, expect } from '@playwright/test';
-import { URLS } from '../../resources/urls';
+import { test } from '../../framework/fixtures/logged-in-user.fixture';
+import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { LoanRequestPage } from '../../framework/ui/pages/loan-request.page';
 
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-const LOAN_DATA = {
-  loanAmount: '600',
-  downPayment: '100',
-};
-
-// ── TC-24 | Submit loan request with valid data ────────────────────────────
 test.describe('PBQ-08 – Loan Request', () => {
 
-  test('TC-24 | Loan request with valid data is approved', async ({ page }) => {
+  test('TC-24 | Loan request with valid data is approved', async ({ page, loggedInUserWithAccount }) => {
+    await epic('EPIC-2 - ACCOUNT MANAGEMENT');
+    await story('PBQ-08 Loan Request');
+    await testCaseId('TC-24');
+    await severity('critical');
 
-    // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.requestLoanUrl);
+    const loanPage = new LoanRequestPage(page);
 
-    // ── Act ──────────────────────────────────────────────────────────────
-    await page.locator('input[id="amount"]').fill(LOAN_DATA.loanAmount);
-    await page.locator('input[id="downPayment"]').fill(LOAN_DATA.downPayment);
+    await step('Navigate to Loan Request page', async () => {
+      await loanPage.goto();
+    });
 
-    // Select first available account
-    await page.locator('#fromAccountId option').first().waitFor({ state: 'attached' });
-    const firstAccount = await page.locator('#fromAccountId option').first().getAttribute('value');
-    await page.locator('#fromAccountId').selectOption(firstAccount!);
+    await step('Submit loan request with valid data', async () => {
+      await loanPage.applyForLoan('600', '100');
+    });
 
-    await page.getByRole('button', { name: 'Apply Now' }).click();
-    await page.waitForLoadState('networkidle');
-
-    // ── Assert ──────────────────────────────────────────────────────────
-    await expect(page.getByText('Loan Request Processed')).toBeVisible({ timeout: 10000 });
-    await expect(page.getByText('Approved')).toBeVisible();
-    await expect(page.getByText('Congratulations, your loan has been approved.')).toBeVisible();
-    await expect(page.locator('#newAccountId')).toBeVisible();
+    await step('Verify loan is approved', async () => {
+      await loanPage.expectApproved();
+    });
   });
 
 });

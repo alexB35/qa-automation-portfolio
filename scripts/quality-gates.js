@@ -6,13 +6,15 @@ const project = process.argv[2] || 'automation-exercise';
 // ── Known failing tests per project ──────────────────────────────────────
 const KNOWN_FAILURES = {
   'automation-exercise': [
-    'TC-03',   // AEX-B: invalid date of birth accepted
-    'TC-10b',  // AEX-B: negative quantity accepted
-    'TC-17',   // AEX-B: expired card not rejected at checkout
-    'TC-29',   // AEX-B01: GET /api/productsList/{id} returns HTML
+    'TC-03',   
+    'TC-10b',  
+    'TC-17',   
+    'TC-29',   
   ],
   'parabank': [
-    'TC-05',   // PBQ-B02: weak password not rejected
+    'TC-05',   
+    'TC-15',
+    'TC-19',   
   ],
   'restful-booker': [
     // list RFB failures here

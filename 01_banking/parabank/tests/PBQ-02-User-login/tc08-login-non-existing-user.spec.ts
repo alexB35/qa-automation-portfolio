@@ -1,30 +1,30 @@
 import { test, expect } from '@playwright/test';
-import { URLS } from '../../resources/urls';
+import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { LoginPage } from '../../framework/ui/pages/login.page';
 
-
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-const TEST_USER = {
-  username: 'nonexisting_user_12345',
-  password: 'Test123!',
-};
-
-// ── TC-08 | Login with non-existing user ──────────────────────────────────
 test.describe('PBQ-02 – User Login', () => {
 
+  //test.use({ storageState: { cookies: [], origins: [] } });
+
   test('TC-08 | Login with non-existing user shows error message', async ({ page }) => {
+    await epic('EPIC-1 - USER MANAGEMENT');
+    await story('PBQ-02 User Login');
+    await testCaseId('TC-08');
+    await severity('normal');
 
-    // ── Arrange ─────────────────────────────────────────────────────────
-    await page.goto(URLS.indexUrl);
+    const loginPage = new LoginPage(page);
 
-    // ── Act ─────────────────────────────────────────────────────────────
-    await page.locator('input[name="username"]').fill(TEST_USER.username);
-    await page.locator('input[name="password"]').fill(TEST_USER.password);
-    await page.locator('input[value="Log In"]').click();
+    await step('Navigate to login page', async () => {
+      await loginPage.goto();
+    });
 
-    // ── Assert ──────────────────────────────────────────────────────────
-    await expect(page.getByText('Error!')).toBeVisible();
-    await expect(page.getByText('The username and password could not be verified.')).toBeVisible();
+    await step('Login with non-existing username', async () => {
+      await loginPage.login('nonexisting_user_12345', 'Test123!');
+    });
+
+    await step('Verify error message is displayed', async () => {
+      await loginPage.expectLoginError('The username and password could not be verified.');
+    });
   });
 
 });

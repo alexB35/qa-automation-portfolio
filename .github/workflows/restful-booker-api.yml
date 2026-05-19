@@ -1,4 +1,4 @@
-name: Restful Booker Tests - API
+name: Restful Booker Tests [API]
 
 on:
   push:
@@ -55,7 +55,7 @@ jobs:
       with:
         name: allure-report-restful-booker
         path: 02_api/restful_booker/outputs/allure-report
-        retention-days: 30
+        retention-days: 5
 
     # ── Quality gate ─────────────────────────────────────────────────────────
     - name: Quality gate — fail on unexpected test failures

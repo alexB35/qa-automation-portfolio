@@ -1,42 +1,30 @@
-import { test, expect } from '@playwright/test';
-import { URLS } from '../../resources/urls';
+import { test } from '../../framework/fixtures/logged-in-user.fixture';
+import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { BillPayPage } from '../../framework/ui/pages/bill-pay.page';
+import { buildPayee } from '../../framework/data/payee.factory';
 
-
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-const PAYEE = {
-  name: 'Electric Company',
-  address: '123 Power St',
-  city: 'New York',
-  state: 'NY',
-  zipCode: '10001',
-  phone: '555-1234',
-  accountNumber: '987654321',
-};
-
-// ── TC-18 | Bill payment with empty field ───────────────────────────
 test.describe('PBQ-05 – Bill Pay', () => {
 
-  test('TC-18 | Bill payment with empty field shows validation error', async ({ page }) => {
+  test('TC-18 | Bill payment with empty amount shows validation error', async ({ page, loggedInUserWithAccount }) => {
+    await epic('EPIC-2 - ACCOUNT MANAGEMENT');
+    await story('PBQ-05 Bill Pay');
+    await testCaseId('TC-18');
+    await severity('normal');
 
-    // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.billPayUrl);
+    const billPayPage = new BillPayPage(page);
+    const payee = buildPayee({ amount: undefined });
 
-    // ── Act — fill all fields except amount ──────────────────────────────
-    await page.locator('input[name="payee.name"]').fill(PAYEE.name);
-    await page.locator('input[name="payee.address.street"]').fill(PAYEE.address);
-    await page.locator('input[name="payee.address.city"]').fill(PAYEE.city);
-    await page.locator('input[name="payee.address.state"]').fill(PAYEE.state);
-    await page.locator('input[name="payee.address.zipCode"]').fill(PAYEE.zipCode);
-    await page.locator('input[name="payee.phoneNumber"]').fill(PAYEE.phone);
-    await page.locator('input[name="payee.accountNumber"]').fill(PAYEE.accountNumber);
-    await page.locator('input[name="verifyAccount"]').fill(PAYEE.accountNumber);
-    // amount left empty intentionally
+    await step('Navigate to Bill Pay page', async () => {
+      await billPayPage.goto();
+    });
 
-    await page.getByRole('button', { name: 'Send Payment' }).click();
+    await step('Submit payment with empty amount', async () => {
+      await billPayPage.fillAndSubmit(payee);
+    });
 
-    // ── Assert ──────────────────────────────────────────────────────────
-    await expect(page.getByText('The amount cannot be empty.')).toBeVisible();
+    await step('Verify validation error is displayed', async () => {
+      await billPayPage.expectValidationError('The amount cannot be empty.');
+    });
   });
 
 });

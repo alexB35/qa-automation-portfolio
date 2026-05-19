@@ -1,30 +1,30 @@
-import { test, expect } from '@playwright/test';
-import { URLS } from '../../resources/urls';
+import { test } from '../../framework/fixtures/logged-in-user.fixture';
+import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { LoginPage } from '../../framework/ui/pages/login.page';
 
-
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-const TEST_USER = {
-  username: 'john_doe_test01',
-  password: 'WrongPassword!',
-};
-
-// ── TC-07 | Login with invalid password ───────────────────────────────────
 test.describe('PBQ-02 – User Login', () => {
 
-  test('TC-07 | Login with invalid password shows error message', async ({ page }) => {
+  test.use({ storageState: { cookies: [], origins: [] } });
 
-    // ── Arrange ─────────────────────────────────────────────────────────
-    await page.goto(URLS.indexUrl);
+  test('TC-07 | Login with wrong password shows error message', async ({ page }) => {
+    await epic('EPIC-1 - USER MANAGEMENT');
+    await story('PBQ-02 User Login');
+    await testCaseId('TC-07');
+    await severity('normal');
 
-    // ── Act ─────────────────────────────────────────────────────────────
-    await page.locator('input[name="username"]').fill(TEST_USER.username);
-    await page.locator('input[name="password"]').fill(TEST_USER.password);
-    await page.locator('input[value="Log In"]').click();
+    const loginPage = new LoginPage(page);
+    
+    await step('Navigate to login page', async () => {
+      await loginPage.goto();
+    });
 
-    // ── Assert ──────────────────────────────────────────────────────────
-    await expect(page.getByText('Error!')).toBeVisible();
-    await expect(page.getByText('The username and password could not be verified.')).toBeVisible();
+    await step('Login with wrong password', async () => {
+      await loginPage.login('john', 'WrongPassword!');
+    });
+
+    await step('Verify error message is displayed', async () => {
+      await loginPage.expectLoginError('The username and password could not be verified.');
+    });
   });
 
 });

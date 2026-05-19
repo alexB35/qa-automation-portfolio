@@ -1,60 +1,39 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../../framework/fixtures/logged-in-user.fixture';
+import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { TransferPage } from '../../framework/ui/pages/transfer.page';
 import { URLS } from '../../resources/urls';
 
-
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-
-// ── TC-15 | Transfer with insufficient funds ───────────────────────────────
 test.describe('PBQ-04 – Transfer Funds', () => {
 
-  test('TC-15 | Transfer with insufficient funds should be rejected', async ({ page }) => {
+  test('TC-15 | Transfer with insufficient funds should be rejected [BUG PBQ-B03]', async ({ page, loggedInUserWithAccount: _ }) => {
+    await epic('EPIC-2 - ACCOUNT MANAGEMENT');
+    await story('PBQ-04 Transfer Funds');
+    await testCaseId('TC-15');
+    await severity('normal');
 
-    // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.overviewUrl);
-
-    // Get total balance across all accounts
-    const balanceTexts = await page.locator('table#accountTable tbody tr td:nth-child(2)').allTextContents();
+    const transferPage = new TransferPage(page);
     let totalBalance = 0;
-    for (const text of balanceTexts) {
-      const amount = parseFloat(text.replace(/[$,]/g, ''));
-      if (!isNaN(amount)) totalBalance += amount;
-    }
-    const transferAmount = (totalBalance + 10000000).toFixed(2);
-    console.log(`Total balance: $${totalBalance} — Transfer amount: $${transferAmount}`);
 
-    // ── Act ──────────────────────────────────────────────────────────────
-    await page.goto(URLS.transferUrl);
-    await page.locator('#amount').fill(transferAmount);
-
-    // Wait for accounts to load
-    await page.locator('#fromAccountId option').first().waitFor({ state: 'attached' });
-
-    // Select first account as source
-    const fromOptions = await page.locator('#fromAccountId option').all();
-    const fromAccount = await fromOptions[0].getAttribute('value');
-    await page.locator('#fromAccountId').selectOption(fromAccount!);
-
-    // Select second account as destination (different from source)
-    const toOptions = await page.locator('#toAccountId option').all();
-    let toAccount: string | null = null;
-    for (const option of toOptions) {
-      const value = await option.getAttribute('value');
-      if (value !== fromAccount) {
-        toAccount = value;
-        break;
+    await step('Get total balance across all accounts', async () => {
+      await page.goto(URLS.overviewUrl);
+      const balanceTexts = await page.locator('table#accountTable tbody tr td:nth-child(2)').allTextContents();
+      for (const text of balanceTexts) {
+        const amount = parseFloat(text.replace(/[$,]/g, ''));
+        if (!isNaN(amount)) totalBalance += amount;
       }
-    }
-    await page.locator('#toAccountId').selectOption(toAccount!);
+    });
 
-    await page.getByRole('button', { name: 'Transfer' }).click();
-    await page.waitForLoadState('networkidle');
+    await step('Navigate to Transfer Funds page', async () => {
+      await transferPage.goto();
+    });
 
-    const count = await page.getByText('Insufficient funds').count();
-    console.log('Insufficient funds count:', count);
+    await step('Submit transfer with amount exceeding total balance', async () => {
+      await transferPage.transfer('999999');
+    });
 
-    // ── Assert ──────────────────────────────────────────────────────────
-    await expect(page.getByText('Insufficient funds')).toHaveCount(1);
+    await step('Verify transfer is rejected', async () => {
+      await expect(page.getByText('Insufficient funds')).toHaveCount(1);
+    });
   });
 
 });

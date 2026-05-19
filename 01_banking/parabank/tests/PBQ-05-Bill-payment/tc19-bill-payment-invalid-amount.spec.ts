@@ -1,50 +1,34 @@
-import { test, expect } from '@playwright/test';
-import { URLS } from '../../resources/urls';
+import { test } from '../../framework/fixtures/logged-in-user.fixture';
+import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { BillPayPage } from '../../framework/ui/pages/bill-pay.page';
+import { buildPayee } from '../../framework/data/payee.factory';
 
+// ── BUG PBQ-B04 : ParaBank processes bill payment with negative amount ─────
+// Expected : payment rejected with validation error
+// Actual   : payment is processed successfully with negative amount
 
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-const PAYEE = {
-  name: 'Electric Company',
-  address: '123 Power St',
-  city: 'New York',
-  state: 'NY',
-  zipCode: '10001',
-  phone: '555-1234',
-  accountNumber: '987654321',
-  amount: '-100',
-};
-
-// ── TC-19 | Bill payment with negative amount ──────────────────────────────
 test.describe('PBQ-05 – Bill Pay', () => {
 
-  test('TC-19 | Bill payment with negative amount should be rejected (KNOWN BUG PBQ-B04: payment processed with negative amount)', async ({ page }) => {
+  test('TC-19 | Negative amount should be rejected [BUG PBQ-B04]', async ({ page, loggedInUserWithAccount }) => {
+    await epic('EPIC-2 - ACCOUNT MANAGEMENT');
+    await story('PBQ-05 Bill Pay');
+    await testCaseId('TC-19');
+    await severity('normal');
 
-    // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.billPayUrl);
+    const billPayPage = new BillPayPage(page);
+    const payee = buildPayee({ amount: '-100' });
 
-    // ── Act — fill all fields with negative amount ───────────────────────
-    await page.locator('input[name="payee.name"]').fill(PAYEE.name);
-    await page.locator('input[name="payee.address.street"]').fill(PAYEE.address);
-    await page.locator('input[name="payee.address.city"]').fill(PAYEE.city);
-    await page.locator('input[name="payee.address.state"]').fill(PAYEE.state);
-    await page.locator('input[name="payee.address.zipCode"]').fill(PAYEE.zipCode);
-    await page.locator('input[name="payee.phoneNumber"]').fill(PAYEE.phone);
-    await page.locator('input[name="payee.accountNumber"]').fill(PAYEE.accountNumber);
-    await page.locator('input[name="verifyAccount"]').fill(PAYEE.accountNumber);
-    await page.locator('input[name="amount"]').fill(PAYEE.amount);
+    await step('Navigate to Bill Pay page', async () => {
+      await billPayPage.goto();
+    });
 
-    // Wait for accounts to load and select source account
-    await page.locator('#fromAccountId option').first().waitFor({ state: 'attached' });
-    const fromOptions = await page.locator('#fromAccountId option').all();
-    const fromAccount = await fromOptions[0].getAttribute('value');
-    await page.locator('#fromAccountId').selectOption(fromAccount!);
+    await step('Submit payment with negative amount', async () => {
+      await billPayPage.fillAndSubmit(payee);
+    });
 
-    await page.getByRole('button', { name: 'Send Payment' }).click();
-    await page.waitForLoadState('networkidle');
-
-    // ── Assert ──────────────────────────────────────────────────────────
-    await expect(page.getByText('Amount must be greater than 0')).toHaveCount(1);
+    await step('Verify payment is rejected [BUG PBQ-B04]', async () => {
+      await billPayPage.expectValidationError('Amount must be greater than 0');
+    });
   });
 
 });

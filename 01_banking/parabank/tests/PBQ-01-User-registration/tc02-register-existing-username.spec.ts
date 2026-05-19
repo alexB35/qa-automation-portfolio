@@ -1,48 +1,31 @@
-import { test, expect } from '@playwright/test';
-import { URLS } from '../../resources/urls';
+import { test, expect } from '../../framework/fixtures/logged-in-user.fixture';
+import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { buildUser } from '../../framework/data/user.factory';
+import { RegisterPage } from '../../framework/ui/pages/register.page';
 
-
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-const EXISTING_USER = {
-  firstName: 'John',
-  lastName: 'Doe',
-  address: '123 Main St',
-  city: 'New York',
-  state: 'NY',
-  zipCode: '10001',
-  phone: '0123456789',
-  ssn: '123-45-6789',
-  username: 'john_doe_test01',
-  password: 'Test123!',
-  confirmPassword: 'Test123!',
-};
-
-// ── TC-02 | Registration with existing username ────────────────────────────
 test.describe('PBQ-01 – User Registration', () => {
 
-  test('TC-02 | Registration with existing username shows error message', async ({ page }) => {
+  test('TC-02 | Registration with existing username', async ({ page, registeredUser }) => {
+    await epic('EPIC-1 - USER MANAGEMENT');
+    await story('PBQ-01 User Registration');
+    await testCaseId('TC-02');
+    await severity('normal');
 
-    // ── Arrange ─────────────────────────────────────────────────────────
-    await page.goto(URLS.registerUrl);
+    const registerPage = new RegisterPage(page);
+    const duplicate = buildUser({ username: registeredUser.username });
 
-    // ── Act ─────────────────────────────────────────────────────────────
-    await page.locator('input[id="customer.firstName"]').fill(EXISTING_USER.firstName);
-    await page.locator('input[id="customer.lastName"]').fill(EXISTING_USER.lastName);
-    await page.locator('input[id="customer.address.street"]').fill(EXISTING_USER.address);
-    await page.locator('input[id="customer.address.city"]').fill(EXISTING_USER.city);
-    await page.locator('input[id="customer.address.state"]').fill(EXISTING_USER.state);
-    await page.locator('input[id="customer.address.zipCode"]').fill(EXISTING_USER.zipCode);
-    await page.locator('input[id="customer.phoneNumber"]').fill(EXISTING_USER.phone);
-    await page.locator('input[id="customer.ssn"]').fill(EXISTING_USER.ssn);
-    await page.locator('input[id="customer.username"]').fill(EXISTING_USER.username);
-    await page.locator('input[id="customer.password"]').fill(EXISTING_USER.password);
-    await page.locator('input[id="repeatedPassword"]').fill(EXISTING_USER.confirmPassword);
-    await page.locator('input[value="Register"]').click();
+    await step('Navigate to registration page', async () => {
+      await registerPage.goto();
+    });
 
-    // ── Assert ──────────────────────────────────────────────────────────
-    await expect(page.locator('#customer\\.username\\.errors')).toBeVisible();
-    await expect(page.getByText('This username already exists.')).toBeVisible();
+    await step('Submit form with existing username', async () => {
+      await registerPage.fillAndSubmit(duplicate);
+    });
+
+    await step('Verify error message is displayed', async () => {
+      await expect(page.locator('#customer\\.username\\.errors')).toBeVisible();
+      await expect(page.getByText('This username already exists.')).toBeVisible();
+    });
   });
 
 });

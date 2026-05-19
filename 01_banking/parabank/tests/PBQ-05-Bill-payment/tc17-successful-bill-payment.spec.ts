@@ -1,51 +1,30 @@
-import { test, expect } from '@playwright/test';
-import { URLS } from '../../resources/urls';
+import { test } from '../../framework/fixtures/logged-in-user.fixture';
+import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { BillPayPage } from '../../framework/ui/pages/bill-pay.page';
+import { buildPayee } from '../../framework/data/payee.factory';
 
-
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-const TEST_USER = {
-  transferAmount: '1000', // A valid amount for bill payment
-};
-
-// ── TC-17 | Successful bill payment ──────────────────────────────────────
 test.describe('PBQ-05 – Bill Pay', () => {
 
-  test('TC-17 | Successful bill payment', async ({ page }) => {
+  test('TC-17 | Successful bill payment with valid data', async ({ page, loggedInUserWithAccount }) => {
+    await epic('EPIC-2 - ACCOUNT MANAGEMENT');
+    await story('PBQ-05 Bill Pay');
+    await testCaseId('TC-17');
+    await severity('critical');
 
-    // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.transferUrl);
+    const billPayPage = new BillPayPage(page);
+    const payee = buildPayee({ amount: '100' });
 
-    // ── Act ──────────────────────────────────────────────────────────────
-    await page.locator('#amount').fill(TEST_USER.transferAmount);
+    await step('Navigate to Bill Pay page', async () => {
+      await billPayPage.goto();
+    });
 
-    // Wait for accounts to load
-    await page.locator('#fromAccountId option').first().waitFor({ state: 'attached' });
+    await step('Fill and submit bill payment form', async () => {
+      await billPayPage.fillAndSubmit(payee);
+    });
 
-    // Select first account as source
-    const fromOptions = await page.locator('#fromAccountId option').all();
-    const fromAccount = await fromOptions[0].getAttribute('value');
-    await page.locator('#fromAccountId').selectOption(fromAccount!);
-
-
-    // Select second account as destination
-    const toOptions = await page.locator('#toAccountId option').all();
-    let toAccount: string | null = null;
-        for (const option of toOptions) {
-            const value = await option.getAttribute('value');
-        if (value !== fromAccount) {
-            toAccount = value;
-        break;
-  }
-}
-    await page.locator('#toAccountId').selectOption(toAccount!);
-
-    await page.getByRole('button', { name: 'Transfer' }).click();
-    await page.waitForLoadState('networkidle');
-
-    // ── Assert ──────────────────────────────────────────────────────────
-    await expect(page.getByText('Transfer Complete!')).toHaveCount(1);
-    await expect(page.getByText('has been transferred from account')).toHaveCount(1);
+    await step('Verify payment completed successfully', async () => {
+      await billPayPage.expectSuccess(payee);
+    });
   });
 
 });

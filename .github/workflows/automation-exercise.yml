@@ -1,4 +1,4 @@
-name: Automation Exercise Tests - UI + API
+name: Automation Exercise Tests [UI / API]
 
 on:
   push:
@@ -66,7 +66,7 @@ jobs:
       with:
         name: allure-report-automation-exercise
         path: 03_ecommerce/automation-exercise/outputs/allure-report
-        retention-days: 30
+        retention-days: 5
 
     # ── Upload Playwright test results ───────────────────────────────────────
     - name: Upload Playwright test results
@@ -75,7 +75,7 @@ jobs:
       with:
         name: playwright-results-automation-exercise
         path: 03_ecommerce/automation-exercise/outputs/test-results
-        retention-days: 30
+        retention-days: 5
 
     # ── Quality gate ─────────────────────────────────────────────────────────
     - name: Quality gate — fail on unexpected test failures

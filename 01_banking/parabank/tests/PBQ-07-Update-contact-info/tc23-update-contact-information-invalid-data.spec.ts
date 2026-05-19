@@ -1,29 +1,33 @@
-import { test, expect } from '@playwright/test';
-import { URLS } from '../../resources/urls';
+import { test } from '../../framework/fixtures/logged-in-user.fixture';
+import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { UpdateProfilePage } from '../../framework/ui/pages/update-profile.page';
 
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-
-// ── TC-23 | Update contact information with invalid data ───────────────────
 test.describe('PBQ-07 – Update Contact Info', () => {
 
-  test('TC-23 | Update contact information with empty required fields shows validation errors', async ({ page }) => {
+  test('TC-23 | Empty required fields show validation errors', async ({ page, registeredUser }) => {
+    await epic('EPIC-1 - USER MANAGEMENT');
+    await story('PBQ-07 Update Contact Info');
+    await testCaseId('TC-23');
+    await severity('minor');
 
-    // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.updateProfileUrl);
+    const updateProfilePage = new UpdateProfilePage(page);
 
-    // ── Act — clear required fields ──────────────────────────────────────
-    await page.locator('input[id="customer.address.street"]').fill('');
-    await page.locator('input[id="customer.address.city"]').fill('');
-    await page.locator('input[id="customer.address.state"]').fill('');
-    await page.locator('input[id="customer.address.zipCode"]').fill('');
-    await page.getByRole('button', { name: 'Update Profile' }).click();
+    await step('Navigate to Update Profile page', async () => {
+      await updateProfilePage.goto();
+    });
 
-    // ── Assert ──────────────────────────────────────────────────────────
-    await expect(page.getByText('Address is required.')).toBeVisible();
-    await expect(page.getByText('City is required.')).toBeVisible();
-    await expect(page.getByText('State is required.')).toBeVisible();
-    await expect(page.getByText('Zip Code is required.')).toBeVisible();
+    await step('Clear all required fields and submit', async () => {
+      await updateProfilePage.fillAndSubmit({
+        address: '',
+        city:    '',
+        state:   '',
+        zipCode: '',
+      });
+    });
+
+    await step('Verify validation errors are displayed', async () => {
+      await updateProfilePage.expectValidationErrors();
+    });
   });
 
 });

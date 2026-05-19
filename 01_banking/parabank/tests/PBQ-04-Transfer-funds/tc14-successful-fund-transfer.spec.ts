@@ -1,50 +1,28 @@
-import { test, expect } from '@playwright/test';
-import { URLS } from '../../resources/urls';
+import { test } from '../../framework/fixtures/logged-in-user.fixture';
+import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { TransferPage } from '../../framework/ui/pages/transfer.page';
 
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-const TEST_USER = {
-  transferAmount: '100',
-};
-
-// ── TC-14 | Successful fund transfer ──────────────────────────────────────
 test.describe('PBQ-04 – Transfer Funds', () => {
 
-  test('TC-14 | Successful fund transfer between accounts', async ({ page }) => {
+  test('TC-14 | Successful fund transfer between accounts', async ({ page, loggedInUserWithAccount }) => {
+    await epic('EPIC-2 - ACCOUNT MANAGEMENT');
+    await story('PBQ-04 Transfer Funds');
+    await testCaseId('TC-14');
+    await severity('critical');
 
-    // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.transferUrl);
+    const transferPage = new TransferPage(page);
 
-    // ── Act ──────────────────────────────────────────────────────────────
-    await page.locator('#amount').fill(TEST_USER.transferAmount);
+    await step('Navigate to Transfer Funds page', async () => {
+      await transferPage.goto();
+    });
 
-    // Wait for accounts to load
-    await page.locator('#fromAccountId option').first().waitFor({ state: 'attached' });
+    await step('Transfer $100 between accounts', async () => {
+      await transferPage.transfer('100');
+    });
 
-    // Select first account as source
-    const fromOptions = await page.locator('#fromAccountId option').all();
-    const fromAccount = await fromOptions[0].getAttribute('value');
-    await page.locator('#fromAccountId').selectOption(fromAccount!);
-
-
-    // Select second account as destination
-    const toOptions = await page.locator('#toAccountId option').all();
-    let toAccount: string | null = null;
-        for (const option of toOptions) {
-            const value = await option.getAttribute('value');
-        if (value !== fromAccount) {
-            toAccount = value;
-        break;
-  }
-}
-    await page.locator('#toAccountId').selectOption(toAccount!);
-
-    await page.getByRole('button', { name: 'Transfer' }).click();
-    await page.waitForLoadState('networkidle');
-
-    // ── Assert ──────────────────────────────────────────────────────────
-    await expect(page.getByText('Transfer Complete!')).toHaveCount(1);
-    await expect(page.getByText('has been transferred from account')).toHaveCount(1);
+    await step('Verify transfer completed successfully', async () => {
+      await transferPage.expectSuccess();
+    });
   });
 
 });

@@ -1,75 +1,71 @@
-import { Page } from '@playwright/test';
+import { type Page, type Locator, expect } from '@playwright/test';
+import { URLS } from '../../../resources/urls';
+import type { UserBase } from '../../data/user.base';
 
 export class RegisterPage {
-  constructor(private page: Page) {}
+  readonly page: Page;
 
-  // ── Locators ─────────────────────────────
+  // ── Locators ────────────────────────────────────────────────────────
+  readonly firstNameInput:       Locator;
+  readonly lastNameInput:        Locator;
+  readonly addressInput:         Locator;
+  readonly cityInput:            Locator;
+  readonly stateInput:           Locator;
+  readonly zipCodeInput:         Locator;
+  readonly phoneInput:           Locator;
+  readonly ssnInput:             Locator;
+  readonly usernameInput:        Locator;
+  readonly passwordInput:        Locator;
+  readonly confirmPasswordInput: Locator;
+  readonly registerButton:       Locator;
 
-  signupLink = () => this.page.getByRole('link', { name: ' Signup / Login' });
-
-  nameInput = () => this.page.locator('input[data-qa="signup-name"]');
-  emailInput = () => this.page.locator('input[data-qa="signup-email"]');
-  signupButton = () => this.page.locator('button[data-qa="signup-button"]');
-
-  passwordInput = () => this.page.locator('input[data-qa="password"]');
-
-  titleMr = () => this.page.locator('#id_gender1');
-  titleMrs = () => this.page.locator('#id_gender2');
-
-  daySelect = () => this.page.locator('select[data-qa="days"]');
-  monthSelect = () => this.page.locator('select[data-qa="months"]');
-  yearSelect = () => this.page.locator('select[data-qa="years"]');
-
-  firstNameInput = () => this.page.locator('input[data-qa="first_name"]');
-  lastNameInput = () => this.page.locator('input[data-qa="last_name"]');
-  addressInput = () => this.page.locator('input[data-qa="address"]');
-
-  countrySelect = () => this.page.locator('select[data-qa="country"]');
-
-  stateInput = () => this.page.locator('input[data-qa="state"]');
-  cityInput = () => this.page.locator('input[data-qa="city"]');
-  zipCodeInput = () => this.page.locator('input[data-qa="zipcode"]');
-  phoneInput = () => this.page.locator('input[data-qa="mobile_number"]');
-
-  createAccountButton = () => this.page.locator('button[data-qa="create-account"]');
-
-  continueButton = () => this.page.locator('a[data-qa="continue-button"]');
-
-  // ── Actions ─────────────────────────────
-
-  async goToSignup() {
-    await this.signupLink().click();
+  constructor(page: Page) {
+    this.page                 = page;
+    this.firstNameInput       = page.locator('#customer\\.firstName');
+    this.lastNameInput        = page.locator('#customer\\.lastName');
+    this.addressInput         = page.locator('#customer\\.address\\.street');
+    this.cityInput            = page.locator('#customer\\.address\\.city');
+    this.stateInput           = page.locator('#customer\\.address\\.state');
+    this.zipCodeInput         = page.locator('#customer\\.address\\.zipCode');
+    this.phoneInput           = page.locator('#customer\\.phoneNumber');
+    this.ssnInput             = page.locator('#customer\\.ssn');
+    this.usernameInput        = page.locator('#customer\\.username');
+    this.passwordInput        = page.locator('#customer\\.password');
+    this.confirmPasswordInput = page.locator('#repeatedPassword');
+    this.registerButton       = page.locator('input[value="Register"]');
   }
 
-  async fillSignupNameAndEmail(name: string, email: string) {
-    await this.nameInput().fill(name);
-    await this.emailInput().fill(email);
-    await this.signupButton().click();
+  // ── Actions ─────────────────────────────────────────────────────────
+  async goto() {
+    await this.page.goto(URLS.registerUrl);
   }
 
-  async fillRegistrationForm(user: any) {
-    await this.titleMr().check();
-    await this.passwordInput().fill(user.password);
-
-    await this.daySelect().selectOption(String(user.day));
-    await this.monthSelect().selectOption(user.month);
-    await this.yearSelect().selectOption(String(user.year));
-
-    await this.firstNameInput().fill(user.firstName);
-    await this.lastNameInput().fill(user.lastName);
-    await this.addressInput().fill(user.address);
-
-    await this.countrySelect().selectOption(user.country);
-
-    await this.stateInput().fill(user.state);
-    await this.cityInput().fill(user.city);
-    await this.zipCodeInput().fill(user.zipCode);
-    await this.phoneInput().fill(user.phone);
-
-    await this.createAccountButton().click();
+  async fillForm(user: UserBase, confirmPassword?: string) {
+    await this.firstNameInput.fill(user.firstName);
+    await this.lastNameInput.fill(user.lastName);
+    await this.addressInput.fill(user.address);
+    await this.cityInput.fill(user.city);
+    await this.stateInput.fill(user.state);
+    await this.zipCodeInput.fill(user.zipCode);
+    await this.phoneInput.fill(user.phone);
+    await this.ssnInput.fill(user.ssn);
+    await this.usernameInput.fill(user.username);
+    await this.passwordInput.fill(user.password);
+    await this.confirmPasswordInput.fill(confirmPassword ?? user.password);
   }
 
-  async clickContinue() {
-    await this.continueButton().click();
+  async submit() {
+    await this.registerButton.click();
+  }
+
+  async fillAndSubmit(user: UserBase, confirmPassword?: string) {
+    await this.fillForm(user, confirmPassword);
+    await this.submit();
+  }
+
+  // ── Assertions ───────────────────────────────────────────────────────
+  async expectSuccess(user: UserBase) {
+    await expect(this.page.getByText('Your account was created')).toBeVisible();
+    await expect(this.page.locator('#leftPanel')).toContainText(`Welcome ${user.firstName} ${user.lastName}`);
   }
 }

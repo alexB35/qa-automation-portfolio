@@ -1,36 +1,29 @@
-import { test, expect } from '@playwright/test';
-import { URLS } from '../../resources/urls';
+import { test, expect } from '../../framework/fixtures/logged-in-user.fixture';
+import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { LoginPage } from '../../framework/ui/pages/login.page';
 
-
-test.use({ storageState: { cookies: [], origins: [] } });
-
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-const TEST_USER = {
-  username: 'john_doe_test01',
-  password: 'Test123!',
-  firstName: 'John',
-  lastName: 'Doe',
-};
-
-// ── TC-06 | Valid Login ────────────────────────────────────────────────────
 test.describe('PBQ-02 – User Login', () => {
 
-  test('TC-06 | Successful login with valid credentials', async ({ page }) => {
+  test('TC-06 | Successful login with valid credentials', async ({ page, registeredUser }) => {
 
-    // ── Arrange ─────────────────────────────────────────────────────────
-    await page.goto(URLS.indexUrl);
+    await epic('Banking');
+    await story('PBQ-02 User Login');
+    await testCaseId('TC-06');
+    await severity('critical');
 
-    // ── Act ─────────────────────────────────────────────────────────────
-    await page.locator('input[name="username"]').fill(TEST_USER.username);
-    await page.locator('input[name="password"]').fill(TEST_USER.password);
-    await page.locator('input[value="Log In"]').click();
+    const loginPage = new LoginPage(page);
+    
+    await step('Navigate to login page', async () => {
+      await loginPage.goto();
+    });
 
-    // ── Assert ──────────────────────────────────────────────────────────
-    await expect(page.getByRole('link', { name: 'Log Out' })).toBeVisible();
+    await step('Login with valid credentials', async () => {
+      await loginPage.login(registeredUser.username, registeredUser.password);
+    });
 
-      // ── Cleanup ───────────────────────────────────────────────────────
-    await page.locator('input[value="Log Out"]').click();
+    await step('Verify login success', async () => {
+      await loginPage.expectLoginSuccess();
+    });
   });
 
 });

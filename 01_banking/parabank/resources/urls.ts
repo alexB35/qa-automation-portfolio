@@ -2,6 +2,7 @@ export const BASE_URL = 'https://parabank.parasoft.com/parabank';
 
 export const URLS = {
   indexUrl: `${BASE_URL}/index.htm`,
+  logoutUrl: `${BASE_URL}/logout.htm`,
   registerUrl: `${BASE_URL}/register.htm`,
   openAccountUrl: `${BASE_URL}/openaccount.htm`,
   overviewUrl: `${BASE_URL}/overview.htm`,

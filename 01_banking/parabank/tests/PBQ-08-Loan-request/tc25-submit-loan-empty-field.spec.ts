@@ -1,30 +1,32 @@
-import { test, expect } from '@playwright/test';
-import { URLS } from '../../resources/urls';
+import { test } from '../../framework/fixtures/logged-in-user.fixture';
+import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { LoanRequestPage } from '../../framework/ui/pages/loan-request.page';
 
-// ── Test Data ──────────────────────────────────────────────────────────────
+// ── BUG PBQ-B05 : Empty loan amount triggers internal error instead of validation message
+// Expected : field-level validation error (e.g. "Loan amount is required.")
+// Actual   : generic internal error — no user-friendly feedback
 
-
-// ── TC-25 | Submit loan request with empty field ───────────────────────────
 test.describe('PBQ-08 – Loan Request', () => {
 
-  test('TC-25 | Loan request with empty amount field should show validation error (KNOWN BUG PBQ-B05: returns internal error instead)', async ({ page }) => {
+  test('TC-25 | Empty loan amount triggers internal error [BUG PBQ-B05]', async ({ page, loggedInUserWithAccount }) => {
+    await epic('EPIC-2 - ACCOUNT MANAGEMENT');
+    await story('PBQ-08 Loan Request');
+    await testCaseId('TC-25');
+    await severity('normal');
 
-    // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.requestLoanUrl);
+    const loanPage = new LoanRequestPage(page);
 
-    // ── Act — leave loan amount empty ────────────────────────────────────
-    await page.locator('input[id="downPayment"]').fill('100');
+    await step('Navigate to Loan Request page', async () => {
+      await loanPage.goto();
+    });
 
-    // Select first available account
-    await page.locator('#fromAccountId option').first().waitFor({ state: 'attached' });
-    const firstAccount = await page.locator('#fromAccountId option').first().getAttribute('value');
-    await page.locator('#fromAccountId').selectOption(firstAccount!);
+    await step('Submit loan request without loan amount', async () => {
+      await loanPage.applyForLoan('', '100');
+    });
 
-    await page.getByRole('button', { name: 'Apply Now' }).click();
-    await page.waitForLoadState('networkidle');
-
-    // ── Assert ──────────────────────────────────────────────────────────
-    await expect(page.getByText('An internal error has occurred and has been logged.')).toBeVisible({ timeout: 10000 });
+    await step('Verify internal error is displayed instead of validation', async () => {
+      await loanPage.expectInternalError();
+    });
   });
 
 });

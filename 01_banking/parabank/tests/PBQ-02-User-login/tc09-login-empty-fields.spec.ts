@@ -1,21 +1,28 @@
 import { test, expect } from '@playwright/test';
-import { URLS } from '../../resources/urls';
+import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { LoginPage } from '../../framework/ui/pages/login.page';
 
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-// ── TC-09 | Login with empty fields ───────────────────────────────────────
 test.describe('PBQ-02 – User Login', () => {
 
   test('TC-09 | Login with empty fields shows error message', async ({ page }) => {
+    await epic('EPIC-1 - USER MANAGEMENT');
+    await story('PBQ-02 User Login');
+    await testCaseId('TC-09');
+    await severity('minor');
 
-    // ── Arrange ─────────────────────────────────────────────────────────
-    await page.goto(URLS.indexUrl);
+    const loginPage = new LoginPage(page);
 
-    // ── Act ─────────────────────────────────────────────────────────────
-    await page.locator('input[value="Log In"]').click();
+    await step('Navigate to login page', async () => {
+      await loginPage.goto();
+    });
 
-    // ── Assert ──────────────────────────────────────────────────────────
-    await expect(page.getByText('Please enter a username and password.')).toBeVisible();
+    await step('Submit empty login form', async () => {
+      await loginPage.submitEmpty();
+    });
+
+    await step('Verify error message is displayed', async () => {
+      await expect(page.getByText('Please enter a username and password.')).toBeVisible();
+    });
   });
 
 });

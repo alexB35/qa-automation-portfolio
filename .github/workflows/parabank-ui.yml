@@ -1,4 +1,4 @@
-name: ParaBank Tests - UI
+name: ParaBank Tests [UI]
 
 on:
   push:
@@ -36,18 +36,20 @@ jobs:
     - name: Install Allure CLI
       run: npm install -g allure-commandline
 
-    # ── Create allure-results directory ─────────────────────────────────────
-    - name: Create allure-results directory
-      run: mkdir -p 01_banking/parabank/outputs/allure-results
+    # ── Create output directories ─────────────────────────────────────────────
+    - name: Create output directories
+      run: |
+        mkdir -p 01_banking/parabank/outputs/allure-results
+        mkdir -p 01_banking/parabank/outputs/test-results
 
-    # ── Run tests ───────────────────────────────────────────────────────────
+    # ── Run tests ─────────────────────────────────────────────────────────────
     - name: Run ParaBank UI tests
       env:
         CI: true
         PROJECT: parabank
+        WORKERS: 2
       run: |
         npx playwright test \
-          --project=setup-parabank \
           --project=parabank \
           --reporter=list
       continue-on-error: true
@@ -66,7 +68,7 @@ jobs:
       with:
         name: allure-report-parabank
         path: 01_banking/parabank/outputs/allure-report
-        retention-days: 30
+        retention-days: 5
 
     # ── Upload Playwright test results ───────────────────────────────────────
     - name: Upload Playwright test results
@@ -75,7 +77,7 @@ jobs:
       with:
         name: playwright-results-parabank
         path: 01_banking/parabank/outputs/test-results
-        retention-days: 30
+        retention-days: 5
 
     # ── Quality gate ─────────────────────────────────────────────────────────
     - name: Quality gate — fail on unexpected test failures

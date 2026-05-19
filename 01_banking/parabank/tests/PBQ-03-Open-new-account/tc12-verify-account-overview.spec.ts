@@ -1,40 +1,38 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../../framework/fixtures/logged-in-user.fixture';
+import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { OpenAccountPage } from '../../framework/ui/pages/open-account.page';
 import { URLS } from '../../resources/urls';
 
-
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-const TEST_USER = {
-  username: 'john_doe_test01',
-  password: 'Test123!',
-};
-
-// ── TC-12 | New account appears in accounts overview ──────────────────────
 test.describe('PBQ-03 – Open New Account', () => {
 
-  test('TC-12 | New account appears in accounts overview after creation', async ({ page }) => {
+  test('TC-12 | New account appears in accounts overview after creation', async ({ page, loggedInUserWithAccount }) => {
 
-    // ── Arrange — session already active via storageState ───────────────────
-    await page.goto(URLS.openAccountUrl);
+    await epic('EPIC-2 - ACCOUNT MANAGEMENT');
+    await story('PBQ-03 Open New Account');
+    await testCaseId('TC-12');
+    await severity('normal');
 
-    // ── Act — Create a new account ───────────────────────────────────────
-    await page.goto(URLS.openAccountUrl);
-    await page.locator('#type').selectOption('0'); // 0 = CHECKING
-    await page.getByRole('button', { name: 'Open New Account' }).waitFor({ state: 'visible' });
-    await page.getByRole('button', { name: 'Open New Account' }).click();
-    await page.waitForLoadState('networkidle');
-    await expect(page.getByText('Congratulations, your account is now open.')).toHaveCount(1);
+    const openAccountPage = new OpenAccountPage(page);
+    let newAccountId: string;
 
-    // Get the new account number
-    const newAccountId = await page.locator('#newAccountId').evaluate(el => el.textContent);
-    console.log('newAccountId:', newAccountId);
+    await step('Navigate to Open New Account page', async () => {
+      await openAccountPage.goto();
+    });
 
-    // ── Act — Navigate to overview ───────────────────────────────────────
-    await page.goto(URLS.overviewUrl);
+    await step('Open a new checking account', async () => {
+      await openAccountPage.openAccount('0');
+      await openAccountPage.expectSuccess();
+      newAccountId = await openAccountPage.getNewAccountId();
+    });
 
-    // ── Assert ──────────────────────────────────────────────────────────
-    await expect(page.getByRole('heading', { name: 'Accounts Overview' })).toBeVisible();
-    await expect(page.getByRole('link', { name: newAccountId! })).toBeVisible();
+    await step('Navigate to Accounts Overview', async () => {
+      await page.goto(URLS.overviewUrl);
+    });
+
+    await step('Verify new account appears in overview', async () => {
+      await expect(page.getByRole('heading', { name: 'Accounts Overview' })).toBeVisible();
+      await expect(page.getByText(newAccountId!, { exact: true })).toBeVisible();
+    });
   });
 
 });

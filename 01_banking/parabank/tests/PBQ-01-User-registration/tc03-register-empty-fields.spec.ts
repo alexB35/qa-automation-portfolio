@@ -1,44 +1,37 @@
 import { test, expect } from '@playwright/test';
-import { URLS } from '../../resources/urls';
+import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { RegisterPage } from '../../framework/ui/pages/register.page';
 
-
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-const EXPECTED_ERRORS = {
-  firstName: 'First name is required.',
-  lastName: 'Last name is required.',
-  address: 'Address is required.',
-  city: 'City is required.',
-  state: 'State is required.',
-  zipCode: 'Zip Code is required.',
-  ssn: 'Social Security Number is required.',
-  username: 'Username is required.',
-  password: 'Password is required.',
-  confirmPassword: 'Password confirmation is required.',
-};
-
-// ── TC-03 | Mandatory field validation ────────────────────────────────────
 test.describe('PBQ-01 – User Registration', () => {
 
-  test('TC-03 | Mandatory field validation — all required fields show error on empty submit', async ({ page }) => {
+  test('TC-03 | Empty submit shows all required field errors', async ({ page }) => {
+    await epic('EPIC-1 - USER MANAGEMENT');
+    await story('PBQ-01 User Registration');
+    await testCaseId('TC-03');
+    await severity('normal');
 
-    // ── Arrange ─────────────────────────────────────────────────────────
-    await page.goto(URLS.registerUrl);
+    const registerPage = new RegisterPage(page);
 
-    // ── Act ─────────────────────────────────────────────────────────────
-    await page.locator('input[value="Register"]').click();
+    await step('Navigate to registration page', async () => {
+      await registerPage.goto();
+    });
 
-    // ── Assert ──────────────────────────────────────────────────────────
-    await expect(page.getByText(EXPECTED_ERRORS.firstName)).toBeVisible();
-    await expect(page.getByText(EXPECTED_ERRORS.lastName)).toBeVisible();
-    await expect(page.getByText(EXPECTED_ERRORS.address)).toBeVisible();
-    await expect(page.getByText(EXPECTED_ERRORS.city)).toBeVisible();
-    await expect(page.getByText(EXPECTED_ERRORS.state)).toBeVisible();
-    await expect(page.getByText(EXPECTED_ERRORS.zipCode)).toBeVisible();
-    await expect(page.getByText(EXPECTED_ERRORS.ssn)).toBeVisible();
-    await expect(page.getByText(EXPECTED_ERRORS.username)).toBeVisible();
-    await expect(page.getByText(EXPECTED_ERRORS.password)).toBeVisible();
-    await expect(page.getByText(EXPECTED_ERRORS.confirmPassword)).toBeVisible();
+    await step('Submit empty form', async () => {
+      await registerPage.submit();
+    });
+
+    await step('Verify all required field errors are displayed', async () => {
+      await expect(page.getByText('First name is required.')).toBeVisible();
+      await expect(page.getByText('Last name is required.')).toBeVisible();
+      await expect(page.getByText('Address is required.')).toBeVisible();
+      await expect(page.getByText('City is required.')).toBeVisible();
+      await expect(page.getByText('State is required.')).toBeVisible();
+      await expect(page.getByText('Zip Code is required.')).toBeVisible();
+      await expect(page.getByText('Social Security Number is required.')).toBeVisible();
+      await expect(page.getByText('Username is required.')).toBeVisible();
+      await expect(page.getByText('Password is required.')).toBeVisible();
+      await expect(page.getByText('Password confirmation is required.')).toBeVisible();
+    });
   });
 
 });

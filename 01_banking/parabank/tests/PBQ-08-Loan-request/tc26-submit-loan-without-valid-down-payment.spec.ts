@@ -1,37 +1,28 @@
-import { test, expect } from '@playwright/test';
-import { URLS } from '../../resources/urls';
+import { test } from '../../framework/fixtures/logged-in-user.fixture';
+import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { LoanRequestPage } from '../../framework/ui/pages/loan-request.page';
 
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-const LOAN_DATA = {
-  loanAmount: '600',
-  downPayment: '200',
-};
-
-// ── TC-26 | Submit loan request without valid down payment ─────────────────
 test.describe('PBQ-08 – Loan Request', () => {
 
-  test('TC-26 | Loan request with insufficient down payment is denied', async ({ page }) => {
+  test('TC-26 | Loan request with insufficient down payment is denied', async ({ page, loggedInUserWithAccount }) => {
+    await epic('EPIC-2 - ACCOUNT MANAGEMENT');
+    await story('PBQ-08 Loan Request');
+    await testCaseId('TC-26');
+    await severity('normal');
 
-    // ── Arrange — session already active via storageState ────────────────
-    await page.goto(URLS.requestLoanUrl);
+    const loanPage = new LoanRequestPage(page);
 
-    // ── Act ──────────────────────────────────────────────────────────────
-    await page.locator('input[id="amount"]').fill(LOAN_DATA.loanAmount);
-    await page.locator('input[id="downPayment"]').fill(LOAN_DATA.downPayment);
+    await step('Navigate to Loan Request page', async () => {
+      await loanPage.goto();
+    });
 
-    // Select first available account
-    await page.locator('#fromAccountId option').first().waitFor({ state: 'attached' });
-    const firstAccount = await page.locator('#fromAccountId option').first().getAttribute('value');
-    await page.locator('#fromAccountId').selectOption(firstAccount!);
+    await step('Submit loan request with insufficient down payment', async () => {
+      await loanPage.applyForLoan('600', '200');
+    });
 
-    await page.getByRole('button', { name: 'Apply Now' }).click();
-    await page.waitForLoadState('networkidle');
-
-    // ── Assert ──────────────────────────────────────────────────────────
-    await expect(page.getByText('Loan Request Processed')).toBeVisible({ timeout: 10000 });
-    await expect(page.getByText('Denied')).toBeVisible();
-    await expect(page.getByText('We cannot grant a loan in that amount with your available funds.')).toBeVisible();
+    await step('Verify loan is denied', async () => {
+      await loanPage.expectDenied();
+    });
   });
 
 });
