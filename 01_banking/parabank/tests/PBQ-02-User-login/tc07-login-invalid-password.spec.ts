@@ -6,7 +6,7 @@ test.describe('PBQ-02 – User Login', () => {
 
   test.use({ storageState: { cookies: [], origins: [] } });
 
-  test('TC-07 | Login with wrong password shows error message', async ({ page }) => {
+  test('TC-07 | Login with wrong password shows error message', async ({ page, registeredUser }) => {
     await epic('EPIC-1 - USER MANAGEMENT');
     await story('PBQ-02 User Login');
     await testCaseId('TC-07');
@@ -19,7 +19,7 @@ test.describe('PBQ-02 – User Login', () => {
     });
 
     await step('Login with wrong password', async () => {
-      await loginPage.login('john', 'WrongPassword!');
+      await loginPage.login(registeredUser.username, 'WrongPassword!');
     });
 
     await step('Verify error message is displayed', async () => {

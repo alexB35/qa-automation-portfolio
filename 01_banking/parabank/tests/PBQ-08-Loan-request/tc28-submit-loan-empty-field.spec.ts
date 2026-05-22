@@ -4,11 +4,11 @@ import { LoanRequestPage } from '../../framework/ui/pages/loan-request.page';
 
 test.describe('PBQ-08 – Loan Request', () => {
 
-  test('TC-24 | Loan request with valid data is approved', async ({ page, loggedInUserWithAccount }) => {
+  test('TC-28 | Empty loan amount triggers internal error', async ({ page, loggedInUserWithAccount }) => {
     await epic('EPIC-2 - ACCOUNT MANAGEMENT');
     await story('PBQ-08 Loan Request');
-    await testCaseId('TC-24');
-    await severity('critical');
+    await testCaseId('TC-28');
+    await severity('normal');
 
     const loanPage = new LoanRequestPage(page);
 
@@ -16,12 +16,12 @@ test.describe('PBQ-08 – Loan Request', () => {
       await loanPage.goto();
     });
 
-    await step('Submit loan request with valid data', async () => {
-      await loanPage.applyForLoan('600', '100');
+    await step('Submit loan request without loan amount', async () => {
+      await loanPage.applyForLoan('', '100');
     });
 
-    await step('Verify loan is approved', async () => {
-      await loanPage.expectApproved();
+    await step('Verify internal error is displayed instead of validation', async () => {
+      await loanPage.expectInternalError();
     });
   });
 

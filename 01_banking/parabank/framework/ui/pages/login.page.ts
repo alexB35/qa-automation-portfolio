@@ -14,7 +14,6 @@ export class LoginPage {
     this.loginButton   = page.locator('input[value="Log In"]');
   }
 
-  // ── Actions ──────────────────────────────────────────────────────────
   async goto() {
     await this.page.goto('https://parabank.parasoft.com/parabank/logout.htm');
     await this.page.goto(URLS.indexUrl);
@@ -30,7 +29,6 @@ export class LoginPage {
     await this.loginButton.click();
   }
 
-  // ── Assertions ───────────────────────────────────────────────────────
   async expectLoginSuccess() {
     await expect(this.page.getByRole('link', { name: 'Log Out' })).toBeVisible();
   }

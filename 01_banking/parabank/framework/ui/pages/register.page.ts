@@ -5,7 +5,6 @@ import type { UserBase } from '../../data/user.base';
 export class RegisterPage {
   readonly page: Page;
 
-  // ── Locators ────────────────────────────────────────────────────────
   readonly firstNameInput:       Locator;
   readonly lastNameInput:        Locator;
   readonly addressInput:         Locator;
@@ -35,7 +34,6 @@ export class RegisterPage {
     this.registerButton       = page.locator('input[value="Register"]');
   }
 
-  // ── Actions ─────────────────────────────────────────────────────────
   async goto() {
     await this.page.goto(URLS.registerUrl);
   }
@@ -63,7 +61,6 @@ export class RegisterPage {
     await this.submit();
   }
 
-  // ── Assertions ───────────────────────────────────────────────────────
   async expectSuccess(user: UserBase) {
     await expect(this.page.getByText('Your account was created')).toBeVisible();
     await expect(this.page.locator('#leftPanel')).toContainText(`Welcome ${user.firstName} ${user.lastName}`);

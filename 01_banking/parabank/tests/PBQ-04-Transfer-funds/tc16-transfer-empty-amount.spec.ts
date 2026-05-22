@@ -4,7 +4,7 @@ import { TransferPage } from '../../framework/ui/pages/transfer.page';
 
 test.describe('PBQ-04 – Transfer Funds', () => {
 
-  test('TC-16 | Transfer with empty amount shows error', async ({ page, loggedInUserWithAccount: _ }) => {
+  test('TC-16 | Transfer with empty amount shows error', async ({ page, loggedInUserWithAccount}) => {
     await epic('EPIC-2 - ACCOUNT MANAGEMENT');
     await story('PBQ-04 Transfer Funds');
     await testCaseId('TC-16');

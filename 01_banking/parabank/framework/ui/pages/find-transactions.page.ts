@@ -7,13 +7,15 @@ export class FindTransactionsPage {
   readonly fromDateInput:     Locator;
   readonly toDateInput:       Locator;
   readonly transactionIdInput: Locator;
+  readonly amountInput:        Locator;
 
   constructor(page: Page) {
     this.page               = page;
     this.accountSelect      = page.locator('#accountId');
-    this.fromDateInput      = page.locator('input[id="criteria.fromDate"]');
-    this.toDateInput        = page.locator('input[id="criteria.toDate"]');
-    this.transactionIdInput = page.locator('input[id="criteria.transactionId"]');
+    this.fromDateInput      = page.locator('input[id="fromDate"]');
+    this.toDateInput        = page.locator('input[id="toDate"]');
+    this.transactionIdInput = page.locator('input[id="transactionId"]');
+    this.amountInput        = page.locator('input[id="amount"]');
   }
 
   async goto() {
@@ -31,31 +33,40 @@ export class FindTransactionsPage {
   async searchByDateRange(from: string, to: string) {
     await this.fromDateInput.fill(from);
     await this.toDateInput.fill(to);
-    await this.page.locator('#byDateRange').getByRole('button', { name: 'Find Transactions' }).click();
+    await this.page.locator('button[id="findByDateRange"]').waitFor({ state: 'visible' });
+    await this.page.locator('button[id="findByDateRange"]').click();
     await this.page.waitForLoadState('networkidle');
   }
 
   async searchById(id: string) {
     await this.transactionIdInput.fill(id);
-    await this.page.locator('#byId').getByRole('button', { name: 'Find Transactions' }).click();
+    await this.page.locator('button[id="findById"]').waitFor({ state: 'visible' });
+    await this.page.locator('button[id="findById"]').click();
+    await this.page.waitForLoadState('networkidle');
+  }
+
+  async searchByAmount(amount: string) {
+    await this.amountInput.fill(amount);
+    await this.page.locator('button[id="findByAmount"]').waitFor({ state: 'visible' });
+    await this.page.locator('button[id="findByAmount"]').click();
     await this.page.waitForLoadState('networkidle');
   }
 
   async expectResultsTable() {
-    await expect(this.page.getByText('Transaction Results')).toBeVisible({ timeout: 10_000 });
-    await expect(this.page.locator('table.table thead')).toBeVisible();
-    await expect(this.page.getByText('Date')).toBeVisible();
-    await expect(this.page.getByText('Transaction')).toBeVisible();
-    await expect(this.page.getByText('Debit (-)')).toBeVisible();
-    await expect(this.page.getByText('Credit (+)')).toBeVisible();
+  await expect(this.page.getByText('Transaction Results')).toBeVisible();
+  await expect(this.page.locator('table#transactionTable thead')).toBeVisible();
+  await expect(this.page.locator('table#transactionTable thead').getByText('Date')).toBeVisible();
+  await expect(this.page.locator('table#transactionTable thead').getByText('Transaction')).toBeVisible();
+  await expect(this.page.locator('table#transactionTable thead').getByText('Debit (-)')).toBeVisible();
+  await expect(this.page.locator('table#transactionTable thead').getByText('Credit (+)')).toBeVisible();
   }
 
   async expectEmptyResults() {
-    await expect(this.page.getByText('Transaction Results')).toBeVisible({ timeout: 10_000 });
+    await expect(this.page.getByText('Transaction Results')).toBeVisible();
     await expect(this.page.locator('table.table tbody tr')).toHaveCount(0);
   }
 
   async expectError(message: string) {
-    await expect(this.page.getByText(message)).toBeVisible({ timeout: 10_000 });
+    await expect(this.page.getByText(message)).toBeVisible();
   }
 }

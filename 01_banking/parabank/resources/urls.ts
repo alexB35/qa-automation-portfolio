@@ -4,6 +4,7 @@ export const URLS = {
   indexUrl: `${BASE_URL}/index.htm`,
   logoutUrl: `${BASE_URL}/logout.htm`,
   registerUrl: `${BASE_URL}/register.htm`,
+  forgotLoginUrl: `${BASE_URL}/lookup.htm`,
   openAccountUrl: `${BASE_URL}/openaccount.htm`,
   overviewUrl: `${BASE_URL}/overview.htm`,
   transferUrl: `${BASE_URL}/transfer.htm`,

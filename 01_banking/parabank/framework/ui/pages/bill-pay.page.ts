@@ -38,7 +38,7 @@ export class BillPayPage {
     this.accountNumberInput  = page.locator('input[name="payee.accountNumber"]');
     this.verifyAccountInput  = page.locator('input[name="verifyAccount"]');
     this.amountInput         = page.locator('input[name="amount"]');
-    this.fromAccountSelect   = page.locator('#fromAccountId');
+    this.fromAccountSelect   = page.locator('select[name="fromAccountId"]');
     this.sendPaymentButton   = page.getByRole('button', { name: 'Send Payment' });
   }
 
@@ -59,12 +59,17 @@ export class BillPayPage {
       await this.amountInput.fill(payee.amount);
     }
   }
-
+/*
   async selectFirstAccount() {
-    await this.fromAccountSelect.locator('option').first().waitFor({ state: 'attached' });
-    const firstOption = await this.fromAccountSelect.locator('option').first().getAttribute('value');
-    await this.fromAccountSelect.selectOption(firstOption!);
+  const firstOption =
+    this.fromAccountSelect.locator('option').first();
+  await expect(firstOption).toBeVisible();
+  const value = await firstOption.getAttribute('value');
+  if (!value) {
+    throw new Error('No account option available');
   }
+  await this.fromAccountSelect.selectOption(value);
+} */
 
   async submit() {
     await this.sendPaymentButton.click();
@@ -73,13 +78,14 @@ export class BillPayPage {
 
   async fillAndSubmit(payee: Payee) {
     await this.fillPayee(payee);
-    await this.selectFirstAccount();
+    //await this.selectFirstAccount();
     await this.submit();
   }
 
   async expectSuccess(payee: Payee) {
-    await expect(this.page.getByText('Bill Payment Complete!')).toBeVisible();
+    await expect(this.page.getByText('Bill Payment Complete')).toBeVisible();
     await expect(this.page.getByText(payee.name)).toBeVisible();
+    await expect(this.page.locator('#amount')).toBeVisible();
   }
 
   async expectValidationError(message: string) {

@@ -4,10 +4,10 @@ import { OpenAccountPage } from '../../framework/ui/pages/open-account.page';
 
 test.describe('PBQ-03 – Open New Account', () => {
 
-  test('TC-10 | Successful account creation with valid data', async ({ page, loggedInUserWithAccount }) => {
+  test('TC-11 | Successful account creation with valid data', async ({ page, loggedInUserWithAccount }) => {
     await epic('EPIC-2 - ACCOUNT MANAGEMENT');
     await story('PBQ-03 Open New Account');
-    await testCaseId('TC-10');
+    await testCaseId('TC-11');
     await severity('critical');
 
     const openAccountPage = new OpenAccountPage(page);

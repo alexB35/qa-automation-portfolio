@@ -15,6 +15,7 @@ export class TransferPage {
 
   async goto() {
     await this.page.goto(URLS.transferUrl);
+    await this.page.waitForLoadState('networkidle');
   }
 
   async transfer(amount: string) {

@@ -4,10 +4,10 @@ import { FindTransactionsPage } from '../../framework/ui/pages/find-transactions
 
 test.describe('PBQ-06 – Find Transactions', () => {
 
-  test('TC-21 | Non-numeric transaction ID shows error', async ({ page, loggedInUserWithAccount }) => {
+  test('TC-24 | Search transaction by amount', async ({ page, loggedInUserWithAccount }) => {
     await epic('EPIC-2 - ACCOUNT MANAGEMENT');
     await story('PBQ-06 Find Transactions');
-    await testCaseId('TC-21');
+    await testCaseId('TC-24');
     await severity('minor');
 
     const findPage = new FindTransactionsPage(page);
@@ -17,12 +17,12 @@ test.describe('PBQ-06 – Find Transactions', () => {
       await findPage.selectFirstAccount();
     });
 
-    await step('Search by invalid transaction ID', async () => {
-      await findPage.searchById('0000');
+    await step('Search by invalid amount format', async () => {
+      await findPage.searchByAmount('invalid');
     });
 
     await step('Verify error message is displayed', async () => {
-      await findPage.expectError('Invalid transaction ID');
+      await findPage.expectError('Invalid amount format');
     });
   });
 

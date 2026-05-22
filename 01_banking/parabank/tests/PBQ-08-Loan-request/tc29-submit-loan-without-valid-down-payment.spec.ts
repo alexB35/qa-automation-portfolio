@@ -4,10 +4,10 @@ import { LoanRequestPage } from '../../framework/ui/pages/loan-request.page';
 
 test.describe('PBQ-08 – Loan Request', () => {
 
-  test('TC-26 | Loan request with insufficient down payment is denied', async ({ page, loggedInUserWithAccount }) => {
+  test('TC-29 | Loan request with insufficient down payment is denied', async ({ page, loggedInUserWithAccount }) => {
     await epic('EPIC-2 - ACCOUNT MANAGEMENT');
     await story('PBQ-08 Loan Request');
-    await testCaseId('TC-26');
+    await testCaseId('TC-29');
     await severity('normal');
 
     const loanPage = new LoanRequestPage(page);
@@ -17,7 +17,7 @@ test.describe('PBQ-08 – Loan Request', () => {
     });
 
     await step('Submit loan request with insufficient down payment', async () => {
-      await loanPage.applyForLoan('600', '200');
+      await loanPage.applyForLoan('600000', '100');
     });
 
     await step('Verify loan is denied', async () => {

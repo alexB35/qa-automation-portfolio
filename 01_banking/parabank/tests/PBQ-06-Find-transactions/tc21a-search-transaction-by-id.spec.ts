@@ -4,11 +4,11 @@ import { FindTransactionsPage } from '../../framework/ui/pages/find-transactions
 
 test.describe('PBQ-06 – Find Transactions', () => {
 
-  test('TC-20 | Search by valid date range returns results', async ({ page, loggedInUserWithTransaction }) => {
+  test('TC-21a | Search transaction by ID', async ({ page, loggedInUserWithAccount }) => {
     await epic('EPIC-2 - ACCOUNT MANAGEMENT');
     await story('PBQ-06 Find Transactions');
-    await testCaseId('TC-20');
-    await severity('normal');
+    await testCaseId('TC-21a');
+    await severity('minor');
 
     const findPage = new FindTransactionsPage(page);
 
@@ -17,12 +17,12 @@ test.describe('PBQ-06 – Find Transactions', () => {
       await findPage.selectFirstAccount();
     });
 
-    await step('Search by date range', async () => {
-      await findPage.searchByDateRange('01-01-2024', '12-31-2026');
+    await step('Search by valid transaction ID', async () => {
+      await findPage.searchById('00001');
     });
 
-    await step('Verify results table is displayed', async () => {
-      await findPage.expectResultsTable();
+    await step('Verify transaction details are displayed', async () => {
+      await findPage.expectTransactionDetailsDisplayed();
     });
   });
 

@@ -4,10 +4,10 @@ import { UpdateProfilePage } from '../../framework/ui/pages/update-profile.page'
 
 test.describe('PBQ-07 – Update Contact Info', () => {
 
-  test('TC-23 | Empty required fields show validation errors', async ({ page, registeredUser }) => {
+  test('TC-26 | Empty required fields show validation errors', async ({ page, registeredUser }) => {
     await epic('EPIC-1 - USER MANAGEMENT');
     await story('PBQ-07 Update Contact Info');
-    await testCaseId('TC-23');
+    await testCaseId('TC-26');
     await severity('minor');
 
     const updateProfilePage = new UpdateProfilePage(page);
@@ -18,10 +18,9 @@ test.describe('PBQ-07 – Update Contact Info', () => {
 
     await step('Clear all required fields and submit', async () => {
       await updateProfilePage.fillAndSubmit({
-        address: '',
-        city:    '',
-        state:   '',
-        zipCode: '',
+        city:    'AAAAAAA!?**',
+        zipCode: '999999¨%$$',
+        phone:   '00000000@!?**',
       });
     });
 

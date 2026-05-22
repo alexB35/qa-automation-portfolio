@@ -23,7 +23,7 @@ test.describe('PBQ-01 – User Registration', () => {
     });
 
     await step('Verify registration is rejected', async () => {
-      await expect(page.getByText('Your account was created successfully. You are now logged in.')).toBeHidden();
+      await expect(page.getByText('Password is required.')).toHaveCount(1);
     });
   });
 
