@@ -21,7 +21,7 @@ export default defineConfig({
   retries:       isCI ? 1 : 0,
   fullyParallel: false,
   workers:       process.env['WORKERS'] ? parseInt(process.env['WORKERS'], 10) : isCI ? 2 : 1,
-  maxFailures:   isCI ? 5 : 0,
+  maxFailures:   0,
 
   reporter: [
     ['list'],

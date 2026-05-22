@@ -32,7 +32,7 @@ test('TC-12 | Add Product to Cart from Brands', async ({ page }) => {
       const product = page.locator('.product-image-wrapper')
         .filter({ has: page.locator('a[href="/product_details/28"]') });
       await product.locator('text=View Product').click();
-      await page.waitForLoadState('networkidle');
+      await page.waitForLoadState('domcontentloaded');
       await page.locator('button.btn-default.cart[type="button"]').click();    });   
 
     await step('Verify cart update', async () => {

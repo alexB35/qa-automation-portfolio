@@ -29,6 +29,8 @@ test('TC-10b | Add Invalid Quantity Product to Cart', async ({ page }) => {
       const product = page.locator('.product-image-wrapper')
         .filter({ has: page.locator('a[href="/product_details/2"]') });
       await product.locator('text=View Product').click();
+      await page.waitForLoadState('domcontentloaded'); 
+      await expect(page.getByRole('spinbutton')).toBeVisible();
       await page.getByRole('spinbutton').fill('-50');
       await page.getByRole('button', { name: /add to cart/i }).click();
     });

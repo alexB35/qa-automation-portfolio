@@ -33,6 +33,7 @@ test('TC-11 | Add Product to Cart from Category', async ({ page }) => {
       const product = page.locator('.product-image-wrapper')
         .filter({ has: page.locator('a[href="/product_details/20"]') });
       await product.locator('text=View Product').click();
+      await page.waitForLoadState('domcontentloaded');
       await page.getByRole('button', { name: /add to cart/i }).click();
     });   
 

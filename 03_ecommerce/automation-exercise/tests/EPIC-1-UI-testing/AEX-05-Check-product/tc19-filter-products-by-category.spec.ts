@@ -35,6 +35,7 @@ test('TC-19 | Filter Product by Categories', async ({ page }) => {
       const product = page.locator('.product-image-wrapper')
         .filter({ has: page.locator('a[href="/product_details/37"]') });
       await product.locator('text=View Product').click();
+      await page.waitForLoadState('domcontentloaded');
       await expect(page.getByText(`Category: Men > Jeans`)).toBeVisible();
     });
   });

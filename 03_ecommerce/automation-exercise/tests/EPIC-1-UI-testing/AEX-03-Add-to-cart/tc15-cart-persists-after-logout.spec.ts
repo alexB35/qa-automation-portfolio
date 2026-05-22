@@ -57,6 +57,7 @@ test('TC-15 | Cart Persists after Logout', async ({ page }) => {
       const product = page.locator('.product-image-wrapper')
         .filter({ has: page.locator('a[href="/product_details/15"]') });
       await product.locator('text=View Product').click();
+      await page.waitForLoadState('domcontentloaded');
       await expect(page.getByRole('spinbutton')).toBeVisible();
       await page.getByRole('spinbutton').fill('99');
       await page.getByRole('button', { name: /add to cart/i }).click();

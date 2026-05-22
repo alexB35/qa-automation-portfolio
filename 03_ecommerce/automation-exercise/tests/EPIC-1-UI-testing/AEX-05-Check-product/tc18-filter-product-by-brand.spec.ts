@@ -34,6 +34,7 @@ test('TC-18 | Filter Product by Brands', async ({ page }) => {
       const product = page.locator('.product-image-wrapper')
         .filter({ has: page.locator('a[href="/product_details/16"]') });
       await product.locator('text=View Product').click();
+      await page.waitForLoadState('domcontentloaded');
       await expect(page.locator('.product-information p', { hasText: 'Brand' })).toBeVisible();
       await expect(page.locator('.product-information p', { hasText: 'Babyhug' })).toBeVisible();
     });
