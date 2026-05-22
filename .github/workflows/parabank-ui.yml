@@ -12,6 +12,9 @@ jobs:
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
+      # Note: Node.js 20 deprecation warnings on actions/checkout@v4, setup-node@v4,
+      # upload-artifact@v4 are a known upstream issue pending action maintainer updates.
+
     steps:
 
     # ── Checkout ────────────────────────────────────────────────────────────
@@ -95,7 +98,7 @@ jobs:
     # ── Build and push Docker image ──────────────────────────────────────────
     - name: Build and push Docker image
       if: github.ref == 'refs/heads/main'
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@v6
       with:
         context: .
         push: true

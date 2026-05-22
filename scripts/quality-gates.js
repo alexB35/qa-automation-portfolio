@@ -47,6 +47,7 @@ for (const file of files) {
   );
 
   if (result.status === 'failed' || result.status === 'broken') {
+    console.log(`DEBUG failed: "${result.name}"`);
     const name = result.name || '';
     const isKnown = knownFailures.some(tc => name.includes(tc));
 
