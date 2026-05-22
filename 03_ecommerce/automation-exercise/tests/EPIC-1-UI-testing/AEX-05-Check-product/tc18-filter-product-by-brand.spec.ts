@@ -26,6 +26,7 @@ test('TC-18 | Filter Product by Brands', async ({ page }) => {
 
     await step('Open product from brands', async () => {
       await page.locator('a[href="/brand_products/Babyhug"]').click();
+      await page.waitForLoadState('domcontentloaded');
     });
 
     await step('Verify filtered products', async () => {

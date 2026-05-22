@@ -32,6 +32,7 @@ test('TC-21 | Write Product Review', async ({ page }) => {
       const product = page.locator('.product-image-wrapper')
         .filter({ has: page.locator('a[href="/product_details/6"]') });
       await product.locator('text=View Product').click();
+      await page.waitForLoadState('domcontentloaded');
     });
 
     await step('Write product review', async () => {

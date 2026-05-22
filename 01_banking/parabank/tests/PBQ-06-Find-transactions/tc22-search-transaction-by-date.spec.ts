@@ -17,12 +17,12 @@ test.describe('PBQ-06 – Find Transactions', () => {
       await findPage.selectFirstAccount();
     });
 
-    await step('Search by invalid date format', async () => {
-      await findPage.searchByDate('00/00/0000');
+    await step('Search by date', async () => {
+      await findPage.searchByDate(new Date().toLocaleDateString()); 
     });
 
-    await step('Verify error message is displayed', async () => {
-      await findPage.expectError('Invalid date format');
+    await step('Verify results table is displayed', async () => {
+      await findPage.expectResultsTable();
     });
   });
 

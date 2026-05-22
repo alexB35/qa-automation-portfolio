@@ -28,10 +28,10 @@ test('TC-14 | Remove Product from Cart', async ({ page }) => {
       const product = page.locator('.product-image-wrapper')
         .filter({ has: page.locator('a[href="/product_details/31"]') });
       await product.locator('text=View Product').click();
-      await page.waitForLoadState('domcontentloaded');
-      const addToCartBtn = page.getByRole('button', { name: /add to cart/i });
-        await expect(addToCartBtn).toBeVisible();
-        await addToCartBtn.click();
+      await page.waitForSelector('input[id="quantity"]', { state: 'visible'});
+      await page.locator('input[id="quantity"]').fill('1');
+      await expect(page.getByRole('button', { name: /add to cart/i })).toBeVisible();
+      await page.getByRole('button', { name: /add to cart/i }).click();
     });
 
     await step('Verify cart', async () => {

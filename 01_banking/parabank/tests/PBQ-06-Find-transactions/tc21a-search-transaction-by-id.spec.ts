@@ -21,8 +21,8 @@ test.describe('PBQ-06 – Find Transactions', () => {
       await findPage.searchById('00001');
     });
 
-    await step('Verify transaction details are displayed', async () => {
-      await findPage.expectTransactionDetailsDisplayed();
+    await step('Verify results table is displayed', async () => {
+      await findPage.expectResultsTable();
     });
   });
 

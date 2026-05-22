@@ -6,6 +6,7 @@ export class FindTransactionsPage {
   readonly accountSelect:     Locator;
   readonly fromDateInput:     Locator;
   readonly toDateInput:       Locator;
+  readonly transactionDateInput: Locator;
   readonly transactionIdInput: Locator;
   readonly amountInput:        Locator;
 
@@ -14,6 +15,7 @@ export class FindTransactionsPage {
     this.accountSelect      = page.locator('#accountId');
     this.fromDateInput      = page.locator('input[id="fromDate"]');
     this.toDateInput        = page.locator('input[id="toDate"]');
+    this.transactionDateInput = page.locator('input[id="transactionDate"]');
     this.transactionIdInput = page.locator('input[id="transactionId"]');
     this.amountInput        = page.locator('input[id="amount"]');
   }
@@ -28,6 +30,13 @@ export class FindTransactionsPage {
     await this.accountSelect.locator('option').first().waitFor({ state: 'attached' });
     const firstOption = await this.accountSelect.locator('option').first().getAttribute('value');
     await this.accountSelect.selectOption(firstOption!);
+  }
+
+  async searchByDate(id: string) {
+    await this.transactionDateInput.fill(id);
+    await this.page.locator('button[id="findById"]').waitFor({ state: 'visible' });
+    await this.page.locator('button[id="findById"]').click();
+    await this.page.waitForLoadState('networkidle');
   }
 
   async searchByDateRange(from: string, to: string) {

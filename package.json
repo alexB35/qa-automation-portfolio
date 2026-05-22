@@ -7,7 +7,7 @@
   "scripts": {
     "test:parabank": "node scripts/clean.js parabank && cross-env PROJECT=parabank node scripts/run-and-report.js parabank",
 
-    "test:restful-booker": "node scripts/clean.js restful-booker && newman run 02_api/restful_booker/postman/collections/RFB-00 - Prerequisites.postman_collection.json --environment 02_api/restful_booker/postman/environments/RFB_Environment.postman_environment.json --export-environment /tmp/rfb_env.json --reporters cli,allure --reporter-allure-export 02_api/restful_booker/outputs/allure-results && newman run \"02_api/restful_booker/postman/collections/RFB-01 - Create Booking.postman_collection.json\" --environment /tmp/rfb_env.json --export-environment /tmp/rfb_env.json --reporters cli,allure --reporter-allure-export 02_api/restful_booker/outputs/allure-results --suppress-exit-code",
+    "test:restful-booker": "node scripts/clean.js restful-booker && newman run \"02_api/restful_booker/postman/collections/RFB-00 - Prerequisites.postman_collection.json\" --environment 02_api/restful_booker/postman/environments/RFB_Environment.postman_environment.json --export-environment /tmp/rfb_env.json --reporters cli,allure --reporter-allure-export 02_api/restful_booker/outputs/allure-results && newman run \"02_api/restful_booker/postman/collections/RFB-01 - Create Booking.postman_collection.json\" --environment /tmp/rfb_env.json --export-environment /tmp/rfb_env.json --reporters cli,allure --reporter-allure-export 02_api/restful_booker/outputs/allure-results --suppress-exit-code",
 
     "test:automation-exercise": "node scripts/clean.js automation-exercise && cross-env PROJECT=automation-exercise node scripts/run-and-report.js automation-exercise",
 

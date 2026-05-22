@@ -2,6 +2,8 @@ import { type Page, type Locator, expect } from '@playwright/test';
 import { URLS } from '../../../resources/urls';
 
 export type ProfileData = {
+  firstName?: string;
+  lastName?:  string;
   address?: string;
   city?:    string;
   state?:   string;
@@ -11,6 +13,8 @@ export type ProfileData = {
 
 export class UpdateProfilePage {
   readonly page:          Page;
+  readonly firstNameInput: Locator;
+  readonly lastNameInput:  Locator;
   readonly addressInput:  Locator;
   readonly cityInput:     Locator;
   readonly stateInput:    Locator;
@@ -20,6 +24,8 @@ export class UpdateProfilePage {
 
   constructor(page: Page) {
     this.page         = page;
+    this.firstNameInput = page.locator('input[id="customer.firstName"]');
+    this.lastNameInput = page.locator('input[id="customer.lastName"]');
     this.addressInput = page.locator('input[id="customer.address.street"]');
     this.cityInput    = page.locator('input[id="customer.address.city"]');
     this.stateInput   = page.locator('input[id="customer.address.state"]');
@@ -33,6 +39,8 @@ export class UpdateProfilePage {
   }
 
   async fillProfile(data: ProfileData) {
+    if (data.firstName !== undefined) await this.firstNameInput.fill(data.firstName);
+    if (data.lastName !== undefined) await this.lastNameInput.fill(data.lastName);
     if (data.address !== undefined) await this.addressInput.fill(data.address);
     if (data.city    !== undefined) await this.cityInput.fill(data.city);
     if (data.state   !== undefined) await this.stateInput.fill(data.state);
@@ -54,6 +62,8 @@ export class UpdateProfilePage {
   }
 
   async expectValidationErrors() {
+    await expect(this.page.getByText('First name is required.')).toBeVisible();
+    await expect(this.page.getByText('Last name is required.')).toBeVisible();
     await expect(this.page.getByText('Address is required.')).toBeVisible();
     await expect(this.page.getByText('City is required.')).toBeVisible();
     await expect(this.page.getByText('State is required.')).toBeVisible();

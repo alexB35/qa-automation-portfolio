@@ -4,10 +4,10 @@ import { TransferPage } from '../../framework/ui/pages/transfer.page';
 
 test.describe('PBQ-04 – Transfer Funds', () => {
 
-  test('TC-14 | Successful fund transfer between accounts', async ({ page, loggedInUserWithAccount }) => {
+  test('TC-15 | Successful fund transfer between accounts', async ({ page, loggedInUserWithAccount }) => {
     await epic('EPIC-2 - ACCOUNT MANAGEMENT');
     await story('PBQ-04 Transfer Funds');
-    await testCaseId('TC-14');
+    await testCaseId('TC-15');
     await severity('critical');
 
     const transferPage = new TransferPage(page);

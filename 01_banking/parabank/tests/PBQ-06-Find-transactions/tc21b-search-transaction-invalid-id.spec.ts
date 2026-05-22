@@ -4,7 +4,7 @@ import { FindTransactionsPage } from '../../framework/ui/pages/find-transactions
 
 test.describe('PBQ-06 – Find Transactions', () => {
 
-  test('TC-21b | Invalid transaction ID formatshows error', async ({ page, loggedInUserWithAccount }) => {
+  test('TC-21b | Invalid transaction ID format', async ({ page, loggedInUserWithAccount }) => {
     await epic('EPIC-2 - ACCOUNT MANAGEMENT');
     await story('PBQ-06 Find Transactions');
     await testCaseId('TC-21b');

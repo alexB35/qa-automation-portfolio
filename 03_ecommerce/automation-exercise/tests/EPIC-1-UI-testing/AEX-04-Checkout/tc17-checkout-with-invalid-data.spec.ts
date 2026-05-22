@@ -56,17 +56,18 @@ test('TC-17 | Checkout with Invalid Data', async ({ page }) => {
 
     await step('Add product to cart', async () => {
       const product = page.locator('.product-image-wrapper')
-        .filter({ has: page.locator('a[href="/product_details/6"]') });
+        .filter({ has: page.locator('a[href="/product_details/8"]') });
       await product.locator('text=View Product').click();
-      await expect(page.getByRole('spinbutton')).toBeVisible();
-      await page.getByRole('spinbutton').fill('2');
+      await page.waitForSelector('input[id="quantity"]', { state: 'visible'});
+      await page.locator('input[id="quantity"]').fill('2');
+      await expect(page.getByRole('button', { name: /add to cart/i })).toBeVisible();
       await page.getByRole('button', { name: /add to cart/i }).click();
     });
 
     await step('Verify cart update', async () => {
       await expect(page.getByText('Added!')).toBeVisible();
       await page.locator('text=View Cart').click();
-      await expect(page.getByText('Summer White Top')).toBeVisible();
+      await expect(page.getByText('Fancy Green Top')).toBeVisible();
       await expect(page.locator('.cart_quantity button')).toHaveText('2');
     });
 
@@ -85,7 +86,7 @@ test('TC-17 | Checkout with Invalid Data', async ({ page }) => {
         await expect(block).toContainText(user.country);
         await expect(block).toContainText(user.phone);
       }     
-      await expect(page.getByText('Summer White Top')).toBeVisible();
+      await expect(page.getByText('Fancy Green Top')).toBeVisible();
       await expect(page.locator('.cart_quantity button')).toHaveText('2');
       await page.locator('text=Place Order').click();
     });

@@ -26,6 +26,7 @@ test('TC-11 | Add Product to Cart from Category', async ({ page }) => {
 
     await step('Open product category', async () => {
       await page.locator('a[href="#Kids"]').click();
+      await page.locator('a[href="/category_products/4"]').waitFor({ state: 'visible' });
       await page.locator('a[href="/category_products/4"]').click();
     });
 

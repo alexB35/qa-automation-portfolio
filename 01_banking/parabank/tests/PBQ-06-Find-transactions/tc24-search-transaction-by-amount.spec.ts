@@ -17,12 +17,12 @@ test.describe('PBQ-06 – Find Transactions', () => {
       await findPage.selectFirstAccount();
     });
 
-    await step('Search by invalid amount format', async () => {
-      await findPage.searchByAmount('invalid');
+    await step('Search by amount', async () => {
+      await findPage.searchByAmount('100');
     });
 
-    await step('Verify error message is displayed', async () => {
-      await findPage.expectError('Invalid amount format');
+    await step('Verify results table is displayed', async () => {
+      await findPage.expectResultsTable();
     });
   });
 

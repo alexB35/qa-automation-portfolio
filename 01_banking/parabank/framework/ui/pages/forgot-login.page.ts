@@ -17,7 +17,7 @@ export class ForgotLoginPage {
     this.page           = page;
     this.firstNameInput = page.locator('input[id="firstName"]');
     this.lastNameInput  = page.locator('input[id="lastName"]');
-    this.addressInput   = page.locator('input[id="addess.street"]');
+    this.addressInput   = page.locator('input[id="address.street"]');
     this.cityInput      = page.locator('input[id="address.city"]');
     this.stateInput     = page.locator('input[id="address.state"]');
     this.zipCodeInput   = page.locator('input[id="address.zipCode"]');

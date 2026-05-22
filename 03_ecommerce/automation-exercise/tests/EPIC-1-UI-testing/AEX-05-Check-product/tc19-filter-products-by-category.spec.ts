@@ -26,6 +26,7 @@ test('TC-19 | Filter Product by Categories', async ({ page }) => {
 
     await step('Open product category', async () => {
       await page.locator('a[href="#Men"]').click();
+      await page.locator('a[href="/category_products/6"]').waitFor({ state: 'visible' });
       await page.locator('a[href="/category_products/6"]').click();
     });
 

@@ -5,10 +5,10 @@ import { buildPayee } from '../../framework/data/payee.factory';
 
 test.describe('PBQ-05 – Bill Pay', () => {
 
-  test('TC-17 | Successful bill payment with valid data', async ({ page, loggedInUserWithAccount }) => {
+  test('TC-18 | Successful bill payment with valid data', async ({ page, loggedInUserWithAccount }) => {
     await epic('EPIC-2 - ACCOUNT MANAGEMENT');
     await story('PBQ-05 Bill Pay');
-    await testCaseId('TC-17');
+    await testCaseId('TC-18');
     await severity('critical');
 
     const billPayPage = new BillPayPage(page);

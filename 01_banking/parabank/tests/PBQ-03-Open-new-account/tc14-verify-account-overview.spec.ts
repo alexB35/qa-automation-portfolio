@@ -5,11 +5,11 @@ import { URLS } from '../../resources/urls';
 
 test.describe('PBQ-03 – Open New Account', () => {
 
-  test('TC-12 | New account appears in accounts overview after creation', async ({ page, loggedInUserWithAccount }) => {
+  test('TC-14 | New account appears in accounts overview after creation', async ({ page, loggedInUserWithAccount }) => {
 
     await epic('EPIC-2 - ACCOUNT MANAGEMENT');
     await story('PBQ-03 Open New Account');
-    await testCaseId('TC-12');
+    await testCaseId('TC-14');
     await severity('normal');
 
     const openAccountPage = new OpenAccountPage(page);

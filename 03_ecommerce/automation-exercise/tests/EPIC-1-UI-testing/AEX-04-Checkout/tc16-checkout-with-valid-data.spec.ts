@@ -59,8 +59,9 @@ test('TC-16 | Checkout with Valid Data', async ({ page }) => {
       const product = page.locator('.product-image-wrapper')
         .filter({ has: page.locator('a[href="/product_details/6"]') });
       await product.locator('text=View Product').click();
-      await expect(page.getByRole('spinbutton')).toBeVisible();
-      await page.getByRole('spinbutton').fill('2');
+      await page.waitForSelector('input[id="quantity"]', { state: 'visible'});
+      await page.locator('input[id="quantity"]').fill('2');
+      await expect(page.getByRole('button', { name: /add to cart/i })).toBeVisible();
       await page.getByRole('button', { name: /add to cart/i }).click();
     });
 

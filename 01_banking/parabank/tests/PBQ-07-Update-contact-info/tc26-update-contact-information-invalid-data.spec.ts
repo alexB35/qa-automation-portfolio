@@ -18,7 +18,11 @@ test.describe('PBQ-07 – Update Contact Info', () => {
 
     await step('Clear all required fields and submit', async () => {
       await updateProfilePage.fillAndSubmit({
+        firstName: 'John123!?',
+        lastName: 'Does456!?*',
+        address:   '456 Invalid St. @!?**',
         city:    'AAAAAAA!?**',
+        state:   'ZZ!?**',
         zipCode: '999999¨%$$',
         phone:   '00000000@!?**',
       });
