@@ -5,7 +5,7 @@ import { buildPayee } from '../../framework/data/payee.factory';
 
 test.describe('PBQ-05 – Bill Pay', () => {
 
-  test('TC-20 | Negative amount should be rejected', async ({ page, loggedInUserWithAccount }) => {
+  test('TC-20 | Bill payment with negative amount', async ({ page, loggedInUserWithAccount }) => {
     await epic('EPIC-2 - ACCOUNT MANAGEMENT');
     await story('PBQ-05 Bill Pay');
     await testCaseId('TC-20');

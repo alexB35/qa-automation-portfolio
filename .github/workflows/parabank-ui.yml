@@ -40,12 +40,13 @@ jobs:
         run: |
           docker run -d -p 8080:8080 --name parabank parasoft/parabank
           echo "Waiting for ParaBank to be ready..."
-          for i in $(seq 1 30); do
-            if curl -s http://localhost:8080/parabank/index.htm | grep -q "ParaBank"; then
-              echo "ParaBank is ready after ${i}s"
+          for i in $(seq 1 40); do
+            if curl -s http://localhost:8080/parabank/services/bank/accounts \
+              -H "Accept: application/json" | grep -q "\["; then
+              echo "ParaBank DB ready after $((i*3))s"
               break
             fi
-            echo "Attempt $i/30..."
+            echo "Attempt $i/40..."
             sleep 3
           done
 
