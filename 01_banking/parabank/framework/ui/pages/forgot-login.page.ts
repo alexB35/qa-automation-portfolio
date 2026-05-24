@@ -30,7 +30,8 @@ export class ForgotLoginPage {
   await this.page.goto(URLS.forgotLoginUrl);
 }
 
-  async fillAndSubmit(user: UserBase) {
+  
+async fillAndSubmit(user: UserBase) {
     await this.firstNameInput.fill(user.firstName);
     await this.lastNameInput.fill(user.lastName);
     await this.addressInput.fill(user.address);

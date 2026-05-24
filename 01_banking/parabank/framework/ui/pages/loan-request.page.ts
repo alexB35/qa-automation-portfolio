@@ -35,19 +35,19 @@ export class LoanRequestPage {
   }
 
   async expectApproved() {
-    await expect(this.page.getByText('Loan Request Processed')).toBeVisible();
+    await expect(this.page.getByText('Loan Request Processed')).toHaveCount(1);
     await expect(this.page.locator('#loanStatus')).toHaveText('Approved');
-    await expect(this.page.getByText('Congratulations, your loan has been approved.')).toBeVisible();
-    await expect(this.page.locator('#newAccountId')).toBeVisible();
+    await expect(this.page.getByText('Congratulations, your loan has been approved.')).toHaveCount(1);
+    await expect(this.page.locator('#newAccountId')).toHaveCount(1);
   }
 
   async expectDenied() {
-    await expect(this.page.getByText('Loan Request Processed')).toBeVisible();
+    await expect(this.page.getByText('Loan Request Processed')).toHaveCount(1);
     await expect(this.page.locator('#loanStatus')).toHaveText('Denied');
-    await expect(this.page.getByText('We cannot grant a loan in that amount with your available funds.')).toBeVisible();
+    await expect(this.page.getByText('We cannot grant a loan in that amount with your available funds.')).toHaveCount(1);
   }
 
   async expectInternalError() {
-    await expect(this.page.getByText('An internal error has occurred and has been logged.')).toBeVisible();
+    await expect(this.page.getByText('An internal error has occurred and has been logged.')).toHaveCount(1);
   }
 }

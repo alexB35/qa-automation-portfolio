@@ -19,6 +19,7 @@ export const test = base.extend<Fixtures>({
     await registerPage.goto();
     await registerPage.fillAndSubmit(user);
     await expect(page.getByText('Your account was created successfully. You are now logged in.')).toBeVisible();
+    await page.waitForLoadState('networkidle');
     await use(user);
   }, { scope: 'test' }],
 

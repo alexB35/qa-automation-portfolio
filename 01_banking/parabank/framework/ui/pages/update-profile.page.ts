@@ -62,11 +62,11 @@ export class UpdateProfilePage {
   }
 
   async expectValidationErrors() {
-    await expect(this.page.getByText('First name is required.')).toBeVisible();
-    await expect(this.page.getByText('Last name is required.')).toBeVisible();
-    await expect(this.page.getByText('Address is required.')).toBeVisible();
-    await expect(this.page.getByText('City is required.')).toBeVisible();
-    await expect(this.page.getByText('State is required.')).toBeVisible();
-    await expect(this.page.getByText('Zip Code is required.')).toBeVisible();
+    await expect(this.page.getByText('First name is required.')).toHaveCount(1);
+    await expect(this.page.getByText('Last name is required.')).toHaveCount(1);
+    await expect(this.page.getByText('Address is required.')).toHaveCount(1);
+    await expect(this.page.getByText('City is required.')).toHaveCount(1);
+    await expect(this.page.getByText('State is required.')).toHaveCount(1);
+    await expect(this.page.getByText('Zip Code is required.')).toHaveCount(1);
   }
 }

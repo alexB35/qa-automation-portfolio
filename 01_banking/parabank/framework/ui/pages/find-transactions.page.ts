@@ -62,20 +62,20 @@ export class FindTransactionsPage {
   }
 
   async expectResultsTable() {
-  await expect(this.page.getByText('Transaction Results')).toBeVisible();
-  await expect(this.page.locator('table#transactionTable thead')).toBeVisible();
-  await expect(this.page.locator('table#transactionTable thead').getByText('Date')).toBeVisible();
-  await expect(this.page.locator('table#transactionTable thead').getByText('Transaction')).toBeVisible();
-  await expect(this.page.locator('table#transactionTable thead').getByText('Debit (-)')).toBeVisible();
-  await expect(this.page.locator('table#transactionTable thead').getByText('Credit (+)')).toBeVisible();
+    await expect(this.page.getByText('Transaction Results')).toHaveCount(1);
+    await expect(this.page.locator('table#transactionTable thead')).toHaveCount(1);
+    await expect(this.page.locator('table#transactionTable thead').getByText('Date')).toHaveCount(1);
+    await expect(this.page.locator('table#transactionTable thead').getByText('Transaction')).toHaveCount(1);
+    await expect(this.page.locator('table#transactionTable thead').getByText('Debit (-)')).toHaveCount(1);
+    await expect(this.page.locator('table#transactionTable thead').getByText('Credit (+)')).toHaveCount(1);
   }
 
   async expectEmptyResults() {
-    await expect(this.page.getByText('Transaction Results')).toBeVisible();
+    await expect(this.page.getByText('Transaction Results')).toHaveCount(1);
     await expect(this.page.locator('table.table tbody tr')).toHaveCount(0);
   }
 
   async expectError(message: string) {
-    await expect(this.page.getByText(message)).toBeVisible();
+    await expect(this.page.getByText(message)).toHaveCount(1);
   }
 }

@@ -16,6 +16,7 @@ test.describe('PBQ-02 – User Login', () => {
 
     await step('Navigate to forgot login page', async () => {
       await forgotLoginPage.goto();
+      await page.waitForLoadState('networkidle');
     });
 
     await step('Fill in customer lookup form with registered user data', async () => {
@@ -25,6 +26,7 @@ test.describe('PBQ-02 – User Login', () => {
     await step('Verify credentials are displayed and user is logged in', async () => {
       await forgotLoginPage.expectLookupSuccess(registeredUser);
     });
+
   });
 
 });
