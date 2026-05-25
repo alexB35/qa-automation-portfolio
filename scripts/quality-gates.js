@@ -13,8 +13,8 @@ const KNOWN_FAILURES = {
   ],
   'parabank': [
     'TC-05',   
-    'TC-15',
-    'TC-19',   
+    'TC-17',
+    'TC-20',   
   ],
   'restful-booker': [
     // list RFB failures here

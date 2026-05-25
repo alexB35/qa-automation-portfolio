@@ -15,8 +15,10 @@ export class LoginPage {
   }
 
   async goto() {
-    await this.page.goto('https://parabank.parasoft.com/parabank/logout.htm');
+    await this.page.goto(URLS.logoutUrl);
+    await this.page.waitForLoadState('networkidle');
     await this.page.goto(URLS.indexUrl);
+    await this.page.waitForLoadState('networkidle');
   }
 
   async login(username: string, password: string) {

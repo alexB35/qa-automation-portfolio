@@ -17,7 +17,7 @@ test.describe('PBQ-04 – Transfer Funds', () => {
     });
 
     await step('Submit transfer with amount exceeding total balance', async () => {
-      await transferPage.transfer('999999');
+      await transferPage.transfer('999999999999');
     });
 
     await step('Verify transfer is rejected', async () => {
