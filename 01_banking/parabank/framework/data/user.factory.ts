@@ -27,7 +27,7 @@ return {
     state:     'NY',
     zipCode:   '10001',
     phone:     '0123456789',
-    ssn:       `123-45-6789`,
+    ssn:       `${unique.slice(0,3)}-${unique.slice(3,5)}-${unique.slice(5)}`,
     username:  `tu_${unique}`,
     password:  'Test123!',
     ...overrides,

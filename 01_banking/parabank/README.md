@@ -64,9 +64,9 @@ Test execution results are generated using Allure.
 > Debug information (logs, screenshots) is centralized in Allure reports.
 
 > [!IMPORTANT]
-> This project targets the shared Parabank environment rather than a dedicated local Docker instance (localhost:8080).
-> The environment is shared and occasionally unstable, some CI test executions may fail intermittently for non-functional reasons.
+> This project targets the local Parabank environment (localhost:8080) rather than the public shared environment.
+> The shared environment is occasionally unstable, triggering Cloudflare bots limitations and penetration tests unavailabilities.
+> The local environment faces less issues but some can still remains.
 > Known examples: 
-> - sporadic "An internal error has been logged" errors during login despite valid credentials
-> - error 1015 "You are being rate limited" by Cloudflare
-> _The issue is reproducible both on the shared and local environments._
+> - sporadic "An internal error has occurred..." errors during registration or login despite valid credentials.
+> - 
