@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://parabank.parasoft.com';
+export const BASE_URL = 'https://parabank.parasoft.com/parabank';
 
 export const URLS = {
   indexUrl: `${BASE_URL}/index.htm`,
