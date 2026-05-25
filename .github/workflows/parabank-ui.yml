@@ -63,6 +63,9 @@ jobs:
           -d "customer.firstName=John&customer.lastName=Doe&customer.address.street=123+Main+St&customer.address.city=New+York&customer.address.state=NY&customer.address.zipCode=10001&customer.phoneNumber=0123456789&customer.ssn=999-99-9999&customer.username=ci_smoke_user&customer.password=Test123!&repeatedPassword=Test123!")
         echo "$RESPONSE" | grep -o "Your account was created successfully\|An internal error\|This username already exists" || echo "No match"
 
+    - name: Check ParaBank logs after register attempt
+      run: docker logs parabank 2>&1 | grep -A 20 "ERROR\|Exception" | tail -40
+
     # ── Install Allure CLI ──────────────────────────────────────────────────
     - name: Install Allure CLI
       run: npm install -g allure-commandline
