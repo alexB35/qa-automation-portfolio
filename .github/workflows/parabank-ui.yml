@@ -45,7 +45,7 @@ jobs:
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
             "http://localhost:8080/parabank/services/bank/login/john/demo" || echo "000")
           echo "Attempt $i/30 — HTTP $STATUS"
-          if [ "$STATUS" = "200" ] || [ "$STATUS" = "404" ]; then
+          if [ "$STATUS" = "200" ] || [ "$STATUS" = "404" ] || [ "$STATUS" = "400" ]; then
             echo "DB ready after ${i}x3s — HTTP $STATUS"
             break
           fi
