@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:8080/parabank/';
+export const BASE_URL = 'http://localhost:8080/parabank';
 
 export const URLS = {
   indexUrl: `${BASE_URL}/index.htm`,
