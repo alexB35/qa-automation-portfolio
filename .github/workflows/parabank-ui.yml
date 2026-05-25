@@ -40,12 +40,11 @@ jobs:
       run: |
         docker run -d -p 8080:8080 --name parabank parasoft/parabank
         echo "Waiting for ParaBank to be ready..."
+        sleep 5
         for i in $(seq 1 20); do
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/parabank/index.htm)
           if [ "$STATUS" = "200" ] || [ "$STATUS" = "302" ]; then
             echo "ParaBank responded 200 after ${i}x3s"
-            # Extra wait for HSQLDB init
-            sleep 10
             break
           fi
           echo "Attempt $i/20 — HTTP $STATUS"
