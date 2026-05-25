@@ -1,4 +1,5 @@
 export const BASE_URL = 'http://localhost:8080/parabank';
+// or for public shared env.: export const BASE_URL = 'https://parabank.parasoft.com/parabank';
 
 export const URLS = {
   indexUrl: `${BASE_URL}/index.htm`,
