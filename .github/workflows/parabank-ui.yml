@@ -56,6 +56,13 @@ jobs:
     - name: Check ParaBank logs
       run: docker logs parabank 2>&1 | tail -50   
 
+    - name: Smoke test register
+      run: |
+        COOKIE=$(curl -s -c /tmp/parabank_cookies.txt http://localhost:8080/parabank/register.htm > /dev/null && cat /tmp/parabank_cookies.txt | grep JSESSIONID | awk '{print $NF}')
+        RESPONSE=$(curl -s -b /tmp/parabank_cookies.txt -X POST "http://localhost:8080/parabank/register.htm" \
+          -d "customer.firstName=John&customer.lastName=Doe&customer.address.street=123+Main+St&customer.address.city=New+York&customer.address.state=NY&customer.address.zipCode=10001&customer.phoneNumber=0123456789&customer.ssn=999-99-9999&customer.username=ci_smoke_user&customer.password=Test123!&repeatedPassword=Test123!")
+        echo "$RESPONSE" | grep -o "Your account was created successfully\|An internal error\|This username already exists" || echo "No match"
+
     # ── Install Allure CLI ──────────────────────────────────────────────────
     - name: Install Allure CLI
       run: npm install -g allure-commandline
