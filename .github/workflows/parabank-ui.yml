@@ -45,13 +45,21 @@ jobs:
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/parabank/index.htm)
           if [ "$STATUS" = "200" ] || [ "$STATUS" = "302" ]; then
             echo "ParaBank responded 200 after ${i}x3s"
-            sleep 15 # Extra wait to ensure HSQLDB is fully initialized
+            echo "Initializing HSQLDB ..."
+            sleep 15
             break
           fi
           echo "Attempt $i/20 — HTTP $STATUS"
           sleep 3
         done
     
+    # ── Smoke test ParaBank DB ──────────────────────────────────────────────
+    - name: Smoke test ParaBank DB
+      run: |
+        curl -v -X POST http://localhost:8080/parabank/services/bank/customers/login/john/demo \
+          || echo "Login failed — DB may not be ready"
+        curl -v http://localhost:8080/parabank/register.htm
+
     # ── Install Allure CLI ──────────────────────────────────────────────────
     - name: Install Allure CLI
       run: npm install -g allure-commandline
