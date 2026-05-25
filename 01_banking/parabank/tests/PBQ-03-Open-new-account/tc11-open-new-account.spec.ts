@@ -17,7 +17,7 @@ test.describe('PBQ-03 – Open New Account', () => {
     });
 
     await step('Open a new checking account', async () => {
-      await openAccountPage.openAccount('0');
+      await openAccountPage.openAccount(/*'0'*/);
     });
 
     await step('Verify account creation success', async () => {

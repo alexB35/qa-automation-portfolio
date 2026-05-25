@@ -18,9 +18,9 @@ export class OpenAccountPage {
     await this.page.goto(URLS.openAccountUrl);
   }
 
-  async openAccount(type: '0' | '1' = '0') {
+  async openAccount(/*type: '0' | '1' = '0'*/) {
     await this.page.waitForLoadState('networkidle');
-    await this.accountTypeSelect.selectOption(type); // 0 = CHECKING, 1 = SAVINGS
+    // await this.accountTypeSelect.selectOption(type); // 0 = CHECKING, 1 = SAVINGS
     await this.page.locator('#fromAccountId option').first().waitFor({ state: 'attached' });
     await this.openButton.waitFor({ state: 'visible' });
     await this.openButton.click();

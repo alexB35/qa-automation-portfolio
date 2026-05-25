@@ -29,7 +29,7 @@ The goal is to automate common banking workflows, validate UI functionality, and
 |---|---|
 | `tests/` | Playwright test scripts |
 | `framework/` | Fixtures, helpers & page objects |
-| `resources/` | Config & test data |
+| `resources/` | Config & URLs |
 | `docs/` | Screenshots of test executions and Allure reports |
 | `jira/` | Screenshots of Jira boards and cards |
 
@@ -62,3 +62,11 @@ Test execution results are generated using Allure.
 > You can run an entire application, a User Story, or individual test cases.
 > Playwright is configured to continue on failure.
 > Debug information (logs, screenshots) is centralized in Allure reports.
+
+> [!IMPORTANT]
+> This project targets the shared Parabank environment rather than a dedicated local Docker instance (localhost:8080).
+> The environment is shared and occasionally unstable, some CI test executions may fail intermittently for non-functional reasons.
+> Known examples: 
+> - sporadic "An internal error has been logged" errors during login despite valid credentials
+> - error 1015 "You are being rate limited" by Cloudflare
+> _The issue is reproducible both on the shared and local environments._
