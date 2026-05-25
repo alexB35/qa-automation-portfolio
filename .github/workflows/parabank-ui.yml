@@ -41,8 +41,20 @@ jobs:
         docker run -d -p 8080:8080 --name parabank parasoft/parabank
         sleep 10
         curl -s http://localhost:8080/parabank/index.htm > /dev/null
-        echo "DB init triggered — waiting 30s for completion..."
-        sleep 30
+        echo "DB init triggered — polling logs for completion..."
+        for i in $(seq 1 30); do
+          sleep 2
+          LOGS=$(docker logs parabank 2>&1)
+          if echo "$LOGS" | grep -q "Database not yet initialized. Initializing..."; then
+            echo "Init in progress... attempt $i/30"
+            continue
+          fi
+          if echo "$LOGS" | grep -q "Database not yet initialized"; then
+            echo "Init complete after ${i}x2s"
+            break
+          fi
+        done
+        sleep 3
 
 
     - name: Check ParaBank logs
