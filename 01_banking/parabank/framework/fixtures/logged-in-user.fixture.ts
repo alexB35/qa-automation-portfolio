@@ -32,7 +32,7 @@ export const test = base.extend<Fixtures>({
 
     const openAccountPage = new OpenAccountPage(page);
     await openAccountPage.goto();
-    await openAccountPage.openAccount('0');
+    await openAccountPage.openAccount(/*'0'*/);
     await expect(page.getByText('Congratulations, your account is now open.')).toHaveCount(1);
 
     await use(user);
@@ -47,7 +47,7 @@ export const test = base.extend<Fixtures>({
 
     const openAccountPage = new OpenAccountPage(page);
     await openAccountPage.goto();
-    await openAccountPage.openAccount('0');
+    await openAccountPage.openAccount(/*'0'*/);
     await expect(page.getByText('Congratulations, your account is now open.')).toHaveCount(1);
 
     const transferPage = new TransferPage(page);
