@@ -36,18 +36,10 @@ jobs:
       run: npx playwright install --with-deps firefox
 
     # ── Start ParaBank ─────────────────────────────────────────────────────
-    - name: Start ParaBank
+    - name: Start ParaBank (Docker)        # ← ICI
       run: |
-        docker run -d -p 8080:8080 --name parabank parasoft/parabank
-        echo "Waiting for ParaBank to be ready..."
-        for i in $(seq 1 30); do
-          if curl -s http://localhost:8080/parabank/index.htm | grep -q "ParaBank"; then
-            echo "ParaBank is ready after ${i}s"
-            break
-        fi
-        echo "Attempt $i/30..."
-        sleep 3
-        done
+        docker run -d -p 8080:8080 parasoft/parabank
+        sleep 30
     
     # ── Install Allure CLI ──────────────────────────────────────────────────
     - name: Install Allure CLI
