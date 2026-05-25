@@ -53,11 +53,8 @@ export class RegisterPage {
   }
 
   async submit() {
-  await Promise.all([
-    this.page.waitForLoadState('domcontentloaded'),
-    this.registerButton.click(),
-  ]);
-}
+    await this.registerButton.click();
+  }
 
   async fillAndSubmit(user: UserBase, confirmPassword?: string) {
     await this.fillForm(user, confirmPassword);

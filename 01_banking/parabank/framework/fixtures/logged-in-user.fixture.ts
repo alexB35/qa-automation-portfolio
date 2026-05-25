@@ -18,7 +18,7 @@ export const test = base.extend<Fixtures>({
     const registerPage = new RegisterPage(page);
     await registerPage.goto();
     await registerPage.fillAndSubmit(user);
-    await page.waitForSelector('text=Your account was created successfully. You are now logged in.');
+    await expect(page.getByText('Your account was created successfully. You are now logged in.')).toBeVisible();
     await page.waitForLoadState('networkidle');
     await use(user);
   }, { scope: 'test' }],
@@ -28,12 +28,12 @@ export const test = base.extend<Fixtures>({
     const registerPage = new RegisterPage(page);
     await registerPage.goto();
     await registerPage.fillAndSubmit(user);
-    await page.waitForSelector('text=Your account was created successfully. You are now logged in.');
+    await expect(page.getByText('Your account was created successfully. You are now logged in.')).toBeVisible();
 
     const openAccountPage = new OpenAccountPage(page);
     await openAccountPage.goto();
     await openAccountPage.openAccount('0');
-    await page.waitForSelector('text=Congratulations, your account is now open.');
+    await expect(page.getByText('Congratulations, your account is now open.')).toHaveCount(1);
 
     await use(user);
   }, { scope: 'test' }],
@@ -43,17 +43,17 @@ export const test = base.extend<Fixtures>({
     const registerPage = new RegisterPage(page);
     await registerPage.goto();
     await registerPage.fillAndSubmit(user);
-    await page.waitForSelector('text=Your account was created successfully. You are now logged in.');
+    await expect(page.getByText('Your account was created successfully. You are now logged in.')).toBeVisible();
 
     const openAccountPage = new OpenAccountPage(page);
     await openAccountPage.goto();
     await openAccountPage.openAccount('0');
-    await page.waitForSelector('text=Congratulations, your account is now open.');
+    await expect(page.getByText('Congratulations, your account is now open.')).toHaveCount(1);
 
     const transferPage = new TransferPage(page);
     await transferPage.goto();
     await transferPage.transfer('100');
-    await page.waitForSelector('text=Transfer Complete!');
+    await expect(page.getByText('Transfer Complete!')).toHaveCount(1);
 
     await use(user);
   }, { scope: 'test' }],
