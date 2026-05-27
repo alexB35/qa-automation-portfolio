@@ -4,7 +4,7 @@ import { firefox } from '@playwright/test';
 async function globalSetup() {
   if (!process.env['CI']) return;
 
-  console.log('[global-setup] Waiting for ParaBank DB to initialize...');
+  console.log('[global-setup] Initializing Parabank Database...');
 
   const browser = await firefox.launch({ headless: true });
   const page = await browser.newPage();
@@ -27,8 +27,8 @@ async function globalSetup() {
       await page.waitForSelector('text=Your account was created successfully', { timeout: 5000 });
       console.log(`[global-setup] ParaBank DB ready after attempt ${i + 1}`);
       break;
-    } catch {
-      console.log(`[global-setup] Attempt ${i + 1}/30 — retrying in 2s...`);
+    } catch (e) {
+      console.log(`[global-setup] Attempt ${i + 1}/30 failed: ${(e as Error).message}`);
       await new Promise(r => setTimeout(r, 2000));
     }
   }
