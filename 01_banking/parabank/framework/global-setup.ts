@@ -9,7 +9,13 @@ async function globalSetup() {
   const browser = await firefox.launch({ headless: true });
   const page = await browser.newPage();
 
-  for (let i = 0; i < 30; i++) {
+  await page.goto('http://localhost:8080/parabank/index.htm');
+  await page.waitForLoadState('networkidle');
+  console.log('[global-setup] DB init triggered — waiting 25s for schema creation...');
+  await new Promise(r => setTimeout(r, 25000));
+
+  let ready = false;
+  for (let i = 0; i < 10; i++) {
     try {
       await page.goto('http://localhost:8080/parabank/register.htm');
       await page.fill('#customer\\.firstName', 'Init');
@@ -26,14 +32,16 @@ async function globalSetup() {
       await page.click('input[value="Register"]');
       await page.waitForSelector('text=Your account was created successfully', { timeout: 5000 });
       console.log(`[global-setup] ParaBank DB ready after attempt ${i + 1}`);
+      ready = true;
       break;
     } catch (e) {
-      console.log(`[global-setup] Attempt ${i + 1}/30 failed: ${(e as Error).message}`);
-      await new Promise(r => setTimeout(r, 2000));
+      console.log(`[global-setup] Attempt ${i + 1}/10 failed: ${(e as Error).message}`);
+      await new Promise(r => setTimeout(r, 3000));
     }
   }
 
   await browser.close();
+  if (!ready) throw new Error('[global-setup] ParaBank DB failed to initialize');
 }
 
 export default globalSetup;
