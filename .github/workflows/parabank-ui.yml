@@ -40,26 +40,24 @@ jobs:
       run: |
         docker run -d -p 8080:8080 --name parabank parasoft/parabank
         sleep 12
-        echo "Triggering DB initialization via admin endpoint..."
-        curl -s "http://localhost:8080/parabank/admin.htm" > /dev/null
-        curl -s -X POST "http://localhost:8080/parabank/admin.htm" \
-          -d "action=initializeDB" > /dev/null
-        sleep 5
-        echo "Verifying DB is ready..."
-        for i in $(seq 1 20); do
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            "http://localhost:8080/parabank/services/bank/login/john/demo" || echo "000")
-          if [ "$STATUS" = "200" ] || [ "$STATUS" = "400" ]; then
-            echo "DB ready after ${i}x3s"
+        echo "Triggering DB initialization..."
+        curl -s http://localhost:8080/parabank/index.htm > /dev/null
+        echo "Waiting for DB schema to be created..."
+        for i in $(seq 1 30); do
+          sleep 2
+          RESPONSE=$(curl -s -c /tmp/pb_cookies.txt http://localhost:8080/parabank/register.htm > /dev/null && \
+            curl -s -b /tmp/pb_cookies.txt -X POST "http://localhost:8080/parabank/register.htm" \
+            -d "customer.firstName=Init&customer.lastName=User&customer.address.street=1+Main+St&customer.address.city=NY&customer.address.state=NY&customer.address.zipCode=10001&customer.phoneNumber=0123456789&customer.ssn=000-00-0001&customer.username=init_user_ci&customer.password=Test123!&repeatedPassword=Test123!")
+          if echo "$RESPONSE" | grep -q "Your account was created successfully"; then
+            echo "DB ready and schema initialized after ${i}x2s"
             break
           fi
-          echo "Attempt $i/20 — HTTP $STATUS"
-          sleep 3
+          echo "Attempt $i/30..."
         done
 
     - name: Check admin page
-    run: |
-      curl -s http://localhost:8080/parabank/admin.htm | grep -o 'action="[^"]*"\|value="[^"]*"\|name="[^"]*"' | head -30
+      run: |
+        curl -s http://localhost:8080/parabank/admin.htm | grep -o 'action="[^"]*"\|value="[^"]*"\|name="[^"]*"' | head -30
 
 
     - name: Check ParaBank logs
