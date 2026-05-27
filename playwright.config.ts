@@ -16,6 +16,7 @@ const allureResultsDir = path.resolve(
 );
 
 export default defineConfig({
+  globalSetup: './01_banking/parabank/framework/global-setup.ts',
   timeout:       process.env['CI'] ? 45_000 : 25_000,
   forbidOnly:    isCI,
   retries:       isCI ? 1 : 0,

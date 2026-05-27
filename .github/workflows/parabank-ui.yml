@@ -31,6 +31,7 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    # ── Playwright browser cache ─────────────────────────────────────────────
     - name: Cache Playwright browsers
       uses: actions/cache@v4
       with:
@@ -46,79 +47,11 @@ jobs:
     - name: Start ParaBank
       run: |
         docker run -d -p 8080:8080 --name parabank parasoft/parabank
-
-        echo "Waiting for ParaBank startup..."
-
-        # attendre que Tomcat réponde
-        for i in $(seq 1 60); do
-          if curl -sf http://localhost:8080/parabank/index.htm > /dev/null; then
-            echo "Application reachable"
-            break
-          fi
-
-          echo "Waiting for web app... ($i/60)"
+        echo "Waiting for Tomcat..."
+        until curl -sf http://localhost:8080/parabank/index.htm > /dev/null 2>&1; do
           sleep 2
         done
-
-        echo "Waiting for DB/schema initialization..."
-
-        SUCCESS=false
-        USER_SUFFIX=$(date +%s)
-
-        for i in $(seq 1 40); do
-
-          curl -s -c /tmp/pb_cookies.txt \
-            http://localhost:8080/parabank/register.htm > /dev/null
-
-          RESPONSE=$(curl -s -L -b /tmp/pb_cookies.txt \
-            -X POST \
-            "http://localhost:8080/parabank/register.htm" \
-            -d "customer.firstName=Init" \
-            -d "customer.lastName=User" \
-            -d "customer.address.street=1 Main St" \
-            -d "customer.address.city=NY" \
-            -d "customer.address.state=NY" \
-            -d "customer.address.zipCode=10001" \
-            -d "customer.phoneNumber=0123456789" \
-            -d "customer.ssn=000-00-0001" \
-            -d "customer.username=init_user_${USER_SUFFIX}_${i}" \
-            -d "customer.password=Test123!" \
-            -d "repeatedPassword=Test123!")
-
-          if echo "$RESPONSE" | grep -q "Your account was created successfully"; then
-            echo "ParaBank DB initialized after $((i * 3))s"
-            SUCCESS=true
-            break
-          fi
-
-          echo "DB not ready yet ($i/40)"
-          sleep 3
-        done
-
-        if [ "$SUCCESS" != "true" ]; then
-          echo "ParaBank initialization failed"
-          echo "===== DOCKER LOGS ====="
-          docker logs parabank
-          exit 1
-        fi
-
-    - name: Check admin page
-      run: |
-        curl -s http://localhost:8080/parabank/admin.htm | grep -o 'action="[^"]*"\|value="[^"]*"\|name="[^"]*"' | head -30
-
-
-    - name: Check ParaBank logs
-      run: docker logs parabank 2>&1 | tail -50   
-
-    - name: Smoke test register
-      run: |
-        COOKIE=$(curl -s -c /tmp/parabank_cookies.txt http://localhost:8080/parabank/register.htm > /dev/null && cat /tmp/parabank_cookies.txt | grep JSESSIONID | awk '{print $NF}')
-        RESPONSE=$(curl -s -b /tmp/parabank_cookies.txt -X POST "http://localhost:8080/parabank/register.htm" \
-          -d "customer.firstName=John&customer.lastName=Doe&customer.address.street=123+Main+St&customer.address.city=New+York&customer.address.state=NY&customer.address.zipCode=10001&customer.phoneNumber=0123456789&customer.ssn=999-99-9999&customer.username=ci_smoke_user&customer.password=Test123!&repeatedPassword=Test123!")
-        echo "$RESPONSE" | grep -o "Your account was created successfully\|An internal error\|This username already exists" || echo "No match"
-
-    - name: Check ParaBank logs after register attempt
-      run: docker logs parabank 2>&1 | grep -A 20 "ERROR\|Exception" | tail -40
+        echo "Tomcat ready — DB init will be handled by Playwright global setup"
 
     # ── Install Allure CLI ──────────────────────────────────────────────────
     - name: Install Allure CLI
@@ -129,9 +62,7 @@ jobs:
       run: |
         mkdir -p 01_banking/parabank/outputs/allure-results
         mkdir -p 01_banking/parabank/outputs/test-results
-
-     
-    
+  
     # ── Run tests ─────────────────────────────────────────────────────────────
     - name: Run ParaBank UI tests
       env:
@@ -151,7 +82,7 @@ jobs:
         allure generate 01_banking/parabank/outputs/allure-results \
           --output 01_banking/parabank/outputs/allure-report
 
-    # ── Upload Allure report ─────────────────────────────────────────────────
+    # ── Upload artifacts ─────────────────────────────────────────────────
     - name: Upload Allure report
       if: always()
       uses: actions/upload-artifact@v4
@@ -160,7 +91,6 @@ jobs:
         path: 01_banking/parabank/outputs/allure-report
         retention-days: 5
 
-    # ── Upload Playwright test results ───────────────────────────────────────
     - name: Upload Playwright test results
       if: always()
       uses: actions/upload-artifact@v4
@@ -174,7 +104,7 @@ jobs:
       if: always()
       run: node scripts/quality-gates.js parabank
 
-    # ── Login to Docker Hub ──────────────────────────────────────────────────
+    # ── Publish Docker image ──────────────────────────────────────────────────
     - name: Login to Docker Hub
       if: github.ref == 'refs/heads/main'
       uses: docker/login-action@v3
@@ -182,7 +112,6 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_TOKEN }}
 
-    # ── Build and push Docker image ──────────────────────────────────────────
     - name: Build and push Docker image
       if: github.ref == 'refs/heads/main'
       uses: docker/build-push-action@v6
