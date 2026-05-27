@@ -39,21 +39,61 @@ jobs:
     - name: Start ParaBank
       run: |
         docker run -d -p 8080:8080 --name parabank parasoft/parabank
-        sleep 12
-        echo "Triggering DB initialization..."
-        curl -s http://localhost:8080/parabank/index.htm > /dev/null
-        echo "Waiting for DB schema to be created..."
-        for i in $(seq 1 30); do
-          sleep 3
-          RESPONSE=$(curl -s -c /tmp/pb_cookies.txt http://localhost:8080/parabank/register.htm > /dev/null && \
-            curl -s -b /tmp/pb_cookies.txt -X POST "http://localhost:8080/parabank/register.htm" \
-            -d "customer.firstName=Init&customer.lastName=User&customer.address.street=1+Main+St&customer.address.city=NY&customer.address.state=NY&customer.address.zipCode=10001&customer.phoneNumber=0123456789&customer.ssn=000-00-0001&customer.username=init_user_ci&customer.password=Test123!&repeatedPassword=Test123!")
-          if echo "$RESPONSE" | grep -q "Your account was created successfully"; then
-            echo "DB ready and schema initialized after ${i}x2s"
+
+        echo "Waiting for ParaBank startup..."
+
+        # attendre que Tomcat réponde
+        for i in $(seq 1 60); do
+          if curl -sf http://localhost:8080/parabank/index.htm > /dev/null; then
+            echo "Application reachable"
             break
           fi
-          echo "Attempt $i/30..."
+
+          echo "Waiting for web app... ($i/60)"
+          sleep 2
         done
+
+        echo "Waiting for DB/schema initialization..."
+
+        SUCCESS=false
+        USER_SUFFIX=$(date +%s)
+
+        for i in $(seq 1 40); do
+
+          curl -s -c /tmp/pb_cookies.txt \
+            http://localhost:8080/parabank/register.htm > /dev/null
+
+          RESPONSE=$(curl -s -L -b /tmp/pb_cookies.txt \
+            -X POST \
+            "http://localhost:8080/parabank/register.htm" \
+            -d "customer.firstName=Init" \
+            -d "customer.lastName=User" \
+            -d "customer.address.street=1 Main St" \
+            -d "customer.address.city=NY" \
+            -d "customer.address.state=NY" \
+            -d "customer.address.zipCode=10001" \
+            -d "customer.phoneNumber=0123456789" \
+            -d "customer.ssn=000-00-0001" \
+            -d "customer.username=init_user_${USER_SUFFIX}_${i}" \
+            -d "customer.password=Test123!" \
+            -d "repeatedPassword=Test123!")
+
+          if echo "$RESPONSE" | grep -q "Your account was created successfully"; then
+            echo "ParaBank DB initialized after $((i * 3))s"
+            SUCCESS=true
+            break
+          fi
+
+          echo "DB not ready yet ($i/40)"
+          sleep 3
+        done
+
+        if [ "$SUCCESS" != "true" ]; then
+          echo "ParaBank initialization failed"
+          echo "===== DOCKER LOGS ====="
+          docker logs parabank
+          exit 1
+        fi
 
     - name: Check admin page
       run: |
