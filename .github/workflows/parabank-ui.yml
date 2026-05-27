@@ -44,7 +44,7 @@ jobs:
         curl -s http://localhost:8080/parabank/index.htm > /dev/null
         echo "Waiting for DB schema to be created..."
         for i in $(seq 1 30); do
-          sleep 2
+          sleep 3
           RESPONSE=$(curl -s -c /tmp/pb_cookies.txt http://localhost:8080/parabank/register.htm > /dev/null && \
             curl -s -b /tmp/pb_cookies.txt -X POST "http://localhost:8080/parabank/register.htm" \
             -d "customer.firstName=Init&customer.lastName=User&customer.address.street=1+Main+St&customer.address.city=NY&customer.address.state=NY&customer.address.zipCode=10001&customer.phoneNumber=0123456789&customer.ssn=000-00-0001&customer.username=init_user_ci&customer.password=Test123!&repeatedPassword=Test123!")
