@@ -57,6 +57,10 @@ jobs:
           sleep 3
         done
 
+    - name: Check admin page
+      run: |
+        curl -s http://localhost:8080/parabank/admin.htm | grep -o 'action="[^"]*"\|value="[^"]*"\|name="[^"]*"' | head -30
+
 
     - name: Check ParaBank logs
       run: docker logs parabank 2>&1 | tail -50   
