@@ -40,15 +40,20 @@ jobs:
       run: |
         docker run -d -p 8080:8080 --name parabank parasoft/parabank
         sleep 12
-        echo "Waiting for ParaBank DB to be ready..."
-        for i in $(seq 1 30); do
+        echo "Triggering DB initialization via admin endpoint..."
+        curl -s "http://localhost:8080/parabank/admin.htm" > /dev/null
+        curl -s -X POST "http://localhost:8080/parabank/admin.htm" \
+          -d "action=initializeDB" > /dev/null
+        sleep 5
+        echo "Verifying DB is ready..."
+        for i in $(seq 1 20); do
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
             "http://localhost:8080/parabank/services/bank/login/john/demo" || echo "000")
-          echo "Attempt $i/30 — HTTP $STATUS"
-          if [ "$STATUS" = "200" ] || [ "$STATUS" = "404" ] || [ "$STATUS" = "400" ]; then
-            echo "DB ready after ${i}x3s — HTTP $STATUS"
+          if [ "$STATUS" = "200" ] || [ "$STATUS" = "400" ]; then
+            echo "DB ready after ${i}x3s"
             break
           fi
+          echo "Attempt $i/20 — HTTP $STATUS"
           sleep 3
         done
 
