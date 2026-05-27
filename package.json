@@ -1,16 +1,12 @@
 {
   "name": "qa-automation-portfolio",
   "version": "1.0.0",
-  "description": "Dockerized QA automation framework featuring UI/API testing, CI/CD pipelines and Allure reporting.",  
+  "description": "Dockerized QA automation framework featuring UI/API testing, CI/CD pipelines and Allure reporting.",
   "main": "index.js",
-  
   "scripts": {
     "test:parabank": "node scripts/clean.js parabank && cross-env PROJECT=parabank node scripts/run-and-report.js parabank",
-
     "test:restful-booker": "node scripts/clean.js restful-booker && newman run \"02_api/restful_booker/postman/collections/RFB-00 - Prerequisites.postman_collection.json\" --environment 02_api/restful_booker/postman/environments/RFB_Environment.postman_environment.json --export-environment /tmp/rfb_env.json --reporters cli,allure --reporter-allure-export 02_api/restful_booker/outputs/allure-results && newman run \"02_api/restful_booker/postman/collections/RFB-01 - Create Booking.postman_collection.json\" --environment /tmp/rfb_env.json --export-environment /tmp/rfb_env.json --reporters cli,allure --reporter-allure-export 02_api/restful_booker/outputs/allure-results --suppress-exit-code",
-
     "test:automation-exercise": "node scripts/clean.js automation-exercise && cross-env PROJECT=automation-exercise node scripts/run-and-report.js automation-exercise",
-
     "test:all": "npm run test:parabank && npm run test:restful-booker && npm run test:automation-exercise"
   },
   "repository": {
@@ -26,13 +22,13 @@
   },
   "homepage": "https://github.com/alexB35/qa-automation-portfolio#readme",
   "devDependencies": {
-    "@playwright/test": "^1.58.2",
-    "@types/node": "^25.5.0",
-    "allure-js-commons": "3.6.0",
-    "allure-playwright": "^3.6.0",
+    "@playwright/test": "^1.60.0",
+    "@types/node": "^25.9.1",
+    "allure-js-commons": "^3.9.0",
+    "allure-playwright": "^3.9.0",
     "cross-env": "^10.1.0",
     "newman": "^6.2.2",
-    "newman-reporter-allure": "^3.7.1",
+    "newman-reporter-allure": "^3.9.0",
     "typescript": "^5.9.3"
   }
 }
