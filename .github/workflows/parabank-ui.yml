@@ -32,7 +32,7 @@ jobs:
         node-version: '24'
 
     # ── Install dependencies ────────────────────────────────────────────────
-    - name: Install dependencies
+    - name: Installing dependencies
       run: npm install
 
     # ── Playwright browser cache ─────────────────────────────────────────────
@@ -44,11 +44,11 @@ jobs:
 
 
     # ── Install Playwright browsers ─────────────────────────────────────────
-    - name: Install Playwright browsers
+    - name: Installing Playwright browsers
       run: npx playwright install --with-deps firefox
 
-    # ── Start ParaBank ─────────────────────────────────────────────────────
-    - name: Start ParaBank
+    # ── Initializing ParaBank ─────────────────────────────────────────────────────
+    - name: Initializing ParaBank
       run: |
         docker run -d -p 8080:8080 --name parabank parasoft/parabank
         echo "Waiting for Tomcat..."
@@ -58,17 +58,17 @@ jobs:
         echo "Tomcat ready — DB init will be handled by Playwright global setup"
 
     # ── Install Allure CLI ──────────────────────────────────────────────────
-    - name: Install Allure CLI
+    - name: Installing Allure CLI
       run: npm install -g allure-commandline
 
-    # ── Create output directories ─────────────────────────────────────────────
-    - name: Create output directories
+    # ── Create Allure output directories ─────────────────────────────────────────────
+    - name: Creating Allure output directories
       run: |
         mkdir -p 01_banking/parabank/outputs/allure-results
         mkdir -p 01_banking/parabank/outputs/test-results
   
     # ── Run tests ─────────────────────────────────────────────────────────────
-    - name: Run ParaBank UI tests
+    - name: Running ParaBank UI tests
       env:
         CI: true
         PROJECT: parabank
@@ -80,19 +80,19 @@ jobs:
       continue-on-error: true
 
     # ── Generate Allure report ───────────────────────────────────────────────
-    - name: Generate Allure report
+    - name: Generating Allure report
       if: always()
       run: |
         allure generate 01_banking/parabank/outputs/allure-results \
           --output 01_banking/parabank/outputs/allure-report \
           --clean
 
-    - name: Check allure-results
+    - name: Checking allure-results
       if: always()
       run: ls -la 01_banking/parabank/outputs/allure-results/
 
     # ── Upload artifacts ─────────────────────────────────────────────────
-    - name: Upload Allure report
+    - name: Uploading Allure report
       if: always()
       uses: actions/upload-artifact@v4
       with:
@@ -100,7 +100,7 @@ jobs:
         path: 01_banking/parabank/outputs/allure-report
         retention-days: 5
 
-    - name: Upload Playwright test results
+    - name: Uploading Playwright test results
       if: always()
       uses: actions/upload-artifact@v4
       with:
@@ -109,22 +109,22 @@ jobs:
         retention-days: 5
 
     # ── Quality gate ─────────────────────────────────────────────────────────
-    - name: Quality gate — fail on unexpected test failures
+    - name: Quality gate — expected test failures
       if: always()
       run: node scripts/quality-gates.js parabank
 
     # ── Deploy Allure report to GitHub Pages ────────────────────────────────
-    - name: Setup GitHub Pages
+    - name: Setting up GitHub Pages
       if: github.ref == 'refs/heads/main'
       uses: actions/configure-pages@v4
 
-    - name: Upload Pages artifact
+    - name: Uploading Pages artifact
       if: github.ref == 'refs/heads/main'
       uses: actions/upload-pages-artifact@v3
       with:
         path: 01_banking/parabank/outputs/allure-report
 
-    - name: Deploy to GitHub Pages
+    - name: Deploying to GitHub Pages
       if: github.ref == 'refs/heads/main'
       uses: actions/deploy-pages@v4
 
@@ -143,3 +143,10 @@ jobs:
         context: .
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/qa-automation-portfolio:latest
+
+    # ── Open Allure report ──────────────────────────────────────────────────
+    - name: Link to Allure report
+      if: always()
+      run: |
+        echo "Allure report available at: https://alexB35.github.io/qa-automation-portfolio/"
+      
