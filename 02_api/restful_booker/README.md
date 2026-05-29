@@ -51,7 +51,8 @@ Trigger the workflow: [restful-booker-api.yml](https://github.com/alexB35/qa-aut
 
 ## Reports :
 
-Test execution results are generated using Allure.
+Test execution results are generated after each workflow run using Allure.
+**Consult here :** [Allure] (https://alexB35.github.io/qa-automation-portfolio/)
 
 - Reports are automatically generated during CI runs
 - Available as downloadable artifacts in GitHub Actions

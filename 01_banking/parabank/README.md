@@ -28,7 +28,7 @@ The goal is to automate common banking workflows, validate UI functionality, and
 | Folder | Description |
 |---|---|
 | `tests/` | Playwright test scripts |
-| `framework/` | Fixtures, helpers & page objects |
+| `framework/` | Fixtures, helpers, data & page objects |
 | `resources/` | Config & URLs |
 | `docs/` | Screenshots of test executions and Allure reports |
 | `jira/` | Screenshots of Jira boards and cards |
@@ -52,7 +52,8 @@ Trigger the workflow: [parabank-ui.yml](https://github.com/alexB35/qa-automation
 
 ## Reports :
 
-Test execution results are generated using Allure.
+Test execution results are generated after each workflow run using Allure.
+**Consult here :** [Allure] (https://alexB35.github.io/qa-automation-portfolio/)
 
 - Reports are automatically generated during CI runs.
 - Available as downloadable artifacts in GitHub Actions.
@@ -60,13 +61,9 @@ Test execution results are generated using Allure.
 
 > [!NOTE]
 > You can run an entire application, a User Story, or individual test cases.
-> Playwright is configured to continue on failure.
-> Debug information (logs, screenshots) is centralized in Allure reports.
+> Playwright is configured to continue on know failure with the quality gate script.
+> Debug informations (logs, screenshots) are centralized in Allure reports.
 
 > [!IMPORTANT]
-> This project targets the local Parabank environment (localhost:8080) rather than the public shared environment.
-> The shared environment is occasionally unstable, triggering Cloudflare bots limitations and penetration tests unavailabilities.
-> The local environment faces less issues but some can still remains.
-> Known examples: 
-> - sporadic "An internal error has occurred..." errors during registration or login despite valid credentials.
-> - 
+> This project targets the local Parabank environment _(localhost:8080)_ rather than the public shared environment.
+> The shared environment is occasionally unstable, triggering Cloudflare limitations and penetration tests unavailabilities.

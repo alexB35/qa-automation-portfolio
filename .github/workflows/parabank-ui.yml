@@ -84,7 +84,12 @@ jobs:
       if: always()
       run: |
         allure generate 01_banking/parabank/outputs/allure-results \
-          --output 01_banking/parabank/outputs/allure-report
+          --output 01_banking/parabank/outputs/allure-report \
+          --clean
+
+    - name: Check allure-results
+      if: always()
+      run: ls -la 01_banking/parabank/outputs/allure-results/
 
     # ── Upload artifacts ─────────────────────────────────────────────────
     - name: Upload Allure report

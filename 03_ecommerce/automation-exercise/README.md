@@ -58,7 +58,8 @@ Trigger the workflow: [automation-exercise.yml](https://github.com/alexB35/qa-au
 
 ## Reporting:
 
-Test execution results are generated using Allure.
+Test execution results are generated after each workflow run using Allure.
+**Consult here :** [Allure] (https://alexB35.github.io/qa-automation-portfolio/)
 
 - Reports are automatically generated during CI runs
 - Available as downloadable artifacts in GitHub Actions
@@ -68,5 +69,5 @@ Test execution results are generated using Allure.
 
 > [!NOTE]
 > You can run an entire application, a User Story, or individual test cases.
-> Playwright is configured to continue on failure.
-> Debug information (logs, screenshots) is centralized in Allure reports.
+> Playwright is configured to continue on know failure with the quality gate script.
+> Debug informations (logs, screenshots) are centralized in Allure reports.
