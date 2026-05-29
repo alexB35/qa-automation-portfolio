@@ -72,7 +72,7 @@ jobs:
       env:
         CI: true
         PROJECT: parabank
-        WORKERS: 1
+        WORKERS: 2
       run: |
         npx playwright test \
           --project=parabank \
@@ -148,5 +148,6 @@ jobs:
     - name: Link to Allure report
       if: always()
       run: |
-        echo "Allure report available at: https://alexB35.github.io/qa-automation-portfolio/"
-      
+        echo "## Allure Report" >> $GITHUB_STEP_SUMMARY
+        echo "[Open Allure Report](https://alexB35.github.io/qa-automation-portfolio/)" >> $GITHUB_STEP_SUMMARY
+          
