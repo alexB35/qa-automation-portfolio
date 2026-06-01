@@ -91,6 +91,10 @@ jobs:
       if: always()
       run: ls -la 01_banking/parabank/outputs/allure-results/
 
+    - name: Find allure-results
+      if: always()
+      run: find . -name "*.json" -path "*/allure-results/*" | head -20
+
     # ── Upload artifacts ─────────────────────────────────────────────────
     - name: Uploading Allure report
       if: always()
@@ -109,7 +113,7 @@ jobs:
         retention-days: 5
 
     # ── Quality gate ─────────────────────────────────────────────────────────
-    - name: Quality gate — expected test failures
+    - name: Quality gate — will fail on unexpected test failures
       if: always()
       run: node scripts/quality-gates.js parabank
 

@@ -61,7 +61,7 @@ jobs:
         retention-days: 5
 
     # ── Quality gate ─────────────────────────────────────────────────────────
-    - name: Quality gate — fail on unexpected test failures
+    - name: Quality gate — will fail on unexpected test failures
       if: always()
       run: node scripts/quality-gates.js restful-booker
 
