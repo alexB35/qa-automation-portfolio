@@ -1,3 +1,4 @@
+const fs = require('fs');
 const newman = require('newman');
 const path = require('path');
 const allureExport = path.resolve(__dirname, '../../outputs/allure-results');
