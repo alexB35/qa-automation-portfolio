@@ -81,8 +81,10 @@ jobs:
         </html>
         EOF
 
-    - name: Debug — list report structure
-      run: find report -type f
+    - name: Debug — check summary
+      run: |
+        cat report/restful-booker/widgets/summary.json
+        cat report/automation-exercise/widgets/summary.json
 
     # ── Setup GitHub Pages ────────────────────────────────────────────────
     - name: Setup GitHub Pages
