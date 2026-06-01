@@ -13,7 +13,9 @@ const currentProject  = process.env['PROJECT'] || 'parabank';
 const allureResultsDir = ALLURE_DIRS[currentProject] ?? ALLURE_DIRS['parabank'];
 
 export default defineConfig({
-  globalSetup: './01_banking/parabank/framework/global-setup.ts',
+  globalSetup: currentProject === 'parabank'
+  ? './01_banking/parabank/framework/global-setup.ts'
+  : undefined,
   timeout:       process.env['CI'] ? 45_000 : 25_000,
   forbidOnly:    isCI,
   retries:       isCI ? 1 : 0,
