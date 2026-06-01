@@ -1,5 +1,6 @@
 const newman = require('newman');
 const path = require('path');
+const allureExport = path.resolve(__dirname, '../../../../outputs/allure-results');
 
 const envFile = '/tmp/rfb_env.json';
 const base = '02_api/restful_booker/postman';
@@ -13,7 +14,7 @@ function run(collection, environment) {
         reporters: ['cli', 'allure'],
         reporter: {
           allure: {
-            export: '02_api/restful_booker/outputs/allure-results'
+            export: allureExport
           }
         },
         exportEnvironment: envFile,
