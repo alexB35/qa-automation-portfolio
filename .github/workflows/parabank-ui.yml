@@ -93,7 +93,11 @@ jobs:
 
     - name: Find allure-results
       if: always()
-      run: find . -name "*.json" -path "*/allure-results/*" | head -20
+      run: |
+        echo "=== allure-results content ==="
+        ls -la 01_banking/parabank/outputs/allure-results/ || echo "Directory not found"
+        echo "=== find all allure json ==="
+        find . -name "*-result.json" 2>/dev/null | head -20
 
     # ── Upload artifacts ─────────────────────────────────────────────────
     - name: Uploading Allure report

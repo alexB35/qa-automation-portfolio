@@ -1,5 +1,4 @@
 import { defineConfig } from '@playwright/test';
-import path from 'path';
 
 const isCI = process.env['CI'] !== undefined;
 const isHeadless = isCI || process.env['HEADLESS'] !== undefined;
@@ -19,7 +18,7 @@ export default defineConfig({
   forbidOnly:    isCI,
   retries:       isCI ? 1 : 0,
   fullyParallel: false,
-  workers:       process.env['WORKERS'] ? parseInt(process.env['WORKERS'], 10) : isCI ? 2 : 1,
+  workers:       process.env['WORKERS'] ? parseInt(process.env['WORKERS'], 10) : isCI ? 2 : undefined,
   maxFailures:   0,
 
   reporter: [
