@@ -1,0 +1,102 @@
+name: Deploy Pages
+
+on:
+  workflow_run:
+    workflows:
+      - "ParaBank Tests [UI]"
+      - "Restful Booker Tests [API]"
+      - "Automation Exercise Tests [UI / API]"
+    types: [completed]
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      actions: read
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+    steps:
+
+    # ── Checkout ─────────────────────────────────────────────────────────
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # ── Download available artifacts ──────────────────────────────────────
+    - name: Download ParaBank report
+      uses: dawidd6/action-download-artifact@v6
+      with:
+        workflow: parabank-ui.yml
+        name: allure-report-parabank
+        path: report/parabank
+        if_no_artifact_found: ignore
+
+    - name: Download Restful Booker report
+      uses: dawidd6/action-download-artifact@v6
+      with:
+        workflow: restful-booker-api.yml
+        name: allure-report-restful-booker
+        path: report/restful-booker
+        if_no_artifact_found: ignore
+
+    - name: Download Automation Exercise report
+      uses: dawidd6/action-download-artifact@v6
+      with:
+        workflow: automation-exercise.yml
+        name: allure-report-automation-exercise
+        path: report/automation-exercise
+        if_no_artifact_found: ignore
+
+    # ── Generate index page ───────────────────────────────────────────────
+    - name: Generate index page
+      run: |
+        cat > report/index.html << 'EOF'
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <title>QA Automation Portfolio — Test Reports</title>
+          <style>
+            body { font-family: sans-serif; max-width: 600px; margin: 60px auto; }
+            h1 { font-size: 1.5rem; }
+            ul { list-style: none; padding: 0; }
+            li { margin: 12px 0; }
+            a { color: #0066cc; text-decoration: none; font-size: 1.1rem; }
+            a:hover { text-decoration: underline; }
+          </style>
+        </head>
+        <body>
+          <h1>📊 QA Automation Portfolio — Test Reports</h1>
+          <ul>
+            <li>🏦 <a href="parabank/">ParaBank — UI Tests</a></li>
+            <li>🔖 <a href="restful-booker/">Restful Booker — API Tests</a></li>
+            <li>🛒 <a href="automation-exercise/">Automation Exercise — UI Tests</a></li>
+          </ul>
+        </body>
+        </html>
+        EOF
+
+    # ── Setup GitHub Pages ────────────────────────────────────────────────
+    - name: Setup GitHub Pages
+      uses: actions/configure-pages@v4
+
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: report
+
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v4
+
+    # ── Summary ───────────────────────────────────────────────────────────
+    - name: Link to reports
+      run: |
+        echo "## 📊 Test Reports" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "👉 [ParaBank](https://alexB35.github.io/qa-automation-portfolio/parabank/)" >> $GITHUB_STEP_SUMMARY
+        echo "👉 [Restful Booker](https://alexB35.github.io/qa-automation-portfolio/restful-booker/)" >> $GITHUB_STEP_SUMMARY
+        echo "👉 [Automation Exercise](https://alexB35.github.io/qa-automation-portfolio/automation-exercise/)" >> $GITHUB_STEP_SUMMARY

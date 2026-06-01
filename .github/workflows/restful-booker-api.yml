@@ -71,22 +71,13 @@ jobs:
       run: node scripts/quality-gates.js restful-booker
 
     # ── Deploy Allure report to GitHub Pages ────────────────────────────────
-    - name: Setting up GitHub Pages
-      if: github.ref == 'refs/heads/main'
-      uses: actions/configure-pages@v4
-
-    - name: Uploading Pages artifact
-      if: github.ref == 'refs/heads/main'
-      uses: actions/upload-pages-artifact@v3
+    - name: Upload Allure report artifact
+      if: always()
+      uses: actions/upload-artifact@v4
       with:
+        name: allure-report-restful-booker        # ou restful-booker / automation-exercise
         path: 02_api/restful_booker/outputs/allure-report
-        name: github-pages
-
-    - name: Deploy to GitHub Pages
-      if: github.ref == 'refs/heads/main'
-      uses: actions/deploy-pages@v4
-      with:
-        artifact_name: github-pages
+        retention-days: 5
 
     # ── Publish Docker image ──────────────────────────────────────────────────
     - name: Login to Docker Hub
@@ -104,10 +95,10 @@ jobs:
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/qa-automation-portfolio:latest
 
-    # ── Link to Allure report ────────────────────────────────────────────────
+    # ── Open Allure report ──────────────────────────────────────────────────
     - name: Link to Allure report
       if: always()
       run: |
         echo "## 📊 Allure Test Report" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "👉 [Open Allure Report](https://alexB35.github.io/qa-automation-portfolio/restful-booker/)" >> $GITHUB_STEP_SUMMARY
+        echo "👉 [Open Allure Report](https://alexB35.github.io/qa-automation-portfolio/)" >> $GITHUB_STEP_SUMMARY

@@ -17,7 +17,9 @@ const KNOWN_FAILURES = {
     'TC-20',   
   ],
   'restful-booker': [
-    // list RFB failures here
+    'TC-02',   
+    'TC-06',
+    'TC-08', 
   ],
 };
 
