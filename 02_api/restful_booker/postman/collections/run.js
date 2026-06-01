@@ -45,6 +45,8 @@ function run(collection, environment) {
     }
 
     console.log('✔ Restful-booker finished');
+    console.log('Files in allure-results:');
+    console.log(fs.readdirSync(allureExport));
   } catch (e) {
     console.error(e);
     process.exit(1);
