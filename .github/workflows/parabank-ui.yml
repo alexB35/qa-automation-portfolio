@@ -90,6 +90,10 @@ jobs:
           --reporter=list
       continue-on-error: true
 
+    - name: Find ALL allure files
+      if: always()
+      run: find . -name "*.json" -not -path "*/node_modules/*" | grep -i allure | head -30
+
     # ── Generate Allure report ───────────────────────────────────────────────
     - name: Generating Allure report
       if: always()
