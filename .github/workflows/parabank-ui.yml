@@ -87,7 +87,6 @@ jobs:
       run: |
         npx playwright test \
           --project=parabank \
-          --reporter=list
       continue-on-error: true
 
     - name: Find ALL allure files
