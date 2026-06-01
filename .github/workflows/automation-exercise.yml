@@ -105,6 +105,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: 03_ecommerce/automation-exercise/outputs/allure-report
         destination_dir: automation-exercise
+        keep_files: true
 
     # ── Publish Docker image ──────────────────────────────────────────────────
     - name: Login to Docker Hub
