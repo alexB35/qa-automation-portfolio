@@ -11,9 +11,7 @@ const ALLURE_DIRS: Record<string, string> = {
 };
 
 const currentProject  = process.env['PROJECT'] || 'parabank';
-const allureResultsDir = path.resolve(
-  ALLURE_DIRS[currentProject] ?? ALLURE_DIRS['parabank']
-);
+const allureResultsDir = ALLURE_DIRS[currentProject] ?? ALLURE_DIRS['parabank'];
 
 export default defineConfig({
   globalSetup: './01_banking/parabank/framework/global-setup.ts',
