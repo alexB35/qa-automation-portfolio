@@ -90,6 +90,9 @@ jobs:
       with:
         path: report
 
+    - name: Debug — list report structure
+      run: find report -type f | head -30
+
     - name: Deploy to GitHub Pages
       uses: actions/deploy-pages@v4
 
