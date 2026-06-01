@@ -1,6 +1,7 @@
 const newman = require('newman');
 const path = require('path');
 const allureExport = path.resolve(__dirname, '../../outputs/allure-results');
+fs.mkdirSync(allureExport, { recursive: true });
 console.log('Allure export path:', allureExport);
 
 const envFile = '/tmp/rfb_env.json';

@@ -3,7 +3,7 @@ const path = require('path');
 
 const DIRS = {
   'parabank': ['./01_banking/parabank/outputs/allure-results', './01_banking/parabank/outputs/allure-report'],
-  'restful-booker': ['./02_api/restful_booker/outputs/allure-results', './02_api/restful-booker/outputs/allure-report'],
+  'restful-booker': ['./02_api/restful_booker/outputs/allure-results', './02_api/restful_booker/outputs/allure-report'],
   'automation-exercise': ['./03_ecommerce/automation-exercise/outputs/allure-results', './03_ecommerce/automation-exercise/outputs/allure-report'],
   'all': [
     './allure-results', './allure-report', 
@@ -21,5 +21,6 @@ const dirs = DIRS[target] || DIRS['all'];
 
 dirs.forEach(dir => {
   fs.rmSync(dir, { recursive: true, force: true });
+  fs.mkdirSync(dir, { recursive: true });
   console.log(`🧹 Cleaned: ${dir}`);
 });
