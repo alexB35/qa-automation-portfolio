@@ -56,6 +56,11 @@ jobs:
           --output 02_api/restful_booker/outputs/allure-report \
           --clean
 
+    # ── Quality gate ─────────────────────────────────────────────────────────
+    - name: Quality gate — will fail on unexpected test failures
+      if: always()
+      run: node scripts/quality-gates.js restful-booker
+
     # ── Upload Allure report ─────────────────────────────────────────────────
     - name: Upload Allure report
       if: always()
@@ -64,20 +69,7 @@ jobs:
         name: allure-report-restful-booker
         path: 02_api/restful_booker/outputs/allure-report
         retention-days: 5
-
-    # ── Quality gate ─────────────────────────────────────────────────────────
-    - name: Quality gate — will fail on unexpected test failures
-      if: always()
-      run: node scripts/quality-gates.js restful-booker
-
-    # ── Deploy Allure report to GitHub Pages ────────────────────────────────
-    - name: Upload Allure report artifact
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: allure-report-restful-booker        # ou restful-booker / automation-exercise
-        path: 02_api/restful_booker/outputs/allure-report
-        retention-days: 5
+        overwrite : true
 
     # ── Publish Docker image ──────────────────────────────────────────────────
     - name: Login to Docker Hub

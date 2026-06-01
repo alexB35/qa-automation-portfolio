@@ -85,6 +85,11 @@ jobs:
           --output 01_banking/parabank/outputs/allure-report \
           --clean
 
+    # ── Quality gate ─────────────────────────────────────────────────────────
+    - name: Quality gate — will fail on unexpected test failures
+      if: always()
+      run: node scripts/quality-gates.js parabank
+
     # ── Upload artifacts ─────────────────────────────────────────────────
     - name: Uploading Allure report
       if: always()
@@ -93,6 +98,7 @@ jobs:
         name: allure-report-parabank
         path: 01_banking/parabank/outputs/allure-report
         retention-days: 5
+        overwrite : true
 
     - name: Uploading Playwright test results
       if: always()
@@ -101,20 +107,7 @@ jobs:
         name: playwright-results-parabank
         path: 01_banking/parabank/outputs/test-results
         retention-days: 5
-
-    # ── Quality gate ─────────────────────────────────────────────────────────
-    - name: Quality gate — will fail on unexpected test failures
-      if: always()
-      run: node scripts/quality-gates.js parabank
-
-    # ── Deploy Allure report to GitHub Pages ────────────────────────────────
-    - name: Upload Allure report artifact
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: allure-report-parabank        # ou restful-booker / automation-exercise
-        path: 01_banking/parabank/outputs/allure-report
-        retention-days: 5
+        overwrite : true
 
     # ── Publish Docker image ──────────────────────────────────────────────────
     - name: Login to Docker Hub
