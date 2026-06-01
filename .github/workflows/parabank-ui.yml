@@ -42,7 +42,6 @@ jobs:
         path: ~/.cache/ms-playwright
         key: playwright-firefox-${{ hashFiles('package-lock.json') }}
 
-
     # ── Install Playwright browsers ─────────────────────────────────────────
     - name: Installing Playwright browsers
       run: npx playwright install --with-deps firefox
@@ -61,22 +60,11 @@ jobs:
     - name: Installing Allure CLI
       run: npm install -g allure-commandline
 
-    # ── Create Allure output directories ─────────────────────────────────────────────
+    # ── Create output directories ─────────────────────────────────────────────
     - name: Creating Allure output directories
       run: |
         mkdir -p 01_banking/parabank/outputs/allure-results
         mkdir -p 01_banking/parabank/outputs/test-results
-
-    - name: Debug allure path
-      run: |
-        PROJECT=parabank node -e "
-        const ALLURE_DIRS = {
-          'parabank': '01_banking/parabank/outputs/allure-results',
-          'automation-exercise': '03_ecommerce/automation-exercise/outputs/allure-results',
-        };
-        const project = process.env.PROJECT || 'parabank';
-        console.log('allureResultsDir:', ALLURE_DIRS[project]);
-        "
   
     # ── Run tests ─────────────────────────────────────────────────────────────
     - name: Running ParaBank UI tests
@@ -89,10 +77,6 @@ jobs:
           --project=parabank \
       continue-on-error: true
 
-    - name: Find ALL allure files
-      if: always()
-      run: find . -name "*.json" -not -path "*/node_modules/*" | grep -i allure | head -30
-
     # ── Generate Allure report ───────────────────────────────────────────────
     - name: Generating Allure report
       if: always()
@@ -100,18 +84,6 @@ jobs:
         allure generate 01_banking/parabank/outputs/allure-results \
           --output 01_banking/parabank/outputs/allure-report \
           --clean
-
-    - name: Checking allure-results
-      if: always()
-      run: ls -la 01_banking/parabank/outputs/allure-results/
-
-    - name: Find allure-results
-      if: always()
-      run: |
-        echo "=== allure-results content ==="
-        ls -la 01_banking/parabank/outputs/allure-results/ || echo "Directory not found"
-        echo "=== find all allure json ==="
-        find . -name "*-result.json" 2>/dev/null | head -20
 
     # ── Upload artifacts ─────────────────────────────────────────────────
     - name: Uploading Allure report

@@ -35,6 +35,13 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    # ── Playwright browser cache ─────────────────────────────────────────────
+    - name: Cache Playwright browsers
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ms-playwright
+        key: playwright-firefox-${{ hashFiles('package-lock.json') }}
+
     # ── Install Playwright browsers ─────────────────────────────────────────
     - name: Install Playwright browsers
       run: npx playwright install --with-deps firefox
@@ -43,20 +50,20 @@ jobs:
     - name: Install Allure CLI
       run: npm install -g allure-commandline
 
-    # ── Create allure-results directory ─────────────────────────────────────
-    - name: Create allure-results directory
-      run: mkdir -p 03_ecommerce/automation-exercise/outputs/allure-results
+    # ── Create output directories ─────────────────────────────────────────────
+    - name: Create Allure output directories
+      run: |
+        mkdir -p 03_ecommerce/automation-exercise/outputs/allure-results
+        mkdir -p 03_ecommerce/automation-exercise/outputs/test-results
 
     # ── Run tests ───────────────────────────────────────────────────────────
     - name: Run Automation Exercise tests
-      id: run_tests
       env:
         CI: true
         PROJECT: automation-exercise
       run: |
         npx playwright test \
           --project=automation-exercise \
-          --reporter=list
       continue-on-error: true
 
     # ── Generate Allure report ───────────────────────────────────────────────
@@ -64,7 +71,8 @@ jobs:
       if: always()
       run: |
         allure generate 03_ecommerce/automation-exercise/outputs/allure-results \
-          --output 03_ecommerce/automation-exercise/outputs/allure-report
+          --output 03_ecommerce/automation-exercise/outputs/allure-report \
+          --clean
 
     # ── Upload Allure report ─────────────────────────────────────
     - name: Upload Allure report
@@ -91,7 +99,7 @@ jobs:
 
     # ── Deploy Allure report to GitHub Pages ─────────────────────────────────
     - name: Deploy Allure report to GitHub Pages
-      if: github.ref == 'refs/heads/main' && always()
+      if: github.ref == 'refs/heads/main'
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -120,4 +128,4 @@ jobs:
       run: |
         echo "## 📊 Allure Test Report" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "👉 [Open Allure Report](https://alexB35.github.io/qa-automation-portfolio/)" >> $GITHUB_STEP_SUMMARY
+        echo "👉 [Open Allure Report](https://alexB35.github.io/qa-automation-portfolio/automation-exercise/)" >> $GITHUB_STEP_SUMMARY
