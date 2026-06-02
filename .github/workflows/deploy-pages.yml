@@ -1,4 +1,4 @@
-name: Deploy Pages
+name: deploy-allure-reports-to-pages
 
 on:
   workflow_dispatch:
@@ -103,8 +103,6 @@ jobs:
     # ── Summary ───────────────────────────────────────────────────────────
     - name: Link to reports
       run: |
-        echo "## 📊 Allure Test Reports" >> $GITHUB_STEP_SUMMARY
+        echo "## 📊 Allure Test Report" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "👉 Open [ParaBank](https://alexB35.github.io/qa-automation-portfolio/parabank/) Allure report" >> $GITHUB_STEP_SUMMARY
-        echo "👉 Open [Restful Booker](https://alexB35.github.io/qa-automation-portfolio/restful-booker/) Allure report" >> $GITHUB_STEP_SUMMARY
-        echo "👉 Open [Automation Exercise](https://alexB35.github.io/qa-automation-portfolio/automation-exercise/) Allure report" >> $GITHUB_STEP_SUMMARY
+        echo "👉 [Open Allure Report](https://alexB35.github.io/qa-automation-portfolio/)" >> $GITHUB_STEP_SUMMARY

@@ -86,11 +86,3 @@ jobs:
         context: .
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/qa-automation-portfolio:latest
-
-    # ── Open Allure report ──────────────────────────────────────────────────
-    - name: Link to Allure report
-      if: always()
-      run: |
-        echo "## 📊 Allure Test Report" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "👉 [Open Allure Report](https://alexB35.github.io/qa-automation-portfolio/)" >> $GITHUB_STEP_SUMMARY
