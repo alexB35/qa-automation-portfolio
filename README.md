@@ -113,7 +113,7 @@ Reports are generated inside each app's `outputs/` folder and accessible at `./r
 
 ## Report sample
 
-![Allure report](./assets/allure_report.png)
+![Allure report](./assets/allure-report.png)
 
 ---
 

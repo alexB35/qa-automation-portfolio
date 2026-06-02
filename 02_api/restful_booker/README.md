@@ -10,7 +10,7 @@
 
 This project covers **API automation** for the Restful Booker API.  
 
-It demonstrates CRUD operations via API: create, retrieve, update, and delete bookings. Includes positive and negative scenarios with Newman.
+It demonstrates CRUD operations via API : create, retrieve, update, and delete bookings. Includes positive and negative scenarios with Newman.
 
 ---
 
@@ -47,7 +47,7 @@ newman run 02_api/restful_booker/5_postman/RFB-00_Prerequisites.postman_collecti
 
 ## Using GitHub Actions
 
-Trigger the workflow: [restful-booker-api](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml)
+Trigger the workflow : [restful-booker-api](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml)
 
 ## Reports :
 
