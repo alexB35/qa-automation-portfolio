@@ -13,7 +13,7 @@ const KNOWN_FAILURES = {
   ],
   'parabank': [
     'TC-05',   
-    'TC-17',
+    'TC-16',
     'TC-20',   
   ],
   'restful-booker': [

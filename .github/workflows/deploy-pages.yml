@@ -81,11 +81,6 @@ jobs:
         </html>
         EOF
 
-    - name: Debug — check summary
-      run: |
-        cat report/restful-booker/widgets/summary.json
-        cat report/automation-exercise/widgets/summary.json
-
     # ── Setup GitHub Pages ────────────────────────────────────────────────
     - name: Setup GitHub Pages
       uses: actions/configure-pages@v4
