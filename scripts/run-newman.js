@@ -50,7 +50,9 @@ function run(collection, environment) {
     ];
 
     for (const { file, env } of collections) {
+      console.log(`Running: ${file}`);
       await run(`${base}/collections/${file}`, env);
+      console.log(`Done: ${file}, files: ${fs.readdirSync(allureExport).length}`);
     }
 
     console.log('✔ Restful-booker finished');
