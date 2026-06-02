@@ -20,7 +20,7 @@ test('TC-23 | Newsletter subscription', async ({ page }) => {
     await epic('UI Testing');
     await story('AEX-06 Contact Us');
     await testCaseId('TC-23 - Newsletter subscription');
-    await severity('low');
+    await severity('minor');
  
     await step('Navigate to homepage', async () => {
       await page.goto(BASE_URL);

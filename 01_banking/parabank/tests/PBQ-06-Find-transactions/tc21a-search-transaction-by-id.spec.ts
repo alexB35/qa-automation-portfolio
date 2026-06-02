@@ -8,7 +8,7 @@ test.describe('PBQ-06 – Find Transactions', () => {
     await epic('EPIC-2 - ACCOUNT MANAGEMENT');
     await story('PBQ-06 Find Transactions');
     await testCaseId('TC-21a');
-    await severity('minor');
+    await severity('normal');
 
     const findPage = new FindTransactionsPage(page);
 

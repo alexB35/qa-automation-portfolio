@@ -23,7 +23,7 @@ test.describe('AEX-07 – API User Management', () => {
     await epic('API Testing');
     await feature('AEX-07 API User Management');
     await story('TC-27 DELETE user account');
-    await severity('high');
+    await severity('critical');
  
     await step('Send DELETE request to /api/deleteAccount', async () => {
       const result = await deleteUser(request, user.email, user.password);

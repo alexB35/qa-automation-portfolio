@@ -23,7 +23,7 @@ test('TC-03 | Invalid data - date of birth : February 31st', async ({ page }) =>
   await epic('UI Testing');
     await story('AEX-01 User Registration');
     await testCaseId('TC-03 - Invalid data - date of birth');
-    await severity('medium');
+    await severity('normal');
     await issue('AEX-B-01 - Invalid date of birth during registration', 'https://alexb35.atlassian.net/browse/AEX-5');
  
     await step('Navigate to login/signup page', async () => {

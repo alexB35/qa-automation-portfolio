@@ -17,7 +17,7 @@ test('TC-10b | Add Invalid Quantity Product to Cart', async ({ page }) => {
     await epic('UI Testing');
     await story('AEX-03 Add Product to Cart');
     await testCaseId('TC-10b - Add Invalid Quantity Product to Cart');
-    await severity('high');
+    await severity('critical');
     await issue('AEX-B-02 - Add invalid product quantity to cart', 'https://alexb35.atlassian.net/browse/AEX-46');
  
     await step('Navigate to product page', async () => {

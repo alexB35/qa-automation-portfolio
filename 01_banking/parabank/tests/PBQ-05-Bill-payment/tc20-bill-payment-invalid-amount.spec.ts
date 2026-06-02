@@ -1,5 +1,5 @@
 import { test } from '../../framework/fixtures/logged-in-user.fixture';
-import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
+import { epic, story, testCaseId, severity, step, issue } from 'allure-js-commons';
 import { BillPayPage } from '../../framework/ui/pages/bill-pay.page';
 import { buildPayee } from '../../framework/data/payee.factory';
 
@@ -9,7 +9,8 @@ test.describe('PBQ-05 – Bill Pay', () => {
     await epic('EPIC-2 - ACCOUNT MANAGEMENT');
     await story('PBQ-05 Bill Pay');
     await testCaseId('TC-20');
-    await severity('normal');
+    await severity('critical');
+    await issue('PBQ-B-03 - Pay bill with negative amount', 'https://alexb35.atlassian.net/browse/PBQ-54');
 
     const billPayPage = new BillPayPage(page);
     const payee = buildPayee({ amount: '-500' });

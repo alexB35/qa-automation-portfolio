@@ -20,7 +20,7 @@ test('TC-21 | Write Product Review', async ({ page }) => {
     await epic('UI Testing');
     await story('AEX-05 Check Product');
     await testCaseId('TC-21 - Write Product Review');
-    await severity('low');
+    await severity('minor');
  
     await step('Navigate to product page', async () => {
       await page.goto(URLS.productUrl);

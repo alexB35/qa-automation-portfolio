@@ -17,7 +17,7 @@ test('TC-18 | Filter Product by Brands', async ({ page }) => {
     await epic('UI Testing');
     await story('AEX-05 Check Product');
     await testCaseId('TC-18 - Filter Product by Brands');
-    await severity('medium');
+    await severity('normal');
  
     await step('Navigate to product page', async () => {
       await page.goto(URLS.productUrl);

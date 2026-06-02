@@ -14,7 +14,7 @@ test.describe('AEX-08 – API Products', () => {
     await epic('API Testing');
     await feature('AEX-08 API Products');
     await story('TC-30a POST search product');
-    await severity('high');
+    await severity('critical');
  
     await step('Send POST request to /api/searchProduct with search_product=top', async () => {
       const response = await request.post(`${API_BASE}/searchProduct`, {

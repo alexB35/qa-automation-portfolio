@@ -67,7 +67,7 @@ test.describe('AEX-09 – API Shopping Flow', () => {
     await epic('API Testing');
     await feature('AEX-09 API Shopping Flow');
     await story('TC-33 GET select product');
-    await severity('high');
+    await severity('critical');
 
     await step('Send GET request to /api/productsList and extract first product', async () => {
       const response = await request.get(`${API_BASE}/productsList`);
@@ -93,7 +93,7 @@ test.describe('AEX-09 – API Shopping Flow', () => {
     await epic('API Testing');
     await feature('AEX-09 API Shopping Flow');
     await story('TC-34 DELETE account');
-    await severity('high');
+    await severity('critical');
 
     await step('Send DELETE request to /api/deleteAccount', async () => {
       const result = await deleteUser(request, user.email, user.password);

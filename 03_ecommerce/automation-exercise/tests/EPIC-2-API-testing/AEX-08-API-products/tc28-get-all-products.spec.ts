@@ -13,7 +13,7 @@ test.describe('AEX-08 – API Products', () => {
     await epic('API Testing');
     await feature('AEX-08 API Products');
     await story('TC-28 GET all products');
-    await severity('high');
+    await severity('critical');
  
     await step('Send GET request to /api/productsList', async () => {
       const response = await request.get(`${API_BASE}/productsList`);

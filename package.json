@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:parabank": "node scripts/clean.js parabank && cross-env PROJECT=parabank node scripts/run-and-report.js parabank",
-    "test:restful-booker": "node scripts/clean.js restful-booker && node 02_api/restful_booker/postman/collections/run.js",
+    "test:restful-booker": "node scripts/clean.js restful-booker && node scripts/run-newman.js",
     "test:automation-exercise": "node scripts/clean.js automation-exercise && cross-env PROJECT=automation-exercise node scripts/run-and-report.js automation-exercise",
     "test:all": "npm run test:parabank && npm run test:restful-booker && npm run test:automation-exercise"
   },

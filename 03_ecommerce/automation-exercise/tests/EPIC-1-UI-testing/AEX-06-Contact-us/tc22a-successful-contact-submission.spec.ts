@@ -24,7 +24,7 @@ test.describe('AEX-06 – Contact us', () => {
     await epic('UI Testing');
     await story('AEX-06 Contact us');
     await testCaseId('TC-22a - Successful contact submission');
-    await severity('high');
+    await severity('critical');
 
     await step('Navigate to homepage', async () => {
       await page.goto(BASE_URL);

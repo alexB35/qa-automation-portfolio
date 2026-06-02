@@ -8,7 +8,7 @@ test.describe('PBQ-08 – Loan Request', () => {
     await epic('EPIC-2 - ACCOUNT MANAGEMENT');
     await story('PBQ-08 Loan Request');
     await testCaseId('TC-29');
-    await severity('normal');
+    await severity('critical');
 
     const loanPage = new LoanRequestPage(page);
 

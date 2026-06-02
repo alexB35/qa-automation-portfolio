@@ -5,12 +5,12 @@ import { URLS } from '../../resources/urls';
 
 test.describe('PBQ-03 – Open New Account', () => {
 
-  test('TC-13 | Account details page displays correct information', async ({ page, loggedInUserWithAccount }) => {
+  test('TC-13 | New account appears in accounts overview after creation', async ({ page, loggedInUserWithAccount }) => {
 
     await epic('EPIC-2 - ACCOUNT MANAGEMENT');
     await story('PBQ-03 Open New Account');
     await testCaseId('TC-13');
-    await severity('normal');
+    await severity('critical');
 
     const openAccountPage = new OpenAccountPage(page);
     let newAccountId: string;
@@ -25,18 +25,13 @@ test.describe('PBQ-03 – Open New Account', () => {
       newAccountId = await openAccountPage.getNewAccountId();
     });
 
-    await step('Navigate to account details via overview', async () => {
+    await step('Navigate to Accounts Overview', async () => {
       await page.goto(URLS.overviewUrl);
-      await page.getByText(newAccountId!, { exact: true }).click();
     });
 
-    await step('Verify account details page displays correct information', async () => {
-      await expect(page.getByText('Account Details')).toBeVisible();
-      await expect(page.getByText('Account Number:')).toBeVisible();
-      await expect(page.getByText('Account Type:')).toBeVisible();
-      await expect(page.getByText('Balance:')).toBeVisible();
-      await expect(page.getByText('Available:')).toBeVisible();
-      await expect(page.getByText('Account Activity')).toBeVisible();
+    await step('Verify new account appears in overview', async () => {
+      await expect(page.getByRole('heading', { name: 'Accounts Overview' })).toBeVisible();
+      await expect(page.getByText(newAccountId!, { exact: true })).toBeVisible();
     });
   });
 

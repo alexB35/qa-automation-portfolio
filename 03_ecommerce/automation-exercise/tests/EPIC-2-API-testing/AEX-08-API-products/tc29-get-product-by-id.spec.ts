@@ -13,7 +13,7 @@ test.describe('AEX-08 – API Products', () => {
     await epic('API Testing');
     await feature('AEX-08 API Products');
     await story('TC-29 GET product by valid ID');
-    await severity('high');
+    await severity('critical');
     await issue('AEX-B-04 - API No ID endpoint', 'https://alexb35.atlassian.net/browse/AEX-62');
  
     await step('Send GET request to /api/productsList/{id} with valid ID', async () => {

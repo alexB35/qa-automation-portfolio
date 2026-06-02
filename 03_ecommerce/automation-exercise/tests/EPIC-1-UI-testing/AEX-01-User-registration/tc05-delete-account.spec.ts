@@ -26,7 +26,7 @@ test('TC-05 | Delete account after registration', async ({ page }) => {
     await epic('UI Testing');
     await story('AEX-01 User Registration');
     await testCaseId('TC-05 - Delete account');
-    await severity('medium');
+    await severity('normal');
  
     await step('Navigate to login / signup page', async () => {
       await page.goto(URLS.loginUrl);

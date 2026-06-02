@@ -8,7 +8,7 @@ test.describe('PBQ-02 – User Login', () => {
     await epic('EPIC-1 - USER MANAGEMENT');
     await story('PBQ-02 User Login');
     await testCaseId('TC-09');
-    await severity('minor');
+    await severity('normal');
 
     const loginPage = new LoginPage(page);
 

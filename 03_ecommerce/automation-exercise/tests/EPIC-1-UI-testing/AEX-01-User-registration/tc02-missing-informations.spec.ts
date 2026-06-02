@@ -22,7 +22,7 @@ test.describe('AEX-01 – User Registration', () => {
     await epic('UI Testing');
     await story('AEX-01 User Registration');
     await testCaseId('TC-02 - Missing informations');
-    await severity('high');
+    await severity('critical');
  
     await step('Navigate to login/signup page', async () => {
       await page.goto(URLS.loginUrl);

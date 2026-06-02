@@ -18,7 +18,7 @@ test.describe('AEX-07 – API User Management', () => {
     await epic('API Testing');
     await feature('AEX-07 API User Management');
     await story('TC-24 POST create account');
-    await severity('high');
+    await severity('critical');
  
     await step('Send POST request to /api/createAccount', async () => {
       const result = await createUser(request, user);

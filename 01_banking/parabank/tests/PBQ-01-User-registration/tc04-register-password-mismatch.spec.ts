@@ -9,7 +9,7 @@ test.describe('PBQ-01 – User Registration', () => {
     await epic('EPIC-1 - USER MANAGEMENT');
     await story('PBQ-01 User Registration');
     await testCaseId('TC-04');
-    await severity('normal');
+    await severity('critical');
 
     const registerPage = new RegisterPage(page);
     const user = buildUser();

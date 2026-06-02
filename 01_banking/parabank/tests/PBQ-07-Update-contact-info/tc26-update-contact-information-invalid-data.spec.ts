@@ -8,7 +8,7 @@ test.describe('PBQ-07 – Update Contact Info', () => {
     await epic('EPIC-1 - USER MANAGEMENT');
     await story('PBQ-07 Update Contact Info');
     await testCaseId('TC-26');
-    await severity('minor');
+    await severity('normal');
 
     const updateProfilePage = new UpdateProfilePage(page);
 

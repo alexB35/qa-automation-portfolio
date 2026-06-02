@@ -4,7 +4,7 @@ import { RegisterPage } from '../../framework/ui/pages/register.page';
 
 test.describe('PBQ-01 – User Registration', () => {
 
-  test('TC-03 | Empty submit shows all required field errors', async ({ page }) => {
+  test('TC-03 | Register with empty fields', async ({ page }) => {
     await epic('EPIC-1 - USER MANAGEMENT');
     await story('PBQ-01 User Registration');
     await testCaseId('TC-03');

@@ -15,7 +15,7 @@ test.describe('AEX-07 – API User Management', () => {
     await epic('API Testing');
     await feature('AEX-07 API User Management');
     await story('TC-26b GET unexisting user details');
-    await severity('medium');
+    await severity('normal');
  
     await step('Send GET request with unknown email', async () => {
       const response = await request.get(`${API_BASE}/getUserDetailByEmail`, {

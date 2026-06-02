@@ -30,7 +30,7 @@ test('TC-04 | Unavailable email address', async ({ page }) => {
     await epic('UI Testing');
     await story('AEX-01 User Registration');
     await testCaseId('TC-04 - Unavailable email address');
-    await severity('medium');
+    await severity('normal');
  
     await step('Navigate to login/signup page', async () => {
       await page.goto(URLS.loginUrl);

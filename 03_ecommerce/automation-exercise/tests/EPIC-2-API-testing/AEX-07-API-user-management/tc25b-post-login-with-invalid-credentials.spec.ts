@@ -15,7 +15,7 @@ test.describe('AEX-07 – API User Management', () => {
     await epic('API Testing');
     await feature('AEX-07 API User Management');
     await story('TC-25b POST login invalid');
-    await severity('medium');
+    await severity('normal');
  
     await step('Send POST request to /api/verifyLogin with invalid credentials', async () => {
       const response = await request.post(`${API_BASE}/verifyLogin`, {

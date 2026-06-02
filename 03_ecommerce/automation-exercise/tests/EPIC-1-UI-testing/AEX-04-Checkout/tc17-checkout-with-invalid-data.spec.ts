@@ -38,7 +38,7 @@ test('TC-17 | Checkout with Invalid Data', async ({ page }) => {
     await epic('UI Testing');
     await story('AEX-04 Checkout');
     await testCaseId('TC-17 - Checkout with Invalid Data');
-    await severity('high');
+    await severity('critical');
     await issue('AEX-B-03 - Payment with expired payment card', 'https://alexb35.atlassian.net/browse/AEX-63');
  
     await step('Login with valid credentials', async () => {

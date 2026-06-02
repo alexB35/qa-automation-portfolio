@@ -13,7 +13,7 @@ test.describe('AEX-08 – API Products', () => {
     await epic('API Testing');
     await feature('AEX-08 API Products');
     await story('TC-30b POST search missing parameter');
-    await severity('medium');
+    await severity('normal');
  
     await step('Send POST request to /api/searchProduct without parameter', async () => {
       const response = await request.post(`${API_BASE}/searchProduct`);

@@ -23,7 +23,7 @@ test.describe('AEX-06 – Contact us', () => {
     await epic('UI Testing');
     await story('AEX-06 Contact us');
     await testCaseId('TC-22b - Contact submission with invalid data');
-    await severity('medium');
+    await severity('normal');
 
     await step('Navigate to homepage', async () => {
       await page.goto(BASE_URL);
