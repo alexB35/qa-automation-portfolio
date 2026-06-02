@@ -2,7 +2,7 @@ const fs = require('fs');
 const newman = require('newman');
 const path = require('path');
 
-const allureExport = path.resolve(__dirname, '../../outputs/allure-results');
+const allureExport = path.resolve(__dirname, '../02_api/restful_booker/outputs/allure-results');
 const reporterPath = path.resolve(__dirname, '../../../../node_modules/newman-reporter-allure');
 
 fs.mkdirSync(allureExport, { recursive: true });
