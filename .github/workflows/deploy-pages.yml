@@ -95,9 +95,12 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: actions/deploy-pages@v4
 
-    # ── Summary ───────────────────────────────────────────────────────────
+    # ── Link to reports ────────────────────────────────────────────────────
     - name: Link to reports
+      if: always()
       run: |
-        echo "## 📊 Allure Test Report" >> $GITHUB_STEP_SUMMARY
+        echo "## 📊 Test Reports" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "👉 [Open Allure Report](https://alexB35.github.io/qa-automation-portfolio/)" >> $GITHUB_STEP_SUMMARY
+        echo "👉 [ParaBank](https://alexB35.github.io/qa-automation-portfolio/parabank/)" >> $GITHUB_STEP_SUMMARY
+        echo "👉 [Restful Booker](https://alexB35.github.io/qa-automation-portfolio/restful-booker/)" >> $GITHUB_STEP_SUMMARY
+        echo "👉 [Automation Exercise](https://alexB35.github.io/qa-automation-portfolio/automation-exercise/)" >> $GITHUB_STEP_SUMMARY
