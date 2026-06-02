@@ -31,7 +31,7 @@ jobs:
     - name: Download ParaBank report
       uses: dawidd6/action-download-artifact@v6
       with:
-        workflow: parabank-ui
+        workflow: parabank-ui.yml
         name: allure-report-parabank
         path: report/parabank
         if_no_artifact_found: ignore
@@ -39,7 +39,7 @@ jobs:
     - name: Download Restful Booker report
       uses: dawidd6/action-download-artifact@v6
       with:
-        workflow: restful-booker-api
+        workflow: restful-booker-api.yml
         name: allure-report-restful-booker
         path: report/restful-booker
         if_no_artifact_found: ignore
@@ -47,7 +47,7 @@ jobs:
     - name: Download Automation Exercise report
       uses: dawidd6/action-download-artifact@v6
       with:
-        workflow: automation-exercise-ui-api
+        workflow: automation-exercise.yml
         name: allure-report-automation-exercise
         path: report/automation-exercise
         if_no_artifact_found: ignore
