@@ -48,16 +48,24 @@ npx playwright test 01_banking/parabank/tests
 
 ## Using GitHub Actions
 
-Trigger the workflow: [parabank-ui.yml](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml)
+Trigger the workflow: [parabank-ui](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml)
 
 ## Reports :
 
-Test execution results are generated after each workflow run using Allure.
-**Consult here :** [Allure] (https://alexB35.github.io/qa-automation-portfolio/)
+Test execution results are automatically generated after each workflow run using Allure.
+Once the _deploy-allure-reports_ is done, you can consult :
+
+**This page :** [Allure-Hub] (https://alexb35.github.io/qa-automation-portfolio/)
+or you can
+**Consult the report :** [ParaBank] (https://alexb35.github.io/qa-automation-portfolio/parabank/)
 
 - Reports are automatically generated during CI runs.
 - Available as downloadable artifacts in GitHub Actions.
 - Include test steps, logs, and screenshots for failures.
+
+## Allure :
+
+![Allure Parabank](./assets/allure-parabank.png)
 
 > [!NOTE]
 > You can run an entire application, a User Story, or individual test cases.
@@ -66,4 +74,4 @@ Test execution results are generated after each workflow run using Allure.
 
 > [!IMPORTANT]
 > This project targets the local Parabank environment _(localhost:8080)_ rather than the public shared environment.
-> The shared environment is occasionally unstable, triggering Cloudflare limitations and penetration tests unavailabilities.
+> The shared environment is occasionally unstable, triggering Cloudflare limitations and unavailabilities due to pentests.

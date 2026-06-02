@@ -47,16 +47,24 @@ newman run 02_api/restful_booker/5_postman/RFB-00_Prerequisites.postman_collecti
 
 ## Using GitHub Actions
 
-Trigger the workflow: [restful-booker-api.yml](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml)
+Trigger the workflow: [restful-booker-api](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml)
 
 ## Reports :
 
-Test execution results are generated after each workflow run using Allure.
-**Consult here :** [Allure] (https://alexB35.github.io/qa-automation-portfolio/)
+Test execution results are automatically generated after each workflow run using Allure.
+Once the _deploy-allure-reports_ is done, you can consult :
+
+**This page :** [Allure-Hub] (https://alexb35.github.io/qa-automation-portfolio/)
+or you can
+**Consult the report :** [Restful-Booker] (https://alexb35.github.io/qa-automation-portfolio/restful-booker/)
 
 - Reports are automatically generated during CI runs
 - Available as downloadable artifacts in GitHub Actions
 - Include request/response details and failure evidence
+
+## Allure :
+
+![Allure restful booker](./assets/allure-restful-booker.png)
 
 ---
 
