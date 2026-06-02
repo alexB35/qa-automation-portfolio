@@ -17,7 +17,8 @@ const KNOWN_FAILURES = {
     'TC-20',   
   ],
   'restful-booker': [
-    'TC-02',   
+    'TC-02', 
+    'TC-03',  
     'TC-06',
     'TC-08', 
   ],

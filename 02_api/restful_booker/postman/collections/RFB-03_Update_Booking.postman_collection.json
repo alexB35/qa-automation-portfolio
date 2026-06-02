@@ -74,24 +74,15 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
-              "});",
-              "",
-              "pm.test(\"Response contains malformed dates due to invalid input\", function () {",
-              "    var json = pm.response.json();",
-              "    pm.expect(json.bookingdates.checkin).to.eql(\"0NaN-aN-aN\");",
-              "    pm.expect(json.bookingdates.checkout).to.eql(\"0NaN-aN-aN\");",
-              "});",
-              "",
-              "pm.test(\"Other booking fields are correctly updated\", function () {",
-              "    var json = pm.response.json();",
-              "    pm.expect(json.firstname).to.eql(\"Alice\");",
-              "    pm.expect(json.lastname).to.eql(\"Brown\");",
-              "    pm.expect(json.totalprice).to.eql(300);",
-              "    pm.expect(json.depositpaid).to.eql(true);",
-              "});"
-            ],
+            "pm.test(\"TC-08 | Status code is 400 - Invalid date format should be rejected\", function () {",
+            "    pm.response.to.have.status(400);",
+            "});",
+            "",
+            "pm.test(\"TC-08 | Response contains validation error\", function () {",
+            "    var json = pm.response.json();",
+            "    pm.expect(json).to.have.property(\"error\");",
+            "});"
+          ],
             "type": "text/javascript",
             "packages": {},
             "requests": {}

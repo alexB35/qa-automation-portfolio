@@ -85,18 +85,14 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test('TC-02 | Status code is 200 (known bug RFB-18 — required fields not validated)', function () {\r",
-              "    pm.response.to.have.status(200);\r",
+              "pm.test('TC-02 | Status code is 400 - Missing required fields should be rejected', function () {\r",
+              "    pm.response.to.have.status(400);\r",
               "});\r",
               "\r",
-              "pm.test('TC-02 | Booking created despite missing firstname and lastname', function () {\r",
+              "pm.test('TC-02 | Response contains validation error', function () {\r",
               "    var json = pm.response.json();\r",
-              "    pm.expect(json).to.have.property('bookingid');\r",
-              "    pm.expect(json.booking.firstname).to.eql('');\r",
-              "    pm.expect(json.booking.lastname).to.eql('');\r",
-              "});\r",
-              "\r",
-              "console.warn('TC-02: API accepts booking with missing firstname and lastname — known Restful Booker limitation. In a real API, a 400 should be returned. Documented in RFB-18.');"
+              "    pm.expect(json).to.have.property('error');\r",
+              "});"
             ],
             "type": "text/javascript",
             "packages": {},
