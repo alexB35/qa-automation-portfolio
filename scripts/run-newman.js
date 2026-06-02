@@ -7,6 +7,12 @@ const reporterPath = path.resolve(__dirname, '../../../../node_modules/newman-re
 
 fs.mkdirSync(allureExport, { recursive: true });
 console.log('Allure export path:', allureExport);
+try {
+  require('newman-reporter-allure');
+  console.log('✔ newman-reporter-allure found');
+} catch(e) {
+  console.log('❌ newman-reporter-allure NOT found:', e.message);
+}
 
 const envFile = '/tmp/rfb_env.json';
 const base = '02_api/restful_booker/postman';
