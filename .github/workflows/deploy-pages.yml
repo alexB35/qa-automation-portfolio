@@ -90,43 +90,55 @@ jobs:
             .footer { display: flex; gap: 1.5rem; padding-top: 1rem; border-top: 1px solid #d0d7de; }
             .footer-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #57606a; text-decoration: none; }
             .footer-item:hover { color: #0969da; }
+            @media (prefers-color-scheme: dark) {
+              body { background: #0d1117; color: #e6edf3; }
+              .header, .card { background: #161b22; border-color: #30363d; }
+              .header-text p, .card-desc, .section-title, .footer-item { color: #8b949e; }
+              .card-name { color: #58a6ff; }
+              .card:hover { border-color: #58a6ff; box-shadow: 0 1px 3px rgba(88,166,255,0.12); }
+              .card-icon.blue { background: #0d2039; }
+              .card-icon.teal { background: #0d2818; }
+              .card-icon.purple { background: #1a0d2e; }
+              .badge.playwright { background: #0d2039; color: #58a6ff; }
+              .badge.postman { background: #2d1a00; color: #f0883e; }
+              .badge.allure { background: #0d2818; color: #3fb950; }
+              .badge.ci { background: #1a0d2e; color: #bc8cff; }
+              .footer { border-color: #30363d; }
+              .footer-item:hover { color: #58a6ff; }
+            }
           </style>
         </head>
         <body>
           <div class="page">
             <div class="header">
-              <div class="avatar">🧪</div>
+              <div class="avatar">🤖</div>
               <div class="header-text">
                 <h1>QA Automation Portfolio</h1>
                 <p>Automated test suites with CI/CD pipelines and Allure reporting</p>
               </div>
             </div>
 
-            <p class="section-title">Test reports</p>
+            <p class="section-title">Allure reports for :</p>
             <div class="cards">
               <a href="parabank/" class="card">
                 <div class="card-header">
-                  <div class="card-icon blue">🏦</div>
+                  <div class="card-icon blue">💳</div>
                   <span class="card-name">ParaBank</span>
                 </div>
-                <p class="card-desc">UI test suite for a banking web application — registration, login and account flows.</p>
+                <p class="card-desc">UI test suite for a banking web application.</p>
                 <div class="card-footer">
                   <span class="badge playwright">Playwright</span>
-                  <span class="badge allure">Allure</span>
-                  <span class="badge ci">GitHub Actions</span>
                 </div>
               </a>
 
               <a href="restful-booker/" class="card">
                 <div class="card-header">
-                  <div class="card-icon teal">🔖</div>
+                  <div class="card-icon teal">🧳</div>
                   <span class="card-name">Restful Booker</span>
                 </div>
-                <p class="card-desc">API test suite for a hotel booking REST API — CRUD operations and auth flows.</p>
+                <p class="card-desc">API test suite for a hotel booking.</p>
                 <div class="card-footer">
                   <span class="badge postman">Postman / Newman</span>
-                  <span class="badge allure">Allure</span>
-                  <span class="badge ci">GitHub Actions</span>
                 </div>
               </a>
 
@@ -135,11 +147,9 @@ jobs:
                   <div class="card-icon purple">🛒</div>
                   <span class="card-name">Automation Exercise</span>
                 </div>
-                <p class="card-desc">UI test suite for an e-commerce web application — product browsing and checkout flows.</p>
+                <p class="card-desc">UI test suite for an e-commerce web application.</p>
                 <div class="card-footer">
                   <span class="badge playwright">Playwright</span>
-                  <span class="badge allure">Allure</span>
-                  <span class="badge ci">GitHub Actions</span>
                 </div>
               </a>
             </div>
