@@ -71,7 +71,7 @@ or you can
 
 ## Allure :
 
-![Allure Automation Exercise](../assets/allure-automation-exercise.png)
+![Allure Automation Exercise](../../assets/allure-automation-exercise.png)
 
 ---
 
