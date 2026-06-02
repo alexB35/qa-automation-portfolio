@@ -28,7 +28,7 @@
     "allure-playwright": "^3.9.0",
     "cross-env": "^10.1.0",
     "newman": "^6.2.2",
-    "newman-reporter-allure": "^1.0.3",
+    "newman-reporter-allure": "^1.1.0",
     "typescript": "^5.9.3"
   }
 }

@@ -44,7 +44,7 @@ jobs:
       run: mkdir -p 02_api/restful_booker/outputs/allure-results
 
     - name: Install compatible newman-reporter-allure
-      run: npm install newman-reporter-allure@1.0.3
+      run: npm install newman-reporter-allure@1.1.0
 
     - name: Debug — newman reporter version
       run: cat node_modules/newman-reporter-allure/package.json | grep -E '"version"|"peerDependencies"'
