@@ -60,23 +60,97 @@ jobs:
         <html lang="en">
         <head>
           <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>QA Automation Portfolio — Test Reports</title>
           <style>
-            body { font-family: sans-serif; max-width: 600px; margin: 60px auto; }
-            h1 { font-size: 1.5rem; }
-            ul { list-style: none; padding: 0; }
-            li { margin: 12px 0; }
-            a { color: #0066cc; text-decoration: none; font-size: 1.1rem; }
-            a:hover { text-decoration: underline; }
+            *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+            body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: #f6f8fa; color: #24292f; min-height: 100vh; padding: 2rem 1rem; }
+            .page { max-width: 860px; margin: 0 auto; }
+            .header { background: #fff; border: 1px solid #d0d7de; border-radius: 6px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 14px; }
+            .avatar { width: 48px; height: 48px; border-radius: 50%; background: #f6f8fa; border: 1px solid #d0d7de; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+            .header-text h1 { font-size: 18px; font-weight: 600; }
+            .header-text p { font-size: 13px; color: #57606a; margin-top: 2px; }
+            .section-title { font-size: 12px; font-weight: 600; color: #57606a; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; padding: 0 0.25rem; }
+            .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+            .card { background: #fff; border: 1px solid #d0d7de; border-radius: 6px; padding: 1rem 1.25rem; text-decoration: none; color: inherit; display: block; transition: border-color 0.15s, box-shadow 0.15s; }
+            .card:hover { border-color: #0969da; box-shadow: 0 1px 3px rgba(9,105,218,0.12); }
+            .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+            .card-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+            .card-icon.blue { background: #ddf4ff; }
+            .card-icon.teal { background: #dcfce7; }
+            .card-icon.purple { background: #fbefff; }
+            .card-name { font-size: 14px; font-weight: 600; color: #0969da; }
+            .card-desc { font-size: 12px; color: #57606a; margin-bottom: 10px; line-height: 1.5; }
+            .card-footer { display: flex; gap: 6px; flex-wrap: wrap; }
+            .badge { font-size: 11px; padding: 2px 8px; border-radius: 2em; font-weight: 500; }
+            .badge.playwright { background: #ddf4ff; color: #0550ae; }
+            .badge.postman { background: #fff1e5; color: #953800; }
+            .badge.allure { background: #dcfce7; color: #1a7f37; }
+            .badge.ci { background: #fbefff; color: #8250df; }
+            .footer { display: flex; gap: 1.5rem; padding-top: 1rem; border-top: 1px solid #d0d7de; }
+            .footer-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #57606a; text-decoration: none; }
+            .footer-item:hover { color: #0969da; }
           </style>
         </head>
         <body>
-          <h1>📊 QA Automation Portfolio — Test Reports</h1>
-          <ul>
-            <li>🏦 <a href="parabank/">ParaBank — UI Tests</a></li>
-            <li>🔖 <a href="restful-booker/">Restful Booker — API Tests</a></li>
-            <li>🛒 <a href="automation-exercise/">Automation Exercise — UI / API Tests</a></li>
-          </ul>
+          <div class="page">
+            <div class="header">
+              <div class="avatar">🧪</div>
+              <div class="header-text">
+                <h1>QA Automation Portfolio</h1>
+                <p>Automated test suites with CI/CD pipelines and Allure reporting</p>
+              </div>
+            </div>
+
+            <p class="section-title">Test reports</p>
+            <div class="cards">
+              <a href="parabank/" class="card">
+                <div class="card-header">
+                  <div class="card-icon blue">🏦</div>
+                  <span class="card-name">ParaBank</span>
+                </div>
+                <p class="card-desc">UI test suite for a banking web application — registration, login and account flows.</p>
+                <div class="card-footer">
+                  <span class="badge playwright">Playwright</span>
+                  <span class="badge allure">Allure</span>
+                  <span class="badge ci">GitHub Actions</span>
+                </div>
+              </a>
+
+              <a href="restful-booker/" class="card">
+                <div class="card-header">
+                  <div class="card-icon teal">🔖</div>
+                  <span class="card-name">Restful Booker</span>
+                </div>
+                <p class="card-desc">API test suite for a hotel booking REST API — CRUD operations and auth flows.</p>
+                <div class="card-footer">
+                  <span class="badge postman">Postman / Newman</span>
+                  <span class="badge allure">Allure</span>
+                  <span class="badge ci">GitHub Actions</span>
+                </div>
+              </a>
+
+              <a href="automation-exercise/" class="card">
+                <div class="card-header">
+                  <div class="card-icon purple">🛒</div>
+                  <span class="card-name">Automation Exercise</span>
+                </div>
+                <p class="card-desc">UI test suite for an e-commerce web application — product browsing and checkout flows.</p>
+                <div class="card-footer">
+                  <span class="badge playwright">Playwright</span>
+                  <span class="badge allure">Allure</span>
+                  <span class="badge ci">GitHub Actions</span>
+                </div>
+              </a>
+            </div>
+
+            <div class="footer">
+              <a href="https://github.com/alexB35/qa-automation-portfolio" class="footer-item">
+                ⎔ alexB35/qa-automation-portfolio
+              </a>
+              <span class="footer-item">⟨/⟩ TypeScript · Node.js</span>
+            </div>
+          </div>
         </body>
         </html>
         EOF
