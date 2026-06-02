@@ -43,6 +43,9 @@ jobs:
     - name: Create Allure output directory
       run: mkdir -p 02_api/restful_booker/outputs/allure-results
 
+    - name: Debug — newman reporter version
+      run: cat node_modules/newman-reporter-allure/package.json | grep -E '"version"|"peerDependencies"'
+
     # ── Run API tests ────────────────────────────────────────────────────────
     - name: Run Restful Booker API tests
       continue-on-error: true
