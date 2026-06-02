@@ -40,6 +40,8 @@ It demonstrates CRUD operations via API : create, retrieve, update, and delete b
 
 Refer to the [root README](../../README.md) for Docker and CI instructions.
 
+## Locally 
+
 ```bash
 newman run 02_api/restful_booker/5_postman/RFB-00_Prerequisites.postman_collection.json \
   -e 02_api/restful_booker/5_postman/environment.json
@@ -49,7 +51,7 @@ newman run 02_api/restful_booker/5_postman/RFB-00_Prerequisites.postman_collecti
 
 Trigger the workflow : [restful-booker-api](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml)
 
-## Reports :
+## Reports
 
 Test execution results are automatically generated after each workflow run using Allure.
 Once the _deploy-allure-reports_ is done, you can consult :
@@ -59,10 +61,10 @@ or you can
 **Consult the report :** [Restful-Booker] (https://alexb35.github.io/qa-automation-portfolio/restful-booker/)
 
 - Reports are automatically generated during CI runs
-- Available as downloadable artifacts in GitHub Actions
+- Available as downloadable artifacts and consultable pages in GitHub Actions.
 - Include request/response details and failure evidence
 
-## Allure :
+## Allure
 
 ![Allure restful booker](../../assets/allure-restful-booker.png)
 

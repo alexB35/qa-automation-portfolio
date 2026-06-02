@@ -11,13 +11,13 @@
 
 This project demonstrates **end-to-end UI automation** for ParaBank, a sample online banking web application.  
 
-The goal is to automate common banking workflows, validate UI functionality, and generate reports for test execution.
+The goal is to automate common banking workflows, validate UI functionality, and generate reports of the test execution.
 
 ## Tech Stack
 
 - **Playwright** - _UI automation_
 - **TypeScript / Node.js**
-- **Docker** - _test environment_
+- **Docker** - _local test environment_
 - **GitHub Actions** - _CI/CD_
 - **Allure** - _test reporting_
 
@@ -39,6 +39,8 @@ The goal is to automate common banking workflows, validate UI functionality, and
 
 ## How to Run Tests
 
+Refer to the [root README](../../README.md) for Docker and CI instructions.
+
 ## Locally
 ```bash
 npm install
@@ -50,7 +52,7 @@ npx playwright test 01_banking/parabank/tests
 
 Trigger the workflow: [parabank-ui](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml)
 
-## Reports :
+## Reports
 
 Test execution results are automatically generated after each workflow run using Allure.
 Once the _deploy-allure-reports_ is done, you can consult :
@@ -60,10 +62,10 @@ or you can
 **Consult the report :** [ParaBank] (https://alexb35.github.io/qa-automation-portfolio/parabank/)
 
 - Reports are automatically generated during CI runs.
-- Available as downloadable artifacts in GitHub Actions.
+- Available as downloadable artifacts and consultable pages in GitHub Actions.
 - Include test steps, logs, and screenshots for failures.
 
-## Allure :
+## Allure
 
 ![Allure Parabank](../../assets/allure-parabank.png)
 

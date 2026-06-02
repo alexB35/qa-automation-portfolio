@@ -52,11 +52,11 @@ npx playwright install
 npx playwright test 03_ecommerce/automation-exercise/tests
 ```
 
-## Using GitHub Actions:
+## Using GitHub Actions
 
 Trigger the workflow: [automation-exercise-ui-api](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/automation-exercise.yml)
 
-## Reporting:
+## Reports
 
 Test execution results are automatically generated after each workflow run using Allure.
 Once the _deploy-allure-reports_ is done, you can consult :
@@ -66,10 +66,10 @@ or you can
 **Consult the report :** [Automation-Exercise] (https://alexb35.github.io/qa-automation-portfolio/automation-exercise/)
 
 - Reports are automatically generated during CI runs
-- Available as downloadable artifacts in GitHub Actions
+- Available as downloadable artifacts and consultable pages in GitHub Actions.
 - Include test steps, logs, and screenshots on failure
 
-## Allure :
+## Allure
 
 ![Allure Automation Exercise](../../assets/allure-automation-exercise.png)
 
