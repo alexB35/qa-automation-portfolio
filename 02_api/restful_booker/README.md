@@ -64,7 +64,7 @@ or you can
 
 ## Allure :
 
-![Allure restful booker](./assets/allure-restful-booker.png)
+![Allure restful booker](../assets/allure-restful-booker.png)
 
 ---
 

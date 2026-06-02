@@ -65,7 +65,7 @@ or you can
 
 ## Allure :
 
-![Allure Parabank](./assets/allure-parabank.png)
+![Allure Parabank](../assets/allure-parabank.png)
 
 > [!NOTE]
 > You can run an entire application, a User Story, or individual test cases.
