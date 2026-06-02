@@ -1,4 +1,4 @@
-name: Automation Exercise Tests [UI / API]
+name: automation-exercise-ui-api
 
 on:
   push:
@@ -61,10 +61,10 @@ jobs:
       env:
         CI: true
         PROJECT: automation-exercise
+      continue-on-error: true
       run: |
         npx playwright test \
-          --project=automation-exercise \
-      continue-on-error: true
+          --project=automation-exercise
 
     # ── Generate Allure report ───────────────────────────────────────────────
     - name: Generate Allure report

@@ -1,4 +1,4 @@
-name: Restful Booker Tests [API]
+name: restful-booker-api
 
 on:
   push:

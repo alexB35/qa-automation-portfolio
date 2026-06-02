@@ -1,4 +1,4 @@
-name: ParaBank Tests [UI]
+name: parabank-ui
 
 on:
   push:
