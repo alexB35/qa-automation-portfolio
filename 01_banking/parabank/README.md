@@ -1,7 +1,14 @@
+<div align="center">
+
+![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml/badge.svg)
+
+<br/>
+
 ![Playwright](https://img.shields.io/badge/Playwright-Automation-green)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-lightgrey)
 ![Allure](https://img.shields.io/badge/Allure-Test%20Reporting-ff69b4)
-![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml/badge.svg)
+
+</div>
 
 # ParaBank UI Automation
 

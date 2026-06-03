@@ -7,9 +7,13 @@
 
 ---
 
+<div align="center">
+
 ![ParaBank - UI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml/badge.svg)
 ![Restful Booker - API](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml/badge.svg)
 ![Automation Exercise - UI + API](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/automation-exercise.yml/badge.svg)
+
+<br/>
 
 ![Playwright](https://img.shields.io/badge/Playwright-Automation-green)
 ![Postman / Newman](https://img.shields.io/badge/Postman-API_Testing-orange)
@@ -17,6 +21,8 @@
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-CI/CD-2088FF)
 ![Allure](https://img.shields.io/badge/Allure-Test%20Reporting-ff69b4)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-lightgrey)
+
+</div>
 
 ---
 

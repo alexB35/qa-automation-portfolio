@@ -1,6 +1,13 @@
+<div align="center">
+
+![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml/badge.svg)
+
+<br/>
+
 ![Postman / Newman](https://img.shields.io/badge/Postman-API_Testing-orange)
 ![Allure](https://img.shields.io/badge/Allure-Test%20Reporting-ff69b4)
-![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml/badge.svg)
+
+</div>
 
 # Restful Booker API Automation
 
