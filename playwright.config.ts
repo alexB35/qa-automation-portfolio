@@ -16,11 +16,11 @@ export default defineConfig({
   globalSetup: currentProject === 'parabank'
   ? './01_banking/parabank/framework/global-setup.ts'
   : undefined,
-  timeout:       process.env['CI'] ? 45_000 : 25_000,
+  timeout:       process.env['CI'] ? 30_000 : 25_000,
   forbidOnly:    isCI,
   retries:       isCI ? 1 : 0,
   fullyParallel: false,
-  workers:       process.env['WORKERS'] ? parseInt(process.env['WORKERS'], 10) : isCI ? 2 : undefined,
+  workers:       process.env['WORKERS'] ? parseInt(process.env['WORKERS'], 10) : isCI ? 2 : 2,
   maxFailures:   0,
 
   reporter: [
