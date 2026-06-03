@@ -20,7 +20,7 @@ export default defineConfig({
   forbidOnly:    isCI,
   retries:       isCI ? 1 : 0,
   fullyParallel: false,
-  workers:       process.env['WORKERS'] ? parseInt(process.env['WORKERS'], 10) : isCI ? 2 : 2,
+  workers:       process.env['WORKERS'] ? parseInt(process.env['WORKERS'], 10) : isCI ? 1 : 1,
   maxFailures:   0,
 
   reporter: [
