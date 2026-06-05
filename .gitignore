@@ -20,7 +20,7 @@ test-results/
 
 # All test outputs
 01_banking/parabank/outputs/
-02_api/restful-booker/outputs/
+02_api/restful_booker/outputs/
 03_ecommerce/automation-exercise/outputs/
 
 # Allure at root (generated reports)

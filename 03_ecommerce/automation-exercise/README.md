@@ -34,14 +34,13 @@ Automates online shopping flows including registration, login, product browsing,
 
 ## Project Structure
 
-| Folder | Description | Link |
-|------|------|------|
-| `tests/` | Playwright test scripts | xx |
-| `framework/` | Fixtures, helpers, page objects & API clients | xx |
-| `outputs/` | Allure reports & logs | xx |
-| `resources/` | Config & test data | xx |
-| `docs/` | Screenshots of test executions and Allure reports | xx |
-| `jira/` | Screenshots of Jira boards and cards | xx |  
+| Folder | Description |
+|------|------|
+| [tests](https://github.com/alexB35/qa-automation-portfolio/tree/main/03_ecommerce/automation-exercise/tests) | Playwright test scripts | xx |
+| [framework](https://github.com/alexB35/qa-automation-portfolio/tree/main/03_ecommerce/automation-exercise/framework) | Fixtures, helpers, page objects & API clients |
+| [resources](https://github.com/alexB35/qa-automation-portfolio/tree/main/03_ecommerce/automation-exercise/resources) | Config & test data |
+| [docs]((https://github.com/alexB35/qa-automation-portfolio/tree/main/03_ecommerce/automation-exercise/docs)) | Screenshots of test executions and Allure reports |
+| [jira](https://github.com/alexB35/qa-automation-portfolio/tree/main/03_ecommerce/automation-exercise/jira) | Screenshots of Jira boards and cards | 
 
 **Jira board:** [AEX Board](https://alexb35.atlassian.net/jira/software/projects/AEX/boards/3)
 

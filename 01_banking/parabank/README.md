@@ -32,13 +32,13 @@ The goal is to automate common banking workflows, validate UI functionality, and
 
 ## Project Structure
 
-| Folder | Description || Folder | Description | Link |
-|------|------|------|
-| `tests/` | Playwright test scripts | xx |
-| `framework/` | Fixtures, helpers, data & page objects | xx |
-| `resources/` | Config & URLs | xx |
-| `docs/` | Screenshots of test executions and Allure reports | xx |
-| `jira/` | Screenshots of Jira boards and cards | xx |
+| Folder | Description |
+|------|------|
+| [tests](https://github.com/alexB35/qa-automation-portfolio/tree/main/01_banking/parabank/tests) | Playwright test scripts |
+| [framework](https://github.com/alexB35/qa-automation-portfolio/tree/main/01_banking/parabank/framework) | Fixtures, helpers, data & page objects |
+| [resources](https://github.com/alexB35/qa-automation-portfolio/tree/main/01_banking/parabank/resources) | Config & URLs |
+| [docs](https://github.com/alexB35/qa-automation-portfolio/tree/main/01_banking/parabank/docs) | Screenshots of test executions and Allure reports |
+| [jira](https://github.com/alexB35/qa-automation-portfolio/tree/main/01_banking/parabank/jira) | Screenshots of Jira boards and cards |
 
 **Jira :** [PBQ Board](https://alexb35.atlassian.net/jira/software/projects/PBQ/boards/1)
 

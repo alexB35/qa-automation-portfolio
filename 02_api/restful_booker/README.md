@@ -31,13 +31,11 @@ It demonstrates CRUD operations via API : create, retrieve, update, and delete b
 
 ## Project Structure
 
-| Folder | Description | Link |
-|------|------|------|
-| `tests/` | Newman API test collections | xx |
-| `postman/` | Collections & environments | xx |
-| `resources/` | Payloads, schemas | xx |
-| `outputs/` | Allure reports | xx |
-| `jira/` | Screenshots of Jira boards and cards | xx |
+| Folder | Description |
+|------|------|
+| [postman](https://github.com/alexB35/qa-automation-portfolio/tree/main/02_api/restful_booker/postman) | Collections & environments |
+| [docs](https://github.com/alexB35/qa-automation-portfolio/tree/main/02_api/restful_booker/docs) | Screenshots of test executions and Allure reports |
+| [jira](https://github.com/alexB35/qa-automation-portfolio/tree/main/02_api/restful_booker/jira) | Screenshots of Jira boards and cards |
 
 **Jira board :** [RFB Board](https://alexb35.atlassian.net/jira/software/projects/RFB/boards/2)
 
