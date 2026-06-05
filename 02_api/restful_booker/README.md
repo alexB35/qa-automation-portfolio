@@ -1,8 +1,7 @@
-# Restful Booker API Automation
+# Restful Booker API
 
 ![Restful Booker Banner](../../assets/restful-booker-banner.png)
 
----
 
 <div align="center">
 

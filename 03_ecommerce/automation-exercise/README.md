@@ -1,12 +1,11 @@
-# Automation Exercise
+# Automation Exercise UI / API
 
 ![Automation Exercise Banner](../../assets/auto-ex-banner.png)
 
----
 
 <div align="center">
 
-![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/orange-hrm-ui.yml/badge.svg)
+![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/automation-exercise.yml/badge.svg)
 
 <br/>
 

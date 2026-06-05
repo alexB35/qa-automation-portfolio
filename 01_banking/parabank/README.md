@@ -1,8 +1,7 @@
-# ParaBank UI Automation
+# ParaBank UI
 
 ![Parabank Banner](../../assets/parabank-banner.png)
 
----
 
 <div align="center">
 
