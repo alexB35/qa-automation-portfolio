@@ -32,13 +32,13 @@ The goal is to automate common banking workflows, validate UI functionality, and
 
 ## Project Structure
 
-| Folder | Description |
-|---|---|
-| `tests/` | Playwright test scripts |
-| `framework/` | Fixtures, helpers, data & page objects |
-| `resources/` | Config & URLs |
-| `docs/` | Screenshots of test executions and Allure reports |
-| `jira/` | Screenshots of Jira boards and cards |
+| Folder | Description || Folder | Description | Link |
+|------|------|------|
+| `tests/` | Playwright test scripts | xx |
+| `framework/` | Fixtures, helpers, data & page objects | xx |
+| `resources/` | Config & URLs | xx |
+| `docs/` | Screenshots of test executions and Allure reports | xx |
+| `jira/` | Screenshots of Jira boards and cards | xx |
 
 **Jira :** [PBQ Board](https://alexb35.atlassian.net/jira/software/projects/PBQ/boards/1)
 

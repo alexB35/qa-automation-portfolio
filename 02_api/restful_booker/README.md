@@ -31,15 +31,15 @@ It demonstrates CRUD operations via API : create, retrieve, update, and delete b
 
 ## Project Structure
 
-| Folder | Description |
-|------|------|
-| `tests/` | Newman API test collections |
-| `postman/` | Collections & environments |
-| `resources/` | Payloads, schemas |
-| `outputs/` | Allure reports |
-| `jira/` | Screenshots of Jira boards and cards |
+| Folder | Description | Link |
+|------|------|------|
+| `tests/` | Newman API test collections | xx |
+| `postman/` | Collections & environments | xx |
+| `resources/` | Payloads, schemas | xx |
+| `outputs/` | Allure reports | xx |
+| `jira/` | Screenshots of Jira boards and cards | xx |
 
-**Jira board:** [RFB Board](https://alexb35.atlassian.net/jira/software/projects/RFB/boards/2)
+**Jira board :** [RFB Board](https://alexb35.atlassian.net/jira/software/projects/RFB/boards/2)
 
 ---
 
@@ -60,7 +60,7 @@ Trigger the workflow : [restful-booker-api](https://github.com/alexB35/qa-automa
 
 ## Reports
 
-Test execution results are automatically generated after each workflow run using Allure.
+Test execution results are automatically generated after each workflow run using Allure (consultible in GitHub Actions or downloadable artifacts).
 
 Once the _deploy-allure-reports_ is done, you can consult :
 
@@ -71,10 +71,6 @@ or you can consult :
 **The report :** [Restful-Booker] (https://alexb35.github.io/qa-automation-portfolio/restful-booker/)
 
 ![Allure report RB](../../assets/allure-report-RB.png)
-
-- Reports are automatically generated during CI runs
-- Available as downloadable artifacts and consultable pages in GitHub Actions.
-- Include request/response details and failure evidence
 
 ## Allure
 
