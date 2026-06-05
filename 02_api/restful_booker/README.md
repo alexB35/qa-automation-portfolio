@@ -1,3 +1,9 @@
+# Restful Booker API Automation
+
+![Restful Booker Banner](../../assets/restful-booker-banner.png)
+
+---
+
 <div align="center">
 
 ![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml/badge.svg)
@@ -9,15 +15,15 @@
 
 </div>
 
-# Restful Booker API Automation
-
-[https://restful-booker.herokuapp.com](https://restful-booker.herokuapp.com)
+---
 
 ## Overview
 
 This project covers **API automation** for the Restful Booker API.  
 
 It demonstrates CRUD operations via API : create, retrieve, update, and delete bookings. Includes positive and negative scenarios with Newman.
+
+[https://restful-booker.herokuapp.com](https://restful-booker.herokuapp.com)
 
 ---
 

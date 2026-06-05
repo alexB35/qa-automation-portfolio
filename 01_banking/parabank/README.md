@@ -1,3 +1,9 @@
+# ParaBank UI Automation
+
+![Parabank Banner](../../assets/parabank-banner.png)
+
+---
+
 <div align="center">
 
 ![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml/badge.svg)
@@ -10,15 +16,15 @@
 
 </div>
 
-# ParaBank UI Automation
-
-[https://parabank.parasoft.com](https://parabank.parasoft.com/parabank/index.htm)
+---
 
 ## Overview
 
 This project demonstrates **end-to-end UI automation** for ParaBank, a sample online banking web application.  
 
 The goal is to automate common banking workflows, validate UI functionality, and generate reports of the test execution.
+
+[https://parabank.parasoft.com](https://parabank.parasoft.com/parabank/index.htm)
 
 ## Tech Stack
 

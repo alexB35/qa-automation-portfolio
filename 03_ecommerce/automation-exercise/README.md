@@ -1,3 +1,9 @@
+# Automation Exercise
+
+![Automation Exercise Banner](../../assets/auto-ex-banner.png)
+
+---
+
 <div align="center">
 
 ![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/orange-hrm-ui.yml/badge.svg)
@@ -10,16 +16,15 @@
 
 </div>
 
-
-# Automation Exercise
-
-[https://automationexercise.com](https://automationexercise.com)
+---
 
 ## Overview
 
 This project demonstrates **UI + API automation** for "Automation Exercise", an e-commerce platform.  
 
 Automates online shopping flows including registration, login, product browsing, checkout and an API scenarios.
+
+[https://automationexercise.com](https://automationexercise.com)
 
 ---
 
