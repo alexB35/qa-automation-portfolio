@@ -61,11 +61,16 @@ Trigger the workflow : [restful-booker-api](https://github.com/alexB35/qa-automa
 ## Reports
 
 Test execution results are automatically generated after each workflow run using Allure.
+
 Once the _deploy-allure-reports_ is done, you can consult :
 
 **This page :** [Allure-Hub] (https://alexb35.github.io/qa-automation-portfolio/)
-or you can
-**Consult the report :** [Restful-Booker] (https://alexb35.github.io/qa-automation-portfolio/restful-booker/)
+
+or you can consult :
+
+**The report :** [Restful-Booker] (https://alexb35.github.io/qa-automation-portfolio/restful-booker/)
+
+![Allure report RB](../../assets/allure-report-RB.png)
 
 - Reports are automatically generated during CI runs
 - Available as downloadable artifacts and consultable pages in GitHub Actions.
