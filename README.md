@@ -2,9 +2,6 @@
 
 ![QA Automation Portfolio](./assets/banner1.png)
 
-## A dockerized QA automation framework featuring UI/API testing, CI/CD pipelines and Allure reporting.
-
-
 ---
 
 <div align="center">
@@ -23,6 +20,12 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-lightgrey)
 
 </div>
+
+---
+
+## Overview
+
+A dockerized QA automation framework featuring UI/API testing, CI/CD pipelines and Allure reporting.
 
 ---
 
