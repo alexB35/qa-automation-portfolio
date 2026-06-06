@@ -57,7 +57,7 @@ jobs:
         mkdir -p 03_ecommerce/automation-exercise/outputs/test-results
 
     # ── Run tests ───────────────────────────────────────────────────────────
-    - name: Run Automation Exercise tests
+    - name: Run Automation Exercise test suite
       env:
         CI: true
         PROJECT: automation-exercise

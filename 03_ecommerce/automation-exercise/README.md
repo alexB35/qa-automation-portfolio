@@ -46,7 +46,7 @@ Automates online shopping flows including registration, login, product browsing,
 | [docs]((https://github.com/alexB35/qa-automation-portfolio/tree/main/03_ecommerce/automation-exercise/docs)) | Screenshots of test executions and Allure reports |
 | [jira](https://github.com/alexB35/qa-automation-portfolio/tree/main/03_ecommerce/automation-exercise/jira) | Screenshots of Jira boards and cards | 
 
-**Jira board:** [AEX Board](https://alexb35.atlassian.net/jira/software/projects/AEX/boards/3)
+**Jira board :** [AEX Board](https://alexb35.atlassian.net/jira/software/projects/AEX/boards/3)
 
 ---
 
@@ -64,7 +64,25 @@ npx playwright test 03_ecommerce/automation-exercise/tests
 
 ## Using GitHub Actions
 
-Trigger the workflow: [automation-exercise-ui-api](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/automation-exercise.yml)
+Trigger the workflow : [automation-exercise-ui-api](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/automation-exercise.yml)
+
+## Detailed Pipeline
+
+<div align="center">
+
+```mermaid
+flowchart TD
+    A([🔔 Trigger]) --> B[Setup\nNode · Deps · Browsers · Allure · Dirs]
+    B --> C[Run Playwright test suite]
+    C --> D[Generate\nAllure report]
+    D --> E{Quality gate}
+    E -->|✅ Pass| F[Upload artifacts]
+    E -->|❌ Unexpected failures| Z([Pipeline fails])
+    F --> G[Build & push\nDocker image]
+    G --> H([📊 Job summary\nAllure link])
+    H --> I([🚀 deploy-pages.yml\nAllure Hub])
+```
+</div>
 
 ## Reports
 
@@ -87,5 +105,6 @@ or you can
 
 > [!NOTE]
 > You can run an entire application, a User Story, or individual test cases.
+
+> [!NOTE]
 > Playwright is configured to continue on know failure with the quality gate script.
-> Debug informations (logs, screenshots) are centralized in Allure reports.

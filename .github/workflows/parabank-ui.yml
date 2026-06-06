@@ -32,10 +32,10 @@ jobs:
         node-version: '24'
 
     # ── Install dependencies ────────────────────────────────────────────────
-    - name: Installing dependencies
+    - name: Install dependencies
       run: npm install
 
-    # ── Playwright browser cache ─────────────────────────────────────────────
+    # ── Cache Playwright browsers ─────────────────────────────────────────────
     - name: Cache Playwright browsers
       uses: actions/cache@v4
       with:
@@ -43,11 +43,21 @@ jobs:
         key: playwright-firefox-${{ hashFiles('package-lock.json') }}
 
     # ── Install Playwright browsers ─────────────────────────────────────────
-    - name: Installing Playwright browsers
+    - name: Install Playwright browsers
       run: npx playwright install --with-deps firefox
 
-    # ── Initializing ParaBank ─────────────────────────────────────────────────────
-    - name: Initializing ParaBank
+    # ── Install Allure CLI ──────────────────────────────────────────────────
+    - name: Install Allure CLI
+      run: npm install -g allure-commandline
+
+    # ── Create output directories ─────────────────────────────────────────────
+    - name: Create Allure output directories
+      run: |
+        mkdir -p 01_banking/parabank/outputs/allure-results
+        mkdir -p 01_banking/parabank/outputs/test-results
+
+    # ── Initialize ParaBank ─────────────────────────────────────────────────────
+    - name: Start ParaBank container
       run: |
         docker run -d -p 8080:8080 --name parabank parasoft/parabank
         echo "Waiting for Tomcat..."
@@ -56,18 +66,8 @@ jobs:
         done
         echo "Tomcat ready — DB init will be handled by Playwright global setup"
 
-    # ── Install Allure CLI ──────────────────────────────────────────────────
-    - name: Installing Allure CLI
-      run: npm install -g allure-commandline
-
-    # ── Create output directories ─────────────────────────────────────────────
-    - name: Creating Allure output directories
-      run: |
-        mkdir -p 01_banking/parabank/outputs/allure-results
-        mkdir -p 01_banking/parabank/outputs/test-results
-  
     # ── Run tests ─────────────────────────────────────────────────────────────
-    - name: Running ParaBank UI tests
+    - name: Run ParaBank test suite
       env:
         CI: true
         PROJECT: parabank
@@ -78,7 +78,7 @@ jobs:
       continue-on-error: true
 
     # ── Generate Allure report ───────────────────────────────────────────────
-    - name: Generating Allure report
+    - name: Generate Allure report
       if: always()
       run: |
         allure generate 01_banking/parabank/outputs/allure-results \
@@ -91,7 +91,7 @@ jobs:
       run: node scripts/quality-gates.js parabank
 
     # ── Upload artifacts ─────────────────────────────────────────────────
-    - name: Uploading Allure report
+    - name: Upload Allure report
       if: always()
       uses: actions/upload-artifact@v4
       with:
@@ -100,7 +100,7 @@ jobs:
         retention-days: 5
         overwrite : true
 
-    - name: Uploading Playwright test results
+    - name: Upload Playwright test results
       if: always()
       uses: actions/upload-artifact@v4
       with:

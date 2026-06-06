@@ -35,6 +35,10 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    # ── Install Newman reporter ────────────────────────────────────────────────
+    - name: Install Newman-reporter-allure
+      run: npm install newman-reporter-allure@2.15.1
+
     # ── Install Allure CLI ──────────────────────────────────────────────────
     - name: Install Allure CLI
       run: npm install -g allure-commandline
@@ -43,14 +47,8 @@ jobs:
     - name: Create Allure output directory
       run: mkdir -p 02_api/restful_booker/outputs/allure-results
 
-    - name: Install compatible newman-reporter-allure
-      run: npm install newman-reporter-allure@2.15.1
-
-    - name: Debug — newman reporter version
-      run: cat node_modules/newman-reporter-allure/package.json | grep -E '"version"|"peerDependencies"'
-
     # ── Run API tests ────────────────────────────────────────────────────────
-    - name: Run Restful Booker API tests
+    - name: Run Restful Booker test suite
       continue-on-error: true
       run: npm run test:restful-booker
 

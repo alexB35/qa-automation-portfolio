@@ -64,6 +64,26 @@ npx playwright test 01_banking/parabank/tests
 
 Trigger the workflow: [parabank-ui](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml)
 
+## Detailed Pipeline
+
+<div align="center">
+
+```mermaid
+flowchart TD
+    A([🔔 Trigger]) --> B[Setup\nNode · Deps · Browsers · Allure · Dirs]
+    B --> C[Start ParaBank\ncontainer]
+    C --> D[Global setup & DB warmup]
+    D --> E[Run Playwright test suite]
+    E --> F[Generate\nAllure report]
+    F --> G{Quality gate}
+    G -->|✅ Pass| H[Upload artifacts]
+    G -->|❌ Unexpected failures| Z([Pipeline fails])
+    H --> I[Build & push\nDocker image]
+    I --> J([📊 Job summary\nAllure link])
+    J --> K([🚀 deploy-pages.yml\nAllure Hub])
+```
+</div>
+
 ## Reports
 
 Test execution results are automatically generated after each workflow run using Allure.
@@ -83,9 +103,11 @@ or you can
 
 > [!NOTE]
 > You can run an entire application, a User Story, or individual test cases.
+
+> [!NOTE]
 > Playwright is configured to continue on know failure with the quality gate script.
-> Debug informations (logs, screenshots) are centralized in Allure reports.
 
 > [!IMPORTANT]
 > This project targets the local Parabank environment _(localhost:8080)_ rather than the public shared environment.
 > The shared environment is occasionally unstable, triggering Cloudflare limitations and unavailabilities due to pentests.
+

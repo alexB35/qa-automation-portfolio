@@ -61,6 +61,24 @@ newman run 02_api/restful_booker/5_postman/RFB-00_Prerequisites.postman_collecti
 
 Trigger the workflow : [restful-booker-api](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml)
 
+## Detailed Pipeline
+
+<div align="center">
+
+```mermaid
+flowchart TD
+    A([🔔 Trigger]) --> B[Setup\nNode · Deps · Newman · Allure · Dirs]
+    B --> C[Run Newman test suite]
+    C --> D[Generate\nAllure report]
+    D --> E{Quality gate}
+    E -->|✅ Pass| F[Upload artifacts]
+    E -->|❌ Unexpected failures| Z([Pipeline fails])
+    F --> G[Build & push\nDocker image]
+    G --> H([📊 Job summary\nAllure link])
+    H --> I([🚀 deploy-pages.yml\nAllure Hub])
+```
+</div>
+
 ## Reports
 
 Test execution results are automatically generated after each workflow run using Allure (consultible in GitHub Actions or downloadable artifacts).
@@ -83,4 +101,6 @@ or you can consult :
 
 > [!NOTE]
 > Collections are executed sequentially — prerequisites must run first to generate the auth token.
+
+> [!NOTE]
 > Each collection targets a specific CRUD operation.
