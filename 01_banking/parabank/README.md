@@ -53,16 +53,16 @@ The goal is to automate common banking workflows, validate UI functionality, and
 
 Refer to the [root README](../../README.md) for Docker and CI instructions.
 
-## Locally
+### Locally
 ```bash
 npm install
 npx playwright install
 npx playwright test 01_banking/parabank/tests
 ```
 
-## Using GitHub Actions
+### Using GitHub Actions
 
-Trigger the workflow: [parabank-ui](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml)
+Trigger the workflow: [parabank-ui.yml](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml)
 
 ## Detailed Pipeline
 

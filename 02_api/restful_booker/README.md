@@ -50,16 +50,16 @@ It demonstrates CRUD operations via API : create, retrieve, update, and delete b
 
 Refer to the [root README](../../README.md) for Docker and CI instructions.
 
-## Locally 
+### Locally 
 
 ```bash
 newman run 02_api/restful_booker/5_postman/RFB-00_Prerequisites.postman_collection.json \
   -e 02_api/restful_booker/5_postman/environment.json
 ```
 
-## Using GitHub Actions
+### Using GitHub Actions
 
-Trigger the workflow : [restful-booker-api](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml)
+Trigger the workflow : [restful-booker-api.yml](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml)
 
 ## Detailed Pipeline
 

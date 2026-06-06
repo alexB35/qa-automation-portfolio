@@ -54,7 +54,7 @@ Automates online shopping flows including registration, login, product browsing,
 
 Refer to the [root README](../../README.md) for Docker and CI instructions.
 
-## Locally
+### Locally
 
 ```bash
 npm install
@@ -62,9 +62,9 @@ npx playwright install
 npx playwright test 03_ecommerce/automation-exercise/tests
 ```
 
-## Using GitHub Actions
+### Using GitHub Actions
 
-Trigger the workflow : [automation-exercise-ui-api](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/automation-exercise.yml)
+Trigger the workflow : [automation-exercise-ui-api.yml](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/automation-exercise.yml)
 
 ## Detailed Pipeline
 
