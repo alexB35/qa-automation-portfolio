@@ -55,6 +55,10 @@ jobs:
     # ── Generate index page ───────────────────────────────────────────────
     - name: Generate index page
       run: |
+        PARABANK_STATUS=$([[ -f report/parabank/index.html ]] && echo "true" || echo "false")
+        BOOKER_STATUS=$([[ -f report/restful-booker/index.html ]] && echo "true" || echo "false")
+        AE_STATUS=$([[ -f report/automation-exercise/index.html ]] && echo "true" || echo "false")
+
         cat > report/index.html << 'EOF'
         <!DOCTYPE html>
         <html lang="en">
@@ -192,34 +196,12 @@ jobs:
           </div>
 
           <script>
-            const apps = [
-              { id: 'parabank', url: 'parabank/' },
-              { id: 'restful-booker', url: 'restful-booker/' },
-              { id: 'automation-exercise', url: 'automation-exercise/' }
-            ];
-
-            apps.forEach(app => {
-              fetch(app.url, { method: 'HEAD', mode: 'no-cors' })
-                .then(() => setStatus(app.id, true))
-                .catch(() => setStatus(app.id, false));
-            });
-
-            function setStatus(id, available) {
-              const card = document.getElementById('card-' + id);
-              const status = document.getElementById('status-' + id);
-              const led = document.getElementById('led-' + id);
-              const text = document.getElementById('status-text-' + id);
-              if (available) {
-                status.className = 'status available';
-                led.className = 'led green';
-                text.textContent = 'Report available';
-              } else {
-                card.classList.add('card-disabled');
-                status.className = 'status unavailable';
-                led.className = 'led gray';
-                text.textContent = 'No report yet';
-              }
-            }
+            const STATUS = {
+              'parabank': ${PARABANK_STATUS},
+              'restful-booker': ${BOOKER_STATUS},
+              'automation-exercise': ${AE_STATUS}
+            };
+            Object.entries(STATUS).forEach(([id, available]) => setStatus(id, available));
           </script>
         </body>
         </html>
