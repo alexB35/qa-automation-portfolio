@@ -21,9 +21,11 @@
 
 This project demonstrates **end-to-end UI automation** for ParaBank, a sample online banking web application.  
 
-The goal is to automate common banking workflows, validate UI functionality, and generate reports of the test execution.
+Its goal is to automate common banking scenarios and validate UI functionalities of the application.
 
 [https://parabank.parasoft.com](https://parabank.parasoft.com/parabank/index.htm)
+
+---
 
 ## Tech Stack
 
@@ -45,24 +47,29 @@ The goal is to automate common banking workflows, validate UI functionality, and
 | [docs](https://github.com/alexB35/qa-automation-portfolio/tree/main/01_banking/parabank/docs) | Screenshots of test executions and Allure reports |
 | [jira](https://github.com/alexB35/qa-automation-portfolio/tree/main/01_banking/parabank/jira) | Screenshots of Jira boards and cards |
 
-**Jira :** [PBQ Board](https://alexb35.atlassian.net/jira/software/projects/PBQ/boards/1)
+**Jira Board :** [ParaBank - PBQ](https://alexb35.atlassian.net/jira/software/projects/PBQ/boards/1)
 
 ---
 
 ## How to Run Tests
 
-Refer to the [root README](../../README.md) for Docker and CI instructions.
-
 ### Locally
+
+Refer to the [root README](../../README.md) for Docker installation.
+
+Then, run in terminal :
+
 ```bash
 npm install
-npx playwright install
-npx playwright test 01_banking/parabank/tests
+npx playwright install --with-deps firefox
+npx playwright test --project=parabank
 ```
 
 ### Using GitHub Actions
 
 Trigger the workflow: [parabank-ui.yml](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml)
+
+---
 
 ## Detailed Pipeline
 
@@ -83,6 +90,8 @@ flowchart TD
     J --> K([🚀 deploy-pages.yml\nAllure Hub])
 ```
 </div>
+
+---
 
 ## Reports
 
