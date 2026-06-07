@@ -94,13 +94,10 @@ jobs:
             .status { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 2em; }
             .status.available { background: #dcfce7; color: #1a7f37; }
             .status.unavailable { background: #f6f8fa; color: #57606a; }
-            .status.checking { background: #f6f8fa; color: #57606a; }
             .led { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
             .led.green { background: #3fb950; animation: pulse 2s infinite; }
             .led.gray { background: #57606a; opacity: 0.4; }
-            .led.checking { background: #57606a; opacity: 0.4; animation: blink 1s infinite; }
             @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-            @keyframes blink { 0%,100%{opacity:0.4} 50%{opacity:1} }
             .footer { display: flex; gap: 1.5rem; padding-top: 1rem; border-top: 1px solid #d0d7de; }
             .footer-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #57606a; text-decoration: none; }
             .footer-item:hover { color: #0969da; }
@@ -117,7 +114,6 @@ jobs:
               .badge.postman { background: #2d1a00; color: #f0883e; }
               .status.available { background: #0d2818; color: #3fb950; }
               .status.unavailable { background: #161b22; color: #8b949e; }
-              .status.checking { background: #161b22; color: #8b949e; }
               .footer { border-color: #30363d; }
               .footer-item:hover { color: #58a6ff; }
             }
@@ -135,16 +131,16 @@ jobs:
             </div>
 
             <p class="section-title">Open latest Allure reports for:</p>
-            <div class="cards" id="cards">
+            <div class="cards">
               <a href="parabank/" class="card" id="card-parabank">
                 <div class="card-header">
                   <div class="card-title">
                     <div class="card-icon blue">💳</div>
                     <span class="card-name">ParaBank</span>
                   </div>
-                  <div class="status checking" id="status-parabank">
-                    <span class="led checking" id="led-parabank"></span>
-                    <span id="status-text-parabank">Checking...</span>
+                  <div class="status" id="status-parabank">
+                    <span class="led" id="led-parabank"></span>
+                    <span id="status-text-parabank"></span>
                   </div>
                 </div>
                 <p class="card-desc">UI test suite for a banking web application.</p>
@@ -159,9 +155,9 @@ jobs:
                     <div class="card-icon teal">🧳</div>
                     <span class="card-name">Restful Booker</span>
                   </div>
-                  <div class="status checking" id="status-restful-booker">
-                    <span class="led checking" id="led-restful-booker"></span>
-                    <span id="status-text-restful-booker">Checking...</span>
+                  <div class="status" id="status-restful-booker">
+                    <span class="led" id="led-restful-booker"></span>
+                    <span id="status-text-restful-booker"></span>
                   </div>
                 </div>
                 <p class="card-desc">API test suite for a hotel booking application.</p>
@@ -176,9 +172,9 @@ jobs:
                     <div class="card-icon purple">🛒</div>
                     <span class="card-name">Automation Exercise</span>
                   </div>
-                  <div class="status checking" id="status-automation-exercise">
-                    <span class="led checking" id="led-automation-exercise"></span>
-                    <span id="status-text-automation-exercise">Checking...</span>
+                  <div class="status" id="status-automation-exercise">
+                    <span class="led" id="led-automation-exercise"></span>
+                    <span id="status-text-automation-exercise"></span>
                   </div>
                 </div>
                 <p class="card-desc">UI & API test suite for an e-commerce web application.</p>
@@ -196,6 +192,23 @@ jobs:
           </div>
 
           <script>
+            function setStatus(id, available) {
+              const card = document.getElementById('card-' + id);
+              const status = document.getElementById('status-' + id);
+              const led = document.getElementById('led-' + id);
+              const text = document.getElementById('status-text-' + id);
+              if (available) {
+                status.className = 'status available';
+                led.className = 'led green';
+                text.textContent = 'Report available';
+              } else {
+                card.classList.add('card-disabled');
+                status.className = 'status unavailable';
+                led.className = 'led gray';
+                text.textContent = 'No report yet';
+              }
+            }
+
             const STATUS = {
               'parabank': ${PARABANK_STATUS},
               'restful-booker': ${BOOKER_STATUS},
