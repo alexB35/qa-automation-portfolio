@@ -27,8 +27,12 @@
 
 A QA automation portfolio featuring UI & API testing, CI/CD pipelines via GitHub Actions, Allure reporting on GitHub Pages, and Docker image distribution for local execution.
 
----
-> Tests run directly on GitHub Actions runners in CI. </br> A Docker image is published to Docker Hub for containerized local execution.
+<details>
+<summary>About Docker usage</summary>
+
+Tests run directly on GitHub Actions runners in CI. A Docker image is published to Docker Hub for containerized local execution — no local dependencies required beyond Docker Desktop.
+
+</details>
 
 ---
 
@@ -80,29 +84,23 @@ This portfolio follows a structured QA approach to ensure high-quality, reliable
 
 ---
 
-## Consult CI reports on GitHub
+## Consult CI reports on GitHub Pages
 
 Tests run on GitHub Actions runners in CI. 
 
 <br/>
 
-**View the latest test reports — Allure Hub (GitHub Pages) :**
-
-👉 [Open Allure Hub](https://alexB35.github.io/qa-automation-portfolio/)
-
----
-
-
+View the latest test reports on the Allure Hub (GitHub Pages).
 
 ---
 
 ## Allure Hub
 
-The Allure reports of the 3 applications are centralized in the Allure Hub after generation of _deploy-pages.yml_.
+The generated Allure reports of the 3 applications are centralized in the Allure Hub after the _deploy-pages.yml_ ends.
 
 ![Allure hub](./assets/allure-hub.png)
 
-[Allure-Hub] (https://alexb35.github.io/qa-automation-portfolio/)
+[Allure Hub](https://alexb35.github.io/qa-automation-portfolio/)
 
 ---
 
