@@ -59,7 +59,7 @@ jobs:
         BOOKER_STATUS=$([[ -f report/restful-booker/index.html ]] && echo "true" || echo "false")
         AE_STATUS=$([[ -f report/automation-exercise/index.html ]] && echo "true" || echo "false")
 
-        cat > report/index.html << 'EOF'
+        cat > report/index.html << EOF
         <!DOCTYPE html>
         <html lang="en">
         <head>
