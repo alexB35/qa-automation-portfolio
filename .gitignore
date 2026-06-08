@@ -15,7 +15,7 @@ node_modules/
 03_ecommerce/automation-exercise/.auth/
 
 # All test outputs
-outputs/
+outputs/playwright-report/
 01_banking/parabank/outputs/
 02_api/restful_booker/outputs/
 03_ecommerce/automation-exercise/outputs/
