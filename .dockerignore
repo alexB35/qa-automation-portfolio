@@ -1,4 +1,35 @@
+# Dependencies
 node_modules
+
+# Build artifacts
 dist
-diff-stat.txt
+
+# Test outputs
+**/outputs/
+**/allure-results/
+**/allure-report/
+**/test-results/
+
+# Auth files
+**/.auth/
+
+# Version control
 .git
+
+# IDE
+.vscode/
+
+# Logs
+*.log
+
+# Environment
+.env
+
+# GitHub artifacts
+diff-stat.txt
+
+# Documentation
+**/docs/
+**/jira/
+**/*.md
+!README.md

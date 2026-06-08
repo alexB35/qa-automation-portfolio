@@ -83,6 +83,7 @@ This portfolio follows a structured QA approach to ensure high-quality, reliable
 | [ParaBank](./01_banking/parabank/README.md) | UI automation for banking scenarios |
 | [Restful Booker](./02_api/restful_booker/README.md) | API automation for booking management scenarios |
 | [Automation Exercise](./03_ecommerce/automation-exercise/README.md) | UI and API automation for e-commerce scenarios |
+| [scripts](./scripts) | Shared CI/CD scripts — dirs clean, Newman runner and quality gate |
 
 ---
 
@@ -95,11 +96,14 @@ _For local execution, a Docker image is available on Docker Hub — no dependenc
 
 <br/>
 
-**Run the image:**
+**Clone the repository and run :**
 ```bash
-docker run --rm -v $(pwd)/reports:/app/outputs alexB35/qa-automation-portfolio:latest
+git clone https://github.com/alexB35/qa-automation-portfolio.git
+cd qa-automation-portfolio
+docker-compose up
 ```
 
+> For the ParaBank application, the test suite starts automatically once the container is ready.
 > Reports are generated locally in `./reports/`.
 
 ---

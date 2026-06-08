@@ -1,4 +1,5 @@
-export const BASE_URL = 'http://localhost:8080/parabank';
+const host = process.env['PARABANK_URL'] || 'http://localhost:8080';
+export const BASE_URL = `${host}/parabank`;
 
 export const URLS = {
   indexUrl: `${BASE_URL}/index.htm`,
