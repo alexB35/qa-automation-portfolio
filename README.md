@@ -114,7 +114,7 @@ Tests run on GitHub Actions runners in CI.
 
 Allure reports for all 3 applications are centralized in the Allure Hub (GitHub Pages), deployed via `deploy-allure-hub.yml` after each CI run.
 
-👉 [Allure Hub](https://alexb35.github.io/qa-automation-portfolio/)
+👉 Open the [Allure Hub](https://alexb35.github.io/qa-automation-portfolio/)
 
 ![Allure hub](./assets/allure-hub.png)
 
