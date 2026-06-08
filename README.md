@@ -41,7 +41,6 @@ Tests run directly on GitHub Actions runners in CI. </br> A Docker image is publ
 ## Framework features
 
 - Reusable fixtures & helpers
-- Data-driven testing
 - Dynamic test data generation
 - API cleanup hooks
 - Isolated test execution

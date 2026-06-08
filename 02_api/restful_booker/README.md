@@ -22,15 +22,7 @@ This project covers **API automation** for the Restful Booker API.
 
 It demonstrates CRUD operations via API : create, retrieve, update, and delete bookings. Includes positive and negative scenarios with Newman.
 
-[https://restful-booker.herokuapp.com](https://restful-booker.herokuapp.com)
-
----
-
-## Tech Stack
-
-- **Postman + Newman** - _API testing_
-- **Docker** - _containerized execution_
-- **GitHub Actions** - _CI/CD_
+👉 Restful Booker website : [https://restful-booker.herokuapp.com](https://restful-booker.herokuapp.com)
 
 ---
 
@@ -42,26 +34,30 @@ It demonstrates CRUD operations via API : create, retrieve, update, and delete b
 | [docs](https://github.com/alexB35/qa-automation-portfolio/tree/main/02_api/restful_booker/docs) | Screenshots of test executions and Allure reports |
 | [jira](https://github.com/alexB35/qa-automation-portfolio/tree/main/02_api/restful_booker/jira) | Screenshots of Jira boards and cards |
 
-**Jira board :** [RFB Board](https://alexb35.atlassian.net/jira/software/projects/RFB/boards/2)
+**Jira board :** [Restful Booker - RFB](https://alexb35.atlassian.net/jira/software/projects/RFB/boards/2)
 
 ---
 
-## How to Run Tests
+## Run Tests Locally
 
-Refer to the [root README](../../README.md) for Docker and CI instructions.
+Refer to the [root README](../../README.md) for Docker installation.
 
-### Locally 
+Then, run in terminal :
 
 ```bash
-newman run 02_api/restful_booker/5_postman/RFB-00_Prerequisites.postman_collection.json \
-  -e 02_api/restful_booker/5_postman/environment.json
+npm install
+npm run test:restful-booker
 ```
 
-### Using GitHub Actions
+> Collections are executed sequentially — prerequisites must run first to generate the auth token.
+> Each collection targets a specific CRUD operation.
 
-Trigger the workflow : [restful-booker-api.yml](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml)
+---
 
-## Detailed Pipeline
+## CI/CD Pipeline
+
+Tests run automatically on every push to `main` via [restful-booker-api.yml](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/restful-booker-api.yml).
+
 
 <div align="center">
 
@@ -75,32 +71,19 @@ flowchart TD
     E -->|❌ Unexpected failures| Z([Pipeline fails])
     F --> G[Build & push\nDocker image]
     G --> H([📊 Job summary\nAllure link])
-    H --> I([🚀 deploy-pages.yml\nAllure Hub])
+    H --> I([🚀 deploy-allure-hub.yml])
 ```
 </div>
 
-## Reports
-
-Test execution results are automatically generated after each workflow run using Allure (consultible in GitHub Actions or downloadable artifacts).
-
-Once the _deploy-allure-reports_ is done, you can consult :
-
-**This page :** [Allure-Hub] (https://alexb35.github.io/qa-automation-portfolio/)
-
-or you can consult :
-
-**The report :** [Restful-Booker] (https://alexb35.github.io/qa-automation-portfolio/restful-booker/)
-
-![Allure report RB](../../assets/allure-report-RB.png)
-
-## Allure
-
-![Allure restful booker](../../assets/allure-restful-booker.png)
-
 ---
 
-> [!NOTE]
-> Collections are executed sequentially — prerequisites must run first to generate the auth token.
+## Allure Reports
 
-> [!NOTE]
-> Each collection targets a specific CRUD operation.
+Test results are published to GitHub Pages after each CI run via `deploy-allure-hub.yml`.
+
+👉 [Allure Hub](https://alexB35.github.io/qa-automation-portfolio/)
+👉 [Restful Booker Report](https://alexb35.github.io/qa-automation-portfolio/restful-booker/)
+
+> Include test steps, logs, and screenshots for failures.
+
+![Allure restful booker](../../assets/allure-restful-booker.png)

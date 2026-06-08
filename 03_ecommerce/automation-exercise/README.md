@@ -5,7 +5,7 @@
 
 <div align="center">
 
-![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/automation-exercise.yml/badge.svg)
+![CI](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/automation-exercise-ui-api.yml/badge.svg)
 
 <br/>
 
@@ -23,16 +23,7 @@ This project demonstrates **UI + API automation** for "Automation Exercise", an 
 
 Automates online shopping flows including registration, login, product browsing, checkout and an API scenarios.
 
-[https://automationexercise.com](https://automationexercise.com)
-
----
-
-## Tech Stack
-
-- **Playwright** - _UI & API_
-- **TypeScript / Node.js**
-- **Docker** - contenerized execution
-- **GitHub Actions** - _CI/CD_
+👉 Automation Exercise website : [https://automationexercise.com](https://automationexercise.com)
 
 ---
 
@@ -40,33 +31,33 @@ Automates online shopping flows including registration, login, product browsing,
 
 | Folder | Description |
 |------|------|
-| [tests](https://github.com/alexB35/qa-automation-portfolio/tree/main/03_ecommerce/automation-exercise/tests) | Playwright test scripts | xx |
+| [tests](https://github.com/alexB35/qa-automation-portfolio/tree/main/03_ecommerce/automation-exercise/tests) | Playwright test scripts |
 | [framework](https://github.com/alexB35/qa-automation-portfolio/tree/main/03_ecommerce/automation-exercise/framework) | Fixtures, helpers, page objects & API clients |
 | [resources](https://github.com/alexB35/qa-automation-portfolio/tree/main/03_ecommerce/automation-exercise/resources) | Config & test data |
-| [docs]((https://github.com/alexB35/qa-automation-portfolio/tree/main/03_ecommerce/automation-exercise/docs)) | Screenshots of test executions and Allure reports |
+| [docs](https://github.com/alexB35/qa-automation-portfolio/tree/main/03_ecommerce/automation-exercise/docs) | Screenshots of test executions and Allure reports |
 | [jira](https://github.com/alexB35/qa-automation-portfolio/tree/main/03_ecommerce/automation-exercise/jira) | Screenshots of Jira boards and cards | 
 
 **Jira board :** [AEX Board](https://alexb35.atlassian.net/jira/software/projects/AEX/boards/3)
 
 ---
 
-## How to Run Tests 
+## Run Tests Locally
 
-Refer to the [root README](../../README.md) for Docker and CI instructions.
-
-### Locally
+Refer to the [root README](../../README.md) for Docker installation.
 
 ```bash
 npm install
-npx playwright install
-npx playwright test 03_ecommerce/automation-exercise/tests
+npx playwright install --with-deps firefox
+npx playwright test --project=automation-exercise
 ```
 
-### Using GitHub Actions
+> Tests can be run at suite, user story, or individual test case level.
 
-Trigger the workflow : [automation-exercise-ui-api.yml](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/automation-exercise.yml)
+---
 
-## Detailed Pipeline
+## CI/CD Pipeline
+
+Tests run automatically on every push to `main` via [automation-exercise-ui-api.yml](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/automation-exercise-ui-api.yml).
 
 <div align="center">
 
@@ -80,31 +71,21 @@ flowchart TD
     E -->|❌ Unexpected failures| Z([Pipeline fails])
     F --> G[Build & push\nDocker image]
     G --> H([📊 Job summary\nAllure link])
-    H --> I([🚀 deploy-pages.yml\nAllure Hub])
+    H --> I([🚀 deploy-allure-hub.yml])
 ```
 </div>
 
-## Reports
-
-Test execution results are automatically generated after each workflow run using Allure.
-Once the _deploy-allure-reports_ is done, you can consult :
-
-**This page :** [Allure-Hub] (https://alexb35.github.io/qa-automation-portfolio/)
-or you can
-**Consult the report :** [Automation-Exercise] (https://alexb35.github.io/qa-automation-portfolio/automation-exercise/)
-
-- Reports are automatically generated during CI runs
-- Available as downloadable artifacts and consultable pages in GitHub Actions.
-- Include test steps, logs, and screenshots on failure
-
-## Allure
-
-![Allure Automation Exercise](../../assets/allure-automation-exercise.png)
+> Playwright is configured to continue on know failure — unexpected failures are caught by the quality gate script.
 
 ---
 
-> [!NOTE]
-> You can run an entire application, a User Story, or individual test cases.
+## Allure Reports
 
-> [!NOTE]
-> Playwright is configured to continue on know failure with the quality gate script.
+Test results are published to GitHub Pages after each CI run via `deploy-allure-hub.yml`.
+
+👉 [Allure Hub](https://alexB35.github.io/qa-automation-portfolio/)
+👉 [Automation Exercise Report](https://alexb35.github.io/qa-automation-portfolio/automation-exercise/)
+
+> Include test steps, logs, and screenshots for failures.
+
+![Allure Automation Exercise](../../assets/allure-automation-exercise.png)

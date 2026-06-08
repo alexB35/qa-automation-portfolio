@@ -21,19 +21,11 @@
 
 This project demonstrates **end-to-end UI automation** for ParaBank, a sample online banking web application.  
 
+</br>
+
 Its goal is to automate common banking scenarios and validate UI functionalities of the application.
 
-[https://parabank.parasoft.com](https://parabank.parasoft.com/parabank/index.htm)
-
----
-
-## Tech Stack
-
-- **Playwright** - _UI automation_
-- **TypeScript / Node.js**
-- **Docker** - _local test environment_
-- **GitHub Actions** - _CI/CD_
-- **Allure** - _test reporting_
+👉 ParaBank website : [https://parabank.parasoft.com](https://parabank.parasoft.com/parabank/index.htm)
 
 ---
 
@@ -51,9 +43,7 @@ Its goal is to automate common banking scenarios and validate UI functionalities
 
 ---
 
-## How to Run Tests
-
-### Locally
+## Run Tests Locally
 
 Refer to the [root README](../../README.md) for Docker installation.
 
@@ -65,13 +55,14 @@ npx playwright install --with-deps firefox
 npx playwright test --project=parabank
 ```
 
-### Using GitHub Actions
-
-Trigger the workflow: [parabank-ui.yml](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml)
+> Tests can be run at suite, user story, or individual test case level.
 
 ---
 
-## Detailed Pipeline
+## CI/CD Pipeline
+
+Tests run automatically on every push to `main` via [parabank-ui.yml](https://github.com/alexB35/qa-automation-portfolio/actions/workflows/parabank-ui.yml).
+
 
 <div align="center">
 
@@ -87,36 +78,27 @@ flowchart TD
     G -->|❌ Unexpected failures| Z([Pipeline fails])
     H --> I[Build & push\nDocker image]
     I --> J([📊 Job summary\nAllure link])
-    J --> K([🚀 deploy-pages.yml\nAllure Hub])
+    J --> K([🚀 deploy-allure-hub.yml])
 ```
 </div>
 
+> Playwright is configured to continue on know failure — unexpected failures are caught by the quality gate script.
+
 ---
 
-## Reports
+## Allure Reports
 
-Test execution results are automatically generated after each workflow run using Allure.
-Once the _deploy-allure-reports_ is done, you can consult :
+Test results are published to GitHub Pages after each CI run via `deploy-allure-hub.yml`.
 
-**This page :** [Allure-Hub] (https://alexb35.github.io/qa-automation-portfolio/)
-or you can
-**Consult the report :** [ParaBank] (https://alexb35.github.io/qa-automation-portfolio/parabank/)
+👉 [Allure Hub](https://alexB35.github.io/qa-automation-portfolio/)
+👉 [ParaBank Report](https://alexB35.github.io/qa-automation-portfolio/parabank/)
 
-- Reports are automatically generated during CI runs.
-- Available as downloadable artifacts and consultable pages in GitHub Actions.
-- Include test steps, logs, and screenshots for failures.
-
-## Allure
+> Include test steps, logs, and screenshots for failures.
 
 ![Allure Parabank](../../assets/allure-parabank.png)
 
-> [!NOTE]
-> You can run an entire application, a User Story, or individual test cases.
-
-> [!NOTE]
-> Playwright is configured to continue on know failure with the quality gate script.
+---
 
 > [!IMPORTANT]
-> This project targets the local Parabank environment _(localhost:8080)_ rather than the public shared environment.
-> The shared environment is occasionally unstable, triggering Cloudflare limitations and unavailabilities due to pentests.
+> This project targets the local Parabank environment _(localhost:8080)_ rather than the public shared environment. </br> The shared environment is occasionally unstable due to Cloudflare limitations and pentest-related unavailabilities.
 
