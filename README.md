@@ -65,14 +65,14 @@ Each application has its own dedicated CI/CD workflow, allowing independent exec
 
 ## Test Strategy
 
+This portfolio follows a structured QA approach to ensure high-quality, reliable, and maintainable automated tests across multiple applications.
+
 | Dimension | Details |
 |-----------|---------|
 | Scope | UI & API automation — independent, reusable tests |
 | Approach | Modular, data-driven tests orchestrated via GitHub Actions |
 | Test Types | Functional, positive/negative, validation, API contract |
 | Reporting | Allure reports on GitHub Pages with failure screenshots, CI artifacts |
-
->This portfolio follows a structured QA approach to ensure high-quality, reliable, and maintainable automated tests across multiple applications.
 
 ---
 
@@ -83,24 +83,6 @@ Each application has its own dedicated CI/CD workflow, allowing independent exec
 | [ParaBank](./01_banking/parabank/README.md) | UI automation for banking scenarios |
 | [Restful Booker](./02_api/restful_booker/README.md) | API automation for booking management scenarios |
 | [Automation Exercise](./03_ecommerce/automation-exercise/README.md) | UI and API automation for e-commerce scenarios |
-
----
-
-## Allure Hub
-
-Tests run on GitHub Actions runners in CI. 
-
-Allure reports for all 3 applications are centralized in the Allure Hub (GitHub Pages), deployed via `deploy-allure-hub.yml` after each CI run.
-
-[Allure Hub](https://alexb35.github.io/qa-automation-portfolio/)
-
-![Allure hub](./assets/allure-hub.png)
-
----
-
-## Allure Report Sample
-
-![Allure report](./assets/allure-report.png)
 
 ---
 
@@ -119,6 +101,24 @@ docker run --rm -v $(pwd)/reports:/app/outputs alexB35/qa-automation-portfolio:l
 ```
 
 > Reports are generated locally in `./reports/`.
+
+---
+
+## Allure Hub
+
+Tests run on GitHub Actions runners in CI. 
+
+Allure reports for all 3 applications are centralized in the Allure Hub (GitHub Pages), deployed via `deploy-allure-hub.yml` after each CI run.
+
+👉 [Allure Hub](https://alexb35.github.io/qa-automation-portfolio/)
+
+![Allure hub](./assets/allure-hub.png)
+
+---
+
+## Allure Report Sample
+
+![Allure report](./assets/allure-report.png)
 
 ---
 
