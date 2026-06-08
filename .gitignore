@@ -21,6 +21,7 @@ outputs/playwright-report/
 03_ecommerce/automation-exercise/outputs/
 
 # Allure at root (generated reports)
+reports/
 allure-results/
 allure-report/
 

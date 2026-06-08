@@ -47,7 +47,7 @@ jobs:
     - name: Download Automation Exercise report
       uses: dawidd6/action-download-artifact@v6
       with:
-        workflow: automation-exercise.yml
+        workflow: automation-exercise-ui-api.yml
         name: allure-report-automation-exercise
         path: report/automation-exercise
         if_no_artifact_found: ignore
