@@ -35,7 +35,7 @@ test('TC-06 | Successful login', async ({ page }) => {
  
     await epic('UI Testing');
     await story('AEX-02 User Login');
-    await testCaseId('TC-06 - Successful login');
+    await testCaseId('TC-06');
     await severity('critical');
  
     await step('Navigate to login page', async () => {

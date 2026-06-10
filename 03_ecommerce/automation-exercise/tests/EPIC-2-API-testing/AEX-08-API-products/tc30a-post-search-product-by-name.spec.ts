@@ -9,11 +9,11 @@ const SEARCH_TERM = 'top';
 test.describe('AEX-08 – API Products', () => {
 
 // ── TC-30a | POST search product by name ────────────────────────────────
-  test('TC-30a | POST search product by name — results returned', async ({ request }) => {
+  test('TC-30a | POST search product by name', async ({ request }) => {
  
     await epic('API Testing');
     await feature('AEX-08 API Products');
-    await story('TC-30a POST search product');
+    await story('TC-30a');
     await severity('critical');
  
     await step('Send POST request to /api/searchProduct with search_product=top', async () => {

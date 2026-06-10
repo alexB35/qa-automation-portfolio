@@ -24,6 +24,11 @@ RUN npm install
 RUN npm install newman-reporter-allure@2.15.1
 
 # ================================
+# Install Java for Allure CLI
+# ================================
+RUN apt-get update && apt-get install -y openjdk-17-jre && rm -rf /var/lib/apt/lists/*
+
+# ================================
 # Install Allure CLI
 # ================================
 RUN npm install -g allure-commandline
@@ -32,9 +37,12 @@ RUN npm install -g allure-commandline
 # Run all test suites
 # ================================
 CMD ["sh", "-c", "\
-  npx playwright test --project=parabank ; \
+  PROJECT=parabank npx playwright test --project=parabank ; \
   npm run test:restful-booker ; \
-  npx playwright test --project=automation-exercise ; \
+  PROJECT=automation-exercise npx playwright test --project=automation-exercise ; \
+  allure generate 01_banking/parabank/outputs/allure-results --output 01_banking/parabank/outputs/allure-report --clean ; \
+  allure generate 02_api/restful_booker/outputs/allure-results --output 02_api/restful_booker/outputs/allure-report --clean ; \
+  allure generate 03_ecommerce/automation-exercise/outputs/allure-results --output 03_ecommerce/automation-exercise/outputs/allure-report --clean ; \
   mkdir -p /app/outputs/parabank /app/outputs/restful-booker /app/outputs/automation-exercise && \
   cp -r 01_banking/parabank/outputs/allure-report/. /app/outputs/parabank/ && \
   cp -r 02_api/restful_booker/outputs/allure-report/. /app/outputs/restful-booker/ && \

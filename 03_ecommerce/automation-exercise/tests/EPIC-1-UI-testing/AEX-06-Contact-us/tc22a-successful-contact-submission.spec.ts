@@ -19,11 +19,11 @@ test.describe('AEX-06 – Contact us', () => {
 
 
 // ── Tests ──────────────────────────────────────────────────────────
-  test('TC-22a | Successful contact submission with valid data', async ({ page }) => {
+  test('TC-22a | Successful contact submission', async ({ page }) => {
 
     await epic('UI Testing');
     await story('AEX-06 Contact us');
-    await testCaseId('TC-22a - Successful contact submission');
+    await testCaseId('TC-22a');
     await severity('critical');
 
     await step('Navigate to homepage', async () => {

@@ -15,14 +15,14 @@ test.describe('AEX-01 – User Registration', () => {
     test.use({ storageState: { cookies: [], origins: [] } });
 
 // ── Tests ──────────────────────────────────────────────────────────
-test('TC-03 | Invalid data - date of birth : February 31st', async ({ page }) => {
+test('TC-03 | Invalid data registration', async ({ page }) => {
  
   const registerPage = new RegisterPage(page);
   const user = buildUser();
 
   await epic('UI Testing');
     await story('AEX-01 User Registration');
-    await testCaseId('TC-03 - Invalid data - date of birth');
+    await testCaseId('TC-03');
     await severity('normal');
     await issue('AEX-B-01 - Invalid date of birth during registration', 'https://alexb35.atlassian.net/browse/AEX-5');
  

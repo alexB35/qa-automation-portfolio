@@ -29,7 +29,7 @@ test('TC-09 | Logout', async ({ page }) => {
  
     await epic('UI Testing');
     await story('AEX-02 User Login');
-    await testCaseId('TC-09 - Logout');
+    await testCaseId('TC-09');
     await severity('normal');
  
     await step('Navigate to login / signup page', async () => {

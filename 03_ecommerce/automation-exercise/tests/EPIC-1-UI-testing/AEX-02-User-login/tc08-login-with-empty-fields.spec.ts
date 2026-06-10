@@ -18,7 +18,7 @@ test('TC-08 | Login with empty fields', async ({ page }) => {
  
     await epic('UI Testing');
     await story('AEX-02 User Login');
-    await testCaseId('TC-08 - Login with empty fields');
+    await testCaseId('TC-08');
     await severity('normal');
  
     await step('Navigate to login / signup page', async () => {

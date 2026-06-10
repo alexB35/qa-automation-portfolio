@@ -18,11 +18,11 @@ test.describe('AEX-07 – API User Management', () => {
   });
 
 // ── TC-27 | DELETE user account ─────────────────────────────────────────
-  test('TC-27 | DELETE user account via API', async ({ request }) => {
+  test('TC-27 | DELETE user account', async ({ request }) => {
  
     await epic('API Testing');
     await feature('AEX-07 API User Management');
-    await story('TC-27 DELETE user account');
+    await story('TC-27');
     await severity('critical');
  
     await step('Send DELETE request to /api/deleteAccount', async () => {

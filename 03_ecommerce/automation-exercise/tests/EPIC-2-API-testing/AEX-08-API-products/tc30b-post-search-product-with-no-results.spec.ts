@@ -8,11 +8,11 @@ const API_BASE = 'https://automationexercise.com/api';
 test.describe('AEX-08 – API Products', () => {
 
 // ── TC-30b | POST search without parameter ──────────────────────────────
-  test('TC-30b | POST search with no results — missing parameter returns 400', async ({ request }) => {
+  test('TC-30b | POST search with no results', async ({ request }) => {
  
     await epic('API Testing');
     await feature('AEX-08 API Products');
-    await story('TC-30b POST search missing parameter');
+    await story('TC-30b');
     await severity('normal');
  
     await step('Send POST request to /api/searchProduct without parameter', async () => {

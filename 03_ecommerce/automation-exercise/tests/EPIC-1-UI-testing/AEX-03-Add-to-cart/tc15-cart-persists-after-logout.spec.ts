@@ -37,7 +37,7 @@ test('TC-15 | Cart Persists after Logout', async ({ page }) => {
  
     await epic('UI Testing');
     await story('AEX-03 Add Product to Cart');
-    await testCaseId('TC-15 - Cart Persists after Logout');
+    await testCaseId('TC-15');
     await severity('normal');
 
     await step('Login with valid credentials', async () => {

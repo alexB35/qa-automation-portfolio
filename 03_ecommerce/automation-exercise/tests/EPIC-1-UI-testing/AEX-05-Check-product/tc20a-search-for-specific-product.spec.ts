@@ -16,7 +16,7 @@ test('TC-20a | Search for specific product', async ({ page }) => {
  
     await epic('UI Testing');
     await story('AEX-05 Check Product');
-    await testCaseId('TC-20a - Search for specific product');
+    await testCaseId('TC-20a');
     await severity('critical');
  
     await step('Navigate to product page', async () => {

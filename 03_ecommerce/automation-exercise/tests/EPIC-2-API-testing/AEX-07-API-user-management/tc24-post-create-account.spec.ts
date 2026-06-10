@@ -13,11 +13,11 @@ test.describe('AEX-07 – API User Management', () => {
   test.describe.configure({ mode: 'serial' });
  
 // ── TC-24 | POST create account ─────────────────────────────────────────
-  test('TC-24 | POST create account via API', async ({ request }) => {
+  test('TC-24 | POST create account', async ({ request }) => {
  
     await epic('API Testing');
     await feature('AEX-07 API User Management');
-    await story('TC-24 POST create account');
+    await story('TC-24');
     await severity('critical');
  
     await step('Send POST request to /api/createAccount', async () => {

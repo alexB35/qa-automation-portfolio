@@ -19,6 +19,5 @@ services:
       - ./reports:/app/outputs
     environment:
       - CI=true
-      - PROJECT=parabank
       - WORKERS=2
       - PARABANK_URL=http://parabank:8080

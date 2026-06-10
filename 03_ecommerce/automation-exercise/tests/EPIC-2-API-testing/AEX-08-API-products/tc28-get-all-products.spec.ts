@@ -8,11 +8,11 @@ const API_BASE = 'https://automationexercise.com/api';
 test.describe('AEX-08 – API Products', () => {
  
   // ── TC-28 | GET all products ────────────────────────────────────────────
-  test('TC-28 | GET all products — verify response structure', async ({ request }) => {
+  test('TC-28 | GET all products', async ({ request }) => {
     
     await epic('API Testing');
     await feature('AEX-08 API Products');
-    await story('TC-28 GET all products');
+    await story('TC-28');
     await severity('critical');
  
     await step('Send GET request to /api/productsList', async () => {

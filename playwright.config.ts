@@ -9,7 +9,7 @@ const ALLURE_DIRS: Record<string, string> = {
   'automation-exercise': '03_ecommerce/automation-exercise/outputs/allure-results',
 };
 
-const currentProject  = process.env['PROJECT'] || 'parabank';
+const currentProject = process.env['PROJECT'] || 'parabank';
 const allureResultsDir = ALLURE_DIRS[currentProject] ?? ALLURE_DIRS['parabank'];
 
 export default defineConfig({

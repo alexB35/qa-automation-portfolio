@@ -101,4 +101,3 @@ Test results are published to GitHub Pages after each CI run via `deploy-allure-
 
 > [!IMPORTANT]
 > This project targets the local Parabank environment _(localhost:8080)_ rather than the public shared environment. </br> The shared environment is occasionally unstable due to Cloudflare limitations and pentest-related unavailabilities.
-

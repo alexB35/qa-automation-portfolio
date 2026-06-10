@@ -15,13 +15,13 @@ test.describe('AEX-01 – User Registration', () => {
     test.use({ storageState: { cookies: [], origins: [] } });
 
 // ── Tests ──────────────────────────────────────────────────────────
-  test('TC-02 | Missing informations — required fields validation', async ({ page }) => {
+  test('TC-02 | Missing informations', async ({ page }) => {
  
     const user = buildUser();
 
     await epic('UI Testing');
     await story('AEX-01 User Registration');
-    await testCaseId('TC-02 - Missing informations');
+    await testCaseId('TC-02');
     await severity('critical');
  
     await step('Navigate to login/signup page', async () => {

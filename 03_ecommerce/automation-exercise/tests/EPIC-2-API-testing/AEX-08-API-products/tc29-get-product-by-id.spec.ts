@@ -8,11 +8,11 @@ const API_BASE = 'https://automationexercise.com/api';
 test.describe('AEX-08 – API Products', () => {
 
 // ── TC-29 | GET product by valid ID ────────────────────────────────────
-  test('TC-29 | GET product by valid ID — verify product details', async ({ request }) => {
+  test('TC-29 | GET product by ID', async ({ request }) => {
  
     await epic('API Testing');
     await feature('AEX-08 API Products');
-    await story('TC-29 GET product by valid ID');
+    await story('TC-29');
     await severity('critical');
     await issue('AEX-B-04 - API No ID endpoint', 'https://alexb35.atlassian.net/browse/AEX-62');
  

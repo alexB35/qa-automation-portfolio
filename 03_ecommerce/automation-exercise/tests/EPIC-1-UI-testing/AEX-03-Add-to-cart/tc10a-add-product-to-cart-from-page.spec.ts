@@ -16,7 +16,7 @@ test('TC-10a | Add Product to Cart', async ({ page }) => {
  
     await epic('UI Testing');
     await story('AEX-03 Add Product to Cart');
-    await testCaseId('TC-10a - Add Product to Cart');
+    await testCaseId('TC-10a');
     await severity('critical');
  
     await step('Navigate to product page', async () => {

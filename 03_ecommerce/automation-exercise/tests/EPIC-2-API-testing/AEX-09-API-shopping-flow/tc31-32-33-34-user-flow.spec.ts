@@ -20,11 +20,11 @@ test.describe('AEX-09 – API Shopping Flow', () => {
   test.describe.configure({ mode: 'serial' });
 
   // ── TC-31 | POST register ─────────────────────────────────────────────────
-  test('TC-31 | POST register — successful account creation via API', async ({ request }) => {
+  test('TC-31 | POST register', async ({ request }) => {
 
     await epic('API Testing');
     await feature('AEX-09 API Shopping Flow');
-    await story('TC-31 POST register');
+    await story('TC-31');
     await severity('critical');
 
     await step('Send POST request to /api/createAccount', async () => {
@@ -38,11 +38,11 @@ test.describe('AEX-09 – API Shopping Flow', () => {
   });
 
   // ── TC-32 | POST login ────────────────────────────────────────────────────
-  test('TC-32 | POST login — successful authentication via API', async ({ request }) => {
+  test('TC-32 | POST login', async ({ request }) => {
 
     await epic('API Testing');
     await feature('AEX-09 API Shopping Flow');
-    await story('TC-32 POST login');
+    await story('TC-32');
     await severity('critical');
 
     await step('Send POST request to /api/verifyLogin', async () => {
@@ -62,11 +62,11 @@ test.describe('AEX-09 – API Shopping Flow', () => {
   });
 
   // ── TC-33 | GET select product ────────────────────────────────────────────
-  test('TC-33 | GET product list — extract product for shopping flow', async ({ request }) => {
+  test('TC-33 | GET select product', async ({ request }) => {
 
     await epic('API Testing');
     await feature('AEX-09 API Shopping Flow');
-    await story('TC-33 GET select product');
+    await story('TC-33');
     await severity('critical');
 
     await step('Send GET request to /api/productsList and extract first product', async () => {
@@ -88,11 +88,11 @@ test.describe('AEX-09 – API Shopping Flow', () => {
   });
 
   // ── TC-34 | DELETE account ────────────────────────────────────────────────
-  test('TC-34 | DELETE account — successful account deletion via API', async ({ request }) => {
+  test('TC-34 | DELETE account', async ({ request }) => {
 
     await epic('API Testing');
     await feature('AEX-09 API Shopping Flow');
-    await story('TC-34 DELETE account');
+    await story('TC-34');
     await severity('critical');
 
     await step('Send DELETE request to /api/deleteAccount', async () => {

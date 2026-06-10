@@ -22,7 +22,7 @@ test.describe('AEX-07 – API User Management', () => {
  
     await epic('API Testing');
     await feature('AEX-07 API User Management');
-    await story('TC-26a GET existing user details');
+    await story('TC-26a');
     await severity('normal');
  
     await step('Send GET request to /api/getUserDetailByEmail', async () => {

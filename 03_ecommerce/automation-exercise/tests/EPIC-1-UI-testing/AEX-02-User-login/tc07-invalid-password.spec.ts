@@ -29,7 +29,7 @@ test('TC-07 | Invalid password', async ({ page }) => {
  
     await epic('UI Testing');
     await story('AEX-02 User Login');
-    await testCaseId('TC-07 - Invalid password');
+    await testCaseId('TC-07');
     await severity('critical');
  
     await step('Navigate to login / signup page', async () => {

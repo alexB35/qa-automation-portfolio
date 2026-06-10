@@ -15,14 +15,14 @@ test.describe('AEX-01 – User Registration', () => {
     test.use({ storageState: { cookies: [], origins: [] } });
 
 // ── Tests ──────────────────────────────────────────────────────────
-  test('TC-01 | Successful user registration with valid data', async ({ page }) => {
+  test('TC-01 | Successful registration', async ({ page }) => {
 
     const user = buildUser();
     const registerPage = new RegisterPage(page);
 
     await epic('UI Testing');
     await story('AEX-01 User Registration');
-    await testCaseId('TC-01 - Successful user registration');
+    await testCaseId('TC-01');
     await severity('critical');
 
     await step('Navigate to homepage', async () => {

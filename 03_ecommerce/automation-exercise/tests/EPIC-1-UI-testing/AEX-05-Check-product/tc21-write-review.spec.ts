@@ -15,11 +15,11 @@ test.describe('AEX-05 – Check Product', () => {
     test.use({ storageState: { cookies: [], origins: [] } });
 
 // ── Tests ──────────────────────────────────────────────────────────
-test('TC-21 | Write Product Review', async ({ page }) => {
+test('TC-21 | Write a Product Review', async ({ page }) => {
  
     await epic('UI Testing');
     await story('AEX-05 Check Product');
-    await testCaseId('TC-21 - Write Product Review');
+    await testCaseId('TC-21');
     await severity('minor');
  
     await step('Navigate to product page', async () => {

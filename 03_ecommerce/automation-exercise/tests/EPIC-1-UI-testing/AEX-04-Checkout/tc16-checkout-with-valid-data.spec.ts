@@ -39,7 +39,7 @@ test('TC-16 | Checkout with Valid Data', async ({ page }) => {
 
     await epic('UI Testing');
     await story('AEX-04 Checkout');
-    await testCaseId('TC-16 - Checkout with Valid Data');
+    await testCaseId('TC-16');
     await severity('critical');
 
     await step('Login with valid credentials', async () => {

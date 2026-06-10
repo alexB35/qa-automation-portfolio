@@ -33,7 +33,7 @@ async function globalSetup() {
       await page.fill('#customer\\.password', 'Test123!');
       await page.fill('#repeatedPassword', 'Test123!');
       await page.click('input[value="Register"]');
-      await page.waitForSelector('text=Your account was created successfully', { timeout: 5000 });
+      await page.locator('body').getByText(/Your account was created successfully|This username already exists/i).waitFor({ timeout: 5000 });
       console.log(`[global-setup] ParaBank DB ready after attempt ${i + 1}`);
       ready = true;
       break;

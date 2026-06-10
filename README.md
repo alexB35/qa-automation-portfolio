@@ -25,14 +25,14 @@
 
 ## Overview
 
-A QA automation portfolio featuring UI & API testing, CI/CD pipelines via GitHub Actions, Allure reporting on GitHub Pages, and Docker image distribution for local execution.
+A QA automation portfolio featuring UI & API testing, CI/CD pipelines via GitHub Actions, Allure reporting on GitHub Pages, and Docker image distribution for containerized local execution.
 
 <details>
 <summary>About Docker usage</summary>
 
 </br>
 
-Tests run directly on GitHub Actions runners in CI. </br> A Docker image is published to Docker Hub for containerized local execution — no local dependencies required beyond Docker Desktop.
+> Tests run directly on GitHub Actions runners in CI. </br> A Docker image is published to Docker Hub to run tests locally — no dependencies required beyond Docker Desktop.
 
 </details>
 
@@ -76,7 +76,7 @@ This portfolio follows a structured QA approach to ensure high-quality, reliable
 
 ---
 
-## Project Structure
+## GitHub Project Structure
 
 | Application | Description |
 |------|------|
@@ -84,6 +84,7 @@ This portfolio follows a structured QA approach to ensure high-quality, reliable
 | [Restful Booker](./02_api/restful_booker/README.md) | API automation for booking management scenarios |
 | [Automation Exercise](./03_ecommerce/automation-exercise/README.md) | UI and API automation for e-commerce scenarios |
 | [scripts](./scripts) | Shared CI/CD scripts — dirs clean, Newman runner and quality gate |
+| [workflows](./.github/workflows) | CI/CD workflows - 3 applications and Allure Hub deploy |
 
 ---
 
@@ -104,7 +105,7 @@ docker-compose up
 ```
 
 > For the ParaBank application, the test suite starts automatically once the container is ready.
-> Reports are generated locally in `./reports/`.
+> Reports are generated locally in `./reports/` - A local Allure Hub will open at the end of the tests.
 
 ---
 
