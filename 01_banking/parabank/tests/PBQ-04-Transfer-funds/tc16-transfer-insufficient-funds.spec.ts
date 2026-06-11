@@ -5,7 +5,7 @@ import { TransferPage } from '../../framework/ui/pages/transfer.page';
 test.describe('PBQ-04 – Transfer Funds', () => {
 
   test('TC-16 | Transfer with insufficient funds', async ({ page, loggedInUserWithAccount }) => {
-    await epic('EPIC-2 - ACCOUNT MANAGEMENT');
+    await epic('EPIC-2 - FUNDS MANAGEMENT');
     await story('PBQ-04 Transfer Funds');
     await testCaseId('TC-16');
     await severity('critical');

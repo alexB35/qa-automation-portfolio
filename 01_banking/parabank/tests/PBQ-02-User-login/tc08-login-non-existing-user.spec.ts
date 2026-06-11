@@ -6,7 +6,7 @@ test.describe('PBQ-02 – User Login', () => {
 
   //test.use({ storageState: { cookies: [], origins: [] } });
 
-  test('TC-08 | Login with non-existing user shows error message', async ({ page }) => {
+  test('TC-08 | Login with non-existing user', async ({ page }) => {
     await epic('EPIC-1 - USER MANAGEMENT');
     await story('PBQ-02 User Login');
     await testCaseId('TC-08');

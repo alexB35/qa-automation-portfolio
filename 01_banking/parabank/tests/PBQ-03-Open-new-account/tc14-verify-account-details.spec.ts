@@ -5,9 +5,9 @@ import { URLS } from '../../resources/urls';
 
 test.describe('PBQ-03 – Open New Account', () => {
 
-  test('TC-14 | Account details page displays correct information', async ({ page, loggedInUserWithAccount }) => {
+  test('TC-14 | Verify account details page', async ({ page, loggedInUserWithAccount }) => {
 
-    await epic('EPIC-2 - ACCOUNT MANAGEMENT');
+    await epic('EPIC-2 - FUNDS MANAGEMENT');
     await story('PBQ-03 Open New Account');
     await testCaseId('TC-14');
     await severity('normal');

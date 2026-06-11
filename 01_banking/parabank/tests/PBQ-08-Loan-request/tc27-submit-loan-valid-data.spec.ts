@@ -4,8 +4,8 @@ import { LoanRequestPage } from '../../framework/ui/pages/loan-request.page';
 
 test.describe('PBQ-08 – Loan Request', () => {
 
-  test('TC-27 | Loan request with valid data is approved', async ({ page, loggedInUserWithAccount }) => {
-    await epic('EPIC-2 - ACCOUNT MANAGEMENT');
+  test('TC-27 | Submit loan request with valid data', async ({ page, loggedInUserWithAccount }) => {
+    await epic('EPIC-2 - FUNDS MANAGEMENT');
     await story('PBQ-08 Loan Request');
     await testCaseId('TC-27');
     await severity('critical');

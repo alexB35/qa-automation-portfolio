@@ -5,9 +5,9 @@ import { URLS } from '../../resources/urls';
 
 test.describe('PBQ-03 – Open New Account', () => {
 
-  test('TC-13 | New account appears in accounts overview after creation', async ({ page, loggedInUserWithAccount }) => {
+  test('TC-13 | Verify new account appears in accounts overview', async ({ page, loggedInUserWithAccount }) => {
 
-    await epic('EPIC-2 - ACCOUNT MANAGEMENT');
+    await epic('EPIC-2 - FUNDS MANAGEMENT');
     await story('PBQ-03 Open New Account');
     await testCaseId('TC-13');
     await severity('critical');

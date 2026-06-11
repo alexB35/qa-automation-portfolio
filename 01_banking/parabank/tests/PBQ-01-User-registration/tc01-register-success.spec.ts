@@ -3,7 +3,7 @@ import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
 
 test.describe('PBQ-01 – User Registration', () => {
 
-  test('TC-01 | Successful registration with valid data', async ({ page, registeredUser }) => {
+  test('TC-01 | Successful user registration', async ({ page, registeredUser }) => {
     await epic('EPIC-1 - USER MANAGEMENT');
     await story('PBQ-01 User Registration');
     await testCaseId('TC-01');

@@ -4,8 +4,8 @@ import { LoanRequestPage } from '../../framework/ui/pages/loan-request.page';
 
 test.describe('PBQ-08 – Loan Request', () => {
 
-  test('TC-29 | Loan request with insufficient down payment is denied', async ({ page, loggedInUserWithAccount }) => {
-    await epic('EPIC-2 - ACCOUNT MANAGEMENT');
+  test('TC-29 | Submit loan request without valid down payment', async ({ page, loggedInUserWithAccount }) => {
+    await epic('EPIC-2 - FUNDS MANAGEMENT');
     await story('PBQ-08 Loan Request');
     await testCaseId('TC-29');
     await severity('critical');

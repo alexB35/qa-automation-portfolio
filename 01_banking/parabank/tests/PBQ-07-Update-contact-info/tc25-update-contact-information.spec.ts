@@ -4,7 +4,7 @@ import { UpdateProfilePage } from '../../framework/ui/pages/update-profile.page'
 
 test.describe('PBQ-07 – Update Contact Info', () => {
 
-  test('TC-25 | Update contact info with valid data shows success message', async ({ page, registeredUser }) => {
+  test('TC-25 | Update contact informations with valid data', async ({ page, registeredUser }) => {
     await epic('EPIC-1 - USER MANAGEMENT');
     await story('PBQ-07 Update Contact Info');
     await testCaseId('TC-25');

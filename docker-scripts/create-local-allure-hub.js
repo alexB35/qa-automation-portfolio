@@ -31,11 +31,27 @@ fs.mkdirSync(reportsDir, { recursive: true });
 
 const cards = apps.map(app => {
   const reportIndex = path.join(reportsDir, app.slug, 'index.html');
+  const summaryPath = path.join(reportsDir, app.slug, 'widgets', 'summary.json');
   const exists      = fs.existsSync(reportIndex);
 
-  const badge  = exists
-    ? `<span class="badge badge-ok">Report available</span>`
-    : `<span class="badge badge-off">Report missing</span>`;
+  // ── Badge with live stats from summary.json ──────────────
+  let badge;
+  if (exists && fs.existsSync(summaryPath)) {
+    const { statistic } = JSON.parse(fs.readFileSync(summaryPath, 'utf8'));
+    const { passed, failed, broken, skipped, total } = statistic;
+    const bad = failed + broken;
+
+    const parts = [];
+    parts.push(`${passed} passed`);
+    if (bad     > 0) parts.push(`${bad} failed`);
+    if (skipped > 0) parts.push(`${skipped} skipped`);
+
+    badge = `<span class="badge badge-stats">${parts.join(' · ')}</span>`;
+  } else if (exists) {
+    badge = `<span class="badge badge-stats">Report available</span>`;
+  } else {
+    badge = `<span class="badge badge-off">Report missing</span>`;
+  }
 
   const button = exists
     ? `<a class="btn-open" href="./${app.slug}/index.html">Open <i class="ti ti-external-link" aria-hidden="true"></i></a>`
@@ -92,11 +108,11 @@ const html = `<!doctype html>
       width: 36px;
       height: 36px;
       border-radius: 8px;
-      background: #dbeafe;
+      background: linear-gradient(135deg, #a855f7, #06b6d4);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #1d4ed8;
+      color: #ffffff;
       font-size: 20px;
       flex-shrink: 0;
     }
@@ -126,11 +142,11 @@ const html = `<!doctype html>
       display: flex;
       align-items: center;
       gap: 16px;
-      transition: border-color 0.15s;
+      transition: border-color 0.2s;
     }
 
-    .card:hover       { border-color: #9aa5b1; }
-    .card-disabled    { opacity: 0.6; }
+    .card:hover    { border-color: #a855f7; }
+    .card-disabled { opacity: 0.6; }
 
     .card-icon {
       width: 40px;
@@ -147,11 +163,11 @@ const html = `<!doctype html>
     .icon-teal  { background: #d1fae5; color: #065f46; }
     .icon-amber { background: #fef3c7; color: #92400e; }
 
-    .card-body    { flex: 1; min-width: 0; }
-    .card-name    { font-size: 15px; font-weight: 500; color: #1f2933; margin: 0 0 3px; }
-    .card-desc    { font-size: 13px; color: #52606d; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .card-body  { flex: 1; min-width: 0; }
+    .card-name  { font-size: 15px; font-weight: 500; color: #1f2933; margin: 0 0 3px; }
+    .card-desc  { font-size: 13px; color: #52606d; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    .card-right   { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .card-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 
     /* ── Badges ─────────────────────────────────────────── */
     .badge {
@@ -159,10 +175,11 @@ const html = `<!doctype html>
       font-weight: 500;
       padding: 3px 10px;
       border-radius: 99px;
+      white-space: nowrap;
     }
 
-    .badge-ok  { background: #dcfce7; color: #166534; }
-    .badge-off { background: #f1f5f9; color: #94a3b8; }
+    .badge-stats { background: #f3e8ff; color: #7e22ce; }
+    .badge-off   { background: #f1f5f9; color: #94a3b8; }
 
     /* ── Button ─────────────────────────────────────────── */
     .btn-open {
@@ -178,10 +195,15 @@ const html = `<!doctype html>
       font-weight: 500;
       text-decoration: none;
       white-space: nowrap;
+      transition: border-color 0.2s, background 0.2s;
     }
 
-    .btn-open:hover   { background: #f6f7f9; }
-    .btn-disabled     { opacity: 0.4; pointer-events: none; }
+    .btn-open:hover {
+      border-color: #a855f7;
+      background: #faf5ff;
+    }
+
+    .btn-disabled { opacity: 0.4; pointer-events: none; }
 
     /* ── Footer ─────────────────────────────────────────── */
     .divider { height: 0.5px; background: #d9e2ec; margin: 28px 0 20px; }
@@ -201,24 +223,23 @@ const html = `<!doctype html>
       gap: 4px;
     }
 
-    .footer a:hover { color: #52606d; }
+    .footer a:hover { color: #a855f7; }
 
     /* ── Dark mode ──────────────────────────────────────── */
     @media (prefers-color-scheme: dark) {
       body            { background: #0d1117; color: #e6edf3; }
       .card           { background: #161b22; border-color: #30363d; }
-      .card:hover     { border-color: #58a6ff; }
-      .hub-logo       { background: #1f3a6e; color: #58a6ff; }
+      .card:hover     { border-color: #a855f7; box-shadow: 0 0 0 1px #a855f720; }
       .hub-title      { color: #e6edf3; }
       .hub-sub        { color: #8b949e; }
       .card-name      { color: #e6edf3; }
       .card-desc      { color: #8b949e; }
       .btn-open       { border-color: #30363d; color: #e6edf3; }
-      .btn-open:hover { background: #21262d; }
+      .btn-open:hover { border-color: #a855f7; background: #1a0a2e; }
       .divider        { background: #30363d; }
       .footer a       { color: #8b949e; }
-      .footer a:hover { color: #e6edf3; }
-      .badge-ok       { background: #1a4731; color: #3fb950; }
+      .footer a:hover { color: #c084fc; }
+      .badge-stats    { background: #2e1065; color: #c084fc; }
       .badge-off      { background: #21262d; color: #8b949e; }
     }
   </style>
@@ -227,7 +248,7 @@ const html = `<!doctype html>
   <div class="hub-wrap">
 
     <div class="hub-header">
-      <div class="hub-logo"><i class="ti ti-test-pipe" aria-hidden="true"></i></div>
+      <div class="hub-logo"><i class="ti ti-brand-docker" aria-hidden="true"></i></div>
       <h1 class="hub-title">Local Allure Reports</h1>
     </div>
     <p class="hub-sub">Generated from the Docker test run.</p>

@@ -4,8 +4,8 @@ import { FindTransactionsPage } from '../../framework/ui/pages/find-transactions
 
 test.describe('PBQ-06 – Find Transactions', () => {
 
-  test('TC-23 | Search by valid date range returns results', async ({ page, loggedInUserWithTransaction }) => {
-    await epic('EPIC-2 - ACCOUNT MANAGEMENT');
+  test('TC-23 | Search transactions by date range', async ({ page, loggedInUserWithTransaction }) => {
+    await epic('EPIC-2 - FUNDS MANAGEMENT');
     await story('PBQ-06 Find Transactions');
     await testCaseId('TC-23');
     await severity('critical');

@@ -4,7 +4,7 @@ import { LoginPage } from '../../framework/ui/pages/login.page';
 
 test.describe('PBQ-02 – User Login', () => {
 
-  test('TC-06 | Successful login with valid credentials', async ({ page, registeredUser }) => {
+  test('TC-06 | Successful user login', async ({ page, registeredUser }) => {
     await epic('EPIC-1 - USER MANAGEMENT');
     await story('PBQ-02 User Login');
     await testCaseId('TC-06');

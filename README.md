@@ -74,6 +74,8 @@ This portfolio follows a structured QA approach to ensure high-quality, reliable
 | Test Types | Functional, positive/negative, validation, API contract |
 | Reporting | Allure reports on GitHub Pages with failure screenshots, CI artifacts |
 
+> Playwright is configured to run with 2 workers to ensure consistent execution across different hardware configurations.
+
 ---
 
 ## GitHub Project Structure
@@ -86,32 +88,13 @@ This portfolio follows a structured QA approach to ensure high-quality, reliable
 | [scripts](./scripts) | Shared CI/CD scripts — dirs clean, Newman runner and quality gate |
 | [workflows](./.github/workflows) | CI/CD workflows - 3 applications and Allure Hub deploy |
 
----
-
-## How to Run Tests Locally
-
-_For local execution, a Docker image is available on Docker Hub — no dependencies required beyond Docker Desktop._
-
-**Prerequisites :** 
-[Docker Desktop](https://www.docker.com/get-started)
-
-<br/>
-
-**Clone the repository and run :**
-```bash
-git clone https://github.com/alexB35/qa-automation-portfolio.git
-cd qa-automation-portfolio
-docker-compose up
-```
-
-> For the ParaBank application, the test suite starts automatically once the container is ready.
-> Reports are generated locally in `./reports/` - A local Allure Hub will open at the end of the tests.
+> Known failures are documented in Jira and summarized in [Issues](https://github.com/alexB35/qa-automation-portfolio/issues)
 
 ---
 
 ## Allure Hub
 
-Tests run on GitHub Actions runners in CI. 
+Tests run on GitHub Actions runners in CI using 2 workers. 
 
 Allure reports for all 3 applications are centralized in the Allure Hub (GitHub Pages), deployed via `deploy-allure-hub.yml` after each CI run.
 
@@ -124,6 +107,37 @@ Allure reports for all 3 applications are centralized in the Allure Hub (GitHub 
 ## Allure Report Sample
 
 ![Allure report](./assets/allure-report.png)
+
+---
+
+## How to Run Tests Locally
+
+_For local execution, a Docker image is available on Docker Hub — no dependencies required beyond Docker Desktop._
+
+**Prerequisites :** 
+[Docker Desktop](https://www.docker.com/get-started)
+
+<br/>
+
+**Open Docker and run this command line :**
+```bash
+git clone https://github.com/alexB35/qa-automation-portfolio.git
+cd qa-automation-portfolio
+npm run docker:reports
+```
+
+> For the ParaBank application, the test suite starts automatically once the container is ready.
+> Reports are generated locally in `./reports/`.
+
+## Local Allure Hub
+
+A local Allure Hub will open in your browser on [localhost:9323](http://localhost:9323) at the end of the tests.
+
+<br/>
+
+It works the same way as the Allure Hub of GitHub Pages.
+
+![Local Allure hub](./assets/local-allure-hub.png)
 
 ---
 

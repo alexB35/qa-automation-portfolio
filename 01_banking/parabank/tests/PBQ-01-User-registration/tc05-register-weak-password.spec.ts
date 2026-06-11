@@ -5,7 +5,7 @@ import { RegisterPage } from '../../framework/ui/pages/register.page';
 
 test.describe('PBQ-01 – User Registration', () => {
 
-  test('TC-05 | Weak password (spaces only)', async ({ page }) => {
+  test('TC-05 | Registration with weak password format', async ({ page }) => {
     await epic('EPIC-1 - USER MANAGEMENT');
     await story('PBQ-01 User Registration');
     await testCaseId('TC-05');

@@ -5,7 +5,7 @@ import { RegisterPage } from '../../framework/ui/pages/register.page';
 
 test.describe('PBQ-01 – User Registration', () => {
 
-  test('TC-04 | Password mismatch shows error message', async ({ page }) => {
+  test('TC-04 | Password mismatch', async ({ page }) => {
     await epic('EPIC-1 - USER MANAGEMENT');
     await story('PBQ-01 User Registration');
     await testCaseId('TC-04');
