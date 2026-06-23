@@ -1,27 +1,23 @@
 import { Page, expect } from '@playwright/test';
 import { URLS } from '../../../resources/urls';
+import { dismissGDPR } from '../helpers/ui-helpers';
 
 export class ProductPage {
   constructor(private page: Page) {}
 
   // ── Product list page locators ────────────────────────────────────────
   
-  // Add to cart from list — uses data-product-id attribute
   addToCartButton = (productId: number) =>
     this.page.locator(`a[data-product-id="${productId}"]`).first();
  
-  
-  // Add to cart from overlay (hover)
   addToCartOverlay = (productId: number) =>
     this.page.locator(`.product-overlay a[data-product-id="${productId}"]`);
  
 
-  // View product link
   viewProductLink = (productId: number) =>
     this.page.locator(`a[href="/product_details/${productId}"]`).first();
  
 
-  // Product container by name
   productByName = (name: string) =>
     this.page.locator('.single-products').filter({ hasText: name });
  
@@ -40,8 +36,10 @@ export class ProductPage {
   get reviewSubmitButton() { return this.page.locator('button#button-review'); } 
   
 
-
-  // ── Methods ───────────────────────────────────────────────────────────
+  async gotoProductPage() {
+    await this.page.goto(URLS.productUrl);
+    await dismissGDPR(this.page);
+  }
 
   async goto(productId?: number) {
     if (productId) {

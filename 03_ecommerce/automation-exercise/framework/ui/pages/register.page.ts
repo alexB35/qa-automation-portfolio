@@ -1,10 +1,11 @@
 import { Page } from '@playwright/test';
 import type { UserBase } from '../../data/user.base';
+import {URLS} from '../../../resources/urls';
+import { dismissGDPR } from '../helpers/ui-helpers';
 
 export class RegisterPage {
   constructor(private page: Page) {}
 
-  // ── Locators ─────────────────────────────
 
   signupLink = () => this.page.getByRole('link', { name: ' Signup / Login' });
 
@@ -36,10 +37,15 @@ export class RegisterPage {
 
   continueButton = () => this.page.locator('a[data-qa="continue-button"]');
 
-  // ── Actions ─────────────────────────────
 
-  async goToSignup() {
+  async goToSignupPage() {
+    await this.page.goto(URLS.signupUrl);
+    await dismissGDPR(this.page);
+  }
+
+  async clickSignupLink() {
     await this.signupLink().click();
+    await dismissGDPR(this.page);
   }
 
   async fillSignupNameAndEmail(name: string, email: string) {
@@ -67,6 +73,10 @@ export class RegisterPage {
     await this.zipCodeInput().fill(user.zipCode);
     await this.phoneInput().fill(user.phone);
 
+    await this.createAccountButton().click();
+  }
+
+  async clickCreateAccountButton() {
     await this.createAccountButton().click();
   }
 

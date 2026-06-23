@@ -1,5 +1,6 @@
 import { Page, expect } from '@playwright/test';
 import { URLS } from '../../../resources/urls';
+import { dismissGDPR } from '../helpers/ui-helpers';
 
 export class HomePage {
   constructor(private page: Page) {}
@@ -10,8 +11,9 @@ export class HomePage {
   readonly subscriptionButton = () => this.page.locator('button#subscribe');
 
   
-  async goto() {
+  async gotoHomePage() {
     await this.page.goto(URLS.homeUrl);
+    await dismissGDPR(this.page);
   }
 
   async searchProduct(term: string) {

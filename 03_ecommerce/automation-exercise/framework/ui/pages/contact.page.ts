@@ -1,5 +1,6 @@
 import { Page, expect } from '@playwright/test';
 import { URLS } from '../../../resources/urls';
+import { dismissGDPR } from '../helpers/ui-helpers';
 
 export class ContactPage {
   readonly nameInput = () => this.page.locator('input[data-qa="name"]');
@@ -11,8 +12,9 @@ export class ContactPage {
 
   constructor(private page: Page) {}
 
-  async goto() {
+  async gotoContactPage() {
     await this.page.goto(URLS.contactUrl);
+    await dismissGDPR(this.page);
   }
 
   async fillContactForm(contact: {

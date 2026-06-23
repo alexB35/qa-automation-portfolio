@@ -1,5 +1,6 @@
 import { expect, Page } from '@playwright/test';
 import { URLS } from '../../../resources/urls';
+import { dismissGDPR } from '../../ui/helpers/ui-helpers';
 
 export class LoginPage {
   constructor(private page: Page) {}
@@ -8,8 +9,9 @@ export class LoginPage {
   readonly passwordInput = () => this.page.locator('[data-qa="login-password"]');
   readonly loginButton = () => this.page.locator('[data-qa="login-button"]');
 
-  async goto() {
+  async gotoLoginPage() {
     await this.page.goto(URLS.loginUrl);
+    await dismissGDPR(this.page);
   }
 
   async login(email: string, password: string) {

@@ -1,5 +1,6 @@
 import { Page, expect } from '@playwright/test';
 import { URLS } from '../../../resources/urls';
+import { dismissGDPR } from '../helpers/ui-helpers';
 
 export class CartPage {
   constructor(private page: Page) {}
@@ -9,18 +10,17 @@ export class CartPage {
   get emptyCartMessage() { return this.page.locator('span#empty_cart'); }
 
   
-    // Delete button by product row ID (e.g. product-1, product-2)
   deleteProductButton = (productRowId: string) =>
     this.page.locator(`tr#${productRowId} a.cart_quantity_delete`);
 
 
-    // Product row by name
   productRowByName = (productName: string) =>
     this.page.locator('#cart_info_table tbody tr').filter({ hasText: productName });
   
 
-  async goto() {
+  async gotoCartPage() {
     await this.page.goto(URLS.cartUrl);
+    await dismissGDPR(this.page);
   }
 
   async verifyProductInCart(productName: string) {

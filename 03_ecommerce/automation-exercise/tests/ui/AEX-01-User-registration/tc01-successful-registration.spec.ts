@@ -1,53 +1,25 @@
 import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
-import { test, expect } from '../../../framework/fixtures/no-ads.fixture';
-import { dismissGDPR } from '../../../framework/ui/helpers/ui-helpers';
+import { test, expect } from '../../../framework/fixtures/register.fixture';
 import { BASE_URL } from '../../../resources/urls';
-import { buildUser } from '../../../framework/data/user.factory';
-import { RegisterPage } from '../../../framework/ui/pages/register.page';
-
-// ── Test Data ──────────────────────────────────────────────────────────────
 
 
-// ── TC-01 | Successful user registration ──────────────────────────────────
 test.describe('AEX-01 – User Registration', () => {
 
-// ── Configuration ────────────────────────────────────────────────── 
-    test.use({ storageState: { cookies: [], origins: [] } });
+  test.use({ storageState: { cookies: [], origins: [] } });
 
-// ── Tests ──────────────────────────────────────────────────────────
-  test('TC-01 | Successful registration', async ({ page }) => {
-
-    const user = buildUser();
-    const registerPage = new RegisterPage(page);
+  test('TC-01 | Successful registration', async ({ page, registeredUser }) => {
 
     await epic('UI Testing');
     await story('AEX-01 User Registration');
     await testCaseId('TC-01');
     await severity('critical');
 
-    await step('Navigate to homepage', async () => {
-      await page.goto(BASE_URL);
-      await dismissGDPR(page);
+    await step('Verify account created and user is logged in', async () => {
+      await expect(page.getByText(`Logged in as ${registeredUser.name}`)).toBeVisible();
+    });
+
+    await step('Verify redirect to homepage', async () => {
       await expect(page).toHaveURL(BASE_URL + '/');
-    });
-
-    await step('Navigate to login/signup page', async () => {
-      await registerPage.goToSignup();
-      await expect(page.getByText('New User Signup!')).toBeVisible();
-    });
-
-    await step('Enter name and email', async () => {
-      await registerPage.fillSignupNameAndEmail(user.name, user.email);
-    });
-
-    await step('Fill registration form', async () => {
-      await registerPage.fillRegistrationForm(user);
-    });
-
-    await step('Verify account created successfully', async () => {
-      await expect(page.getByText('Account Created!')).toBeVisible();
-      await registerPage.clickContinue();
-      await expect(page.getByText(`Logged in as ${user.name}`)).toBeVisible();
     });
   });
 });

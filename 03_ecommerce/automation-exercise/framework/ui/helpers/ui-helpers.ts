@@ -5,7 +5,7 @@ import { Page } from '@playwright/test';
 export async function dismissGDPR(page: Page): Promise<void> {
   try {
     const consentButton = page.getByRole('button', { name: 'Consent' });
-    await consentButton.waitFor({ state: 'visible', timeout: 5000 });
+    await consentButton.waitFor({ state: 'visible', timeout: 3000 });
     await consentButton.click();
   } catch {
     // No GDPR popup
