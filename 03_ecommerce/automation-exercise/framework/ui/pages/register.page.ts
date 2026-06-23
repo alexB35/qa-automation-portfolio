@@ -1,4 +1,5 @@
 import { Page } from '@playwright/test';
+import type { UserBase } from '../../data/user.base';
 
 export class RegisterPage {
   constructor(private page: Page) {}
@@ -47,7 +48,7 @@ export class RegisterPage {
     await this.signupButton().click();
   }
 
-  async fillRegistrationForm(user: any) {
+  async fillRegistrationForm(user: UserBase) {
     await this.titleMr().check();
     await this.passwordInput().fill(user.password);
 

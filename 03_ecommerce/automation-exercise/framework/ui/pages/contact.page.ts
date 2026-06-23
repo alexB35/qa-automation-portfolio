@@ -1,4 +1,5 @@
 import { Page, expect } from '@playwright/test';
+import { URLS } from '../../../resources/urls';
 
 export class ContactPage {
   readonly nameInput = () => this.page.locator('input[data-qa="name"]');
@@ -11,7 +12,7 @@ export class ContactPage {
   constructor(private page: Page) {}
 
   async goto() {
-    await this.page.goto('https://automationexercise.com/contact_us');
+    await this.page.goto(URLS.contactUrl);
   }
 
   async fillContactForm(contact: {

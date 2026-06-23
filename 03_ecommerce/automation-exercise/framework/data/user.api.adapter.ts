@@ -2,7 +2,7 @@ import { UserBase } from './user.base';
 
 export function toApiPayload(user: UserBase) {
   return {
-    name: `${user.firstName} ${user.lastName}`,
+    name: user.name,
     email: user.email,
     password: user.password,
     title: 'Mr',

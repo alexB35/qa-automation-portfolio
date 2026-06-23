@@ -1,4 +1,5 @@
 import { expect, Page } from '@playwright/test';
+import { URLS } from '../../../resources/urls';
 
 export class LoginPage {
   constructor(private page: Page) {}
@@ -8,7 +9,7 @@ export class LoginPage {
   readonly loginButton = () => this.page.locator('[data-qa="login-button"]');
 
   async goto() {
-    await this.page.goto('https://automationexercise.com/login');
+    await this.page.goto(URLS.loginUrl);
   }
 
   async login(email: string, password: string) {

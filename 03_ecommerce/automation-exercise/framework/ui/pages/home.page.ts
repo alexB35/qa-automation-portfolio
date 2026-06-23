@@ -1,4 +1,5 @@
 import { Page, expect } from '@playwright/test';
+import { URLS } from '../../../resources/urls';
 
 export class HomePage {
   constructor(private page: Page) {}
@@ -10,7 +11,7 @@ export class HomePage {
 
   
   async goto() {
-    await this.page.goto('https://automationexercise.com');
+    await this.page.goto(URLS.homeUrl);
   }
 
   async searchProduct(term: string) {

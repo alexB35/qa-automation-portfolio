@@ -145,4 +145,4 @@ It works the same way as the Allure Hub of GitHub Pages.
 > Test data is dynamically generated. </br> Tests are independent and isolated. </br> Allure reports are published to [GitHub Pages](https://alexB35.github.io/qa-automation-portfolio/) after each CI run and remain accessible until the next CI run overwrites them.
 
 > [!WARNING]
-> Docker image includes known npm dependency vulnerabilities. </br> In a real environment, dependencies would be pinned to secure versions and a minimal base image used.
+> Docker image may includes known dependency vulnerabilities. </br> In a real environment, dependencies would be pinned to secure versions and a minimal base image used.

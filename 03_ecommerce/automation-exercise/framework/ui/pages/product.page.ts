@@ -1,4 +1,5 @@
 import { Page, expect } from '@playwright/test';
+import { URLS } from '../../../resources/urls';
 
 export class ProductPage {
   constructor(private page: Page) {}
@@ -44,9 +45,9 @@ export class ProductPage {
 
   async goto(productId?: number) {
     if (productId) {
-      await this.page.goto(`https://automationexercise.com/product_details/${productId}`);
+      await this.page.goto(`${URLS.productDetailsUrl}/${productId}`);
     } else {
-      await this.page.goto('https://automationexercise.com/products');
+      await this.page.goto(URLS.productUrl);
     }
   }
 

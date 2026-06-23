@@ -1,4 +1,5 @@
 import { Page, expect } from '@playwright/test';
+import { URLS } from '../../../resources/urls';
 
 export class CartPage {
   constructor(private page: Page) {}
@@ -19,7 +20,7 @@ export class CartPage {
   
 
   async goto() {
-    await this.page.goto('https://automationexercise.com/view_cart');
+    await this.page.goto(URLS.cartUrl);
   }
 
   async verifyProductInCart(productName: string) {

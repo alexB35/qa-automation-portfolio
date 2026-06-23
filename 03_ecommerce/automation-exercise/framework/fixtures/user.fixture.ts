@@ -1,5 +1,5 @@
-import { test as base, request, APIRequestContext, APIResponse } from '@playwright/test';
-import { createUser } from '../api/user.api';
+import { test as base, request, APIRequestContext } from '@playwright/test';
+import { createUser, deleteUser } from '../api/user.api';
 import { buildUser } from '../data/user.factory';
 
 type User = ReturnType<typeof buildUser>;
@@ -24,14 +24,7 @@ export const test = base.extend<{
   await use(user);
 
 // ── Cleanup ─────────────────────────────
-    const deleteResponse = await apiContext.post(
-      'https://automationexercise.com/api/deleteAccount',
-      {
-        form: { email: user.email, password: user.password }
-      }
-    );
-
-    const deleteBody = await deleteResponse.json();
+    const deleteBody = await deleteUser(apiContext, user.email, user.password);
 
     if (deleteBody.responseCode !== 200) {
       console.warn('User cleanup failed:', deleteBody);

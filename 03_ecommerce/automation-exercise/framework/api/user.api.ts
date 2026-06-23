@@ -1,6 +1,7 @@
 import { APIRequestContext } from '@playwright/test';
 import { UserBase } from '../data/user.base';
-
+import { toApiPayload } from '../data/user.api.adapter';
+import { API_URLS } from '../../resources/urls';
 
 // ── Create API user ──────────────────────────────────
 export type CreateUserResponse = {
@@ -14,29 +15,10 @@ export async function createUser(
 ): Promise<CreateUserResponse> {
 
   const response = await apiContext.post(
-    'https://automationexercise.com/api/createAccount',
-    {
-      form: {
-        name: user.name,
-        email: user.email,
-        password: user.password,
-        title: 'Mr',
-        birth_date: String(user.day),
-        birth_month: user.month,
-        birth_year: String(user.year),
-        firstname: user.firstName,
-        lastname: user.lastName,
-        company: 'TestCompany',
-        address1: user.address,
-        address2: '',
-        country: user.country,
-        zipcode: user.zipCode,
-        state: user.state,
-        city: user.city,
-        mobile_number: user.phone
-      }
-    }
+    API_URLS.createAccountUrl,
+    { form: toApiPayload(user) }
   );
+  
 
   return await response.json();
 }
@@ -55,7 +37,7 @@ export async function deleteUser(
   password: string
 ): Promise<DeleteUserResponse> {
   const response = await apiContext.delete(
-    'https://automationexercise.com/api/deleteAccount',
+    API_URLS.deleteAccountUrl,
     {
       form: { email, password },
     }
