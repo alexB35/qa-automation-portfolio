@@ -4,6 +4,7 @@ export { expect };
 
 export const test = base.extend({
   page: async ({ page }, use) => {
+    
     // Block ad requests
     await page.route('**/*doubleclick*', r => r.abort());
     await page.route('**/*googlesyndication*', r => r.abort());

@@ -19,8 +19,7 @@ test('TC-03 | Invalid data registration', async ({ page }) => {
     await issue('AEX-B-01 - Invalid date of birth during registration', 'https://alexb35.atlassian.net/browse/AEX-5');
 
     await step('Navigate to signup page', async () => {
-      await registerPage.goToSignupPage();
-      await expect(page.getByText('New User Signup!')).toBeVisible();
+      await registerPage.goto();
     });
  
     await step('Enter name and email then proceed', async () => {

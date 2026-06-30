@@ -1,59 +1,46 @@
 import { Page, expect } from '@playwright/test';
 import { URLS } from '../../../resources/urls';
-import { dismissGDPR } from '../helpers/ui-helpers';
 
 export class CartPage {
   constructor(private page: Page) {}
 
-  get proceedToCheckoutButton() { return this.page.locator('a', { hasText: 'Proceed To Checkout' }); }
-  get cartTable() { return this.page.locator('table#cart_info_table'); }
-  get emptyCartMessage() { return this.page.locator('span#empty_cart'); }
+  readonly proceedToCheckoutButton = () => this.page.locator('a', { hasText: 'Proceed To Checkout' });
+  readonly cartTable = () => this.page.locator('table#cart_info_table');
+  readonly emptyCartMessage = () => this.page.locator('span#empty_cart');
 
-  
-  deleteProductButton = (productRowId: string) =>
-    this.page.locator(`tr#${productRowId} a.cart_quantity_delete`);
-
-
-  productRowByName = (productName: string) =>
-    this.page.locator('#cart_info_table tbody tr').filter({ hasText: productName });
-  
-
-  async gotoCartPage() {
+  async goto() {
     await this.page.goto(URLS.cartUrl);
-    await dismissGDPR(this.page);
   }
 
-  async verifyProductInCart(productName: string) {
+  async verifyProductInCart(productName: string, quantity: string) {
     await expect(this.page.getByText(productName)).toBeVisible();
-    await expect(this.cartTable).toBeVisible();
+    await expect(this.page.locator('.cart_quantity button')).toHaveText(quantity);
+    await expect(this.cartTable()).toBeVisible();
   }
 
-  async removeProduct(productName: string) {
-    await this.page.locator('td.cart_delete')
-      .filter({ has: this.page.locator(`text=${productName}`) })
-      .locator('a').click();
+  async verifyProductQuantityAtLeast(productName: string, minQuantity: number) {
+    await expect(this.page.getByText(productName)).toBeVisible();
+    const quantity = Number(
+      await this.page.locator('.cart_quantity button').textContent()
+    );
+    expect(quantity).toBeGreaterThanOrEqual(minQuantity);
+    await expect(this.cartTable()).toBeVisible();
   }
 
-  async removeProductByRowId(productRowId: string) {
-  await this.deleteProductButton(productRowId).click();
-  await this.page.locator(`tr#${productRowId}`).waitFor({ state: 'detached' });
-}
-
-  async removeProductByName(productName: string) {
-    const row = this.productRowByName(productName);
-    await row.locator('a.cart_quantity_delete').click();
-    await row.waitFor({ state: 'detached' });
-  }
-
-  async verifyCartEmpty() {
-    await expect(this.page.getByText('Cart is empty!')).toBeVisible();
-  }
-
-  async proceedToCheckout() {
-    await this.proceedToCheckoutButton.click();
+  async removeProduct(productId: number) {
+    await this.page.locator(`a.cart_quantity_delete[data-product-id="${productId}"]`).click();
+    await this.page.locator(`tr#product-${productId}`).waitFor({ state: 'detached' });
   }
 
   async verifyCartHasItems() {
-    await expect(this.cartTable.locator('tbody tr')).not.toHaveCount(0);
+    await expect(this.cartTable().locator('tbody tr')).not.toHaveCount(0);
+  }
+
+  async verifyCartEmpty() {
+    await expect(this.emptyCartMessage()).toBeVisible();
+  }
+
+  async proceedToCheckout() {
+    await this.proceedToCheckoutButton().click();
   }
 }

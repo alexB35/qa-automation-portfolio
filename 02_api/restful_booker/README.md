@@ -40,10 +40,10 @@ It demonstrates CRUD operations via API : create, retrieve, update, and delete b
 
 ## Run Tests Locally
 
-Refer to the [root README](../../README.md) for Docker installation.
+**Prerequisites :** 
+[Docker Desktop](https://www.docker.com/get-started)
 
-Then, run in terminal :
-
+**Open Docker and run this command line :**
 ```bash
 npm install
 npm run test:restful-booker

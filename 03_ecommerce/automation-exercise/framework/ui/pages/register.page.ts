@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import type { UserBase } from '../../data/user.base';
 import {URLS} from '../../../resources/urls';
 import { dismissGDPR } from '../helpers/ui-helpers';
@@ -38,9 +38,10 @@ export class RegisterPage {
   continueButton = () => this.page.locator('a[data-qa="continue-button"]');
 
 
-  async goToSignupPage() {
+  async goto() {
     await this.page.goto(URLS.signupUrl);
     await dismissGDPR(this.page);
+    await expect(this.page.getByText('New User Signup!')).toBeVisible();
   }
 
   async clickSignupLink() {

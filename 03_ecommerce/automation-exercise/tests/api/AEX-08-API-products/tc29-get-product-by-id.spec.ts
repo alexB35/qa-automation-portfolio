@@ -1,13 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { epic, feature, story, severity, step, issue } from 'allure-js-commons';
+import { getProductById, ProductByIdResult } from '../../../framework/api/product.api';
  
-// ── Test Data ──────────────────────────────────────────────────────────────
-const API_BASE = 'https://automationexercise.com/api';
- 
-// ── AEX-08 | API Products ─────────────────────────────────────────────────
 test.describe('AEX-08 – API Products', () => {
 
-// ── TC-29 | GET product by valid ID ────────────────────────────────────
   test('TC-29 | GET product by ID', async ({ request }) => {
  
     await epic('API Testing');
@@ -16,13 +12,16 @@ test.describe('AEX-08 – API Products', () => {
     await severity('critical');
     await issue('AEX-B-04 - API No ID endpoint', 'https://alexb35.atlassian.net/browse/AEX-62');
  
-    await step('Send GET request to /api/productsList/{id} with valid ID', async () => {
-      const response = await request.get(`${API_BASE}/productsList/1`);
-      const contentType = response.headers()['content-type'] ?? '';
+    let result: ProductByIdResult;
 
-      await step('Verify response is JSON', async () => {
-        expect(contentType).toContain('application/json');
-      });
+    await step('Send GET request to /api/productsList/{id} with valid ID', async () => {
+      result = await getProductById(request, 1);
+    });
+
+    await step('Verify response returns product details for ID 1', async () => {
+      expect(result.statusCode).toBe(200);
+      expect(result.body).not.toBeNull();
+      expect(result.body?.product).toHaveProperty('id', 1);
     });
   });
 });

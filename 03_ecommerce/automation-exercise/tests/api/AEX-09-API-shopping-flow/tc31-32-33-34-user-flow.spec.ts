@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { epic, feature, story, severity, step } from 'allure-js-commons';
 import { buildUser } from '../../../framework/data/user.factory';
-import { createUser, deleteUser } from '../../../framework/api/user.api';
+import { createUser, deleteUser, verifyLogin, ApiResponse } from '../../../framework/api/user.api';
+import { getProductsList, ProductsListResponse } from '../../../framework/api/product.api';
 
-// ── Test Data ──────────────────────────────────────────────────────────────
 const API_BASE = 'https://automationexercise.com/api';
 
 // NOTE: Cart and checkout operations (add to cart, view cart, place order)
@@ -14,12 +14,11 @@ const user = buildUser();
 let selectedProductId: number = -1;
 let selectedProductName: string = '';
 
-// ── AEX-09 | API Shopping Flow ────────────────────────────────────────────
+
 test.describe('AEX-09 – API Shopping Flow', () => {
 
   test.describe.configure({ mode: 'serial' });
 
-  // ── TC-31 | POST register ─────────────────────────────────────────────────
   test('TC-31 | POST register', async ({ request }) => {
 
     await epic('API Testing');
@@ -27,17 +26,19 @@ test.describe('AEX-09 – API Shopping Flow', () => {
     await story('TC-31');
     await severity('critical');
 
-    await step('Send POST request to /api/createAccount', async () => {
-      const result = await createUser(request, user);
+    let result: ApiResponse;
 
-      await step('Verify response code is 201 and user created', async () => {
-        expect(result).toHaveProperty('responseCode', 201);
-        expect(result.message).toBe('User created!');
-      });
+    await step('Send POST request to /api/createAccount', async () => {
+      result = await createUser(request, user);
+    });
+
+    await step('Verify response code is 201 and user created', async () => {
+      expect(result).toHaveProperty('responseCode', 201);
+      expect(result.message).toBe('User created!');
     });
   });
 
-  // ── TC-32 | POST login ────────────────────────────────────────────────────
+
   test('TC-32 | POST login', async ({ request }) => {
 
     await epic('API Testing');
@@ -45,23 +46,19 @@ test.describe('AEX-09 – API Shopping Flow', () => {
     await story('TC-32');
     await severity('critical');
 
-    await step('Send POST request to /api/verifyLogin', async () => {
-      const response = await request.post(`${API_BASE}/verifyLogin`, {
-        form: {
-          email:    user.email,
-          password: user.password,
-        },
-      });
-      const body = await response.json();
+    let result: ApiResponse;
 
-      await step('Verify response code is 200 and user exists', async () => {
-        expect(body).toHaveProperty('responseCode', 200);
-        expect(body.message).toBe('User exists!');
-      });
+    await step('Send POST request to /api/verifyLogin', async () => {
+      result = await verifyLogin(request, user.email, user.password);
+    });
+
+    await step('Verify response code is 200 and user exists', async () => {
+      expect(result).toHaveProperty('responseCode', 200);
+      expect(result.message).toBe('User exists!');
     });
   });
 
-  // ── TC-33 | GET select product ────────────────────────────────────────────
+
   test('TC-33 | GET select product', async ({ request }) => {
 
     await epic('API Testing');
@@ -69,25 +66,26 @@ test.describe('AEX-09 – API Shopping Flow', () => {
     await story('TC-33');
     await severity('critical');
 
+    let result: ProductsListResponse;
+
     await step('Send GET request to /api/productsList and extract first product', async () => {
-      const response = await request.get(`${API_BASE}/productsList`);
-      const body = await response.json();
+      result = await getProductsList(request);
+    });
 
-      await step('Verify response code is 200 and products list is not empty', async () => {
-        expect(body).toHaveProperty('responseCode', 200);
-        expect(body.products.length).toBeGreaterThan(0);
-      });
+    await step('Verify response code is 200 and products list is not empty', async () => {
+      expect(result).toHaveProperty('responseCode', 200);
+      expect(result.products.length).toBeGreaterThan(0);
+    });
 
-      await step('Extract first product details for downstream flow', async () => {
-        selectedProductId = body.products[0].id;
-        selectedProductName = body.products[0].name;
-        expect(selectedProductId).toBeGreaterThan(0);
-        expect(selectedProductName).toBeTruthy();
-      });
+    await step('Extract first product details for downstream flow', async () => {
+      selectedProductId = result.products[0].id;
+      selectedProductName = result.products[0].name;
+      expect(selectedProductId).toBeGreaterThan(0);
+      expect(selectedProductName).toBeTruthy();
     });
   });
 
-  // ── TC-34 | DELETE account ────────────────────────────────────────────────
+
   test('TC-34 | DELETE account', async ({ request }) => {
 
     await epic('API Testing');
@@ -95,13 +93,15 @@ test.describe('AEX-09 – API Shopping Flow', () => {
     await story('TC-34');
     await severity('critical');
 
-    await step('Send DELETE request to /api/deleteAccount', async () => {
-      const result = await deleteUser(request, user.email, user.password);
+    let result: ApiResponse;
 
-      await step('Verify response code is 200 and account deleted', async () => {
-        expect(result).toHaveProperty('responseCode', 200);
-        expect(result.message).toBe('Account deleted!');
-      });
+    await step('Send DELETE request to /api/deleteAccount', async () => {
+      result = await deleteUser(request, user.email, user.password);
+    });
+
+    await step('Verify response code is 200 and account deleted', async () => {
+      expect(result).toHaveProperty('responseCode', 200);
+      expect(result.message).toBe('Account deleted!');
     });
   });
 

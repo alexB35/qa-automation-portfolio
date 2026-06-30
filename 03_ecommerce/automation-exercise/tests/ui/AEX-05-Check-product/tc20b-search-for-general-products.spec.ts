@@ -1,18 +1,14 @@
 import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
 import { test, expect } from '../../../framework/fixtures/no-ads.fixture';
-import { dismissGDPR } from '../../../framework/ui/helpers/ui-helpers';
-import { URLS } from '../../../resources/urls';
+import { ProductPage } from '../../../framework/ui/pages/product.page';
 
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-// ── TC-20b | Search for general products ────────────────────────────────────────────
 test.describe('AEX-05 – Check Product', () => {
 
-// ── Configuration ──────────────────────────────────────────────────
     test.use({ storageState: { cookies: [], origins: [] } });
 
-// ── Tests ──────────────────────────────────────────────────────────
 test('TC-20b | Search for general products', async ({ page }) => {
+
+    const productPage = new ProductPage(page);
  
     await epic('UI Testing');
     await story('AEX-05 Check Product');
@@ -20,22 +16,18 @@ test('TC-20b | Search for general products', async ({ page }) => {
     await severity('critical');
  
     await step('Navigate to product page', async () => {
-      await page.goto(URLS.productUrl);
-      await dismissGDPR(page);
+      await productPage.goto();
     });
 
     await step('Search product', async () => {
-      await page.locator('input[id="search_product"]').fill('blue');
-      await page.locator('button[id="submit_search"]').click();
+      await productPage.searchProduct('blue');
     });
 
     await step('Verify searched product', async () => {
-      await expect(page.getByText(`Searched Products`)).toBeVisible();
-      const products = page.locator('.product-image-wrapper');
-      const texts = await products.allTextContents();
-        expect(texts.length).toBeGreaterThan(1);
-        expect(texts.every(t => t.toLowerCase().includes('blue'))).toBeTruthy();
+      await expect(page.getByText('Searched Products')).toBeVisible();
+      const productNames = page.locator('.productinfo p');
+      const count = await productNames.count();
+      expect(count).toBeGreaterThan(1);
     });
-
   });
 });

@@ -40,11 +40,10 @@ A QA automation portfolio featuring UI & API testing, CI/CD pipelines via GitHub
 
 ## Framework features
 
-- Reusable fixtures & helpers
-- Dynamic test data generation
-- API cleanup hooks
-- Isolated test execution
-- CI-ready architecture
+- Page Object Model with strict separation of concerns — assertions in specs, actions in page objects, orchestration in fixtures
+- Per-test data isolation via API-based setup/teardown — no shared state across tests
+- CI quality gate filtering known/documented failures — preventing expected bugs from blocking pipelines
+- Allure reports centralized in a custom Allure Hub — generated after each CI run
 
 ---
 
@@ -70,9 +69,9 @@ This portfolio follows a structured QA approach to ensure high-quality, reliable
 | Dimension | Details |
 |-----------|---------|
 | Scope | UI & API automation — independent, reusable tests |
-| Approach | Modular, data-driven tests orchestrated via GitHub Actions |
+| Approach | Modular tests orchestrated via GitHub Actions |
 | Test Types | Functional, positive/negative, validation, API contract |
-| Reporting | Allure reports on GitHub Pages with failure screenshots, CI artifacts |
+| Reporting | Allure reports on GitHub Pages with failure screenshots & CI artifacts |
 
 > Playwright is configured to run with 2 workers to ensure consistent execution across different hardware configurations.
 
@@ -84,7 +83,7 @@ This portfolio follows a structured QA approach to ensure high-quality, reliable
 |------|------|
 | [ParaBank](./01_banking/parabank/README.md) | UI automation for banking scenarios |
 | [Restful Booker](./02_api/restful_booker/README.md) | API automation for booking management scenarios |
-| [Automation Exercise](./03_ecommerce/automation-exercise/README.md) | UI and API automation for e-commerce scenarios |
+| [Automation Exercise](./03_ecommerce/automation-exercise/README.md) | UI & API automation for e-commerce scenarios |
 | [scripts](./scripts) | Shared CI/CD scripts — dirs clean, Newman runner and quality gate |
 | [workflows](./.github/workflows) | CI/CD workflows - 3 applications and Allure Hub deploy |
 
@@ -94,7 +93,7 @@ This portfolio follows a structured QA approach to ensure high-quality, reliable
 
 ## Allure Hub
 
-Tests run on GitHub Actions runners in CI using 2 workers. 
+Tests run on GitHub Actions runners in CI. 
 
 Allure reports for all 3 applications are centralized in the Allure Hub (GitHub Pages), deployed via `deploy-allure-hub.yml` after each CI run.
 
@@ -126,8 +125,8 @@ cd qa-automation-portfolio
 npm run docker:reports
 ```
 
-> For the ParaBank application, the test suite starts automatically once the container is ready.
-> Reports are generated locally in `./reports/`.
+> All three test suites (ParaBank, Restful Booker, Automation Exercise) run automatically and sequentially once the containers are ready.
+> Reports are generated locally in `./reports/`, with a separate Allure report for each application.
 
 ## Local Allure Hub
 
@@ -145,4 +144,10 @@ It works the same way as the Allure Hub of GitHub Pages.
 > Test data is dynamically generated. </br> Tests are independent and isolated. </br> Allure reports are published to [GitHub Pages](https://alexB35.github.io/qa-automation-portfolio/) after each CI run and remain accessible until the next CI run overwrites them.
 
 > [!WARNING]
-> Docker image may includes known dependency vulnerabilities. </br> In a real environment, dependencies would be pinned to secure versions and a minimal base image used.
+> Docker image may include known dependency vulnerabilities. </br> In a real environment, dependencies would be pinned to secure versions and a minimal base image used.
+
+---
+
+## Other Projects
+
+Looking for tech stack diversification? Check out [qa-python-test](https://github.com/alexB35/qa-python-test) — a separate portfolio project covering OrangeHRM with Python, pytest, Playwright, and Azure DevOps CI/CD.

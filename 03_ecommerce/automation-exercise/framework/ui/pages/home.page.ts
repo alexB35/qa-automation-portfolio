@@ -11,7 +11,7 @@ export class HomePage {
   readonly subscriptionButton = () => this.page.locator('button#subscribe');
 
   
-  async gotoHomePage() {
+  async goto() {
     await this.page.goto(URLS.homeUrl);
     await dismissGDPR(this.page);
   }

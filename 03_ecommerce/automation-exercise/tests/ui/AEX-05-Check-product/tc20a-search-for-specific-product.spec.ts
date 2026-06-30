@@ -1,18 +1,14 @@
 import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
 import { test, expect } from '../../../framework/fixtures/no-ads.fixture';
-import { dismissGDPR } from '../../../framework/ui/helpers/ui-helpers';
-import { URLS } from '../../../resources/urls';
+import { ProductPage } from '../../../framework/ui/pages/product.page';
 
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-// ── TC-20a | Search for specific product ────────────────────────────────────────────
 test.describe('AEX-05 – Check Product', () => {
 
-// ── Configuration ──────────────────────────────────────────────────
     test.use({ storageState: { cookies: [], origins: [] } });
 
-// ── Tests ──────────────────────────────────────────────────────────
 test('TC-20a | Search for specific product', async ({ page }) => {
+
+    const productPage = new ProductPage(page);
  
     await epic('UI Testing');
     await story('AEX-05 Check Product');
@@ -20,13 +16,11 @@ test('TC-20a | Search for specific product', async ({ page }) => {
     await severity('critical');
  
     await step('Navigate to product page', async () => {
-      await page.goto(URLS.productUrl);
-      await dismissGDPR(page);
+      await productPage.goto();
     });
 
     await step('Search product', async () => {
-      await page.locator('input[id="search_product"]').fill('Blue Cotton Indie Mickey Dress');
-      await page.locator('button[id="submit_search"]').click();
+      await productPage.searchProduct('Blue Cotton Indie Mickey Dress');
     });
 
     await step('Verify searched product', async () => {

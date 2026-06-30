@@ -21,7 +21,7 @@
 
 This project demonstrates **UI + API automation** for "Automation Exercise", an e-commerce platform.  
 
-Automates online shopping flows including registration, login, product browsing, checkout and an API scenarios.
+It automates online shopping flows including registration, login, product browsing, checkout and API scenarios.
 
 👉 Automation Exercise website : [https://automationexercise.com](https://automationexercise.com)
 
@@ -43,8 +43,10 @@ Automates online shopping flows including registration, login, product browsing,
 
 ## Run Tests Locally
 
-Refer to the [root README](../../README.md) for Docker installation.
+**Prerequisites :** 
+[Node.js](https://nodejs.org/) (LTS recommended)
 
+**Install dependencies and run the suite :**
 ```bash
 npm install
 npx playwright install --with-deps firefox
@@ -75,7 +77,7 @@ flowchart TD
 ```
 </div>
 
-> Playwright is configured to continue on know failure — unexpected failures are caught by the quality gate script.
+> Playwright is configured to continue on known failures — unexpected failures are caught by the quality gate script.
 
 ---
 
@@ -86,6 +88,6 @@ Test results are published to GitHub Pages after each CI run via `deploy-allure-
 👉 [Allure Hub](https://alexB35.github.io/qa-automation-portfolio/)
 👉 [Automation Exercise Report](https://alexb35.github.io/qa-automation-portfolio/automation-exercise/)
 
-> Include test steps, logs, and screenshots for failures.
+> Reports include test steps, logs, and screenshots for failures.
 
 ![Allure Automation Exercise](../../assets/allure-automation-exercise.png)

@@ -26,7 +26,7 @@ export const API_URLS = {
   productsListUrl: `${BASE_API_URL}/productsList`,
   productByIdUrl:         (productId: number | string) => `${BASE_API_URL}/productsList/${productId}`,
   brandsListUrl: `${BASE_API_URL}/brandsList`,
-  searchProductsUrl: `${BASE_API_URL}/searchProducts`,
+  searchProductsUrl: `${BASE_API_URL}/searchProduct`,
   verifyLoginUrl: `${BASE_API_URL}/verifyLogin`,
   createAccountUrl: `${BASE_API_URL}/createAccount`,
   deleteAccountUrl: `${BASE_API_URL}/deleteAccount`,

@@ -1,34 +1,48 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
+import type { UserBase } from '../../data/user.base';
+import type { PaymentData } from '../../data/payment.data';
+
 
 export class CheckoutPage {
   constructor(private page: Page) {}
 
-  addToCartButton = () =>
-    this.page.locator('button[data-qa="summer-white-top-view-product-button"]');
+  readonly checkoutButton = () => this.page.locator('a', { hasText: 'Proceed To Checkout' });
+  readonly placeOrderButton = () => this.page.locator('a', { hasText: 'Place Order' });
 
-  addModalButton = () =>
-    this.page.locator('button[data-qa="add-to-cart-button"]');
+  readonly nameOnCardInput = () => this.page.locator('input[data-qa="name-on-card"]');
+  readonly cardNumberInput = () => this.page.locator('input[data-qa="card-number"]');
+  readonly cvcInput = () => this.page.locator('input[data-qa="cvc"]');
+  readonly expiryMonthInput = () => this.page.locator('input[data-qa="expiry-month"]');
+  readonly expiryYearInput = () => this.page.locator('input[data-qa="expiry-year"]');
+  readonly payButton = () => this.page.locator('button[data-qa="pay-button"]');
 
-  checkoutButton = () =>
-    this.page.locator('button[data-qa="checkout-button"]');
-
-  payButton = () =>
-    this.page.locator('button[data-qa="pay_and_confirm_order-button"]');
-
-  async addProductToCart() {
-    await this.addToCartButton().click();
-    await this.addModalButton().click();
-  }
+  readonly deliveryAddress = () => this.page.locator('#address_delivery');
+  readonly billingAddress = () => this.page.locator('#address_invoice');
 
   async proceedToCheckout() {
     await this.checkoutButton().click();
   }
 
-  async fillPayment(user: any) {
-    await this.page.fill('[data-qa="name_on_card"]', `${user.firstName} ${user.lastName}`);
-    await this.page.fill('[data-qa="card_number"]', '4111111111111111');
-    await this.page.fill('[data-qa="cvc"]', '123');
-    await this.page.fill('[data-qa="expiration_date"]', '12/2027');
+  async verifyPurchase(user: UserBase, productName: string, quantity: string) {
+    await expect(this.page.getByRole('heading', { name: 'Review Your Order' })).toBeVisible();
+    for (const block of [this.deliveryAddress(), this.billingAddress()]) {
+      await expect(block).toContainText(`${user.firstName} ${user.lastName}`);
+      await expect(block).toContainText(user.address);
+      await expect(block).toContainText(`${user.city} ${user.state} ${user.zipCode}`);
+      await expect(block).toContainText(user.country);
+      await expect(block).toContainText(user.phone);
+    }
+    await expect(this.page.getByText(productName)).toBeVisible();
+    await expect(this.page.locator('.cart_quantity button')).toHaveText(quantity);
+    await this.placeOrderButton().click();
+  }
+  
+  async fillPayment(nameOnCard: string, card: PaymentData) {
+    await this.nameOnCardInput().fill(nameOnCard);
+    await this.cardNumberInput().fill(card.cardNumber);
+    await this.cvcInput().fill(card.cvc);
+    await this.expiryMonthInput().fill(card.expiryMonth);
+    await this.expiryYearInput().fill(card.expiryYear);
     await this.payButton().click();
   }
 }

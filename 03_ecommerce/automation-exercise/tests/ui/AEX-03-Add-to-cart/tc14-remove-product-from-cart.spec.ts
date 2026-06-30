@@ -1,48 +1,43 @@
 import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
 import { test, expect } from '../../../framework/fixtures/no-ads.fixture';
-import { dismissGDPR } from '../../../framework/ui/helpers/ui-helpers';
-import { URLS } from '../../../resources/urls';
+import { ProductPage } from '../../../framework/ui/pages/product.page';
+import { CartPage } from '../../../framework/ui/pages/cart.page';
 
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-// ── TC-14 | Remove Product from Cart ────────────────────────────────────────────
 test.describe('AEX-03 – Add Product to Cart', () => {
 
-// ── Configuration ──────────────────────────────────────────────────
     test.use({ storageState: { cookies: [], origins: [] } });
 
-// ── Tests ──────────────────────────────────────────────────────────
 test('TC-14 | Remove Product from Cart', async ({ page }) => {
+
+    const productPage = new ProductPage(page);
+    const cartPage = new CartPage(page);
  
     await epic('UI Testing');
     await story('AEX-03 Add Product to Cart');
     await testCaseId('TC-14');
     await severity('critical');
- 
+
     await step('Navigate to product page', async () => {
-      await page.goto(URLS.productUrl);
-      await dismissGDPR(page);
+      await productPage.goto();
     });
 
-    await step('Add product to cart', async () => {
-      const product = page.locator('.product-image-wrapper')
-        .filter({ has: page.locator('a[href="/product_details/31"]') });
-      await product.locator('text=View Product').click();
-      await page.waitForSelector('input[id="quantity"]', { state: 'visible'});
-      await page.locator('input[id="quantity"]').fill('1');
-      await expect(page.getByRole('button', { name: /add to cart/i })).toBeVisible();
-      await page.getByRole('button', { name: /add to cart/i }).click();
+    await step('Add product to cart from details page', async () => {
+      await productPage.addToCartFromDetail('99', 31);
     });
 
-    await step('Verify cart', async () => {
-      await expect(page.getByText(`Added!`)).toBeVisible();
-      await page.locator('text=View Cart').click();
+    await step('Verify cart update', async () => {   
+      await cartPage.goto();  
       await expect(page.getByText('Pure Cotton Neon Green Tshirt')).toBeVisible();
+      await expect(page.locator('.cart_quantity button')).toHaveText('99');
     });
 
     await step('Remove product from cart', async () => {
-      await page.locator('a.cart_quantity_delete[data-product-id="31"]').click();
-      await expect(page.getByText('Cart is empty!')).toBeVisible();
+      await cartPage.removeProduct(31);
+    });
+
+    await step('Verify cart is empty', async () => {
+      await cartPage.goto();
+      await expect(page.locator('span#empty_cart')).toBeVisible();
     });
   });
 });

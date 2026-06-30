@@ -9,7 +9,7 @@ export class LoginPage {
   readonly passwordInput = () => this.page.locator('[data-qa="login-password"]');
   readonly loginButton = () => this.page.locator('[data-qa="login-button"]');
 
-  async gotoLoginPage() {
+  async goto() {
     await this.page.goto(URLS.loginUrl);
     await dismissGDPR(this.page);
   }
@@ -20,7 +20,15 @@ export class LoginPage {
     await this.loginButton().click();
   }
 
+  async logout() {
+    await this.page.getByRole('link', { name: ' Logout' }).click();
+  }
+
   async isLoggedIn(name: string) {
     await expect(this.page.getByText(`Logged in as ${name}`)).toBeVisible();
+  }
+
+  async isLoggedOut() {
+    await expect(this.page.getByText('Signup / Login')).toBeVisible();
   }
 }

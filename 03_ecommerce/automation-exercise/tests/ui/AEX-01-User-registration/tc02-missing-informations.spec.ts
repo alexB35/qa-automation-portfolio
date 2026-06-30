@@ -18,8 +18,7 @@ test.describe('AEX-01 – User Registration', () => {
     await severity('critical');
 
     await step('Navigate to signup page', async () => {
-      await registerPage.goToSignupPage();
-      await expect(page.getByText('New User Signup!')).toBeVisible();
+      await registerPage.goto();
     });
 
     await step('Enter name and email then proceed', async () => {

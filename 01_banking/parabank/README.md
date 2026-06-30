@@ -45,10 +45,10 @@ Its goal is to automate common banking scenarios and validate UI functionalities
 
 ## Run Tests Locally
 
-Refer to the [root README](../../README.md) for Docker installation.
+**Prerequisites :** 
+[Docker Desktop](https://www.docker.com/get-started)
 
-Then, run in terminal :
-
+**Open Docker and run this command line :**
 ```bash
 npm install
 npx playwright install --with-deps firefox

@@ -1,4 +1,3 @@
-import { expect } from '@playwright/test';
 import { test as base } from './no-ads.fixture';
 import { buildUser } from '../data/user.factory';
 import type { UserBase } from '../data/user.base';
@@ -40,7 +39,7 @@ export const test = base.extend<Fixtures>({
 
     await page.goto(URLS.loginUrl);
     await dismissGDPR(page);
-    await registerPage.goToSignupPage();
+    await registerPage.goto();
     await registerPage.fillSignupNameAndEmail(user.name, user.email);
     await registerPage.fillRegistrationForm(user);
     await registerPage.clickContinue();
@@ -59,9 +58,9 @@ export const test = base.extend<Fixtures>({
     }
 
     const loginPage = new LoginPage(page);
-    await loginPage.gotoLoginPage();
-    await dismissGDPR(page);
+    await loginPage.goto();
     await loginPage.login(user.email, user.password);
+    await loginPage.isLoggedIn(user.name);
 
     await use(user);
 

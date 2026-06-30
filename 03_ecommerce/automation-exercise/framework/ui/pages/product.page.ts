@@ -5,48 +5,43 @@ import { dismissGDPR } from '../helpers/ui-helpers';
 export class ProductPage {
   constructor(private page: Page) {}
 
-  // ── Product list page locators ────────────────────────────────────────
-  
-  addToCartButton = (productId: number) =>
-    this.page.locator(`a[data-product-id="${productId}"]`).first();
- 
-  addToCartOverlay = (productId: number) =>
-    this.page.locator(`.product-overlay a[data-product-id="${productId}"]`);
- 
 
-  viewProductLink = (productId: number) =>
-    this.page.locator(`a[href="/product_details/${productId}"]`).first();
- 
+readonly viewProductLink = (productId: number) => this.page.locator(`a[href="/product_details/${productId}"]`).first();
 
-  productByName = (name: string) =>
-    this.page.locator('.single-products').filter({ hasText: name });
- 
+readonly productByName = (name: string) => this.page.locator('.single-products').filter({ hasText: name });
 
-  // ── Product detail page locators ─────────────────────────────────────
-  get quantityInput() { return this.page.locator('input#quantity'); }
-  get addToCartDetailButton() { return this.page.locator('button.btn.btn-default.cart'); }
-  get continueShoppingButton() { return this.page.getByRole('button', { name: 'Continue Shopping' }); }
-  get viewCartButton() { return this.page.getByRole('link', { name: 'View Cart' }); }
- 
+readonly quantityInput = () => this.page.locator('input#quantity');
+readonly addToCartDetailButton = () => this.page.locator('button.btn.btn-default.cart');
+readonly continueShoppingButton = () => this.page.getByRole('button', { name: 'Continue Shopping' });
+readonly viewCartButton = () => this.page.getByRole('link', { name: 'View Cart' });
 
-  // ── Review form locators ──────────────────────────────────────────────
-  get reviewNameInput() { return this.page.locator('input#name'); }
-  get reviewEmailInput() { return this.page.locator('input#email'); }
-  get reviewTextarea() { return this.page.locator('textarea#review'); }
-  get reviewSubmitButton() { return this.page.locator('button#button-review'); } 
+readonly reviewNameInput = () => this.page.locator('input#name');
+readonly reviewEmailInput = () => this.page.locator('input#email');
+readonly reviewTextarea = () => this.page.locator('textarea#review');
+readonly reviewSubmitButton = () => this.page.locator('button#button-review');
+
+readonly searchInput = () => this.page.locator('input#search_product');
+readonly searchButton = () => this.page.locator('button#submit_search');
   
 
-  async gotoProductPage() {
+  async goto() {
     await this.page.goto(URLS.productUrl);
     await dismissGDPR(this.page);
+    await this.page.waitForLoadState('domcontentloaded');
   }
 
-  async goto(productId?: number) {
-    if (productId) {
-      await this.page.goto(`${URLS.productDetailsUrl}/${productId}`);
-    } else {
-      await this.page.goto(URLS.productUrl);
-    }
+  async viewCartFromPopup() {
+    await expect(this.page.getByText('Added!')).toBeVisible();
+    await this.page.getByRole('link', { name: 'View Cart' }).click();
+  }
+
+  async viewProduct(productId: number) {
+    const product = this.page.locator('.product-image-wrapper')
+    .filter({ has: this.page.locator(`a[href="/product_details/${productId}"]`) });
+    await product.hover();
+    await this.viewProductLink(productId).waitFor({ state: 'visible' });
+    await this.viewProductLink(productId).click();
+    await this.page.waitForLoadState('domcontentloaded');
   }
 
   async addToCartFromList(productName: string) {
@@ -55,24 +50,42 @@ export class ProductPage {
     await this.page.getByRole('button', { name: 'Continue Shopping' }).click();
   }
 
-  async addToCartFromDetail(quantity?: string) {
-    if (quantity) {
-      await this.page.locator('input#quantity').fill(quantity);
-    }
-    await this.page.locator('button.cart').click();
-    await this.page.getByRole('button', { name: 'Continue Shopping' }).click();
+  async addToCartFromDetail(quantity: string, productId: number) {
+    const product = this.page.locator('.product-image-wrapper')
+      .filter({ has: this.page.locator(`a[href="/product_details/${productId}"]`) });
+    await product.hover();
+    await product.locator('a', { hasText: 'View Product' }).waitFor({ state: 'visible' });
+    await product.locator('a', { hasText: 'View Product' }).click();
+    await this.page.waitForLoadState('domcontentloaded');
+    await this.quantityInput().fill(quantity);
+    await this.addToCartDetailButton().click();
+    await this.continueShoppingButton().click();
+  }
+
+  async searchProduct(term: string) {
+    await this.searchInput().fill(term);
+    await this.searchButton().click();
+    await expect(this.page.getByText('Searched Products')).toBeVisible();
+  }
+
+  async filterByCategory(categoryAccordion: string, categoryId: number) {
+    await this.page.locator(`a[href="#${categoryAccordion}"]`).click();
+    await this.page.locator(`a[href="/category_products/${categoryId}"]`).waitFor({ state: 'visible' });
+    await this.page.locator(`a[href="/category_products/${categoryId}"]`).click();
+  }
+
+  async filterByBrand(brandName: string) {
+    await this.page.locator(`a[href="/brand_products/${brandName}"]`).click();
   }
 
   async writeReview(name: string, email: string, review: string) {
-    await this.page.locator('input#name').fill(name);
-    await this.page.locator('input#email').fill(email);
-    await this.page.locator('textarea#review').fill(review);
-    await this.page.locator('button#button-review').click();
-    await expect(this.page.getByText('Thank you for your review.')).toBeVisible();
+    await this.reviewNameInput().fill(name);
+    await this.reviewEmailInput().fill(email);
+    await this.reviewTextarea().fill(review);
+    await this.reviewSubmitButton().click();
   }
 
   async verifySearchResults(term: string) {
-    await expect(this.page.getByText('Searched Products')).toBeVisible();
     await expect(this.page.locator('.productinfo')).not.toHaveCount(0);
   }
 

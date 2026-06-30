@@ -12,9 +12,10 @@ export class ContactPage {
 
   constructor(private page: Page) {}
 
-  async gotoContactPage() {
+  async goto() {
     await this.page.goto(URLS.contactUrl);
     await dismissGDPR(this.page);
+    await expect(this.page.getByText('Get In Touch')).toBeVisible();
   }
 
   async fillContactForm(contact: {
@@ -30,7 +31,11 @@ export class ContactPage {
     await this.messageInput().fill(contact.message);
     if (contact.filePath) {
       await this.fileInput().setInputFiles(contact.filePath);
-    }
+      await this.page.waitForLoadState('domcontentloaded');
+        this.page.once('dialog', async dialog => {
+        await dialog.accept();
+      }
+    )};
   }
 
   async submitForm() {

@@ -1,18 +1,14 @@
 import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
 import { test, expect } from '../../../framework/fixtures/no-ads.fixture';
-import { dismissGDPR } from '../../../framework/ui/helpers/ui-helpers';
-import { URLS } from '../../../resources/urls';
+import { ProductPage } from '../../../framework/ui/pages/product.page';
 
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-// ── TC-19 | Filter Product by Categories ────────────────────────────────────────────
 test.describe('AEX-05 – Check Product', () => {
 
-// ── Configuration ──────────────────────────────────────────────────
     test.use({ storageState: { cookies: [], origins: [] } });
     
-// ── Tests ──────────────────────────────────────────────────────────
 test('TC-19 | Filter Product by Categories', async ({ page }) => {
+
+    const productPage = new ProductPage(page);
  
     await epic('UI Testing');
     await story('AEX-05 Check Product');
@@ -20,24 +16,26 @@ test('TC-19 | Filter Product by Categories', async ({ page }) => {
     await severity('normal');
  
     await step('Navigate to product page', async () => {
-      await page.goto(URLS.productUrl);
-      await dismissGDPR(page);
+      await productPage.goto();
     });
 
     await step('Open product category', async () => {
-      await page.locator('a[href="#Men"]').click();
-      await page.locator('a[href="/category_products/6"]').waitFor({ state: 'visible' });
-      await page.locator('a[href="/category_products/6"]').click();
+      await productPage.filterByCategory('Men', 6);
     });
 
     await step('Verify filtered products', async () => {
-      await expect(page.getByText(`Men - Jeans Products`)).toBeVisible();
+      await expect(page.getByText('Men - Jeans Products')).toBeVisible();
       await expect(page.getByText('Grunt Blue Slim Fit Jeans').first()).toBeVisible();
-      const product = page.locator('.product-image-wrapper')
-        .filter({ has: page.locator('a[href="/product_details/37"]') });
-      await product.locator('text=View Product').click();
-      await page.waitForLoadState('domcontentloaded');
-      await expect(page.getByText(`Category: Men > Jeans`)).toBeVisible();
+    });
+
+    await step('Open product details', async () => {
+      await productPage.viewProduct(37);
+    });
+
+    await step('Verify product category', async () => {
+      await expect(page.locator('.product-information')).toContainText('Category');
+      await expect(page.locator('.product-information')).toContainText('Men');
+      await expect(page.locator('.product-information')).toContainText('Jeans');
     });
   });
 });

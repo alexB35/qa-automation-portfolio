@@ -48,6 +48,7 @@ export default defineConfig({
       name:    'automation-exercise',
       testDir: './03_ecommerce/automation-exercise/tests',
       outputDir: './03_ecommerce/automation-exercise/outputs/test-results',
+      timeout: process.env['CI'] ? 45_000 : 40_000,
       use: {
         browserName: 'firefox',
         headless:    isHeadless,

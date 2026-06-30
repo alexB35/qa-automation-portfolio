@@ -1,19 +1,17 @@
 import { epic, story, testCaseId, severity, step, issue } from 'allure-js-commons';
 import { test, expect } from '../../../framework/fixtures/no-ads.fixture';
-import { dismissGDPR } from '../../../framework/ui/helpers/ui-helpers';
-import { URLS } from '../../../resources/urls';
+import { ProductPage } from '../../../framework/ui/pages/product.page';
+import { CartPage } from '../../../framework/ui/pages/cart.page';
 
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-// ── TC-10b | Add Invalid Quantity Product to Cart ────────────────────────────────────────────
 test.describe('AEX-03 – Add Product to Cart', () => {
 
-// ── Configuration ──────────────────────────────────────────────────
     test.use({ storageState: { cookies: [], origins: [] } });
 
-// ── Tests ──────────────────────────────────────────────────────────
 test('TC-10b | Add Invalid Product Quantity to Cart', async ({ page }) => {
  
+    const productPage = new ProductPage(page);
+    const cartPage = new CartPage(page);
+  
     await epic('UI Testing');
     await story('AEX-03 Add Product to Cart');
     await testCaseId('TC-10b');
@@ -21,24 +19,18 @@ test('TC-10b | Add Invalid Product Quantity to Cart', async ({ page }) => {
     await issue('AEX-B-02 - Add invalid product quantity to cart', 'https://alexb35.atlassian.net/browse/AEX-46');
  
     await step('Navigate to product page', async () => {
-      await page.goto(URLS.productUrl);
-      await dismissGDPR(page);
-    }); 
-
-    await step('Add product to cart', async () => {
-      const product = page.locator('.product-image-wrapper')
-        .filter({ has: page.locator('a[href="/product_details/2"]') });
-      await product.locator('text=View Product').click();
-      await expect(page.locator('input[id="quantity"]')).toBeVisible();
-      await page.locator('input[id="quantity"]').fill('-50');
-      await page.getByRole('button', { name: /add to cart/i }).click();
+      await productPage.goto();
     });
 
-    await step('Verify negative quantity is not accepted', async () => {
-      await page.locator('text=View Cart').click();
-      const qty = page.locator('.cart_quantity button');
-      const value = Number(await qty.textContent());
-      expect(value).toBeGreaterThanOrEqual(1);
+    await step('Add product to cart from details page', async () => {
+      await productPage.addToCartFromDetail('-50', 2);
+    });
+
+    await step('Verify cart update', async () => {     
+      await cartPage.goto();
+      await expect(page.getByText('Men Tshirt')).toBeVisible();
+      const quantity = Number(await page.locator('.cart_quantity button').textContent());
+      expect(quantity).toBeGreaterThanOrEqual(1);
     });
   });
 });

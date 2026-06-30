@@ -1,43 +1,36 @@
 import { epic, story, testCaseId, severity, step } from 'allure-js-commons';
 import { test, expect } from '../../../framework/fixtures/no-ads.fixture';
-import { dismissGDPR } from '../../../framework/ui/helpers/ui-helpers';
-import { URLS } from '../../../resources/urls';
+import { ProductPage } from '../../../framework/ui/pages/product.page';
+import { CartPage } from '../../../framework/ui/pages/cart.page';
 
-// ── Test Data ──────────────────────────────────────────────────────────────
-
-// ── TC-12 | Add Product to Cart from Brands ────────────────────────────────────────────
 test.describe('AEX-03 – Add Product to Cart', () => {
 
-// ── Configuration ──────────────────────────────────────────────────
     test.use({ storageState: { cookies: [], origins: [] } });
 
-// ── Tests ──────────────────────────────────────────────────────────
 test('TC-12 | Add Product to Cart from Brands', async ({ page }) => {
  
+    const productPage = new ProductPage(page);
+    const cartPage = new CartPage(page);
+
     await epic('UI Testing');
     await story('AEX-03 Add Product to Cart');
     await testCaseId('TC-12');
     await severity('critical');
  
     await step('Navigate to product page', async () => {
-      await page.goto(URLS.productUrl);
-      await dismissGDPR(page);
+      await productPage.goto();
     });
 
     await step('Open product from brands', async () => {
-      await page.locator('a[href="/brand_products/H&M"]').click();
+      await productPage.filterByBrand('H&M');
+    }); 
+
+    await step('Add product to cart from details page', async () => {
+      await productPage.addToCartFromList('Pure Cotton V-Neck T-Shirt');
     });
 
-    await step('Add product to cart', async () => {  
-      const product = page.locator('.product-image-wrapper')
-        .filter({ has: page.locator('a[href="/product_details/28"]') });
-      await product.locator('text=View Product').click();
-      await page.waitForLoadState('domcontentloaded');
-      await page.locator('button.btn-default.cart[type="button"]').click();    });   
-
-    await step('Verify cart update', async () => {
-      await expect(page.getByText('Added!')).toBeVisible();
-      await page.locator('text=View Cart').click();
+    await step('Verify cart update', async () => {     
+      await cartPage.goto();
       await expect(page.getByText('Pure Cotton V-Neck T-Shirt')).toBeVisible();
       await expect(page.locator('.cart_quantity button')).toHaveText('1');
     });
