@@ -48,7 +48,7 @@ jobs:
 
     # ── Install Allure CLI ──────────────────────────────────────────────────
     - name: Install Allure CLI
-      run: npm install -g allure-commandline
+      run: npm install -g allure
 
     # ── Create output directories ─────────────────────────────────────────────
     - name: Create Allure output directories
@@ -71,8 +71,7 @@ jobs:
       if: always()
       run: |
         allure generate 03_ecommerce/automation-exercise/outputs/allure-results \
-          --output 03_ecommerce/automation-exercise/outputs/allure-report \
-          --clean
+          --output 03_ecommerce/automation-exercise/outputs/allure-report
 
     # ── Quality gate ─────────────────────────────────────────────────────────
     - name: Quality gate — will fail on unexpected test failures
