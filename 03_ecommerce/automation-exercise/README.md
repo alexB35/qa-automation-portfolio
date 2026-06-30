@@ -88,6 +88,6 @@ Test results are published to GitHub Pages after each CI run via `deploy-allure-
 👉 [Allure Hub](https://alexB35.github.io/qa-automation-portfolio/)
 👉 [Automation Exercise Report](https://alexb35.github.io/qa-automation-portfolio/automation-exercise/)
 
-> Reports include test steps, logs, and screenshots for failures.
+> Reports include test steps, logs and screenshots for failures.
 
 ![Allure Automation Exercise](../../assets/allure-automation-exercise.png)
