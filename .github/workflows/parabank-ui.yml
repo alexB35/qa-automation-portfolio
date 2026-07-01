@@ -46,10 +46,6 @@ jobs:
     - name: Install Playwright browsers
       run: npx playwright install --with-deps firefox
 
-    # ── Install Allure CLI ──────────────────────────────────────────────────
-    - name: Install Allure CLI
-      run: npm install -g allure
-
     # ── Create output directories ─────────────────────────────────────────────
     - name: Create Allure output directories
       run: |
@@ -81,7 +77,7 @@ jobs:
     - name: Generate Allure report
       if: always()
       run: |
-        allure generate 01_banking/parabank/outputs/allure-results \
+        npx allure generate 01_banking/parabank/outputs/allure-results \
           --output 01_banking/parabank/outputs/allure-report
 
     # ── Quality gate ─────────────────────────────────────────────────────────

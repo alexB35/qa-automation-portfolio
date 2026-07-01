@@ -12,7 +12,6 @@ const ALLURE = {
   'parabank': {
     results: '01_banking/parabank/outputs/allure-results',
     report:  '01_banking/parabank/outputs/allure-report',
-    setup:   'setup-parabank',
     run:     'parabank',
   },
 };
@@ -39,6 +38,6 @@ try {
 
 // ── Generate and open Allure report ──────────────────────────────────
 execSync(
-  `allure generate ${cfg.results} --output ${cfg.report} && allure open ${cfg.report}`,
+  `npx allure generate ${cfg.results} --output ${cfg.report} && npx allure open ${cfg.report}`,
   { stdio: 'inherit' }
 );
